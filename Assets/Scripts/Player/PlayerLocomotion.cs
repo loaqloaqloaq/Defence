@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerLocomotion : MonoBehaviour
 {
+    //入力
+    private PlayerInput playerInput;
+
     //コンポネント
     private Animator animator;
     private CharacterController charController;
@@ -11,7 +14,6 @@ public class PlayerLocomotion : MonoBehaviour
     private ReloadWeapon reloadWeapon;
     private PlayerAiming characterAiming;
     //入力ベクタ
-    public Vector2 input { get; private set; }
 
     //移動
     private Vector3 rootMotion;
@@ -36,9 +38,12 @@ public class PlayerLocomotion : MonoBehaviour
     private float currentStamina;
     private float lastSprintTime;
 
+    private Vector2 input;
+
     //コンポネント取得
     void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
         characterAiming = GetComponent<PlayerAiming>();
         activeWeapon = GetComponent<ActiveWeapon>();
         reloadWeapon = GetComponent<ReloadWeapon>();
@@ -49,15 +54,12 @@ public class PlayerLocomotion : MonoBehaviour
 
     void Update()
     {
-        float xInput = Input.GetAxis("Horizontal");
-        float yInput = Input.GetAxis("Vertical");
-
-        input = new Vector2(xInput, yInput);
+        input = playerInput.input;
 
         animator.SetFloat("InputX", input.x);
         animator.SetFloat("InputY", input.y);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (playerInput.Jump)
         {
             Jump();
         }
@@ -66,7 +68,7 @@ public class PlayerLocomotion : MonoBehaviour
         UpdateUI();
 
         input.Normalize();
-        Debug.Log(input);
+
         Vector3 movement = transform.right * input.x + transform.forward * input.y;
         charController.Move(movement * 0.12f);
     }
@@ -78,7 +80,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         bool notThrowing = rigController.GetCurrentAnimatorStateInfo(3).shortNameHash
         == Animator.StringToHash("notThrowing");
-        bool isSprinting = Input.GetKey(KeyCode.LeftShift);
+        bool isSprinting = playerInput.Sprint;
         bool isFiring = activeWeapon.IsFiring();
         bool isReloading = reloadWeapon.isReloading;
         bool isChangingWeapon = activeWeapon.isChangingWeapon;
@@ -119,9 +121,6 @@ public class PlayerLocomotion : MonoBehaviour
         { // IsGrounded State
             UpdateOnGround();
         }
-
-
-
     }
     
     private void UpdateOnGround()

@@ -24,9 +24,13 @@ public class PlayerAiming : MonoBehaviour
 
     private const float zoomRecoil = 0.3f;
 
+    //入力
+    PlayerInput playerInput;
+
     //コンポネント取得
     void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
         animator = GetComponent<Animator>();
         activeWeapon = GetComponent<ActiveWeapon>();
@@ -56,7 +60,7 @@ public class PlayerAiming : MonoBehaviour
             aimLayer.weight = 1.0f;
         } //AimLayerを取得しているか確認
 
-        isAiming = Input.GetMouseButton(1);
+        isAiming = playerInput.zoom || playerInput.Zoom >= 0.02f;
         //カメラズームアニメーション
         camAnimator.SetBool(isAimingParam, isAiming);
         //クロスヘアイメージサイズ変更

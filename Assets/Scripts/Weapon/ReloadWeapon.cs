@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class ReloadWeapon : MonoBehaviour
 {
+    //入力
+    private PlayerInput playerInput;
+
+
     //アニメーションリギング
     [SerializeField] Animator rigController;
     [SerializeField] WeaponAnimationEvents animationEvents;
@@ -18,6 +22,7 @@ public class ReloadWeapon : MonoBehaviour
 
     void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
         activeWeapon = GetComponent<ActiveWeapon>(); 
         animationEvents.WeaponAnimationEvent.AddListener(OnAnimationEvent);  
     }
@@ -35,7 +40,7 @@ public class ReloadWeapon : MonoBehaviour
             bool isChanging = activeWeapon.isChangingWeapon;
             bool isHolstered = activeWeapon.isHolstered;
             //りーろど可能な状態か確認
-            if (Input.GetKeyDown(KeyCode.R) && !isChanging && !isHolstered) // || weapon.ammoCount <= 0
+            if (playerInput.Reload && !isChanging && !isHolstered) // || weapon.ammoCount <= 0
             {
                 if (weapon.reloadAvailable)
                 {

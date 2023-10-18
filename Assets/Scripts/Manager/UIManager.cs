@@ -62,11 +62,12 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (GameManager.Instance.isGameover)
         {
             return;
         }
-
+        */
         UpdateScore();
         
         if (Input.GetKeyDown(KeyCode.Escape) && !settingUI.activeSelf)
