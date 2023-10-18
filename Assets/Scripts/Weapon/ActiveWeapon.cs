@@ -20,7 +20,10 @@ public class ActiveWeapon : MonoBehaviour
     [HideInInspector] public bool isHolstered = false;
 
     [SerializeField] WeaponAnimationEvents animationEvents;
-    
+
+    //入力
+    private PlayerInput playerInput;
+
     //コンポネント
     private PlayerAiming characterAiming;
     private PlayerLocomotion characterLocomotion;
@@ -37,6 +40,7 @@ public class ActiveWeapon : MonoBehaviour
     //コンポネント取得
     void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
         characterAiming = GetComponent<PlayerAiming>();
         characterLocomotion = GetComponent<PlayerLocomotion>();
         reloadWeapon = GetComponent<ReloadWeapon>();
@@ -153,7 +157,7 @@ public class ActiveWeapon : MonoBehaviour
 
         UpdateWeaponControl();
 
-        //UpdateUI();
+        UpdateUI();
     }
 
     public void ThrowGrenade()
@@ -188,7 +192,7 @@ public class ActiveWeapon : MonoBehaviour
 
         //装備、パラメータ設定
         weapon = newWeapon;
-        weapon.SetHolder(gameObject);
+        weapon.SetHolder(gameObject, playerInput);
         weapon.raycastDestination = crosshairTarget; 
         weapon.recoil.characterAiming = characterAiming;
         weapon.recoil.rigController = rigController;
@@ -203,7 +207,7 @@ public class ActiveWeapon : MonoBehaviour
     {
         if (isChangingWeapon) { return; }
         //武器を取り出す
-        if (Input.GetKeyDown(KeyCode.T))
+        if (playerInput.Toggle)
         {
             ToggleActiveWeapon();
         }
@@ -275,7 +279,7 @@ public class ActiveWeapon : MonoBehaviour
                 yield return new WaitForSeconds(0.02f);
             } while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
         }
-        //UIManager.Instance.UpdateWeaponSlotImage(index, false);
+        UIManager.Instance.UpdateWeaponSlotImage(index, false);
         isChangingWeapon = false;
     }
     IEnumerator ActivateWeapon(int index)
@@ -292,7 +296,7 @@ public class ActiveWeapon : MonoBehaviour
             } while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
             isHolstered = false;
         }
-        //UIManager.Instance.UpdateWeaponSlotImage(index, true);
+        UIManager.Instance.UpdateWeaponSlotImage(index, true);
         isChangingWeapon = false;
     }
 

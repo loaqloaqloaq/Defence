@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         }
         else
         {
-            GameManager.Instance.EndGame();
+            //GameManager.Instance.EndGame();
         }
     }
 
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         if (item != null)
         {
             item.Use(gameObject);
-            GameManager.Instance.AddItemCount();
+            //GameManager.Instance.AddItemCount();
             SoundManager.Instance.Play("Sounds/Sfx/PickUp");
         }
     }
