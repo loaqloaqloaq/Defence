@@ -9,6 +9,7 @@ public class EnemyNavigator : MonoBehaviour
     private NavMeshAgent agent;
     private Animator animator;
     // Start is called before the first frame update
+    
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
