@@ -1,10 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 public class RaycastWeapon : MonoBehaviour
 {
+    private PlayerInput input; 
+
     class Bullet
     {
         public bool isSimulating;
@@ -24,7 +25,7 @@ public class RaycastWeapon : MonoBehaviour
     };
 
     public ActiveWeapon.weaponSlot weaponSlot;
-    public WeaponRecoil recoil;
+    public WeaponRecoil recoil { get; private set; }
     public GameObject magazine;
 
     public bool isInifinty;
@@ -76,9 +77,10 @@ public class RaycastWeapon : MonoBehaviour
         magAmmo = magCapacity;
     }
 
-    public void SetHolder(GameObject holder)
+    public void SetHolder(GameObject holder, PlayerInput playerInput)
     {
         weaponHolder = holder;
+        input = playerInput;
     }
 
     Vector3 GetPosition(Bullet bullet)
@@ -107,7 +109,7 @@ public class RaycastWeapon : MonoBehaviour
 
     public void UpdateWeapon(float deltaTime)
     {
-        isFiring = Input.GetMouseButton(0);
+        isFiring = input.isFiring || input.Fire > 0.02f;
 
         if (isFiring)
         {
