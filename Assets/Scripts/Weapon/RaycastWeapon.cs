@@ -174,9 +174,10 @@ public class RaycastWeapon : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, distance))
         {
             var target = hitInfo.collider.GetComponent<IDamageable>();
-
+            Debug.Log(hitInfo.transform.name);
             if (target != null)
             {
+        
                 DamageMessage damageMessage;
                 damageMessage.damager = weaponHolder;
                 damageMessage.amount = damage;
