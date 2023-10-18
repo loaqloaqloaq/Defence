@@ -1,0 +1,327 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ActiveWeapon : MonoBehaviour
+{
+    public enum weaponSlot
+    {
+        Primary = 0,　   //primary：ライフル
+        Secondary = 1,   //secondary：ピストル
+    }
+
+
+    [SerializeField] private Transform crosshairTarget;
+    [SerializeField] private Transform[] weaponSlots;
+    [SerializeField] private Transform weaponRightGrip;
+    [SerializeField] private Transform weaponLeftGrip;
+    [SerializeField] private LayerMask excludeTarget;
+    public bool isChangingWeapon { get; private set; }
+    [HideInInspector] public bool isHolstered = false;
+
+    [SerializeField] WeaponAnimationEvents animationEvents;
+    
+    //コンポネント
+    private PlayerAiming characterAiming;
+    private PlayerLocomotion characterLocomotion;
+    private RaycastWeapon[] equipped_Weapons = new RaycastWeapon[2];
+    private ReloadWeapon reloadWeapon;
+    private GrenadeController grController;    
+
+    [SerializeField] private Animator rigController;
+    private int unarmedParam = Animator.StringToHash("weapon_Unarmed");
+
+    private int activeWeaponIndex;
+    private Vector3 aimPoint;
+
+    //コンポネント取得
+    void Awake()
+    {
+        characterAiming = GetComponent<PlayerAiming>();
+        characterLocomotion = GetComponent<PlayerLocomotion>();
+        reloadWeapon = GetComponent<ReloadWeapon>();
+        grController = GetComponent<GrenadeController>();
+        animationEvents.WeaponAnimationEvent.AddListener(OnAnimationEvent);
+    }
+
+    private void Start()
+    {
+        //武器を所持しているか確認
+        RaycastWeapon exisitingWeapon = GetComponentInChildren<RaycastWeapon>();
+        if (exisitingWeapon)
+        {
+            Equip(exisitingWeapon);//装備
+        }
+    }
+
+    private void OnEnable()
+    {
+        SetDefaultState();
+    }
+
+    //初期の状態にする（primary = null secondary = pistol）
+    private void SetDefaultState()
+    {
+        isHolstered = true;
+        isChangingWeapon = false;
+
+        rigController.SetBool("holster_weapon", true);
+        rigController.Play(unarmedParam);
+
+        activeWeaponIndex = (int)weaponSlot.Secondary;
+        rigController.SetInteger("weapon_index", activeWeaponIndex);
+
+        var weapon = weaponSlots[(int)weaponSlot.Primary].GetComponentInChildren<RaycastWeapon>();
+        if (weapon)
+        {
+            Destroy(weapon.gameObject);
+        }
+    }
+
+    //標的オブジェクトを更新する
+    private void UpdateAimTarget()
+    {
+        RaycastHit hit;
+        Camera playerCamera = Camera.main;
+        RaycastWeapon weapon = GetActiveWeapon();
+        if (!weapon)
+        {
+            return;
+        }
+        Vector3 firePosition = weapon.raycastOrigin.transform.position;
+        var ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f)); //画面中央にRay 
+
+        if (Physics.Raycast(ray, out hit, 200.0f, ~excludeTarget)) 
+        {
+            //excludeTargetを除く
+            aimPoint = hit.point; //画面中央からのRayに当たった的 (FPS)
+
+            //的とプレイヤーキャラクタの間に何かのオブジェクトがあったら標的をそのオブジェクトに変える (TPS)
+            if (Physics.Linecast(firePosition, hit.point, out hit, ~excludeTarget)) 
+            {
+                aimPoint = hit.point;
+            }
+        }
+        else
+        {
+            aimPoint = playerCamera.transform.position + playerCamera.transform.forward * 200.0f; //fire distance < 수정예정 
+        }
+    }
+
+    //現在使用している武器取得
+    RaycastWeapon GetWeapon(int index)
+    {
+        if (index < 0 || index >= equipped_Weapons.Length)
+        {
+            return null;
+        }
+        return equipped_Weapons[index];
+    }
+
+    //UI
+    private void UpdateUI() 
+    {
+        var weapon = GetActiveWeapon();
+        if (weapon == null) return;
+        if (UIManager.Instance == null) return;
+        // 残弾数
+        UIManager.Instance.UpdateAmmoText(weapon.magAmmo, weapon.ammoRemain, weapon.isInifinty);
+        // クロスヘアのサイズ
+        UIManager.Instance.SetActiveCrosshair(!isHolstered);
+        //クロスヘアを的の位置に表示させる
+        UIManager.Instance.UpdateCrossHairPosition(aimPoint); 
+    }
+
+    void FixedUpdate()
+    {
+        if (UIManager.Instance.isPause) return;　//Pause 
+        //走っているか
+        bool notSprinting = rigController.GetCurrentAnimatorStateInfo(2).shortNameHash 
+                == Animator.StringToHash("notSprinting");
+        //リロードしているか
+        bool isReloading = reloadWeapon.isReloading;
+        
+        if (isReloading || !notSprinting) return;
+
+        var weapon = GetWeapon(activeWeaponIndex);
+        if (weapon && !isHolstered)　//武器を所持している＆取り出している
+        {
+            //武器の処理
+            weapon.UpdateWeapon(Time.deltaTime);
+            UpdateAimTarget();
+        }
+
+        UpdateWeaponControl();
+
+        //UpdateUI();
+    }
+
+    public void ThrowGrenade()
+    {
+        if (!grController)
+        {
+            Debug.Log("grController variable has not been assigned");
+            return;
+        }
+        grController.ThrowGrenade();
+    }
+
+    public bool IsFiring()
+    {
+        RaycastWeapon currentWeapon = GetActiveWeapon();
+        if (!currentWeapon)
+        {
+            return false;
+        }
+        return currentWeapon.isFiring;
+    }
+
+    //武器を装備する
+    public void Equip(RaycastWeapon newWeapon)
+    {
+        int weaponSlotIndex = (int)newWeapon.weaponSlot; //装備する武器のindexを読み込む
+        var weapon = GetWeapon(weaponSlotIndex); //すでに他の武器を所持しているか確認
+        if (weapon) // あったら破棄
+        {
+            Destroy(weapon.gameObject);
+        }
+
+        //装備、パラメータ設定
+        weapon = newWeapon;
+        weapon.SetHolder(gameObject);
+        weapon.raycastDestination = crosshairTarget; 
+        weapon.recoil.characterAiming = characterAiming;
+        weapon.recoil.rigController = rigController;
+        weapon.transform.SetParent(weaponSlots[weaponSlotIndex], false); 
+        equipped_Weapons[weaponSlotIndex] = weapon; 
+
+        //SetActiveWeapon(newWeapon.weaponSlot); 
+    }
+
+    //Num1 key : Rifle,  Num2 key : Pistol　武器選択処理 
+    private void UpdateWeaponControl()
+    {
+        if (isChangingWeapon) { return; }
+        //武器を取り出す
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            ToggleActiveWeapon();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1) && equipped_Weapons[(int)weaponSlot.Primary] != null)
+        {
+            SetActiveWeapon(weaponSlot.Primary);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) && equipped_Weapons[(int)weaponSlot.Secondary] != null)
+        {
+            SetActiveWeapon(weaponSlot.Secondary);
+        }
+        //グレネードを投げる
+        if (Input.GetKeyDown(KeyCode.G) && grController.isAvailable && !isHolstered)
+        {
+            rigController.SetTrigger("throw_grenade");
+        }
+    }
+
+    //primary < > secondary 変更処理
+    void ToggleActiveWeapon()
+    {
+        switch (activeWeaponIndex)
+        {
+            case (int)weaponSlot.Primary :
+                SetActiveWeapon(weaponSlot.Primary);
+                break;             
+            case (int)weaponSlot.Secondary:
+                SetActiveWeapon(weaponSlot.Secondary);
+                break;
+            default:
+                break;
+        }
+    }
+    void SetActiveWeapon(weaponSlot weaponslot)
+    {
+        int holsterIndex = activeWeaponIndex; // 
+        int activateIndex = (int)weaponslot; //
+
+        if (holsterIndex == activateIndex)
+        {
+            if (isHolstered)
+            {
+                holsterIndex = -1;
+            }
+            else
+            {
+                activateIndex = -1;
+            }
+        }
+        StartCoroutine(SwitchWeapon(holsterIndex, activateIndex));
+    }
+    IEnumerator SwitchWeapon(int holsterindex, int activateIndex)
+    {
+        rigController.SetInteger("weapon_index", activateIndex); 
+        yield return StartCoroutine(HolsterWeapon(holsterindex));
+        yield return StartCoroutine(ActivateWeapon(activateIndex));
+        activeWeaponIndex = activateIndex >= 0 ? activateIndex : activeWeaponIndex;
+    }
+    IEnumerator HolsterWeapon(int index)
+    {
+        isChangingWeapon = true;
+        isHolstered = true;
+        var weapon = GetWeapon(index);
+        if (weapon)
+        {
+            rigController.SetBool("holster_weapon", true);
+            do
+            {
+                yield return new WaitForSeconds(0.02f);
+            } while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+        }
+        //UIManager.Instance.UpdateWeaponSlotImage(index, false);
+        isChangingWeapon = false;
+    }
+    IEnumerator ActivateWeapon(int index)
+    {
+        isChangingWeapon = true;
+        var weapon = GetWeapon(index);
+        if (weapon)
+        {
+            rigController.Play("equip_" + weapon.weaponName);
+            rigController.SetBool("holster_weapon", false);
+            do
+            {
+                yield return new WaitForSeconds(0.02f);
+            } while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+            isHolstered = false;
+        }
+        //UIManager.Instance.UpdateWeaponSlotImage(index, true);
+        isChangingWeapon = false;
+    }
+
+    //使用している武器を取得
+    public RaycastWeapon GetActiveWeapon()
+    {
+        return GetWeapon(activeWeaponIndex);
+    }
+
+    public RaycastWeapon GetPrimaryWeapon()
+    {
+        var primary = GetWeapon(0);
+        if (primary)
+        {
+            return primary;
+        }
+        return null;
+    }
+
+    private void OnAnimationEvent(string evenName)
+    {
+        switch (evenName)
+        {
+            case "throw_Grenade":
+                ThrowGrenade();
+                break;
+
+            default:
+                break;
+        }
+    }
+}
