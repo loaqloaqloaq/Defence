@@ -13,10 +13,19 @@ public class PlayerInput : MonoBehaviour
 
     public bool Reload { get; private set; }
 
-    public float Fire { get; private set; }
+    public bool Fire { get; private set; }
 
     public float Zoom { get; private set; }
     public bool zoom { get; private set; }
+
+    public bool Grenade { get; private set; }
+
+    public float D_XAxis { get; private set; }
+    public float D_YAxis { get; private set; }
+
+    public bool Alpha1 { get; private set; }
+    public bool Alpha2 { get; private set; }
+    public bool Alpha3 { get; private set; }
 
     // Update is called once per frame
     void Update()
@@ -26,9 +35,11 @@ public class PlayerInput : MonoBehaviour
 
         input = new Vector2(xInput, yInput);
 
-        Sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey("joystick button 5");
+        Sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetAxis("RightTrigger") > 0.1f;
 
         Jump = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0");
+
+        Grenade = Input.GetKeyDown(KeyCode.G) || Input.GetKeyDown("joystick button 1");
 
         Toggle = Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown("joystick button 2");
 
@@ -36,9 +47,24 @@ public class PlayerInput : MonoBehaviour
 
         Reload = Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown("joystick button 4");
 
-        Fire = Input.GetAxis("RightTrigger");
+        Fire = Input.GetKey("joystick button 5");
 
         Zoom = Input.GetAxisRaw("LeftTrigger");
-        zoom = Input.GetMouseButtonDown(1);
+
+        zoom = Input.GetMouseButton(1);
+
+        if (Mathf.Abs(D_YAxis) < 0.05f)
+        {
+            D_XAxis = Input.GetAxisRaw("Dpad X");
+        }
+
+        if (Mathf.Abs(D_XAxis) < 0.05f)
+        {
+            D_YAxis = Input.GetAxisRaw("Dpad Y");
+        }
+
+        Alpha1 = D_YAxis > 0.05f || Input.GetKeyDown(KeyCode.Alpha1);
+        Alpha2 = D_XAxis > 0.05f || Input.GetKeyDown(KeyCode.Alpha2);
+        Alpha3 = D_YAxis < -0.05f || Input.GetKeyDown(KeyCode.Alpha3);
     }
 }

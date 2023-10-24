@@ -6,8 +6,10 @@ public class ActiveWeapon : MonoBehaviour
 {
     public enum weaponSlot
     {
-        Primary = 0,　   //primary：ライフル
-        Secondary = 1,   //secondary：ピストル
+        Primary = 0,　   //Primary：ライフル
+        Secondary = 1,   //Secondary：ピストル
+        Tertiary = 2,    //Tertiary：ロケットランチャー
+        Length,
     }
 
 
@@ -26,8 +28,7 @@ public class ActiveWeapon : MonoBehaviour
 
     //コンポネント
     private PlayerAiming characterAiming;
-    private PlayerLocomotion characterLocomotion;
-    private RaycastWeapon[] equipped_Weapons = new RaycastWeapon[2];
+    private RaycastWeapon[] equipped_Weapons = new RaycastWeapon[(int)weaponSlot.Length];
     private ReloadWeapon reloadWeapon;
     private GrenadeController grController;    
 
@@ -42,7 +43,6 @@ public class ActiveWeapon : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         characterAiming = GetComponent<PlayerAiming>();
-        characterLocomotion = GetComponent<PlayerLocomotion>();
         reloadWeapon = GetComponent<ReloadWeapon>();
         grController = GetComponent<GrenadeController>();
         animationEvents.WeaponAnimationEvent.AddListener(OnAnimationEvent);
@@ -211,16 +211,20 @@ public class ActiveWeapon : MonoBehaviour
         {
             ToggleActiveWeapon();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1) && equipped_Weapons[(int)weaponSlot.Primary] != null)
-        {
-            SetActiveWeapon(weaponSlot.Primary);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && equipped_Weapons[(int)weaponSlot.Secondary] != null)
+        if (playerInput.Alpha1 && equipped_Weapons[(int)weaponSlot.Secondary] != null)
         {
             SetActiveWeapon(weaponSlot.Secondary);
         }
+        if (playerInput.Alpha2 && equipped_Weapons[(int)weaponSlot.Primary] != null)
+        {
+            SetActiveWeapon(weaponSlot.Primary);
+        }
+        if (playerInput.Alpha3 && equipped_Weapons[(int)weaponSlot.Tertiary] != null)
+        {
+            SetActiveWeapon(weaponSlot.Tertiary);
+        }
         //グレネードを投げる
-        if (Input.GetKeyDown(KeyCode.G) && grController.isAvailable && !isHolstered)
+        if (playerInput.Grenade && grController.isAvailable && !isHolstered)
         {
             rigController.SetTrigger("throw_grenade");
         }

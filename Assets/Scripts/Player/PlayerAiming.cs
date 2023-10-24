@@ -6,19 +6,23 @@ public class PlayerAiming : MonoBehaviour
     //カメラ回転
     [SerializeField] private float turnSpeed = 15;
     [SerializeField] private Transform cameraLookAt;
+    [Range(0.2f, 1.0f)][SerializeField] private float axisModifier = 0.8f;
     public Cinemachine.AxisState xAxis;
     public Cinemachine.AxisState yAxis;
+
+    private float xStartSpeed;
+    private float yStartSpeed;
+
     public bool isAiming { get; private set; }
 
     //コンポネント
     private Camera mainCamera;
-    private Animator animator;
     private ActiveWeapon activeWeapon;
 
     //ズームするときのカメラアニメーション
     [SerializeField] private Animator camAnimator;
     private int isAimingParam = Animator.StringToHash("IsAiming");
-    
+
     //アニメーションリギング
     [SerializeField] Rig aimLayer;
 
@@ -32,12 +36,18 @@ public class PlayerAiming : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
-        animator = GetComponent<Animator>();
         activeWeapon = GetComponent<ActiveWeapon>();
+    }
+
+    private void Start()
+    {
+        xStartSpeed = xAxis.m_MaxSpeed;
+        yStartSpeed = yAxis.m_MaxSpeed;
     }
 
     void FixedUpdate()
     {
+        SetCameraRotationSpeed();
         CameraRotate();
     }
 
@@ -51,6 +61,20 @@ public class PlayerAiming : MonoBehaviour
 
         float yawCamera = mainCamera.transform.rotation.eulerAngles.y;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, yawCamera, 0), turnSpeed * Time.fixedDeltaTime);
+    }
+
+    private void SetCameraRotationSpeed()
+    {
+        if (isAiming)
+        {
+            xAxis.m_MaxSpeed = xStartSpeed * axisModifier;
+            yAxis.m_MaxSpeed = yStartSpeed * axisModifier;
+        }
+        else
+        {
+            xAxis.m_MaxSpeed = xStartSpeed;
+            yAxis.m_MaxSpeed = yStartSpeed;
+        }
     }
 
     private void Update()

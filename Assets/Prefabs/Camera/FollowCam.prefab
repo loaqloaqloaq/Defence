@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 73866768414409930}
   - component: {fileID: 73866768414409935}
   - component: {fileID: 73866768414409929}
-  - component: {fileID: 73866768414409928}
+  - component: {fileID: 8952260587728013938}
   m_Layer: 0
   m_Name: FollowCam
   m_TagString: Untagged
@@ -103,7 +103,7 @@ Transform:
   m_Children:
   - {fileID: 73866768199901970}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!114 &73866768414409930
 MonoBehaviour:
@@ -188,7 +188,7 @@ MonoBehaviour:
     m_FrequencyGain: 1
     m_Duration: 1
     m_NoiseOffsets: {x: 0, y: 0, z: 0}
---- !u!114 &73866768414409928
+--- !u!114 &8952260587728013938
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,19 +202,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 53
-  m_IgnoreTag: Untagged
+    m_Bits: 384
+  m_IgnoreTag: 
   m_TransparentLayers:
     serializedVersion: 2
-    m_Bits: 2
-  m_MinimumDistanceFromTarget: 0.1
+    m_Bits: 392
+  m_MinimumDistanceFromTarget: 0.01
   m_AvoidObstacles: 1
   m_DistanceLimit: 0
   m_MinimumOcclusionTime: 0
-  m_CameraRadius: 0.1
-  m_Strategy: 1
+  m_CameraRadius: 0.4
+  m_Strategy: 0
   m_MaximumEffort: 4
-  m_SmoothingTime: 0
+  m_SmoothingTime: 0.2
   m_Damping: 0
   m_DampingWhenOccluded: 0
   m_OptimalTargetDistance: 0
