@@ -59,7 +59,7 @@ public class EnemyController : MonoBehaviour, IDamageable
             if (destoryTimer >= destoryTime)
             {
                 var pos = transform.position;
-                pos.y += 0.5f;
+                pos.y += 1.0f;
                 if (explosion!=null) Instantiate(explosion, pos, transform.rotation);
                 Destroy(gameObject);
             }
@@ -72,13 +72,12 @@ public class EnemyController : MonoBehaviour, IDamageable
             if (lastCheck >= checkFeq)
             {
                 lastCheck = 0;
-                if (target == gate)
-                {   if (disToGate > 2f)
-                    {
-                        if (disToPlayer < 3f) target = player;
-                        else if (disToPlayer < 5f && rand < 5) target = player;
-                        else if (disToPlayer < 7f && rand < 1) target = player;
-                    }                    
+                if (disToGate <= 2f) target = gate;
+                else if (target == gate)
+                {   
+                    if (disToPlayer < 3f) target = player;
+                    else if (disToPlayer < 5f && rand < 5) target = player;
+                    else if (disToPlayer < 7f && rand < 1) target = player;                                        
                 }
                 else if (target == player)
                 {
