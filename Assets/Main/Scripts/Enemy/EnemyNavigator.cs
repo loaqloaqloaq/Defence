@@ -5,39 +5,34 @@ using UnityEngine.AI;
 
 public class EnemyNavigator : MonoBehaviour
 {
-    public Transform player;
-    private NavMeshAgent agent;
+    public Transform target;    
     private Animator animator;
     private EnemyController ec;
-
    
     // Start is called before the first frame update
     
     void Start()
-    {
-        agent = GetComponent<NavMeshAgent>();
+    {       
         animator = GetComponent<Animator>();
-        ec = gameObject.AddComponent<EnemyController>();
-
-        if (player == null) player = GameObject.Find("Player").transform;
-        
+        ec = GetComponent<EnemyController>();   
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (agent.enabled == true)
+        if (ec?.agent?.enabled == true && !ec.attacking)
         {
-            if (Vector3.Distance(transform.position, player.position) > 1f)
+            target = ec.target ?? GameObject.Find("Gate").transform;
+            if (Vector3.Distance(transform.position, target.position) > 1.5f)
             {
                 animator.SetBool("walking", true);
-                agent.isStopped = false;
-                agent.destination = player.position;
+                ec.agent.isStopped = false;
+                ec.agent.destination = target.position;
             }
             else
             {
                 animator.SetBool("walking", false);
-                agent.isStopped = true;
+                ec.agent.isStopped = true;
             }
         }
 
