@@ -109,7 +109,7 @@ public class RaycastWeapon : MonoBehaviour
 
     public void UpdateWeapon(float deltaTime)
     {
-        isFiring = input.isFiring || input.Fire > 0.02f;
+        isFiring = input.isFiring || input.Fire;
 
         if (isFiring)
         {
@@ -174,7 +174,7 @@ public class RaycastWeapon : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, distance))
         {
             var target = hitInfo.collider.GetComponent<IDamageable>();
-            Debug.Log(hitInfo.transform.name);
+            //Debug.Log(hitInfo.transform.name);
             if (target != null)
             {
         
