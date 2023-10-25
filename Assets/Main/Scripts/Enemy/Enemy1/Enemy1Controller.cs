@@ -22,7 +22,13 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
     public Transform gate,gate1,gate2,gate3, player;
     public GameObject explosion;
 
+    public GameObject ammoPack;
+
     float checkFeq, lastCheck;
+
+    [SerializeField]
+    TextAsset EnemyJsonFile;
+    EnemyJsonReader EnemyJson;
 
     //çUåÇÇêHÇÁÇ¡ÇΩâÒêî
     int damage_Cnt = 0;
@@ -51,6 +57,11 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
         checkFeq = 0.5f;
 
         attacking = false;
+
+        string jsonString = EnemyJsonFile.ToString();
+        EnemyJson= JsonUtility.FromJson<EnemyJsonReader>(jsonString);
+        //agent.speed = EnemyJson.Enemy1.moveSpeed;
+
     }
 
     // Update is called once per frame
@@ -65,14 +76,13 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
             GetComponent<NavMeshAgent>().enabled = false;
             destoryTimer += Time.deltaTime;
             if (destoryTimer >= destoryTime)
-            {
-                var pos = transform.position;
-                pos.y += 0.5f;
-                if (explosion != null) { 
+            {                
+                if (explosion != null) {
+                    var pos = transform.position;
+                    pos.y += 0.5f;
                     var exp=Instantiate(explosion, pos, transform.rotation);
                     exp.transform.localScale=new Vector3(0.7f, 0.7f, 0.7f);
-                }
-                
+                }                
                 Destroy(gameObject);
             }
         }
@@ -131,6 +141,15 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
         HP -= damageMessage.amount;
         if (HP <= 0 && !dead)
         {
+
+            if (UnityEngine.Random.Range(0, 100) < 1) {
+                if (ammoPack != null)
+                {
+                    var pos = transform.position;
+                    pos.y = 0;
+                    Instantiate(ammoPack, pos, transform.rotation);                    
+                }
+            }
             animator.SetTrigger("die");
             dead = true;
         }

@@ -20,8 +20,8 @@ public class EnemyGenerator : MonoBehaviour
     void Update()
     {
         lastGen += Time.deltaTime;
-        int randX = Random.Range(-2, 2);
-        int randZ = Random.Range(-2, 2);
+        int randX = Random.Range(-3, 3);
+        int randZ = Random.Range(-3, 3);
         Vector3 pos = transform.position;
         pos = new Vector3(pos.x + randX, pos.y, pos.z + randZ);
         if (lastGen >= genFreq) {

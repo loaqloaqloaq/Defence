@@ -3136,6 +3136,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1538845396968759557, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
+      propertyPath: ammoPack
+      value: 
+      objectReference: {fileID: 4549580422657515402, guid: f4a4eef7b95967d47a00839a556d17d3, type: 3}
+    - target: {fileID: 1538845396968759557, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 2532972853072531924, guid: b40f4969cc5dc9c41adb34150b3c46f3, type: 3}
     - target: {fileID: 3554424129766646819, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
       propertyPath: m_RootOrder
       value: 18

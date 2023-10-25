@@ -1062,7 +1062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400096, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 400096, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       propertyPath: m_LocalScale.x
@@ -1631,6 +1631,8 @@ MonoBehaviour:
   gate3: {fileID: 0}
   player: {fileID: 0}
   explosion: {fileID: 2532972853072531924, guid: b40f4969cc5dc9c41adb34150b3c46f3, type: 3}
+  ammoPack: {fileID: 4549580422657515402, guid: f4a4eef7b95967d47a00839a556d17d3, type: 3}
+  EnemyJsonFile: {fileID: 4900000, guid: f1c981157521eed4fae48c4d1df9debd, type: 3}
 --- !u!114 &3992058183028840753
 MonoBehaviour:
   m_ObjectHideFlags: 0

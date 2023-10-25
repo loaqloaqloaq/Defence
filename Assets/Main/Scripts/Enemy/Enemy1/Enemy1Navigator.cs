@@ -31,6 +31,7 @@ public class Enemy1Navigator : MonoBehaviour
                 if(target.name.StartsWith("Gate"))
                     targetPos.x = (target.position - (target.position - transform.position).normalized * 3f).x;
                 ec.agent.destination = targetPos;
+                
             }
             else
             {

@@ -1,0 +1,9 @@
+{
+    "Enemy1":{
+        "moveSpeed":7,
+        "atk":10,
+        "drop":{
+            "ammo":5
+        }
+    }
+}
