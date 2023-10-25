@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.XR;
 
 
@@ -12,9 +13,10 @@ public class GateController : MonoBehaviour
 
     public int gateNumber;
     [HideInInspector]
-    public bool broke;
-    
-    public GameObject explosion;
+    public bool broke;    
+
+    NavMeshObstacle o1,o2;
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +24,20 @@ public class GateController : MonoBehaviour
         HP = MaxHP;
         ani= GetComponent<Animator>();
         broke = false;
+        o1 = transform.GetChild(0).GetChild(0).GetComponent<NavMeshObstacle>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (ani.GetCurrentAnimatorStateInfo(0).IsName("break") && ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        {
+            o1.enabled = false;           
+        }
+        else {
+            o1.enabled = true;            
+        }
     }
    
     public bool ApplyDamage(DamageMessage damageMessage)
@@ -42,13 +52,6 @@ public class GateController : MonoBehaviour
     private void Broke(){
         broke = true;
         GetComponent<BoxCollider>().enabled = false;
-        ani.SetTrigger("break");        
-        var pos = transform.position;
-        pos.y += 1.0f;
-        if (explosion != null)
-        {
-            var exp=Instantiate(explosion, pos, transform.rotation);
-            exp.transform.localScale = new Vector3(2,2,2);
-        }
+        ani.SetTrigger("break");                
     }
 }
