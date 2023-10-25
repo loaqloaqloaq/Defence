@@ -23,7 +23,7 @@ public class EnemyNavigator : MonoBehaviour
         if (ec?.agent?.enabled == true && !ec.attacking)
         {
             target = ec.target ?? GameObject.Find("Gate1").transform ?? GameObject.Find("Gate2").transform ?? GameObject.Find("Gate3").transform;
-            if (!ec.attacking)
+            if (Vector3.Distance(transform.position, target.position) > 1.5f && !ec.attacking)
             {
                 animator.SetBool("walking", true);
                 ec.agent.isStopped = false;
