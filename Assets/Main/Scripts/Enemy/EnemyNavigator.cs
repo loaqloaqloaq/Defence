@@ -27,7 +27,10 @@ public class EnemyNavigator : MonoBehaviour
             {
                 animator.SetBool("walking", true);
                 ec.agent.isStopped = false;
-                ec.agent.destination = target.position;
+                var targetPos = target.position;
+                if(target.name.StartsWith("Gate"))
+                    targetPos.x = (target.position - (target.position - transform.position).normalized * 3f).x;
+                ec.agent.destination = targetPos;
             }
             else
             {

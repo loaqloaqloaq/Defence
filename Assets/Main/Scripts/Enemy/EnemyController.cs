@@ -67,7 +67,10 @@ public class EnemyController : MonoBehaviour, IDamageable
             {
                 var pos = transform.position;
                 pos.y += 1.0f;
-                if (explosion!=null) Instantiate(explosion, pos, transform.rotation);
+                if (explosion != null) { 
+                    var exp=Instantiate(explosion, pos, transform.rotation);
+                    exp.transform.localScale=new Vector3(0.7f, 0.7f, 0.7f);
+                }
                 
                 Destroy(gameObject);
             }
