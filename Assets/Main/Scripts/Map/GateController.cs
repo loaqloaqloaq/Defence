@@ -1,5 +1,9 @@
+using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
 using UnityEngine.XR;
 
 
@@ -12,9 +16,15 @@ public class GateController : MonoBehaviour
 
     public int gateNumber;
     [HideInInspector]
-    public bool broke;
-    
-    public GameObject explosion;
+    public bool broke;    
+
+    NavMeshObstacle o1;
+
+    GameObject HPfill;
+    TextMeshProUGUI HPText;  
+    float width, targetWidth;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,33 +32,56 @@ public class GateController : MonoBehaviour
         HP = MaxHP;
         ani= GetComponent<Animator>();
         broke = false;
+        o1 = transform.GetChild(0).GetChild(0).GetComponent<NavMeshObstacle>();
+
+        HPfill = transform.GetChild(3).GetChild(0).gameObject;
+        HPfill.SetActive(false);
+        HPText = transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+
+        HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100,2) + "%)";        
+        
+        targetWidth = 30f;
+        width = targetWidth;
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {  
+      
 
+        if ( Mathf.Abs(width-targetWidth) > 0.002f) {
+            width += (targetWidth - width)*Time.deltaTime*4f;
+            HPfill.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(width, 2);
+        }
+
+        if (ani.GetCurrentAnimatorStateInfo(0).IsName("break") && ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        {
+            o1.enabled = false;           
+        }
+        else {
+            o1.enabled = true;            
+        }
     }
    
     public bool ApplyDamage(DamageMessage damageMessage)
     {
-        if (HP <= 0) return true;
+        if (HP <= 0) return true;        
         HP -= damageMessage.amount;
         if (HP <= 0) Broke();
         else ani.SetTrigger("damage");
+
+        HPfill.SetActive(true);
+        targetWidth = 30f * HP / MaxHP;
+        HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
+
+
         return true;
     }
 
     private void Broke(){
         broke = true;
         GetComponent<BoxCollider>().enabled = false;
-        ani.SetTrigger("break");        
-        var pos = transform.position;
-        pos.y += 1.0f;
-        if (explosion != null)
-        {
-            var exp=Instantiate(explosion, pos, transform.rotation);
-            exp.transform.localScale = new Vector3(2,2,2);
-        }
+        ani.SetTrigger("break");
+        HPfill.GetComponent<Animator>().SetTrigger("hideHP");
     }
 }
