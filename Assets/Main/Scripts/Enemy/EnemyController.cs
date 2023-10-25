@@ -139,4 +139,21 @@ public class EnemyController : MonoBehaviour, IDamageable
         attacking = false;
         attacked = false;
     }
+
+    //ƒ_ƒ[ƒWˆ—
+    public void Damage(int damage)
+    {
+        if (dead) return;
+
+        HP -= damage;
+
+        //HP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚Æ‚«
+        if (HP <= 0)
+        {
+            //‚·‚®‚É”j‰ó‚³‚¹‚é
+            destoryTimer = 3.0f;
+            animator.SetTrigger("die");
+            dead = true;
+        }
+    }
 }
