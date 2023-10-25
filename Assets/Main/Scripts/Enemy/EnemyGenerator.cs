@@ -7,12 +7,12 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField]
     GameObject enemy;
 
-    float lastGen, genFreq;
+    float lastGen;
+    public float genFreq;
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(enemy, transform.position, transform.rotation);
-        genFreq = 3f;
+        Instantiate(enemy, transform.position, transform.rotation);        
         lastGen = 0;
     }
 

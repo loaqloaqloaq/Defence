@@ -1,13 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.PlayerSettings;
+
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class Enemy1Controller : MonoBehaviour, IDamageable
 {
     [HideInInspector]
-    public float HP, MAXHP;
+    public float HP, MAXHP, ATK;
+    Drop drop;
     private Animator animator;
     [HideInInspector]
     public NavMeshAgent agent;
@@ -22,7 +23,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
     public Transform gate,gate1,gate2,gate3, player;
     public GameObject explosion;
 
-    public GameObject ammoPack;
+    public GameObject ammoPack,healthPack;
 
     float checkFeq, lastCheck;
 
@@ -34,12 +35,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
     int damage_Cnt = 0;
     // Start is called before the first frame update
     void Start()
-    {
-        MAXHP = 100f;
-        HP = MAXHP;
-
-        animator=GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
+    {              
 
         destoryTime = 3.0f;
         destoryTimer = 0;
@@ -58,10 +54,18 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
 
         attacking = false;
 
+        animator = GetComponent<Animator>();       
+        agent = GetComponent<NavMeshAgent>();
+
         string jsonString = EnemyJsonFile.ToString();
         EnemyJson= JsonUtility.FromJson<EnemyJsonReader>(jsonString);
-        //agent.speed = EnemyJson.Enemy1.moveSpeed;
+        agent.speed = EnemyJson.Enemy1.moveSpeed;
 
+        MAXHP = EnemyJson.Enemy1.hp;
+        HP = MAXHP;
+        ATK = EnemyJson.Enemy1.atk;
+
+        drop = EnemyJson.Enemy1.drop;
     }
 
     // Update is called once per frame
@@ -140,14 +144,20 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
     {
         HP -= damageMessage.amount;
         if (HP <= 0 && !dead)
-        {
-
-            if (UnityEngine.Random.Range(0, 100) < 1) {
+        {            
+            if (UnityEngine.Random.Range(0, 100) < drop.ammo) {
                 if (ammoPack != null)
                 {
                     var pos = transform.position;
                     pos.y = 0;
                     Instantiate(ammoPack, pos, transform.rotation);                    
+                }
+            }else if(UnityEngine.Random.Range(0, 100) < drop.ammo+drop.health) {
+                if (healthPack != null)
+                {
+                    var pos = transform.position;
+                    pos.y = 0;
+                    Instantiate(healthPack, pos, transform.rotation);
                 }
             }
             animator.SetTrigger("die");
@@ -167,7 +177,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
 
         DamageMessage dm= new DamageMessage();
         dm.damager = gameObject;
-        dm.amount = 10f;
+        dm.amount = ATK;
         if((target.GetComponent<GateController>() ?? null) != null) target.GetComponent<GateController>().ApplyDamage(dm);
         else if ((target.GetComponent<PlayerHealth>() ?? null) != null) target.GetComponent<PlayerHealth>().ApplyDamage(dm);   
         attacked = true;
