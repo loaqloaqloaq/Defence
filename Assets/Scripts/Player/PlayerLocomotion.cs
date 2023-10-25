@@ -67,8 +67,11 @@ public class PlayerLocomotion : MonoBehaviour
         UpdateIsSprinting();
         UpdateUI();
 
-        input.Normalize();
-
+        if (input.sqrMagnitude > 1.0f)
+        {
+            input.Normalize();
+        }
+ 
         Vector3 movement = transform.right * input.x + transform.forward * input.y;
         charController.Move(movement * 0.12f);
     }
