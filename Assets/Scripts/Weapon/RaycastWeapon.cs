@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class RaycastWeapon : MonoBehaviour
 {
-    private PlayerInput input; 
+    protected PlayerInput input; 
 
-    class Bullet
+     public class Bullet
     {
         public bool isSimulating;
         public float time;
@@ -39,19 +38,16 @@ public class RaycastWeapon : MonoBehaviour
     public int magCapacity = 30;
     public float damage = 20.0f;
 
-
     public Transform raycastOrigin;
     public Transform raycastDestination;
 
-    [SerializeField] TrailRenderer tracerEffect;
-    [SerializeField] ParticleSystem[] muzzleFlash;
-    [SerializeField] ParticleSystem hitEffect;
+    [SerializeField] protected TrailRenderer tracerEffect;
+    [SerializeField] protected ParticleSystem[] muzzleFlash;
+    [SerializeField] protected ParticleSystem hitEffect;
 
-    private PlayerAiming characterAiming;
-
-    [SerializeField] float bulletSpeed = 1000.0f;
-    [SerializeField] float bulletDrop = 0.0f;
-    [SerializeField] int maxBounces = 0;
+    [SerializeField] protected float bulletSpeed = 1000.0f;
+    [SerializeField] protected float bulletDrop = 0.0f;
+    [SerializeField] protected int maxBounces = 0;
 
     List<Bullet> bullets = new List<Bullet>();
 
@@ -67,12 +63,12 @@ public class RaycastWeapon : MonoBehaviour
         }
     }
 
-    private void Awake()
+    public void Awake()
     {
         recoil = GetComponent<WeaponRecoil>();
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
         magAmmo = magCapacity;
     }
@@ -83,14 +79,14 @@ public class RaycastWeapon : MonoBehaviour
         input = playerInput;
     }
 
-    Vector3 GetPosition(Bullet bullet)
+    public virtual Vector3 GetPosition(Bullet bullet)
     {
         // p + v * t + 0.5 * g * t * t
         Vector3 gravity = Vector3.down * bulletDrop;
         return bullet.initialPosition + bullet.initialVelocity * bullet.time + 0.5f * gravity * bullet.time * bullet.time;
     }
 
-    Bullet CreateBullet(Vector3 position, Vector3 velocity)
+    public virtual Bullet CreateBullet(Vector3 position, Vector3 velocity)
     {
         Bullet bullet = new Bullet();
         bullet.isSimulating = true;
@@ -105,9 +101,9 @@ public class RaycastWeapon : MonoBehaviour
 
     Ray ray;
     RaycastHit hitInfo;
-    float accumulateTime;
+    protected float accumulateTime;
 
-    public void UpdateWeapon(float deltaTime)
+    public virtual void UpdateWeapon(float deltaTime)
     {
         isFiring = input.isFiring || input.Fire;
 
@@ -123,13 +119,13 @@ public class RaycastWeapon : MonoBehaviour
         UpdateBullets(deltaTime);
     }
 
-    public void StartFiring()
+    public virtual void StartFiring()
     {
         accumulateTime = 0.0f;
         recoil.Reset();
     }
 
-    public void UpdateFiring(float deltaTime)
+    public virtual void UpdateFiring(float deltaTime)
     {
         accumulateTime += deltaTime;
         float fireInterval = 1.0f / fireRate;
@@ -140,12 +136,12 @@ public class RaycastWeapon : MonoBehaviour
         }
     }
 
-    public void UpdateBullets(float deltaTime)
+    public virtual void UpdateBullets(float deltaTime)
     {
         SimulateBullet(deltaTime);
     }
 
-    void SimulateBullet(float deltaTime)
+    public virtual void SimulateBullet(float deltaTime)
     {
         bullets.ForEach(bullet =>
         {
@@ -164,7 +160,7 @@ public class RaycastWeapon : MonoBehaviour
         );
     }
 
-    void RaycastSegment(Vector3 start, Vector3 end, Bullet bullet)
+    private void RaycastSegment(Vector3 start, Vector3 end, Bullet bullet)
     {
         Vector3 direction = end - start;
         float distance = direction.magnitude;
@@ -229,7 +225,7 @@ public class RaycastWeapon : MonoBehaviour
         }
     }
 
-    private void FireBullet()
+    public virtual void FireBullet()
     {
         if (magAmmo <= 0) 
         {
@@ -292,7 +288,7 @@ public class RaycastWeapon : MonoBehaviour
         ammoRemain -= refillAmount;
     }
 
-    private void OnDestroy()
+    public virtual void OnDestroy()
     {
         foreach (var bullet in bullets)
         {
