@@ -7,7 +7,7 @@ public class WeaponRecoil : MonoBehaviour
     [HideInInspector] public PlayerAiming characterAiming;
     [HideInInspector] public Cinemachine.CinemachineImpulseSource cameraShake;
     [HideInInspector] public Animator rigController;
-    [HideInInspector] public float recoilModifier = 1.0f;
+    public float recoilModifier = 1.0f;
 
     [SerializeField] Vector2[] recoilPattern;
     [SerializeField] float duration;
@@ -43,7 +43,7 @@ public class WeaponRecoil : MonoBehaviour
         verticalRecoil = recoilPattern[index].y;
 
         index = NextIndex(index);
-
+        Debug.Log(index);
         rigController.Play("weapon_recoil_" + weaponName, 1, 0.0f);
     }
 
