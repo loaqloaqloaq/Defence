@@ -360,7 +360,7 @@ public class Enemy : LivingEntity
         animator.applyRootMotion = true;
         animator.SetTrigger("Die");
 
-        GameManager.Instance.AddKillCount();
-        SoundManager.Instance.Play("Sounds/Sfx/HitSound/" + deathSoundType.ToString());
+        GameManager.Instance?.AddKillCount();
+        SoundManager.Instance?.Play("Sounds/Sfx/HitSound/" + deathSoundType.ToString());
     }
 }

@@ -43,7 +43,7 @@ public class WeaponRecoil : MonoBehaviour
         verticalRecoil = recoilPattern[index].y;
 
         index = NextIndex(index);
-        Debug.Log(index);
+
         rigController.Play("weapon_recoil_" + weaponName, 1, 0.0f);
     }
 

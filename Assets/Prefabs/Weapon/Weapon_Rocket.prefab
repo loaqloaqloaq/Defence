@@ -9943,7 +9943,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2084060361119042039}
-  - component: {fileID: 6360325984832206524}
+  - component: {fileID: 877602141083985784}
   - component: {fileID: -7999184717167703922}
   - component: {fileID: -4132024379511950016}
   m_Layer: 0
@@ -9972,7 +9972,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6360325984832206524
+--- !u!114 &877602141083985784
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9981,33 +9981,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 2397723860111938270}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13325a98e0bcb484283aae05d8cbaadc, type: 3}
+  m_Script: {fileID: 11500000, guid: e488792669f95b04598c1528ff0ebc87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSlot: 2
   magazine: {fileID: 514843262947869396}
-  isInifinty: 1
+  isInifinty: 0
   weaponName: rocket
   soundName:
   - rocketFire
   - rifleReload1
   - emptyRifle
   isFiring: 0
-  fireRate: 2
+  fireRate: 1
   ammoRemain: 10
   magAmmo: 0
   magCapacity: 1
-  damage: 500
+  damage: 600
   raycastOrigin: {fileID: 1430727169578368036}
   raycastDestination: {fileID: 0}
-  tracerEffect: {fileID: 6919128151455992844, guid: 891368959f297ce47aab53fdb486792c, type: 3}
+  tracerEffect: {fileID: 0}
   muzzleFlash:
   - {fileID: 1232495158790509215}
   - {fileID: 1232774670129713721}
   hitEffect: {fileID: 1715300333291913085}
-  bulletSpeed: 450
-  bulletDrop: 0.5
+  bulletSpeed: 550
+  bulletDrop: 0.2
   maxBounces: 0
+  rocket: {fileID: 1961524337391048081, guid: 533b84a2c4773eb45beba728424aa4ed, type: 3}
 --- !u!114 &-7999184717167703922
 MonoBehaviour:
   m_ObjectHideFlags: 0
