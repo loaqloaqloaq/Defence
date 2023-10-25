@@ -15,13 +15,13 @@ AnimatorState:
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
+  m_WriteDefaultValues: 0
   m_Mirror: 0
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: 39eabede734a447439b0a8fb21d3aee4, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -151,7 +151,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -410,7 +410,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -464,7 +464,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -476,7 +476,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: holster_
+  m_Name: holster_rocket
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -573,7 +573,7 @@ AnimatorStateTransition:
   m_TransitionOffset: 0
   m_ExitTime: 0
   m_HasExitTime: 0
-  m_HasFixedDuration: 0
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
@@ -759,7 +759,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 44e96fcaf31b7814db7d56154ee9d49f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 158515da32fe91c459572c0767278246, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -945,19 +945,19 @@ AnimatorStateMachine:
     m_Position: {x: 340, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4130790570457112957}
-    m_Position: {x: 90, y: 340, z: 0}
+    m_Position: {x: 310, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2113487717658134055}
-    m_Position: {x: 630, y: 260, z: 0}
+    m_Position: {x: 630, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1640321143395347283}
-    m_Position: {x: 630, y: 430, z: 0}
+    m_Position: {x: 630, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8575588781816007910}
-    m_Position: {x: 340, y: 420, z: 0}
+    m_Position: {x: 340, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3362874129874075243}
-    m_Position: {x: 80, y: 420, z: 0}
+    m_Position: {x: 80, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3159742231638789559}
     m_Position: {x: 80, y: 250, z: 0}
@@ -975,9 +975,9 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: -140, y: 340, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_AnyStatePosition: {x: 350, y: 20, z: 0}
+  m_EntryPosition: {x: 80, y: 80, z: 0}
+  m_ExitPosition: {x: 550, y: 80, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -4130790570457112957}
 --- !u!1101 &1412236744323988909
@@ -1423,7 +1423,7 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 1
-  m_TransitionOffset: 0
+  m_TransitionOffset: 0.8
   m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
@@ -1494,7 +1494,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: weapon_sprinting_rifle 0
+  m_Name: weapon_sprinting_rocket
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1582,7 +1582,7 @@ AnimatorState:
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
+  m_WriteDefaultValues: 0
   m_Mirror: 0
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
