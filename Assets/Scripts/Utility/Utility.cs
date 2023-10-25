@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public static class Utility
 {
-    //NavMeshß¾ªÇ«é«ó«À«àªÊêÈöÇªòö¢Ôğª¹ªë
+    //NavMeshß¾ªÇ«é«ó«À«àªÊEöÇªòö¢Ôğª¹ªE
     public static Vector3 GetRandomPointOnNavMesh(Vector3 center, float distance, int areaMask)
     {
         var randomPos = Random.insideUnitSphere * distance + center;

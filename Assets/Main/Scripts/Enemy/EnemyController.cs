@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     private bool dead;
 
     public Transform target;
-    public Transform gate, player;
+    public Transform gate,gate1,gate2,gate3, player;
     public GameObject explosion;
 
     float checkFeq, lastCheck;
@@ -38,7 +38,10 @@ public class EnemyController : MonoBehaviour, IDamageable
         destoryTimer = 0;
         dead = false;
 
-        gate = GameObject.Find("Gate").transform;
+        gate1 = GameObject.Find("Gate1").transform;
+        gate2 = GameObject.Find("Gate2").transform;
+        gate3 = GameObject.Find("Gate3").transform;
+        gate = gate1!=null? gate1 : gate2!=null? gate2:gate3;
         player = GameObject.Find("Player").transform;        
 
         target = gate;
@@ -53,24 +56,36 @@ public class EnemyController : MonoBehaviour, IDamageable
     void Update()
     {
         if (HP <= 0)
-        {
+        {            
+            transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<BoxCollider>().enabled = false;
+            transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(0).GetComponent<BoxCollider>().enabled = false;
+            transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<BoxCollider>().enabled = false;
+            transform.GetChild(1).GetChild(0).GetChild(2).GetComponent<BoxCollider>().enabled = false;
             GetComponent<NavMeshAgent>().enabled = false;
             destoryTimer += Time.deltaTime;
             if (destoryTimer >= destoryTime)
             {
                 var pos = transform.position;
                 pos.y += 1.0f;
-                if (explosion!=null) Instantiate(explosion, pos, transform.rotation);
+                if (explosion != null) { 
+                    var exp=Instantiate(explosion, pos, transform.rotation);
+                    exp.transform.localScale=new Vector3(0.7f, 0.7f, 0.7f);
+                }
+                
                 Destroy(gameObject);
             }
         }
-        else {            
-            int rand = UnityEngine.Random.Range(0, 100);
-            var disToPlayer = Vector3.Distance(transform.position, player.position);
-            var disToGate = Vector3.Distance(transform.position, gate.position);
+        else {  
+            if(gate1 != null && !gate1.GetComponent<GateController>().broke) { gate = gate1; }
+            else if (gate2 != null && !gate2.GetComponent<GateController>().broke) { gate = gate2; }
+            else if (gate3 != null && !gate3.GetComponent<GateController>().broke) { gate = gate3; }
+            
             lastCheck += Time.deltaTime;
             if (lastCheck >= checkFeq)
             {
+                int rand = UnityEngine.Random.Range(0, 100);
+                var disToPlayer = Vector3.Distance(transform.position, player.position);
+                var disToGate = Vector3.Distance(transform.position, gate.position);
                 lastCheck = 0;
                 if (disToGate <= 2f) target = gate;
                 else if (target == gate)
@@ -84,6 +99,9 @@ public class EnemyController : MonoBehaviour, IDamageable
                     if (disToPlayer >= 7f && rand < 1) target = gate;
                     else if (disToPlayer >= 9f && rand < 5) target = gate;
                     else if (disToPlayer >= 11f) target = gate;
+                }
+                else{
+                    target = gate;
                 }
             }
             var disToTarget = Vector3.Distance(transform.position, target.position);
@@ -101,7 +119,7 @@ public class EnemyController : MonoBehaviour, IDamageable
                     Attack();
                 }
             }
-            else {
+            else if(animator.GetCurrentAnimatorStateInfo(0).IsName("idle")) {
                 ResetAfterAttack();
             }
 
@@ -138,5 +156,22 @@ public class EnemyController : MonoBehaviour, IDamageable
     private void ResetAfterAttack() { 
         attacking = false;
         attacked = false;
+    }
+
+    //É_ÉÅÅ[ÉWèàóù
+    public void Damage(int damage)
+    {
+        if (dead) return;
+
+        HP -= damage;
+
+        //HPÇ™0à»â∫Ç…Ç»Ç¡ÇΩÇ∆Ç´
+        if (HP <= 0)
+        {
+            //Ç∑ÇÆÇ…îjâÛÇ≥ÇπÇÈ
+            destoryTimer = 3.0f;
+            animator.SetTrigger("die");
+            dead = true;
+        }
     }
 }
