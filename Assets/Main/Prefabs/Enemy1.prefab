@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy1
       objectReference: {fileID: 0}
+    - target: {fileID: 100098, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.00000027875888
@@ -1062,7 +1066,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400096, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 400096, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       propertyPath: m_LocalScale.x
