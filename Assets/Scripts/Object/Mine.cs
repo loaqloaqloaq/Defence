@@ -3,30 +3,34 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour
 {
-    //敵1
-    [SerializeField] GameObject Enemy1;
     //地雷の攻撃力
     private int mine_Damage;
-    //死ぬまでのカウント
+    //ダメージ発生カウント
     private float damage_countDown;
-    //死ぬ時間
-    private float death_Time;
+    //消滅する時間
+    private float destroy_Time;
+    //接触した/しない
+    private bool contact;
+
     void Start()
     {
         mine_Damage = 100; //仮ダメージ
         damage_countDown = 0.0f;
-        death_Time = 100.0f;
+        destroy_Time = 20.0f;
+        contact = false;
     }
 
-    //ダメージ発生カウント
-    private void Damage_Count()
+    void Update()
     {
-        damage_countDown += Time.deltaTime;
-
-        //10秒経ったら消滅
-        if (damage_countDown >= death_Time)
+        //接触したら時間をカウント
+        if (contact == true)
         {
-            Destroy(gameObject);
+            damage_countDown += Time.deltaTime;
+        }
+        //接触してから20秒経ったら地雷を消滅させる
+        if (damage_countDown >= destroy_Time)
+        {
+            Destroy(this.gameObject);
         }
     }
 
@@ -34,17 +38,16 @@ public class Mine : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        string layerName = LayerMask.LayerToName(collision.gameObject.layer);
 
         //ダメージ処理が発生したとき
         if (damageable != null)
         {
-            //敵1が接触したとき
-            if (collision.gameObject == Enemy1)
+            contact = true;
+            //敵が接触したとき
+            if (layerName == "Enemy")
             {
-
                 damageable.Damage(mine_Damage);
-
-                Damage_Count();
 
                 Debug.Log(collision.gameObject + "に" + mine_Damage + "ダメージを与える");
             }

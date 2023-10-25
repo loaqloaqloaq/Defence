@@ -24,7 +24,8 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     float checkFeq, lastCheck;
 
-    
+    //UŒ‚‚ğH‚ç‚Á‚½‰ñ”
+    int damage_Cnt = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -160,13 +161,21 @@ public class EnemyController : MonoBehaviour, IDamageable
     {
         if (dead) return;
 
+        //HP‚ğŒ¸­
         HP -= damage;
-
-        //HP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚Æ‚«
-        if (HP <= 0)
+        //ƒ_ƒ[ƒW‚ğH‚ç‚Á‚½‰ñ”
+        ++damage_Cnt;
+        //HP‚ª0ˆÈ‰º‚©‚Âˆê‰ñ‚ÌUŒ‚‚Å€‚ñ‚¾‚Æ‚«
+        if (HP <= 0 && damage_Cnt == 1)
         {
             //‚·‚®‚É”j‰ó‚³‚¹‚é
             destoryTimer = 3.0f;
+            animator.SetTrigger("die");
+            dead = true;
+        }
+        //HP‚ª0ˆÈ‰º‚©‚Â“ñ‰ñˆÈã‚ÌUŒ‚‚Å€‚ñ‚¾‚Æ‚«
+        else if (HP <= 0 && damage_Cnt >= 2)
+        {
             animator.SetTrigger("die");
             dead = true;
         }
