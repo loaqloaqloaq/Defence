@@ -5,7 +5,7 @@
     "atk":10,
     "drop":{
       "ammo": 5,
-      "health":2     
+      "health":5     
     }
   }
 }

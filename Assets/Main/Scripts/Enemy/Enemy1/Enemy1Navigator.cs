@@ -28,16 +28,19 @@ public class Enemy1Navigator : MonoBehaviour
                 animator.SetBool("walking", true);
                 ec.agent.isStopped = false;
                 var targetPos = target.position;
-                if(target.name.StartsWith("Gate"))
+                if (target.name.StartsWith("Gate"))
                     targetPos.x = (target.position - (target.position - transform.position).normalized * 3f).x;
                 ec.agent.destination = targetPos;
-                
+
             }
             else
             {
                 animator.SetBool("walking", false);
                 ec.agent.isStopped = true;
             }
+        }
+        else {
+            animator.SetBool("walking", false);
         }
 
         

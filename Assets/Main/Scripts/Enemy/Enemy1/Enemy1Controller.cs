@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,7 +9,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
 {
     [HideInInspector]
     public float HP, MAXHP, ATK;
-    Drop drop;
+    Dictionary<string, float> drop = new Dictionary<string, float>();
     private Animator animator;
     [HideInInspector]
     public NavMeshAgent agent;
@@ -23,6 +24,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
     public Transform gate,gate1,gate2,gate3, player;
     public GameObject explosion;
 
+    Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();
     public GameObject ammoPack,healthPack;
 
     float checkFeq, lastCheck;
@@ -64,8 +66,15 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
         MAXHP = EnemyJson.Enemy1.hp;
         HP = MAXHP;
         ATK = EnemyJson.Enemy1.atk;
+               
+        drop.Add("ammo", EnemyJson.Enemy1.drop.ammo);
+        drop.Add("health", EnemyJson.Enemy1.drop.health);
 
-        drop = EnemyJson.Enemy1.drop;
+        Debug.Log(EnemyJson.Enemy1.drop.ammo);
+        
+        dropPrefab.Add("ammo", ammoPack);
+        dropPrefab.Add("health", healthPack);
+        
     }
 
     // Update is called once per frame
@@ -77,7 +86,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
             transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(0).GetComponent<BoxCollider>().enabled = false;
             transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<BoxCollider>().enabled = false;
             transform.GetChild(1).GetChild(0).GetChild(2).GetComponent<BoxCollider>().enabled = false;
-            GetComponent<NavMeshAgent>().enabled = false;
+            agent.enabled = false;
             destoryTimer += Time.deltaTime;
             if (destoryTimer >= destoryTime)
             {                
@@ -120,7 +129,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
                 }
             }
             var disToTarget = Vector3.Distance(transform.position, target.position);
-            if (disToTarget < 1.5f && !animator.GetCurrentAnimatorStateInfo(0).IsName("attack") && HP > 0)
+            if (disToTarget < 1.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
             {
                 attacking = true;
                 //face to target
@@ -145,25 +154,30 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
         HP -= damageMessage.amount;
         if (HP <= 0 && !dead)
         {            
-            if (UnityEngine.Random.Range(0, 100) < drop.ammo) {
-                if (ammoPack != null)
-                {
-                    var pos = transform.position;
-                    pos.y = 0;
-                    Instantiate(ammoPack, pos, transform.rotation);                    
-                }
-            }else if(UnityEngine.Random.Range(0, 100) < drop.ammo+drop.health) {
-                if (healthPack != null)
-                {
-                    var pos = transform.position;
-                    pos.y = 0;
-                    Instantiate(healthPack, pos, transform.rotation);
-                }
-            }
-            animator.SetTrigger("die");
             dead = true;
+            Dead();
         }
         return true;
+    }
+    private void Dead() {
+        Drop();
+        animator.SetTrigger("die");
+        GetComponent<Rigidbody>().isKinematic = true;
+    }
+    private void Drop() {
+        float dice = UnityEngine.Random.Range(0f, 100f);
+        float prevPresent = 0;
+        foreach (KeyValuePair<string, float> d in drop) {            
+            if (dice > prevPresent && dice <= prevPresent+d.Value && dropPrefab[d.Key] != null) {
+                var pos = transform.position;
+                pos.x += UnityEngine.Random.Range(-0.5f, 0.5f);
+                pos.z += UnityEngine.Random.Range(-0.5f, 0.5f);
+                pos.y = 0;
+                Instantiate(dropPrefab[d.Key], pos, transform.rotation);
+            }
+
+            prevPresent += d.Value;
+        }        
     }
     private void Attack() {
         //前にいないとダメージ受けない
