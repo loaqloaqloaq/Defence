@@ -184,8 +184,8 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
         if (dot < 0.2f || dot > 1.7f) return;
         //攻撃したとアニメション終わるまでもう一度攻撃しない
         if (attacked) return;
-        //遠い行くとダメージ受けない
-        if (Vector3.Distance(target.position,transform.position) >= 1.5f) return;
+        //遠い行くとダメージ受けない        
+        if (target.name.StartsWith("Player") && Vector3.Distance(target.position,transform.position) >= 1.7f) return;
 
         DamageMessage dm= new DamageMessage();
         dm.damager = gameObject;

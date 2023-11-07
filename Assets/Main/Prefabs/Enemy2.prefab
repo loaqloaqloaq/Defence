@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100098, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       propertyPath: m_Name
-      value: Enemy1
+      value: Enemy2
       objectReference: {fileID: 0}
     - target: {fileID: 100098, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       propertyPath: m_Layer
@@ -1501,16 +1501,16 @@ PrefabInstance:
       addedObject: {fileID: 4905972668054022294}
     - targetCorrespondingSourceObject: {fileID: 100098, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1538845396968759557}
-    - targetCorrespondingSourceObject: {fileID: 100098, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3992058183028840753}
-    - targetCorrespondingSourceObject: {fileID: 100098, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5884716992538542453}
     - targetCorrespondingSourceObject: {fileID: 100098, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8317676120591387737}
+    - targetCorrespondingSourceObject: {fileID: 100098, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7667162323414539654}
+    - targetCorrespondingSourceObject: {fileID: 100098, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 530036362725472157}
     - targetCorrespondingSourceObject: {fileID: 100108, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4195321804437058635}
@@ -1618,47 +1618,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
---- !u!114 &1538845396968759557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3554424129767012801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3f1c707ae9b6c94ca5485f1245203fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP: 0
-  MAXHP: 0
-  ATK: 0
-  agent: {fileID: 0}
-  attacking: 0
-  attacked: 0
-  target: {fileID: 0}
-  gate: {fileID: 0}
-  gate1: {fileID: 0}
-  gate2: {fileID: 0}
-  gate3: {fileID: 0}
-  player: {fileID: 0}
-  explosion: {fileID: 2532972853072531924, guid: b40f4969cc5dc9c41adb34150b3c46f3, type: 3}
-  ammoPack: {fileID: 4549580422657515402, guid: f4a4eef7b95967d47a00839a556d17d3, type: 3}
-  healthPack: {fileID: 3692371945894827175, guid: d68017b376389f44b9bcaa994555c022, type: 3}
-  EnemyJsonFile: {fileID: 4900000, guid: f1c981157521eed4fae48c4d1df9debd, type: 3}
---- !u!114 &3992058183028840753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3554424129767012801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46a7c890b2469ee40b27ce9c18f594fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!65 &5884716992538542453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1707,6 +1666,43 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &7667162323414539654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3554424129767012801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e0764f47ec882745b567f4e28b8afe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 0
+  MAXHP: 0
+  ATK: 0
+  agent: {fileID: 0}
+  attacking: 0
+  attacked: 0
+  target: {fileID: 0}
+  player: {fileID: 0}
+  explosion: {fileID: 2532972853072531924, guid: b40f4969cc5dc9c41adb34150b3c46f3, type: 3}
+  ammoPack: {fileID: 4549580422657515402, guid: f4a4eef7b95967d47a00839a556d17d3, type: 3}
+  healthPack: {fileID: 3692371945894827175, guid: d68017b376389f44b9bcaa994555c022, type: 3}
+  EnemyJsonFile: {fileID: 4900000, guid: f1c981157521eed4fae48c4d1df9debd, type: 3}
+--- !u!114 &530036362725472157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3554424129767012801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c6c5d17b7218a44f9bc8c8d483940d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!1 &3554424129767012815 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100108, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}

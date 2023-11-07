@@ -7,6 +7,7 @@ using UnityEngine;
 public class EnemyJsonReader
 {
     public EnemyData Enemy1;
+    public EnemyData Enemy2;
 }
 
 [Serializable]

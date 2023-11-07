@@ -57,14 +57,14 @@ public class Enemy2Controller : MonoBehaviour, IDamageable
 
         string jsonString = EnemyJsonFile.ToString();
         EnemyJson= JsonUtility.FromJson<EnemyJsonReader>(jsonString);
-        agent.speed = EnemyJson.Enemy1.moveSpeed;
+        agent.speed = EnemyJson.Enemy2.moveSpeed;
 
-        MAXHP = EnemyJson.Enemy1.hp;
+        MAXHP = EnemyJson.Enemy2.hp;
         HP = MAXHP;
-        ATK = EnemyJson.Enemy1.atk;
+        ATK = EnemyJson.Enemy2.atk;
                
-        drop.Add("ammo", EnemyJson.Enemy1.drop.ammo);
-        drop.Add("health", EnemyJson.Enemy1.drop.health);        
+        drop.Add("ammo", EnemyJson.Enemy2.drop.ammo);
+        drop.Add("health", EnemyJson.Enemy2.drop.health);        
         
         dropPrefab.Add("ammo", ammoPack);
         dropPrefab.Add("health", healthPack);

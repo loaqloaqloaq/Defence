@@ -46,9 +46,11 @@ public class EnemyGenerator : MonoBehaviour
         Vector3 pos = transform.position;
         pos = new Vector3(pos.x + randX, pos.y, pos.z + randZ);
         if (lastGen >= genFreq) {
-            int type = currentLine[currentIndex];
+            int type = currentLine[currentIndex]-1;
             Debug.Log(type);
-            Instantiate(enemy[type], pos, transform.rotation);
+            if (type >= 0 && type < enemy.Length)
+                Instantiate(enemy[type], pos, transform.rotation);
+            else Debug.LogError("enemy type not found");
             lastGen = 0;
             currentIndex++;
             if (currentIndex >= currentLine.Length) {
