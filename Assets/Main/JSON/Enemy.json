@@ -4,8 +4,8 @@
     "moveSpeed":4,
     "atk":10,
     "drop":{
-      "ammo": 10,
-      "health":5      
+      "ammo": 5,
+      "health":2     
     }
   }
 }

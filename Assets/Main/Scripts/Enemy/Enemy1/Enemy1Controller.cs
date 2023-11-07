@@ -120,7 +120,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
                 }
             }
             var disToTarget = Vector3.Distance(transform.position, target.position);
-            if (disToTarget < 1.5f && !animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+            if (disToTarget < 1.5f && !animator.GetCurrentAnimatorStateInfo(0).IsName("attack") && HP > 0)
             {
                 attacking = true;
                 //face to target
