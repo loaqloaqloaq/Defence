@@ -26,6 +26,7 @@ public class PlayerInput : MonoBehaviour
     public bool Alpha1 { get; private set; }
     public bool Alpha2 { get; private set; }
     public bool Alpha3 { get; private set; }
+    public bool Alpha4 { get; private set; }
 
     // Update is called once per frame
     void Update()
@@ -66,5 +67,6 @@ public class PlayerInput : MonoBehaviour
         Alpha1 = D_YAxis > 0.05f || Input.GetKeyDown(KeyCode.Alpha1);
         Alpha2 = D_XAxis > 0.05f || Input.GetKeyDown(KeyCode.Alpha2);
         Alpha3 = D_YAxis < -0.05f || Input.GetKeyDown(KeyCode.Alpha3);
+        Alpha4 = D_XAxis < -0.05f || Input.GetKeyDown(KeyCode.Alpha4);
     }
 }
