@@ -21,3 +21,8 @@ public class Drop
     public float ammo;
     public float health;
 }
+
+[Serializable]
+public class Pattern {
+    public string[] pattern;
+}

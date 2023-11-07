@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class Enemy1Controller : MonoBehaviour, IDamageable
+public class Enemy2Controller : MonoBehaviour, IDamageable
 {
     [HideInInspector]
     public float HP, MAXHP, ATK;
@@ -21,7 +21,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
     private bool dead;
 
     public Transform target;
-    public Transform gate,gate1,gate2,gate3, player;
+    public Transform player;
     public GameObject explosion;
 
     Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();
@@ -42,14 +42,10 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
         destoryTime = 3.0f;
         destoryTimer = 0;
         dead = false;
-
-        gate1 = GameObject.Find("Gate1").transform;
-        gate2 = GameObject.Find("Gate2").transform;
-        gate3 = GameObject.Find("Gate3").transform;
-        gate = gate1!=null? gate1 : gate2!=null? gate2:gate3;
+        
         player = GameObject.Find("Player").transform;        
 
-        target = gate;
+        target = player;
 
         lastCheck = 0;
         checkFeq = 0.5f;
@@ -98,33 +94,10 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
             }
         }
         else {  
-            if(gate1 != null && !gate1.GetComponent<GateController>().broke) { gate = gate1; }
-            else if (gate2 != null && !gate2.GetComponent<GateController>().broke) { gate = gate2; }
-            else if (gate3 != null && !gate3.GetComponent<GateController>().broke) { gate = gate3; }
-            
             lastCheck += Time.deltaTime;
             if (lastCheck >= checkFeq)
             {
-                int rand = UnityEngine.Random.Range(0, 100);
-                var disToPlayer = Vector3.Distance(transform.position, player.position);
-                var disToGate = Vector3.Distance(transform.position, gate.position);
-                lastCheck = 0;
-                if (disToGate <= 2f) target = gate;
-                else if (target == gate)
-                {   
-                    if (disToPlayer < 3f) target = player;
-                    else if (disToPlayer < 5f && rand < 5) target = player;
-                    else if (disToPlayer < 7f && rand < 1) target = player;                                        
-                }
-                else if (target == player)
-                {
-                    if (disToPlayer >= 7f && rand < 1) target = gate;
-                    else if (disToPlayer >= 9f && rand < 5) target = gate;
-                    else if (disToPlayer >= 11f) target = gate;
-                }
-                else{
-                    target = gate;
-                }
+                
             }
             var disToTarget = Vector3.Distance(transform.position, target.position);
             if (disToTarget < 1.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
@@ -185,7 +158,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
         //攻撃したとアニメション終わるまでもう一度攻撃しない
         if (attacked) return;
         //遠い行くとダメージ受けない
-        if (Vector3.Distance(target.position,transform.position) >= 1.5f) return;
+        if (Vector3.Distance(target.position,transform.position) >= 1.7f) return;
 
         DamageMessage dm= new DamageMessage();
         dm.damager = gameObject;

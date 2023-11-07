@@ -503,33 +503,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3554424129767012801, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
   m_PrefabInstance: {fileID: 1571053852}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &701123977
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701123970}
-  serializedVersion: 4
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
 --- !u!1 &746065488
 GameObject:
   m_ObjectHideFlags: 0
@@ -3031,8 +3004,24 @@ PrefabInstance:
       objectReference: {fileID: 3554424129767012801, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
     - target: {fileID: 8435248775537443001, guid: 3588b805d2e93374cad7619313e05c0b, type: 3}
       propertyPath: genFreq
-      value: 3
+      value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8435248775537443001, guid: 3588b805d2e93374cad7619313e05c0b, type: 3}
+      propertyPath: PatternJsonFile
+      value: 
+      objectReference: {fileID: 4900000, guid: c48560d8b90d6d347b2a615993db19f1, type: 3}
+    - target: {fileID: 8435248775537443001, guid: 3588b805d2e93374cad7619313e05c0b, type: 3}
+      propertyPath: enemy.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435248775537443001, guid: 3588b805d2e93374cad7619313e05c0b, type: 3}
+      propertyPath: enemy.Array.data[0]
+      value: 
+      objectReference: {fileID: 701123970}
+    - target: {fileID: 8435248775537443001, guid: 3588b805d2e93374cad7619313e05c0b, type: 3}
+      propertyPath: enemy.Array.data[1]
+      value: 
+      objectReference: {fileID: 701123970}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3223,10 +3212,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3554424129767012801, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 701123977}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
 --- !u!1001 &1626956132
 PrefabInstance:
