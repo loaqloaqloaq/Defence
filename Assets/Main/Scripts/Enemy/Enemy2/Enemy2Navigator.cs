@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy1Navigator : MonoBehaviour
+public class Enemy2Navigator : MonoBehaviour
 {
     public Transform target;    
     private Animator animator;

@@ -18,5 +18,11 @@ public class EnemyData
 [Serializable]
 public class Drop 
 {
-    public float ammo, health;
+    public float ammo;
+    public float health;
+}
+
+[Serializable]
+public class Pattern {
+    public string[] pattern;
 }
