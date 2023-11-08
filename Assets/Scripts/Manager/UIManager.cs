@@ -15,6 +15,10 @@ public class UIManager : MonoBehaviour
             return instance;
         }
     }
+    //Canvas 
+    [SerializeField] Canvas canvas_Player;
+    [SerializeField] Canvas canvas_Sniping;
+    [SerializeField] Canvas canvas_UI;
 
     //UIオブジェクト
     [SerializeField] private GameObject gameoverUI; 
@@ -276,5 +280,20 @@ public class UIManager : MonoBehaviour
     public void WaveClear()
     {
         animator.SetTrigger("wave_Clear");
+    }
+
+    public void SetEnableCanvas_Player(bool isEnable)
+    {
+        canvas_Player.enabled = isEnable;
+    }
+
+    public void SetEnableCanvas_UI(bool isEnable)
+    {
+        canvas_UI.enabled = isEnable;
+    }
+
+    public void SetEnableCanvas_Sniping(bool isEnable)
+    {
+        canvas_Sniping.enabled = isEnable;
     }
 }

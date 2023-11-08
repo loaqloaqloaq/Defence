@@ -68,7 +68,12 @@ public class PlayerAiming : MonoBehaviour
 
     private void SetCameraRotationSpeed()
     {
-        if (isAiming)
+        if (isSniping)
+        {
+            xAxis.m_MaxSpeed = xStartSpeed * axisModifier * 0.4f;
+            yAxis.m_MaxSpeed = yStartSpeed * axisModifier * 0.4f;
+        }
+        else if (isAiming)
         {
             xAxis.m_MaxSpeed = xStartSpeed * axisModifier;
             yAxis.m_MaxSpeed = yStartSpeed * axisModifier;
@@ -123,12 +128,32 @@ public class PlayerAiming : MonoBehaviour
     {
         isSniping = true;
         snipingCam.Priority = 15;
+
+        var uiManager = UIManager.Instance;
+
+        if (uiManager == null)
+        {
+            return;
+        }
+
+        uiManager.SetEnableCanvas_Player(false);
+        uiManager.SetEnableCanvas_Sniping(true);
     }
 
     public void OffSniping()
     {
         isSniping = false;
         snipingCam.Priority = 5;
+
+        var uiManager = UIManager.Instance;
+
+        if (uiManager == null)
+        {
+            return;
+        }
+
+        uiManager.SetEnableCanvas_Player(true);
+        uiManager.SetEnableCanvas_Sniping(false);
     }
 
 }
