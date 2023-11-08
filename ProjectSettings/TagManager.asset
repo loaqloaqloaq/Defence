@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Gate
   - Enemy
+  - Aim
+  - CrossHairTarget
+  - FollowCam
   layers:
   - Default
   - TransparentFX

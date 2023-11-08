@@ -22,8 +22,9 @@ public class PlayerAiming : MonoBehaviour
     private ActiveWeapon activeWeapon;
 
     //ズームするときのカメラアニメーション
-    [SerializeField] private Animator camAnimator;
     [SerializeField] private CinemachineFreeLook snipingCam;
+
+    private Animator camAnimator;
     private int isAimingParam = Animator.StringToHash("IsAiming");
 
     //アニメーションリギング
@@ -40,6 +41,9 @@ public class PlayerAiming : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         mainCamera = Camera.main;
         activeWeapon = GetComponent<ActiveWeapon>();
+
+        camAnimator = GameObject.FindWithTag("FollowCam").GetComponent<Animator>();
+        if (!camAnimator) { Debug.Log("Follow Cam is Null"); }
     }
 
     private void Start()

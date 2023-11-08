@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7792094263571347030}
   m_Layer: 0
   m_Name: CrossHairTarget
-  m_TagString: Untagged
+  m_TagString: CrossHairTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 7792094263708372613}
   m_Layer: 0
   m_Name: AimLookAt
-  m_TagString: Untagged
+  m_TagString: Aim
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ Transform:
   - {fileID: 7792094263571347025}
   - {fileID: 7792094263708372613}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!20 &7792094263946613050
 Camera:
@@ -150,7 +150,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 991
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -189,8 +189,8 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
+    m_Style: 4
+    m_Time: 0.08
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []

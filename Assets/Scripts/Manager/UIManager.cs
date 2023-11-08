@@ -30,7 +30,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image lifeImage;
     [SerializeField] private Image[] grenadeImages = new Image[3];
     [SerializeField] private Image[] weaponSlotImages = new Image[2];
-    [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI ammoText;
     [SerializeField] private TextMeshProUGUI waveText;
