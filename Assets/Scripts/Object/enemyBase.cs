@@ -55,6 +55,7 @@ public class enemyBase : MonoBehaviour, IDamageable
         else 
         {
             HP -= damageMessage.amount;
+            Debug.Log(HP);
             animator.SetTrigger("damage");
         }
         gaugeWidth = 30f * HP / MaxHP;
