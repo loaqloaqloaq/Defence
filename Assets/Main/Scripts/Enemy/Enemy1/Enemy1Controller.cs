@@ -151,6 +151,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
     public bool ApplyDamage(DamageMessage damageMessage)
     {
         HP -= damageMessage.amount;
+        Debug.Log(HP);
         if (HP <= 0 && !dead)
         {            
             dead = true;
