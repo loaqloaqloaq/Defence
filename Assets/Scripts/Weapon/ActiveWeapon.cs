@@ -13,13 +13,16 @@ public class ActiveWeapon : MonoBehaviour
         Length,
     }
 
-
-    [SerializeField] private Transform crosshairTarget;
     [SerializeField] private Transform[] weaponSlots;
     [SerializeField] private Transform weaponRightGrip;
     [SerializeField] private Transform weaponLeftGrip;
     [SerializeField] private LayerMask excludeTarget;
+    [SerializeField] private Animator rigController;
+
+    private Transform crosshairTarget;
+
     public bool isChangingWeapon { get; private set; }
+
     [HideInInspector] public bool isHolstered = false;
 
     [SerializeField] WeaponAnimationEvents animationEvents;
@@ -33,7 +36,6 @@ public class ActiveWeapon : MonoBehaviour
     private ReloadWeapon reloadWeapon;
     private GrenadeController grController;    
 
-    [SerializeField] private Animator rigController;
     private int unarmedParam = Animator.StringToHash("weapon_Unarmed");
 
     private int activeWeaponIndex;
@@ -47,6 +49,9 @@ public class ActiveWeapon : MonoBehaviour
         reloadWeapon = GetComponent<ReloadWeapon>();
         grController = GetComponent<GrenadeController>();
         animationEvents.WeaponAnimationEvent.AddListener(OnAnimationEvent);
+
+        crosshairTarget = GameObject.FindWithTag("CrossHairTarget").transform;
+        if (crosshairTarget == null) { Debug.Log("CrossHairTarget is Null"); }
     }
 
     private void Start()

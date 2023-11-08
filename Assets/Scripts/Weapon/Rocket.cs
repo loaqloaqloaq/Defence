@@ -15,7 +15,7 @@ public class Rocket : MonoBehaviour
     //[SerializeField] private float forceToVelocity = 0.35f;
 
     private BoxCollider boxCollider;
-    [SerializeField] private GameObject model;
+    [SerializeField] private GameObject modelPivot;
 
     private GameObject damager;
 
@@ -61,7 +61,7 @@ public class Rocket : MonoBehaviour
 
     private void SetActive(bool isActive)
     {
-        model.SetActive(isActive);
+        modelPivot.SetActive(isActive);
         boxCollider.enabled = isActive;
     }
 
@@ -88,7 +88,7 @@ public class Rocket : MonoBehaviour
 
     private void Move()
     {
-        model.transform.LookAt(head);
+        modelPivot.transform.LookAt(head);
         transform.Translate(direction * Speed * Time.deltaTime);
     }
 
