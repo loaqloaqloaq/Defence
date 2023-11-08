@@ -30,6 +30,7 @@ public class Rocket : MonoBehaviour
     private float damageAmount;
 
     [SerializeField] ParticleSystem explosionVFX;
+    [SerializeField] ParticleSystem fireVFX;
 
     private bool collide;
 
@@ -113,6 +114,7 @@ public class Rocket : MonoBehaviour
     private void Explosion()
     {
         var colliders = Physics.OverlapSphere(attackRoot.position, attackRadius, whatIsTarget);
+        fireVFX.Stop();
 
         //”ÍˆÍ“à‚ÌTargetLayer Collider‚Éƒ_ƒ[ƒW
         foreach (var collider in colliders)
