@@ -636,7 +636,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8175458372173670043}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: SetActiveSettingPanel
         m_Mode: 6
@@ -1832,7 +1832,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8175458372173670043}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
@@ -4825,7 +4825,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8175458372173670043}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: SetActiveSettingPanel
         m_Mode: 6
@@ -8870,7 +8870,6 @@ GameObject:
   - component: {fileID: 1385995788604773252}
   - component: {fileID: 1917547295246710235}
   - component: {fileID: 6195705496065004417}
-  - component: {fileID: 8175458372173670043}
   - component: {fileID: 604489614952340254}
   m_Layer: 5
   m_Name: Canvas_Player
@@ -8963,41 +8962,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8175458372173670043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8541609343156395651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 685884eaf898291429fce91d9bb88d92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas_Player: {fileID: 0}
-  canvas_Sniping: {fileID: 0}
-  canvas_UI: {fileID: 0}
-  gameoverUI: {fileID: 9104746725280831183}
-  pauseUI: {fileID: 132005584548629148}
-  settingUI: {fileID: 4326243771443849759}
-  crosshair: {fileID: 1855871856778524444}
-  staminaBackground: {fileID: 4532705026200447661}
-  staminaImage: {fileID: 6677499026163248384}
-  lifeImage: {fileID: 4005790911071653361}
-  grenadeImages:
-  - {fileID: 7658408825856176592}
-  - {fileID: 6125566350376032996}
-  - {fileID: 4610016727937226311}
-  weaponSlotImages:
-  - {fileID: 7216766281249997637}
-  - {fileID: 5468244870202077836}
-  healthText: {fileID: 0}
-  scoreText: {fileID: 3527839432343186170}
-  ammoText: {fileID: 7830602515728062819}
-  waveText: {fileID: 1664049123944482633}
-  lifeText: {fileID: 4626077126771832174}
-  aimPointRect: {fileID: 7797916220768953261}
 --- !u!95 &604489614952340254
 Animator:
   serializedVersion: 5
