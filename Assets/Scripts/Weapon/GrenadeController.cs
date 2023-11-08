@@ -4,7 +4,8 @@ public class GrenadeController : MonoBehaviour
 {
     [SerializeField] private GameObject grenade;
     [SerializeField] private Transform throwRoot;
-    [SerializeField] private Transform crosshairTarget;
+
+    private Transform crossHairTarget;
 
     //
     private float timeBetThrow = 3.5f;
@@ -21,6 +22,8 @@ public class GrenadeController : MonoBehaviour
     private void Awake()
     {
         grenadeRemain = maxGrenade;
+        crossHairTarget = GameObject.FindWithTag("CrossHairTarget").transform;
+        if (!crossHairTarget) Debug.Log("CrossHairTarget is Null");
     }
 
     //グレネード使用が出来る状態か
@@ -37,7 +40,7 @@ public class GrenadeController : MonoBehaviour
     {
         throwTime = Time.time;
 
-        Vector3 aimDirection = crosshairTarget.transform.position - throwRoot.position;
+        Vector3 aimDirection = crossHairTarget.transform.position - throwRoot.position;
         //斜めに投げる
         // Vector3 throwDirection = Quaternion.AngleAxis(throwAngle, Vector3.right) * aimDirection.normalized;
         Vector3 throwDirection = aimDirection.normalized + new Vector3(0, throwAngle / 90.0f, 0);
