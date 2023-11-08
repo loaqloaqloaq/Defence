@@ -181,6 +181,10 @@ public class RaycastWeapon : MonoBehaviour
                 damageMessage.hitNormal = hitInfo.normal;
 
                 target.ApplyDamage(damageMessage);
+
+                hitEffect.transform.position = hitInfo.point;
+                hitEffect.transform.forward = hitInfo.normal;
+                hitEffect.Emit(1);
             }
             else
             {

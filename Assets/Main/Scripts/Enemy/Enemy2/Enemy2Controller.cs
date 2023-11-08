@@ -134,7 +134,7 @@ public class Enemy2Controller : MonoBehaviour, IDamageable
     private void Dead() {
         Drop();
         animator.SetTrigger("die");
-        GetComponent<Rigidbody>().isKinematic = true;
+        //GetComponent<Rigidbody>().isKinematic = true;
     }
     private void Drop() {
         float dice = UnityEngine.Random.Range(0f, 100f);

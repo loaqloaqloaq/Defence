@@ -26,4 +26,5 @@ public class Drop
 [Serializable]
 public class Pattern {
     public string[] pattern;
+    public float genFreq;
 }

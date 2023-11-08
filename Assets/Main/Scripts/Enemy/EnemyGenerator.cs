@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class EnemyGenerator : MonoBehaviour
@@ -20,6 +21,7 @@ public class EnemyGenerator : MonoBehaviour
     string[] patterns;
 
     int[] currentLine;
+    int currentLineIndex;
     int currentIndex;
 
     // Start is called before the first frame update
@@ -28,9 +30,11 @@ public class EnemyGenerator : MonoBehaviour
         //Instantiate(enemy, transform.position, transform.rotation);        
         lastGen = 0;
         EnemyCnt = 0;
-        
-        string jsonString = PatternJsonFile.ToString();        
-        patterns = JsonUtility.FromJson<Pattern>(jsonString).pattern;        
+
+        Pattern enemyJson = JsonUtility.FromJson<Pattern>(PatternJsonFile.ToString());        
+        patterns = enemyJson.pattern;
+
+        genFreq = enemyJson.genFreq;
 
         RandomNewPattern();
     }
@@ -49,8 +53,14 @@ public class EnemyGenerator : MonoBehaviour
             int type = currentLine[currentIndex]-1;
             Debug.Log(type);
             if (type >= 0 && type < enemy.Length)
-                Instantiate(enemy[type], pos, transform.rotation);
-            else Debug.LogError("enemy type not found");
+                try
+                {
+                    Instantiate(enemy[type], pos, transform.rotation);
+                }
+                catch (System.NullReferenceException e) {
+                    Debug.LogError("line " + currentLineIndex.ToString() + ", " + currentIndex.ToString() + ": enemy type " + type.ToString() + " not found");
+                }
+            else Debug.LogError("line "+currentLineIndex.ToString()+", "+currentIndex.ToString()+": enemy type "+ type.ToString()+" not found");
             lastGen = 0;
             currentIndex++;
             if (currentIndex >= currentLine.Length) {
@@ -61,7 +71,8 @@ public class EnemyGenerator : MonoBehaviour
 
     private void RandomNewPattern()
     {
-        currentLine = patterns[Random.Range(0, patterns.Length)].Split(",").Select(i => int.Parse(i)).ToArray();
+        currentLineIndex = Random.Range(0, patterns.Length);
+        currentLine = patterns[currentLineIndex].Split(",").Select(i => int.Parse(i)).ToArray();
         currentIndex = 0;
     }
 }
