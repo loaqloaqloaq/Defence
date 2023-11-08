@@ -27,14 +27,14 @@ Transform:
   m_GameObject: {fileID: 1961524337391048081}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -30.710682, y: 4.91, z: 28.29}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7088970728980549433}
   - {fileID: 6429147739363167935}
   - {fileID: 700033990591919517}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6548355930049946083
 MonoBehaviour:
@@ -49,16 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRoot: {fileID: 3671885942750110809}
-  attackRadius: 6.2
+  attackRadius: 4.2
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 448
-  rbForceTarget:
-    serializedVersion: 2
-    m_Bits: 576
-  Speed: 380
-  explosionForce: 40
-  forceToVelocity: 0.35
+  Speed: 200
+  rbForce: 20
   model: {fileID: 2746148049332759095}
   explosionVFX: {fileID: 6626428434219771969}
 --- !u!65 &3499048702636970501
@@ -5067,15 +5063,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4388947112716342, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
       propertyPath: m_LocalPosition.x

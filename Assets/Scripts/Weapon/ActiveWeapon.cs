@@ -9,7 +9,6 @@ public class ActiveWeapon : MonoBehaviour
         Primary = 0,　   //Primary：ライフル
         Secondary = 1,   //Secondary：ピストル
         Tertiary = 2,    //Tertiary：ロケットランチャー
-        quaternary = 3, //quaternary：スナイパーライフル
         Length,
     }
 
@@ -223,10 +222,6 @@ public class ActiveWeapon : MonoBehaviour
         if (playerInput.Alpha3 && equipped_Weapons[(int)weaponSlot.Tertiary] != null)
         {
             SetActiveWeapon(weaponSlot.Tertiary);
-        }
-        if (playerInput.Alpha4 && equipped_Weapons[(int)weaponSlot.quaternary] != null)
-        {
-            SetActiveWeapon(weaponSlot.quaternary);
         }
         //グレネードを投げる
         if (playerInput.Grenade && grController.isAvailable && !isHolstered)

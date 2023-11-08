@@ -1,5 +1,4 @@
-﻿using Cinemachine;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
 public class PlayerAiming : MonoBehaviour
@@ -15,7 +14,6 @@ public class PlayerAiming : MonoBehaviour
     private float yStartSpeed;
 
     public bool isAiming { get; private set; }
-    public bool isSniping { get; private set; }
 
     //コンポネント
     private Camera mainCamera;
@@ -23,7 +21,6 @@ public class PlayerAiming : MonoBehaviour
 
     //ズームするときのカメラアニメーション
     [SerializeField] private Animator camAnimator;
-    [SerializeField] private CinemachineFreeLook snipingCam;
     private int isAimingParam = Animator.StringToHash("IsAiming");
 
     //アニメーションリギング
@@ -87,12 +84,6 @@ public class PlayerAiming : MonoBehaviour
             aimLayer.weight = 1.0f;
         } //AimLayerを取得しているか確認
 
-        if (isSniping)
-        {
-
-            return;
-        }
-
         isAiming = playerInput.zoom || playerInput.Zoom >= 0.02f;
         //カメラズームアニメーション
         camAnimator.SetBool(isAimingParam, isAiming);
@@ -118,17 +109,4 @@ public class PlayerAiming : MonoBehaviour
             }
         }
     }
-
-    public void OnSniping()
-    {
-        isSniping = true;
-        snipingCam.Priority = 15;
-    }
-
-    public void OffSniping()
-    {
-        isSniping = false;
-        snipingCam.Priority = 5;
-    }
-
 }

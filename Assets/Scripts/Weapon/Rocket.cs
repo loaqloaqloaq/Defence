@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Rocket : MonoBehaviour
 {
@@ -8,16 +6,12 @@ public class Rocket : MonoBehaviour
     [SerializeField] private float attackRadius;
 
     [SerializeField] private LayerMask whatIsTarget;
-    [SerializeField] private LayerMask rbForceTarget;
 
     [SerializeField] private float Speed = 350.0f;
-    [SerializeField] private float explosionForce = 6.0f;
-    //[SerializeField] private float forceToVelocity = 0.35f;
+    [SerializeField] private float rbForce = 6.0f; 
 
     private BoxCollider boxCollider;
     [SerializeField] private GameObject model;
-
-    private GameObject damager;
 
     private Vector3 direction;
 
@@ -64,11 +58,10 @@ public class Rocket : MonoBehaviour
         boxCollider.enabled = isActive;
     }
 
-    public void Initialize(Vector3 direction, float damage, Transform head, GameObject damager)
+    public void Initialize(Vector3 direction, float damage, Transform head)
     {
         this.direction = direction;
         this.head = head;
-        this.damager = damager;
         damageAmount = damage;
         start = transform.position;
         end = transform.position;
@@ -124,34 +117,23 @@ public class Rocket : MonoBehaviour
                 Vector3 normal = collider.transform.position - transform.position;
 
                 DamageMessage damageMessage;
-                damageMessage.damager = damager;
+                damageMessage.damager = null;
                 damageMessage.amount = damageAmount;
                 damageMessage.hitPoint = collider.transform.position;
                 damageMessage.hitNormal = normal;
 
                 target.ApplyDamage(damageMessage);
-
-                //temp explosion physics to Enemy  
-                //var dir = (collider.transform.position - damager.transform.position).normalized;
-                //collider.GetComponent<NavMeshAgent>().velocity = dir * explosionForce * forceToVelocity;
             }
-        }
 
-        var forceTargets = Physics.OverlapSphere(attackRoot.position, attackRadius, rbForceTarget);
-
-        //半径内のオブジェクトに物理効果
-        foreach (var forceTarget in forceTargets)
-        {
-            Rigidbody rb = forceTarget.GetComponent<Rigidbody>();
-
-            if (rb)
+            var rb = collider.GetComponent<Rigidbody>();
+            
+            if (rb) 
             {
-                var dir = (forceTarget.transform.position - attackRoot.position).normalized;
-                rb.AddForceAtPosition(dir * explosionForce, forceTarget.transform.position, ForceMode.Impulse);
-                //rb.AddExplosionForce(explosionForce, transform.position, attackRadius, upForce);
+                var dir = (collider.transform.position - attackRoot.position).normalized;
+                //rb2d.AddForceAtPosition(dir * rbForce, collider.transform.position, ForceMode.Impulse);
+                rb.AddForce(dir * rbForce, ForceMode.Impulse);
             }
         }
-
         Destroy(gameObject, delay);
     }
 }
