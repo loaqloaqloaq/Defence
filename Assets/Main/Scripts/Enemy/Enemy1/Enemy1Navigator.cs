@@ -29,7 +29,7 @@ public class Enemy1Navigator : MonoBehaviour
                 ec.agent.isStopped = false;
                 var targetPos = target.position;
                 if (target.name.StartsWith("Gate"))
-                    targetPos.x = (target.position - (target.position - transform.position).normalized * 3f).x;
+                    targetPos.x = (target.position - (target.position - transform.position).normalized * 1.5f).x;
                 ec.agent.destination = targetPos;
 
             }

@@ -169,7 +169,7 @@ public class RaycastWeapon : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, distance))
         {
-            var target = hitInfo.collider.transform.GetComponent<IDamageable>();
+            var target = hitInfo.collider.transform.root.GetComponent<IDamageable>();
 
             if (target != null)
             {
@@ -179,11 +179,7 @@ public class RaycastWeapon : MonoBehaviour
                 damageMessage.hitPoint = hitInfo.point;
                 damageMessage.hitNormal = hitInfo.normal;
 
-                target.ApplyDamage(damageMessage);
-
-                hitEffect.transform.position = hitInfo.point;
-                hitEffect.transform.forward = hitInfo.normal;
-                hitEffect.Emit(1);
+                target.ApplyDamage(damageMessage);                
             }
             else
             {
