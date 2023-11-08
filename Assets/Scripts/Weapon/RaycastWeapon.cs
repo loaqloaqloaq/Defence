@@ -51,7 +51,7 @@ public class RaycastWeapon : MonoBehaviour
 
     List<Bullet> bullets = new List<Bullet>();
 
-    private GameObject weaponHolder;
+    protected GameObject weaponHolder;
 
     float maxLifeTime = 1.2f;
 
@@ -63,7 +63,7 @@ public class RaycastWeapon : MonoBehaviour
         }
     }
 
-    public void Awake()
+    public virtual void Awake()
     {
         recoil = GetComponent<WeaponRecoil>();
     }
@@ -136,12 +136,12 @@ public class RaycastWeapon : MonoBehaviour
         }
     }
 
-    public virtual void UpdateBullets(float deltaTime)
+    protected void UpdateBullets(float deltaTime)
     {
         SimulateBullet(deltaTime);
     }
 
-    public virtual void SimulateBullet(float deltaTime)
+    protected void SimulateBullet(float deltaTime)
     {
         bullets.ForEach(bullet =>
         {
