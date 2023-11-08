@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class RayWeapon_RocketLauncher : RaycastWeapon
+public class RocketLauncher : RaycastWeapon
 {
     [SerializeField] GameObject rocket;
 
@@ -40,7 +40,7 @@ public class RayWeapon_RocketLauncher : RaycastWeapon
 
         var rocketPref = Instantiate(rocket, raycastOrigin.position, Quaternion.identity);
         Rocket r = rocketPref.GetComponent<Rocket>();
-        r.Initialize(direction, damage, raycastDestination);
+        r.Initialize(direction, damage, raycastDestination, weaponHolder);
         //
     }
 

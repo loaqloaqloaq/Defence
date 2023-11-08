@@ -9997,7 +9997,7 @@ MonoBehaviour:
   ammoRemain: 10
   magAmmo: 0
   magCapacity: 1
-  damage: 600
+  damage: 50
   raycastOrigin: {fileID: 1430727169578368036}
   raycastDestination: {fileID: 0}
   tracerEffect: {fileID: 0}
