@@ -22,7 +22,7 @@ public class GateController : MonoBehaviour
 
     GameObject HPfill;
     TextMeshProUGUI HPText;  
-    float width, targetWidth;
+    float width, gaugeWidth;
 
 
     // Start is called before the first frame update
@@ -40,8 +40,8 @@ public class GateController : MonoBehaviour
 
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100,2) + "%)";        
         
-        targetWidth = 30f;
-        width = targetWidth;
+        gaugeWidth = 30f;
+        width = gaugeWidth;
     }
 
     // Update is called once per frame
@@ -49,8 +49,8 @@ public class GateController : MonoBehaviour
     {  
       
 
-        if ( Mathf.Abs(width-targetWidth) > 0.002f) {
-            width += (targetWidth - width)*Time.deltaTime*4f;
+        if ( Mathf.Abs(width-gaugeWidth) > 0.002f) {
+            width += (gaugeWidth - width)*Time.deltaTime*4f;
             HPfill.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(width, 2);
         }
 
@@ -71,7 +71,7 @@ public class GateController : MonoBehaviour
         else ani.SetTrigger("damage");
 
         HPfill.SetActive(true);
-        targetWidth = 30f * HP / MaxHP;
+        gaugeWidth = 30f * HP / MaxHP;
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
 
 
