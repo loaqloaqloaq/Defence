@@ -10,9 +10,9 @@
 |22CI0527　|髙野 和音     |マップデザイン|
 |22CI0532　|張 皓 嵐      |敵|
 
-制作期間： 
-制作環境： UNITY
-実行環境： Windows
+- 制作期間： 10/18 ~ 
+- 制作環境： UNITY
+- 実行環境： Windows
 
 ## ゲーム
 - ゲーム名：Defence(仮)
@@ -29,5 +29,5 @@
 
 ## お借りした素材：
 - ゲート：https://assetstore.unity.com/packages/3d/chainlink-fences-73107
-- 敵１＆２：https://assetstore.unity.com/packages/3d/characters/robots/robot-metallic-humanoid-171295
-- 敵３：https://assetstore.unity.com/packages/3d/characters/robots/robot-soldier-142438
+- 敵1&2：https://assetstore.unity.com/packages/3d/characters/robots/robot-metallic-humanoid-171295
+- 敵3：https://assetstore.unity.com/packages/3d/characters/robots/robot-soldier-142438
