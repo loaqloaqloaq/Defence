@@ -9919,9 +9919,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2084060361119042039}
+  - component: {fileID: 965815393752899145}
   - component: {fileID: -7999184717167703922}
   - component: {fileID: -4132024379511950016}
-  - component: {fileID: 965815393752899145}
   m_Layer: 0
   m_Name: Weapon_SniperRifle
   m_TagString: Untagged
@@ -9948,6 +9948,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &965815393752899145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2397723860111938270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc33aaebc443a64eb91970c366883f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSlot: 3
+  magazine: {fileID: 817124530509406123}
+  isInifinty: 0
+  weaponName: sniperRifle
+  soundName:
+  - sniperRifleShot
+  - rifleReload2
+  - emptyRifle
+  isFiring: 0
+  fireRate: 1
+  ammoRemain: 32
+  magAmmo: 8
+  magCapacity: 8
+  damage: 150
+  raycastOrigin: {fileID: 1430727169578368036}
+  raycastDestination: {fileID: 0}
+  tracerEffect: {fileID: 6919128151455992844, guid: 0c16051605a91df4c92d82f1962d9d21, type: 3}
+  muzzleFlash:
+  - {fileID: 1232495158790509215}
+  - {fileID: 1232774670129713721}
+  hitEffect: {fileID: 3817866813065893935}
+  bulletSpeed: 1500
+  bulletDrop: 0
+  maxBounces: 0
+  timeBetFire: 1.7
 --- !u!114 &-7999184717167703922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10006,7 +10043,7 @@ MonoBehaviour:
     m_ImpulseDuration: 0.2
     m_ImpulseType: 3
     m_DissipationRate: 0.25
-    m_RawSignal: {fileID: 11400000, guid: 9377a312fc9a15b4fa1fc7c379807947, type: 2}
+    m_RawSignal: {fileID: 11400000, guid: 071dd13758a72924a9c2bf2eb816c031, type: 2}
     m_AmplitudeGain: 1
     m_FrequencyGain: 1
     m_RepeatMode: 0
@@ -10035,43 +10072,6 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
---- !u!114 &965815393752899145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2397723860111938270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecc33aaebc443a64eb91970c366883f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponSlot: 3
-  magazine: {fileID: 817124530509406123}
-  isInifinty: 1
-  weaponName: sniperRifle
-  soundName:
-  - 
-  - 
-  - 
-  isFiring: 0
-  fireRate: 1
-  ammoRemain: 10
-  magAmmo: 32
-  magCapacity: 8
-  damage: 50
-  raycastOrigin: {fileID: 1430727169578368036}
-  raycastDestination: {fileID: 0}
-  tracerEffect: {fileID: 6919128151455992844, guid: 0c16051605a91df4c92d82f1962d9d21, type: 3}
-  muzzleFlash:
-  - {fileID: 1232495158790509215}
-  - {fileID: 1232774670129713721}
-  hitEffect: {fileID: 3817866813065893935}
-  bulletSpeed: 1500
-  bulletDrop: 0
-  maxBounces: 0
-  timeBetFire: 1.7
 --- !u!1 &3908143555396493733
 GameObject:
   m_ObjectHideFlags: 0
