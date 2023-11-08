@@ -22,16 +22,13 @@ public class Enemy2Controller : MonoBehaviour, IDamageable
 
     public Transform target;
     public Transform player;
-    public GameObject explosion;
+    GameObject explosion;
 
     Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();
-    public GameObject ammoPack,healthPack;
+    EnemyData EnemyJson;
 
-    float checkFeq, lastCheck;
-
-    [SerializeField]
-    TextAsset EnemyJsonFile;
-    EnemyJsonReader EnemyJson;
+    float checkFeq, lastCheck;   
+    
 
     //çUåÇÇêHÇÁÇ¡ÇΩâÒêî
     int damage_Cnt = 0;
@@ -55,20 +52,21 @@ public class Enemy2Controller : MonoBehaviour, IDamageable
         animator = GetComponent<Animator>();       
         agent = GetComponent<NavMeshAgent>();
 
-        string jsonString = EnemyJsonFile.ToString();
-        EnemyJson= JsonUtility.FromJson<EnemyJsonReader>(jsonString);
-        agent.speed = EnemyJson.Enemy2.moveSpeed;
+        EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
 
-        MAXHP = EnemyJson.Enemy2.hp;
+        EnemyJson = eg.EnemyJson.Enemy2;
+        agent.speed = EnemyJson.moveSpeed;
+
+        MAXHP = EnemyJson.hp;
         HP = MAXHP;
-        ATK = EnemyJson.Enemy2.atk;
-               
-        drop.Add("ammo", EnemyJson.Enemy2.drop.ammo);
-        drop.Add("health", EnemyJson.Enemy2.drop.health);        
-        
-        dropPrefab.Add("ammo", ammoPack);
-        dropPrefab.Add("health", healthPack);
-        
+        ATK = EnemyJson.atk;
+
+        drop.Add("ammo", EnemyJson.drop.ammo);
+        drop.Add("health", EnemyJson.drop.health);
+
+        dropPrefab = eg.dropPrefab;
+        explosion = eg.explosion;
+
     }
 
     // Update is called once per frame
