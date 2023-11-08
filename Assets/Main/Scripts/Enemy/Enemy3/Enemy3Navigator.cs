@@ -7,14 +7,14 @@ public class Enemy3Navigator : MonoBehaviour
 {
     public Transform target;    
     private Animator animator;
-    private Enemy2Controller ec;
+    private Enemy3Controller ec;
    
     // Start is called before the first frame update
     
     void Start()
     {       
         animator = GetComponent<Animator>();
-        ec = GetComponent<Enemy2Controller>();   
+        ec = GetComponent<Enemy3Controller>();   
     }
 
     // Update is called once per frame

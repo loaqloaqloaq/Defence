@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -35,6 +36,8 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
     RaycastWeapon rcw;
     //攻撃を食らった回数
     int damage_Cnt = 0;
+
+    float fireFreq, fireCnt, fireStop, fireStopCnt;
     // Start is called before the first frame update
     void Start()
     {              
@@ -63,14 +66,23 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
         MAXHP = EnemyJson.hp;
         HP = MAXHP;
         ATK = EnemyJson.atk;
+        fireFreq = EnemyJson.fireFreq;
+        fireStop = EnemyJson.fireStop;
+
+        fireCnt = 0;
+        fireStopCnt = 0;
 
         drop.Add("ammo", EnemyJson.drop.ammo);
         drop.Add("health", EnemyJson.drop.health);
 
         dropPrefab = eg.dropPrefab;
         explosion = eg.explosion;
+        
 
         rcw = transform.Find("Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/Weapon_Rifle 0").GetComponent<RaycastWeapon>();
+        rcw.damage = ATK;
+
+        
 
     }
 
@@ -78,12 +90,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
     void Update()
     {
         if (HP <= 0)
-        {            
-            transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<BoxCollider>().enabled = false;
-            transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(0).GetComponent<BoxCollider>().enabled = false;
-            transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<BoxCollider>().enabled = false;
-            transform.GetChild(1).GetChild(0).GetChild(2).GetComponent<BoxCollider>().enabled = false;
-            transform.GetComponent<BoxCollider>().enabled = false;
+        {   transform.GetComponent<Collider>().enabled = false;
             agent.enabled = false;
             destoryTimer += Time.deltaTime;
             if (destoryTimer >= destoryTime)
@@ -111,15 +118,15 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
                 //face to target
                 var lookPos = target.position - transform.position;
                 lookPos.y = 0;
-                //Quaternion rot= Quaternion.LookRotation(lookPos) * Quaternion.Euler(0, 45, 0);               
-                //transform.rotation = rot;
+                Quaternion rot= Quaternion.LookRotation(lookPos) * Quaternion.Euler(0, 50, 0);               
+                transform.rotation = rot;
 
-                animator.SetBool("attacking", true);           
+                animator.SetBool("attacking", true);                
+                Attack();
             }
             else {
                 ResetAfterAttack();               
-            }
-
+            }        
             
 
         }
@@ -136,6 +143,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
     }
     private void Dead() {
         Drop();
+        animator.speed = 1;
         animator.SetTrigger("die");
         //GetComponent<Rigidbody>().isKinematic = true;
     }
@@ -155,27 +163,33 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
         }        
     }
     private void Attack() {
-        //前にいないとダメージ受けない
-        var heading = target.position - transform.position;
-        float dot = Vector3.Dot(heading, transform.forward);        
-        if (dot < 0.2f || dot > 1.7f) return;
-        //攻撃したとアニメション終わるまでもう一度攻撃しない
-        if (attacked) return;
-        //遠い行くとダメージ受けない
-        if (Vector3.Distance(target.position,transform.position) >= 1.7f) return;
+        bool fire = true;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Shooting"))
+        {
+            fireCnt += Time.deltaTime;
+            if (fireCnt>=fireFreq)
+            {
+                animator.Play("Shooting");
+                animator.speed = 0f;
+                fire = false;
+                fireStopCnt += Time.deltaTime;
+                if (fireStopCnt >= fireStop) {
+                    fireStopCnt = 0;
+                    fireCnt = 0;
+                    animator.speed = 1f;
+                }
+            }
+            
+        }
 
-        DamageMessage dm= new DamageMessage();
-        dm.damager = gameObject;
-        dm.amount = ATK;
-        if((target.GetComponent<GateController>() ?? null) != null) target.GetComponent<GateController>().ApplyDamage(dm);
-        else if ((target.GetComponent<PlayerHealth>() ?? null) != null) target.GetComponent<PlayerHealth>().ApplyDamage(dm);   
-        attacked = true;
+        rcw.UpdateNPCWeapon(Time.deltaTime, fire);
     }
 
     private void ResetAfterAttack() { 
         attacking = false;
         attacked = false;
         animator.SetBool("attacking", false);
+        animator.speed = 1;
     }
 
     //ダメージ処理

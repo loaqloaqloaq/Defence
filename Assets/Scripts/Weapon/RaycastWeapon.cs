@@ -119,6 +119,22 @@ public class RaycastWeapon : MonoBehaviour
         UpdateBullets(deltaTime);
     }
 
+    public virtual void UpdateNPCWeapon(float deltaTime,bool npcFiring)
+    {
+        isFiring = npcFiring;
+
+        if (isFiring)
+        {
+            UpdateNPCFiring(deltaTime);
+        }
+        else
+        {
+            accumulateTime = 0.0f; // << X ¼öÁ¤ ÇÊ¼E
+            recoil.Reset();
+        }
+        UpdateBullets(deltaTime);
+    }
+
     public virtual void StartFiring()
     {
         accumulateTime = 0.0f;
@@ -132,6 +148,16 @@ public class RaycastWeapon : MonoBehaviour
         while (accumulateTime >= 0.0f)
         {
             FireBullet();
+            accumulateTime -= fireInterval;
+        }
+    }
+    public virtual void UpdateNPCFiring(float deltaTime)
+    {
+        accumulateTime += deltaTime;
+        float fireInterval = 1.0f / fireRate;
+        while (accumulateTime >= 0.0f)
+        {
+            NPCFireBullet();
             accumulateTime -= fireInterval;
         }
     }
@@ -240,6 +266,38 @@ public class RaycastWeapon : MonoBehaviour
         }
 
         var velocity = (raycastDestination.position - raycastOrigin.position).normalized * bulletSpeed;
+
+        foreach (var bullet in bullets)
+        {
+            if (!bullet.isSimulating)
+            {
+                bullet.isSimulating = true;
+                bullet.tracer.gameObject.SetActive(true);
+                bullet.time = 0;
+                bullet.initialPosition = raycastOrigin.position;
+                bullet.initialVelocity = velocity;
+                return;
+            }
+        }
+        var newBullet = CreateBullet(raycastOrigin.position, velocity);
+        bullets.Add(newBullet);
+    }
+    public virtual void NPCFireBullet()
+    {
+        if (magAmmo <= 0)
+        {
+            RefillAmmo();
+            return;
+        }
+        --magAmmo;
+        PlaySound("Shot");                    //sound
+        recoil.GernerateNPCRecoil(weaponName);   //recoil
+        foreach (var particle in muzzleFlash) //effect
+        {
+            particle.Emit(1);
+        }
+
+        var velocity = transform.forward * bulletSpeed;
 
         foreach (var bullet in bullets)
         {

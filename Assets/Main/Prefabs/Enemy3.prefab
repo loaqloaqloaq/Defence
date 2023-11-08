@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 4243740444037266695}
   - component: {fileID: 7684062632669335789}
   - component: {fileID: 4087060980682235611}
+  - component: {fileID: 4714780012397426949}
   m_Layer: 0
   m_Name: Enemy3
   m_TagString: Untagged
@@ -217,6 +218,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &4714780012397426949
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553309270535123319}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.94
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!1 &690284702091147324
 GameObject:
   m_ObjectHideFlags: 0
@@ -2310,14 +2334,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7242387072278065774}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.47711313, z: -0, w: 0.87884194}
+  m_LocalPosition: {x: 0.005613327, y: 0, z: -0.003047347}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4708581126796201219}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 56.994, z: 0}
 --- !u!137 &8192838120755847812
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -2805,47 +2829,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2084060361119042039, guid: 973c1784511e9694ebac5028468af390, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.032
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 2084060361119042039, guid: 973c1784511e9694ebac5028468af390, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.053
+      value: -0.059
       objectReference: {fileID: 0}
     - target: {fileID: 2084060361119042039, guid: 973c1784511e9694ebac5028468af390, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.138
+      value: 0.131
       objectReference: {fileID: 0}
     - target: {fileID: 2084060361119042039, guid: 973c1784511e9694ebac5028468af390, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5075081
+      value: 0.48387894
       objectReference: {fileID: 0}
     - target: {fileID: 2084060361119042039, guid: 973c1784511e9694ebac5028468af390, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.5297532
+      value: 0.5415627
       objectReference: {fileID: 0}
     - target: {fileID: 2084060361119042039, guid: 973c1784511e9694ebac5028468af390, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.40257218
+      value: 0.4403026
       objectReference: {fileID: 0}
     - target: {fileID: 2084060361119042039, guid: 973c1784511e9694ebac5028468af390, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5474786
+      value: 0.527925
       objectReference: {fileID: 0}
     - target: {fileID: 2084060361119042039, guid: 973c1784511e9694ebac5028468af390, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 5.561
+      value: 3.394
       objectReference: {fileID: 0}
     - target: {fileID: 2084060361119042039, guid: 973c1784511e9694ebac5028468af390, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 83.389
+      value: 88.525
       objectReference: {fileID: 0}
     - target: {fileID: 2084060361119042039, guid: 973c1784511e9694ebac5028468af390, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 99.294
+      value: 98.293
       objectReference: {fileID: 0}
     - target: {fileID: 2397723860111938270, guid: 973c1784511e9694ebac5028468af390, type: 3}
       propertyPath: m_Name
       value: Weapon_Rifle 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360325984832206524, guid: 973c1784511e9694ebac5028468af390, type: 3}
+      propertyPath: magAmmo
+      value: 9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360325984832206524, guid: 973c1784511e9694ebac5028468af390, type: 3}
+      propertyPath: isInifinty
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
