@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponRecoil : MonoBehaviour
@@ -26,7 +27,7 @@ public class WeaponRecoil : MonoBehaviour
     private void Awake()
     {
         cameraShake = GetComponent<Cinemachine.CinemachineImpulseSource>();
-    }
+    }   
 
     int NextIndex(int index)
     {
@@ -47,12 +48,29 @@ public class WeaponRecoil : MonoBehaviour
         rigController.Play("weapon_recoil_" + weaponName, 1, 0.0f);
     }
 
+    public void GernerateNPCRecoil(string weaponName)
+    {
+        time = duration;
+
+        //cameraShake.GenerateImpulse(Camera.main.transform.forward);
+
+        horizontalRecoil = recoilPattern[index].x;
+        verticalRecoil = recoilPattern[index].y;
+
+        index = NextIndex(index);
+
+        //rigController.Play("weapon_recoil_" + weaponName, 1, 0.0f);
+    }
+
     void Update()
     {
         if (time > 0)
         {
-            characterAiming.yAxis.Value -= ((verticalRecoil / 1000) * Time.deltaTime / duration) * recoilModifier;
-            characterAiming.xAxis.Value -= ((horizontalRecoil / 10) * Time.deltaTime / duration) * recoilModifier;
+            if (characterAiming)
+            {
+                characterAiming.yAxis.Value -= ((verticalRecoil / 1000) * Time.deltaTime / duration) * recoilModifier;
+                characterAiming.xAxis.Value -= ((horizontalRecoil / 10) * Time.deltaTime / duration) * recoilModifier;
+            }
             time -= Time.deltaTime;
         }
     }

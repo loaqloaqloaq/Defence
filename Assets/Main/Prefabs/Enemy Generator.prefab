@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8435248775537443001
 MonoBehaviour:
@@ -47,6 +47,7 @@ MonoBehaviour:
   enemy:
   - {fileID: 3554424129767012801, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
   - {fileID: 3554424129767012801, guid: b6e09415da3844b4281ff6d110d944c6, type: 3}
+  - {fileID: 553309270535123319, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
   EnemyCnt: 0
   genFreq: 0.5
   PatternJsonFile: {fileID: 4900000, guid: c48560d8b90d6d347b2a615993db19f1, type: 3}

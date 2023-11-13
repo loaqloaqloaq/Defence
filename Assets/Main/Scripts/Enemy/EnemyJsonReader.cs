@@ -8,12 +8,13 @@ public class EnemyJsonReader
 {
     public EnemyData Enemy1;
     public EnemyData Enemy2;
+    public EnemyData Enemy3;
 }
 
 [Serializable]
 public class EnemyData 
 {
-    public float hp,moveSpeed, atk;
+    public float hp,moveSpeed, atk, fireFreq, fireStop;
     public Drop drop;
 }
 [Serializable]

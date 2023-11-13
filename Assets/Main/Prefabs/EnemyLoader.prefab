@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &814670879726100184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5133163499696771065}
+  - component: {fileID: 1442222546943776965}
+  m_Layer: 0
+  m_Name: EnemyLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5133163499696771065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814670879726100184}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.52903616, y: 0.9522276, z: -2.0937855}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1442222546943776965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814670879726100184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 325adc2c3e661be4d8dd3e7736725bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyJsonFile: {fileID: 4900000, guid: f1c981157521eed4fae48c4d1df9debd, type: 3}
+  EnemyJson:
+    Enemy1:
+      hp: 0
+      moveSpeed: 0
+      atk: 0
+      drop:
+        ammo: 0
+        health: 0
+    Enemy2:
+      hp: 0
+      moveSpeed: 0
+      atk: 0
+      drop:
+        ammo: 0
+        health: 0
+    Enemy3:
+      hp: 0
+      moveSpeed: 0
+      atk: 0
+      drop:
+        ammo: 0
+        health: 0
+  explosion: {fileID: 2532972853072531924, guid: b40f4969cc5dc9c41adb34150b3c46f3, type: 3}
+  ammoPack: {fileID: 4549580422657515402, guid: f4a4eef7b95967d47a00839a556d17d3, type: 3}
+  healthPack: {fileID: 3692371945894827175, guid: d68017b376389f44b9bcaa994555c022, type: 3}

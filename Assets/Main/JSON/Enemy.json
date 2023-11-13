@@ -16,5 +16,16 @@
       "ammo": 5,
       "health": 5
     }
+  },
+  "Enemy3": {
+    "hp": 100,
+    "moveSpeed": 2,
+    "atk": 10,
+    "fireFreq": 1,
+    "fireStop": 1.5,
+    "drop": {
+      "ammo": 5,
+      "health": 5
+    }
   }
 }
