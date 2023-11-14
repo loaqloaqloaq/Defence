@@ -86,6 +86,9 @@ public class GateController : MonoBehaviour
         GetComponent<BoxCollider>().enabled = false;
         ani.SetTrigger("break");
         HPfill.GetComponent<Animator>().SetTrigger("hideHP");
-        EnemyBase_Manager.gameObject.GetComponent<EnemyBase_Manager>().stage[gateNumber - 1] = 1;
+        if (EnemyBase_Manager != null)
+        {
+            EnemyBase_Manager.gameObject.GetComponent<EnemyBase_Manager>().stage[gateNumber - 1] = 1;
+        }
     }
 }
