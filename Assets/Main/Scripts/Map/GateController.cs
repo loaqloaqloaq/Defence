@@ -24,6 +24,8 @@ public class GateController : MonoBehaviour
     TextMeshProUGUI HPText;  
     float width, gaugeWidth;
 
+    private GameObject EnemyBase_Manager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +44,7 @@ public class GateController : MonoBehaviour
         
         gaugeWidth = 30f;
         width = gaugeWidth;
+        EnemyBase_Manager = GameObject.Find("EnemyBaseManager");
     }
 
     // Update is called once per frame
@@ -83,5 +86,6 @@ public class GateController : MonoBehaviour
         GetComponent<BoxCollider>().enabled = false;
         ani.SetTrigger("break");
         HPfill.GetComponent<Animator>().SetTrigger("hideHP");
+        EnemyBase_Manager.gameObject.GetComponent<EnemyBase_Manager>().stage[gateNumber - 1] = 1;
     }
 }
