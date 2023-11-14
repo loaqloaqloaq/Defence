@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.XR;
 
 
-public class GateController : MonoBehaviour
+public class GateController : MonoBehaviour,IDamageable
 {
     [HideInInspector]
     public float HP;
@@ -83,5 +83,10 @@ public class GateController : MonoBehaviour
         GetComponent<BoxCollider>().enabled = false;
         ani.SetTrigger("break");
         HPfill.GetComponent<Animator>().SetTrigger("hideHP");
+    }
+
+    public void Damage(int damage)
+    {
+        //throw new NotImplementedException();
     }
 }
