@@ -15,7 +15,7 @@ public class EnemyBase_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        movePoint[0] = new Vector3(-90.9f, 27.11f, 286.74f);
+        movePoint[0] = new Vector3(-93.92f, 27.11f, 290.61f);
         movePoint[1] = new Vector3(12.2f, 27.1f, 295.67f);
         movePoint[2] = new Vector3(115.33f, 23.92f, 292.09f);
         movePoint[3] = new Vector3(-93.41f, 2.45f, 78.4f);
