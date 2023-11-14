@@ -7,6 +7,8 @@ public class enemyBase : MonoBehaviour, IDamageable
     private float HP;       //HP
     private float MaxHP;    //最大HP
     private float width, gaugeWidth; //ゲージ幅
+    private GameObject gate1;
+    private GameObject gate2;
     [SerializeField]
     GameObject canvas;      //敵拠点UI
     [SerializeField]
@@ -26,6 +28,8 @@ public class enemyBase : MonoBehaviour, IDamageable
         HPfill.SetActive(true);
         HPText = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
+        gate1 = GameObject.Find("Gate1");
+        gate2 = GameObject.Find("Gate2");
     }
     void Update()
     {
@@ -78,6 +82,20 @@ public class enemyBase : MonoBehaviour, IDamageable
         //オブジェクトが消える
         Destroy(gameObject);
     }
+
+    //ゲートが壊れたときの処理
+    private void Base_Move()
+    { 
+        if(gate1.gameObject.GetComponent<GateController>().HP <= 0)
+        {
+            transform.position = new Vector3(-93, 2.45f, 78.4f);
+        }
+        if(gate2.gameObject.GetComponent<GateController>().HP <= 0)
+        {
+            transform.position = new Vector3(-93, 2.45f, 78.4f);
+        }
+    }
+
 
     //ダメージ処理
     public void Damage(int damage)
