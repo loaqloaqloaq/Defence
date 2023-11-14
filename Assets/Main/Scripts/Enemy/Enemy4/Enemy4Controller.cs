@@ -34,7 +34,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
 
     Collider[] colliders;
 
-    ParticleSystem ps;
+    //ParticleSystem ps;
 
     //攻撃を食らった回数
     int damage_Cnt = 0;
@@ -63,8 +63,8 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
 
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        ps = GetComponent<ParticleSystem>();
-        if (ps.isPlaying) ps.Stop();
+        //ps = GetComponent<ParticleSystem>();
+        //if (ps.isPlaying) ps.Stop();
 
         EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
 
@@ -137,8 +137,9 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
                     target = gate;
                 }
             }
+
             var disToTarget = Vector3.Distance(transform.position, target.position);            
-            if (disToTarget < 2.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+            if (disToTarget < 2.5f && !attacking)
             {
                 attacking = true;
                 //face to target
@@ -146,10 +147,11 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
                 lookPos.y = 0;
                 transform.rotation = Quaternion.LookRotation(lookPos);
                 animator.SetTrigger("attack");
-                if (!ps.isPlaying) ps.Play();                
+                //if (!ps.isPlaying) ps.Play();                
             }
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
             {
+                Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
                 if (disToTarget >= 2.5f && animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.25f) {
                     ResetAfterAttack();
                     animator.Play("idle");
@@ -229,7 +231,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
     {
         attacking = false;
         attacked = false;
-        GetComponent<ParticleSystem>().Stop();
+        //GetComponent<ParticleSystem>().Stop();
     }
 
     //ダメージ処理
