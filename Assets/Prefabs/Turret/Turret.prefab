@@ -14581,8 +14581,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3782704184529069710}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.1556598, y: -0.69850296, z: -0.6817425, w: 0.15195715}
+  m_LocalPosition: {x: 0.29608232, y: -0.76536393, z: 27.226576}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29219,7 +29219,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6901308941406096748}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.002523141, y: 0.9777994, z: -0.011844519, w: 0.20919296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -29238,6 +29238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5067521836675565254}
   - component: {fileID: 5627915710466077965}
+  - component: {fileID: 7226083923120834486}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -29262,6 +29263,45 @@ Transform:
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5627915710466077965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550330679009589702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c124f089a807fd14b8160c59733e3a40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  isInifinty: 0
+  fireRate: 7
+  ammoRemain: 1000
+  magAmmo: 40
+  magCapacity: 40
+  damage: 20
+  shootingAngle: 30
+  raycastOrigin: {fileID: 781156039725122233}
+  tracerEffect: {fileID: 6919128151455992844, guid: 0c16051605a91df4c92d82f1962d9d21, type: 3}
+  muzzleFlash:
+  - {fileID: 3840470576712442269}
+  - {fileID: 9115815505213777178}
+  - {fileID: 9115815505213777178}
+  hitEffect: {fileID: 1247462234392539282}
+  bulletSpeed: 250
+  bulletDrop: 0
+  maxBounces: 0
+  reloadTime: 3.5
+  turnSmoothVelocity: 3
+  firePivot: {fileID: 4748293671714642504}
+  attackRadius: 45
+  fieldOfView: 360
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 64
+  target: {fileID: 0}
+--- !u!114 &7226083923120834486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

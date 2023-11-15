@@ -1,7 +1,7 @@
 //using UnityEditor.VersionControl;
 using UnityEngine;
 
-public class Mine : MonoBehaviour
+public class mine : MonoBehaviour
 {
     //’n—‹‚ÌUŒ‚—Í
     private int mine_Damage;
