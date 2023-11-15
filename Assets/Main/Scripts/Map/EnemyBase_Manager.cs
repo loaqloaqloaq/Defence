@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EnemyBase_Manager : MonoBehaviour
 {   
     public GameObject[] enemyBase = new GameObject[3];　//現在マップに生成されているEnemyBase
     private Vector3[] movePoint = new Vector3[9];//EnemyBaseの移動先
-    private Vector3 rotation;
     public GameObject EnemyBase_Prefab;//EnemyBaseが壊されたら再生成するためのプレファブ
     public GameObject[] PlayerMovePoint = new GameObject[3];//一時的に強制移動するため、プレイヤーの移動先
-    public GameObject Player;
+    private GameObject Player;
 
     public int[] stage = new int[2] { 0, 0 };//壊れてるゲートの確認
     private bool[] moveFlg = new bool[2] { false, false }; //移動したかの確認
@@ -25,7 +25,7 @@ public class EnemyBase_Manager : MonoBehaviour
         movePoint[6] = new Vector3(-88.6f, 2.45f, -170.5f);
         movePoint[7] = new Vector3(10.4f, 2.45f, -170.5f);
         movePoint[8] = new Vector3(119.01f, 2.45f, -170.5f);
-        rotation = new Vector3(0, 180, 0);
+        Player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -62,7 +62,9 @@ public class EnemyBase_Manager : MonoBehaviour
                 enemyBase[2] = obj;
             }
             moveFlg[0] = true;
+            Player.GetComponent<CharacterController>().enabled = false;
             Player.transform.position = PlayerMovePoint[1].transform.position;
+            Player.GetComponent<CharacterController>().enabled = true;
         }
         if (stage[1] != 0 && !moveFlg[1])
         {
@@ -85,7 +87,9 @@ public class EnemyBase_Manager : MonoBehaviour
                 enemyBase[2] = obj;
             }
             moveFlg[1] = true;
+            Player.GetComponent<CharacterController>().enabled = false;
             Player.transform.position = PlayerMovePoint[2].transform.position;
+            Player.GetComponent<CharacterController>().enabled = true;
         }
     }
 

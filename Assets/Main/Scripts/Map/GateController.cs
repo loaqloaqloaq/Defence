@@ -86,9 +86,16 @@ public class GateController : MonoBehaviour,IDamageable
         GetComponent<BoxCollider>().enabled = false;
         ani.SetTrigger("break");
         HPfill.GetComponent<Animator>().SetTrigger("hideHP");
-        if (EnemyBase_Manager != null)
+        if (EnemyBase_Manager != null && gateNumber <= 2)
         {
             EnemyBase_Manager.gameObject.GetComponent<EnemyBase_Manager>().stage[gateNumber - 1] = 1;
+        }
+        else if( gateNumber >= 3)
+        {
+            Debug.Log("•‰‚¯");
+        }
+        {
+
         }
     }
 
