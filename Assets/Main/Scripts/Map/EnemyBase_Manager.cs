@@ -8,7 +8,8 @@ public class EnemyBase_Manager : MonoBehaviour
     private Vector3[] movePoint = new Vector3[9];//EnemyBaseの移動先
     private Vector3 rotation;
     public GameObject EnemyBase_Prefab;//EnemyBaseが壊されたら再生成するためのプレファブ
-    public Vector3[] PlayerMovePoint = new Vector3[3];//一時的に強制移動するため、プレイヤーの移動先
+    public GameObject[] PlayerMovePoint = new GameObject[3];//一時的に強制移動するため、プレイヤーの移動先
+    public GameObject Player;
 
     public int[] stage = new int[2] { 0, 0 };//壊れてるゲートの確認
     private bool[] moveFlg = new bool[2] { false, false }; //移動したかの確認
@@ -61,6 +62,7 @@ public class EnemyBase_Manager : MonoBehaviour
                 enemyBase[2] = obj;
             }
             moveFlg[0] = true;
+            Player.transform.position = PlayerMovePoint[1].transform.position;
         }
         if (stage[1] != 0 && !moveFlg[1])
         {
@@ -83,6 +85,7 @@ public class EnemyBase_Manager : MonoBehaviour
                 enemyBase[2] = obj;
             }
             moveFlg[1] = true;
+            Player.transform.position = PlayerMovePoint[2].transform.position;
         }
     }
 

@@ -1371,6 +1371,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.75, y: 4.15, z: 0.75}
   m_Center: {x: 0, y: 2.075, z: 0}
+--- !u!1 &83899491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1799385376033719698, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
+  m_PrefabInstance: {fileID: 1197353338}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &85618713 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: e253e5caf701fd84d84f850bc071621a, type: 3}
@@ -21829,6 +21834,10 @@ PrefabInstance:
       propertyPath: crosshairTarget
       value: 
       objectReference: {fileID: 2036889524}
+    - target: {fileID: 1799385376026310230, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1799385376033495472, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -33552,9 +33561,10 @@ MonoBehaviour:
   - {fileID: 1963514929}
   EnemyBase_Prefab: {fileID: 7046073816692133705, guid: fe60c63a2d7c5704a938a67072b5836d, type: 3}
   PlayerMovePoint:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {fileID: 2069069392}
+  - {fileID: 518350628}
+  - {fileID: 1377756923}
+  Player: {fileID: 83899491}
   stage: 0000000000000000
 --- !u!4 &1821792659
 Transform:
