@@ -35,6 +35,6 @@ public class EnemyCollider : MonoBehaviour,IDamageable
 
     public bool IsDead()
     {
-        return false;
+        return root.IsDead();
     }
 }
