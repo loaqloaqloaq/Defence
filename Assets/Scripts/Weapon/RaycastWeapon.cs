@@ -48,14 +48,16 @@ public class RaycastWeapon : MonoBehaviour
 
     [SerializeField] protected float bulletSpeed = 1000.0f;
     [SerializeField] protected float bulletDrop = 0.0f;
+    [SerializeField] protected float fireDistance = 1000.0f;
     [SerializeField] protected int maxBounces = 0;
     [SerializeField] protected float rbForce = 4.0f;
+
 
     List<Bullet> bullets = new List<Bullet>();
 
     protected GameObject weaponHolder;
 
-    float maxLifeTime = 1.2f;
+    [SerializeField] protected float maxLifeTime = 1.2f;
 
     public bool reloadAvailable
     {
