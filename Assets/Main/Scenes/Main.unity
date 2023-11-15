@@ -3440,6 +3440,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponPickup_SniperRifle
       objectReference: {fileID: 0}
+    - target: {fileID: 8437934624666712676, guid: 1f31d2a4d87ed794a9c19140e3c4aa2b, type: 3}
+      propertyPath: weaponFab
+      value: 
+      objectReference: {fileID: 965815393752899145, guid: 11cc16cf4b59b924b80c659afe96d30e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3747,11 +3751,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5067521836675565254, guid: 824b90b2b9aba6a4c8c292945257144c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.43
+      value: -13.53
       objectReference: {fileID: 0}
     - target: {fileID: 5067521836675565254, guid: 824b90b2b9aba6a4c8c292945257144c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.67
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5067521836675565254, guid: 824b90b2b9aba6a4c8c292945257144c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4243,7 +4247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2595014424384535998, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2595014424384535998, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4276,18 +4280,6 @@ PrefabInstance:
     - target: {fileID: 2595014424384535998, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336341549389084840, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336341549389084840, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].time
-      value: 0.4032067
-      objectReference: {fileID: 0}
-    - target: {fileID: 7336341549389084840, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
-      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].value
-      value: 0.9724772
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
