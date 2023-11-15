@@ -41,7 +41,7 @@ public class Enemy2Navigator : MonoBehaviour
         }
         else {
             animator.SetBool("walking", false);
-            if (ec.agent.isStopped == false) ec.agent.isStopped = true;
+            if (ec?.agent?.enabled == true && ec.agent.isStopped == false) ec.agent.isStopped = true;
         }
 
         

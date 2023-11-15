@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,6 +40,9 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
 
     //攻撃を食らった回数
     int damage_Cnt = 0;
+
+    float expRadius;
+    float expTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,8 +78,10 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
 
         EnemyJson = eg.EnemyJson.Enemy4;
         agent.speed = EnemyJson.moveSpeed;
+        expRadius = EnemyJson.AttackRadius;
+        expTimer = EnemyJson.AttackDuration;
 
-        MAXHP = EnemyJson.hp;
+       MAXHP = EnemyJson.hp;
         HP = MAXHP;
         ATK = EnemyJson.atk;        
 
@@ -84,6 +90,8 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
 
         dropPrefab = eg.dropPrefab;
         explosion = eg.explosion;
+
+       
 
 
     }
@@ -155,9 +163,10 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
             }
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
             {
+                animator.speed = 1f / expTimer;
                 //Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
                 expEffect.SetActive(true);
-                if (disToTarget >= 2.5f && animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.25f) {
+                if (disToTarget >= 2.5f && animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.4f) {
                     ResetAfterAttack();
                     animator.Play("idle");
                 }
@@ -211,12 +220,12 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
     private void Attack()
     {
         if (explosion != null)
-        {
-            float maxDis = 3.3f;
+        {            
             var pos = transform.position;
             pos.y = 1f;
             var exp = Instantiate(explosion, pos, transform.rotation);
-            exp.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
+            float scale = 0.75f * expRadius;
+            exp.transform.localScale = new Vector3(scale, scale, scale);
             Destroy(gameObject);
             float playerToExp = Vector3.Distance(player.position, exp.transform.position);
             float gateToExp = Vector3.Distance(gate.position, exp.transform.position);
@@ -224,9 +233,10 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
             DamageMessage dm = new DamageMessage();
 
             dm.damager = gameObject;
-            dm.amount = ATK - (ATK * (playerToExp / maxDis));
+            dm.amount = ATK - (ATK * (playerToExp / expRadius));
 
-            Collider[] hitColliders = Physics.OverlapSphere(exp.transform.position, maxDis);
+            pos.y = 0;
+            Collider[] hitColliders = Physics.OverlapSphere(pos, expRadius);
             foreach (var hitCollider in hitColliders)
             {
                 var hitTarget = hitCollider.gameObject.GetComponent<IDamageable>();
@@ -238,6 +248,16 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
             attacked = true;
         }       
     }
+
+#if UNITY_EDITOR //Turretの攻撃範囲デバッグ
+    private void OnDrawGizmosSelected()
+    {
+        var pos = transform.position;
+        pos.y = 0;
+        Gizmos.color = new Color(1f, 0f, 0f, 0.15f);
+        Gizmos.DrawSphere(pos, expRadius);      
+     }
+#endif
 
     private void ResetAfterAttack()
     {

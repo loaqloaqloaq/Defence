@@ -65,7 +65,7 @@ public class Enemy4Navigator : MonoBehaviour
         else
         {
             animator.SetBool("walking", false);
-            if (ec.agent.isStopped == false)
+            if (ec?.agent?.enabled == true && ec.agent.isStopped == false)
                 ec.agent.isStopped = true;
         }
 

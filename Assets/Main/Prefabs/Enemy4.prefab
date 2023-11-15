@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7871138391266515229}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41,14 +41,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7871138391266515229}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 3
   simulationSpeed: 2.91
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -4871,7 +4871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
       propertyPath: m_LocalScale.x
@@ -5029,7 +5029,7 @@ CapsuleCollider:
   m_Radius: 0.11
   m_Height: 0.67
   m_Direction: 2
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6325275945063274626
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5050,7 +5050,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.28, y: 0.08, z: 0.29}
-  m_Center: {x: -0.24, y: 2.04, z: 0.03}
+  m_Center: {x: -0.24, y: 0.04, z: 0.03}
 --- !u!65 &6495937054142326368
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5071,7 +5071,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.28, y: 0.08, z: 0.29}
-  m_Center: {x: 0.22, y: 2.04, z: 0.03}
+  m_Center: {x: 0.22, y: 0.04, z: 0.03}
 --- !u!114 &2016421548553083522
 MonoBehaviour:
   m_ObjectHideFlags: 0
