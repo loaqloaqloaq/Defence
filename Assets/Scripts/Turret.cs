@@ -71,7 +71,7 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private Transform target;
 
-    float maxLifeTime = 1.2f;
+    float maxLifeTime = 0.04f;
 
     private bool IsTargetDead(Transform target)
     {
