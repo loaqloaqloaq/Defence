@@ -11,7 +11,7 @@ public class teleportController : MonoBehaviour
     public GameObject teleportButton2;//ステージ2に行くことができるボタン
     public GameObject teleportButton3;//ステージ3に行くことができるボタン
     private GameObject[] gate = new GameObject[2];
-    private Animator animator;
+    public Animator animator;
 
     public bool isPause { get; private set; }
 
@@ -23,7 +23,6 @@ public class teleportController : MonoBehaviour
         PlayerMovePoint[1] = GameObject.Find("teleportPoint2");
         PlayerMovePoint[2] = GameObject.Find("teleportPoint3");
         teleportUI.SetActive(false);
-        animator = GetComponent<Animator>();
         gate[0] = GameObject.Find("Gate1");
         gate[1] = GameObject.Find("Gate2");
         isPause = false;
@@ -32,9 +31,11 @@ public class teleportController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //yボタンまたはｃキーを押したら
         if(Input.GetButtonDown("Teleport")) {
             if (!isPause)
             {
+                //プレイヤーがワープする先を選ぶ
                 teleportUI.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(GameObject.Find("PlayerteleportUI/stage1"));
                 Pause();
