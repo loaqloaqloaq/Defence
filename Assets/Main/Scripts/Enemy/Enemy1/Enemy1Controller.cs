@@ -1,4 +1,4 @@
-using System;
+    using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -224,5 +224,9 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
             animator.SetTrigger("die");
             dead = true;
         }
+    }
+    public bool IsDead()
+    {
+        return dead;
     }
 }

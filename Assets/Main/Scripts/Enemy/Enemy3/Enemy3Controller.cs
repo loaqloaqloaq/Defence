@@ -66,8 +66,8 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
         MAXHP = EnemyJson.hp;
         HP = MAXHP;
         ATK = EnemyJson.atk;
-        fireFreq = EnemyJson.fireFreq;
-        fireStop = EnemyJson.fireStop;
+        fireFreq = EnemyJson.AttackDuration;
+        fireStop = EnemyJson.AttackStop;
 
         fireCnt = 0;
         fireStopCnt = 0;
@@ -112,7 +112,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
                 //Debug.Log(Time.time.ToString() + " : " + Physics.Linecast(transform.position, target.transform.position));
             }
             var disToTarget = Vector3.Distance(transform.position, target.position);           
-            if (!Physics.Linecast(transform.position, target.transform.position))
+            if (!Physics.Linecast(transform.position, target.transform.position) && disToTarget < 20f)
             {
                 attacking = true;
                 //face to target
@@ -222,5 +222,9 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
             child.GetComponent<Collider>().enabled = enable;
             setCollider(child.gameObject, enable);
         }        
+    }
+    public bool IsDead()
+    {
+        return dead;
     }
 }

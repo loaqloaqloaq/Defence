@@ -65,4 +65,9 @@ public class LivingEntity : MonoBehaviour, IDamageable
     {
         //仮処理
     }
+
+    public bool IsDead()
+    {
+        return dead;
+    }
 }

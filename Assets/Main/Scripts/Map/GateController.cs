@@ -49,9 +49,13 @@ public class GateController : MonoBehaviour,IDamageable
 
     // Update is called once per frame
     void Update()
-    {  
-      
+    {
 
+        if (HPfill.activeSelf){
+            var lookPos = GameObject.Find("Player").transform.position - transform.position;
+            lookPos.y = 0;
+            HPfill.transform.parent.rotation = Quaternion.LookRotation(lookPos) * Quaternion.Euler(0,180,0);           
+        }
         if ( Mathf.Abs(width-gaugeWidth) > 0.002f) {
             width += (gaugeWidth - width)*Time.deltaTime*4f;
             HPfill.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(width, 2);
@@ -102,5 +106,10 @@ public class GateController : MonoBehaviour,IDamageable
     public void Damage(int damage)
     {
         //throw new NotImplementedException();
+    }
+
+    public bool IsDead()
+    {
+        return false;
     }
 }

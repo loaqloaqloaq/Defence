@@ -85,4 +85,9 @@ public class enemyBase : MonoBehaviour, IDamageable
     {
        //‚È‚µ
     }
+
+    public bool IsDead()
+    {
+        return false;
+    }
 }

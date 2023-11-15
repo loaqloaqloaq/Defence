@@ -33,11 +33,14 @@ public class Enemy3Navigator : MonoBehaviour
             else
             {
                 animator.SetBool("walking", false);
-                ec.agent.isStopped = true;
+                if (ec.agent.isStopped == false)
+                    ec.agent.isStopped = true;                
             }
         }
         else {
             animator.SetBool("walking", false);
+            if (ec?.agent?.enabled == true && ec.agent.isStopped == false)
+                ec.agent.isStopped = true;            
         }
 
         

@@ -54,8 +54,8 @@ public class WeaponRecoil : MonoBehaviour
 
         //cameraShake.GenerateImpulse(Camera.main.transform.forward);
 
-        horizontalRecoil = recoilPattern[index].x;
-        verticalRecoil = recoilPattern[index].y;
+        horizontalRecoil = 0;// recoilPattern[index].x;
+        verticalRecoil = 0;// recoilPattern[index].y;
 
         index = NextIndex(index);
 

@@ -13,6 +13,7 @@ public class RaycastWeapon : MonoBehaviour
         public Vector3 initialVelocity;
         public TrailRenderer tracer;
         public int bounce;
+        public bool isNPC;
     }
 
     private enum SoundType
@@ -48,6 +49,7 @@ public class RaycastWeapon : MonoBehaviour
     [SerializeField] protected float bulletSpeed = 1000.0f;
     [SerializeField] protected float bulletDrop = 0.0f;
     [SerializeField] protected int maxBounces = 0;
+    [SerializeField] protected float rbForce = 4.0f;
 
     List<Bullet> bullets = new List<Bullet>();
 
@@ -86,7 +88,7 @@ public class RaycastWeapon : MonoBehaviour
         return bullet.initialPosition + bullet.initialVelocity * bullet.time + 0.5f * gravity * bullet.time * bullet.time;
     }
 
-    public virtual Bullet CreateBullet(Vector3 position, Vector3 velocity)
+    public virtual Bullet CreateBullet(Vector3 position, Vector3 velocity, bool isNPC=false)
     {
         Bullet bullet = new Bullet();
         bullet.isSimulating = true;
@@ -96,6 +98,7 @@ public class RaycastWeapon : MonoBehaviour
         bullet.tracer = Instantiate(tracerEffect, position, Quaternion.identity);
         bullet.tracer.AddPosition(position);
         bullet.bounce = maxBounces;
+        bullet.isNPC = isNPC;
         return bullet;
     }
 
@@ -195,9 +198,9 @@ public class RaycastWeapon : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, distance))
         {
-            var target = hitInfo.collider.transform.root.GetComponent<IDamageable>();
+            var target = hitInfo.collider.transform.GetComponent<IDamageable>();
 
-            if (target != null)
+            if (target != null && ( (bullet.isNPC && !hitInfo.transform.CompareTag("Enemy")) || (!bullet.isNPC && !hitInfo.transform.CompareTag("Gate")) ) )
             {
                 DamageMessage damageMessage;
                 damageMessage.damager = weaponHolder;
@@ -234,8 +237,8 @@ public class RaycastWeapon : MonoBehaviour
             }
 
             // Collision Impulse
-            var rb2d = hitInfo.collider.GetComponent<Rigidbody>();
-            if (rb2d) { rb2d.AddForceAtPosition(ray.direction * 4, hitInfo.point, ForceMode.Impulse); }
+            var rb = hitInfo.collider.GetComponent<Rigidbody>();
+            if (rb) { rb.AddForceAtPosition(ray.direction * rbForce, hitInfo.point, ForceMode.Impulse); }
             /*
             var enemyLivingEntity = hitInfo.collider.GetComponent<LivingEntity>();
             if (enemyLivingEntity)
@@ -311,7 +314,7 @@ public class RaycastWeapon : MonoBehaviour
                 return;
             }
         }
-        var newBullet = CreateBullet(raycastOrigin.position, velocity);
+        var newBullet = CreateBullet(raycastOrigin.position, velocity, true);
         bullets.Add(newBullet);
     }
 
