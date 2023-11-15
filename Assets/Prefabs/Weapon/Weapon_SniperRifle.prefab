@@ -9984,6 +9984,7 @@ MonoBehaviour:
   bulletSpeed: 1500
   bulletDrop: 0
   maxBounces: 0
+  rbForce: 13
   timeBetFire: 1.7
 --- !u!114 &-7999184717167703922
 MonoBehaviour:

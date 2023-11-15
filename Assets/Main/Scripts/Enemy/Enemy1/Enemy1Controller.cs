@@ -1,4 +1,4 @@
-using System;
+    using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -18,7 +18,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
     public bool attacking,attacked;
 
     private float destoryTimer, destoryTime;
-    private bool dead;
+    public bool dead { get; private set; }
 
     public Transform target;
     public Transform gate,gate1,gate2,gate3, player;

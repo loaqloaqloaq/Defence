@@ -181,7 +181,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb7bf33b5a5fb8748b37d6e4dfdb06cb, type: 2}
+  - {fileID: 2100000, guid: ce179c43516f28e40857b242bd7075a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -215,8 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f601180fa392dd94987c507b33386f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponFab: {fileID: 6360325984832206524, guid: e93155c3073bf7f44b38babf2ca110cf,
-    type: 3}
+  weaponFab: {fileID: 6360325984832206524, guid: e93155c3073bf7f44b38babf2ca110cf, type: 3}
 --- !u!114 &9078459192927092490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,9 +237,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9078459192927092493}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9078459193268162862
