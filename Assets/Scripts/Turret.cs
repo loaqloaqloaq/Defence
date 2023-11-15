@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
+
 public class Turret : MonoBehaviour
 {
     enum State
@@ -72,10 +75,13 @@ public class Turret : MonoBehaviour
 
     private bool IsTargetDead(Transform target)
     {
-        if (target.GetComponent<IDamageable>().IsDead())
+        var ITarget = target.GetComponent<IDamageable>();
+
+        if (ITarget != null)
         {
-            return true;
+            return ITarget.IsDead();
         }
+
         return false;
     }
 
@@ -154,7 +160,7 @@ public class Turret : MonoBehaviour
 
         if (reloadDuration < 0)
         {
-            magAmmo = magCapacity;
+            RefillAmmo();
             state = target != null ? State.Attack : State.StanBy;
         }
     }
@@ -165,6 +171,7 @@ public class Turret : MonoBehaviour
 
         //OverlapSphereを通して仮想の球体と重なるすべてのcolliderを読み込む
         var colliders = Physics.OverlapSphere(raycastOrigin.position, attackRadius, whatIsTarget);
+       
         foreach (var collider in colliders)
         {
             //オブジェクトが視野範囲内にない
@@ -193,7 +200,7 @@ public class Turret : MonoBehaviour
         RaycastHit hit;
 
         var direction = target.position - raycastOrigin.position;
-        direction.y = raycastOrigin.forward.y;
+        //direction.y = raycastOrigin.forward.y;
 
         //対象が視野から抜けてる
         if (Vector3.Angle(direction, raycastOrigin.forward) > fieldOfView * 0.5f)
@@ -207,12 +214,13 @@ public class Turret : MonoBehaviour
             if (hit.transform == target)
                 return true;
         }
+
         return false;
     }
 
     private void Rotate()
     {
-        Vector3 lookDirection = target.position + Vector3.up - firePivot.position;
+        Vector3 lookDirection = target.position - firePivot.position;
         lookDirection.Normalize();
 
         firePivot.rotation = Quaternion.Slerp(firePivot.rotation, Quaternion.LookRotation(lookDirection), turnSmoothVelocity * Time.deltaTime);
@@ -223,7 +231,7 @@ public class Turret : MonoBehaviour
         if (!target) { return false; }
 
         var direction = target.position - raycastOrigin.position;
-        direction.y = raycastOrigin.forward.y;
+        //direction.y = raycastOrigin.forward.y;
 
         float angle = shootingAngle;
 
@@ -372,7 +380,7 @@ public class Turret : MonoBehaviour
             state = State.Reloading;
             return;
         }
-        //--magAmmo;
+        --magAmmo;
         PlaySound("Shot");                    //sound
 
         foreach (var particle in muzzleFlash) //effect
@@ -382,7 +390,7 @@ public class Turret : MonoBehaviour
 
         //temp
         Vector3 upVector = Vector3.up;
-        var velocity = (raycastDestination.position + upVector - raycastOrigin.position).normalized * bulletSpeed;
+        var velocity = (raycastDestination.position - raycastOrigin.position).normalized * bulletSpeed;
 
         foreach (var bullet in bullets)
         {

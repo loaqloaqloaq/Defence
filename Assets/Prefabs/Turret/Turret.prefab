@@ -61,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 2043963435131861763}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5534485982435166310}
@@ -150,7 +150,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.05
+      scalar: 0.15
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -203,7 +203,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.1
+      scalar: -0.05
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -257,7 +257,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.9245283, g: 0.82487243, b: 0.3009078, a: 1}
+      maxColor: {r: 0.6603774, g: 0.58244395, b: 0.18378428, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -899,7 +899,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
@@ -24242,7 +24242,7 @@ Transform:
   m_GameObject: {fileID: 5022763041425282339}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5534485982435166310}
@@ -24331,7 +24331,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.05
+      scalar: 0.15
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -24384,7 +24384,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.02
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -24438,7 +24438,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+      maxColor: {r: 0.8396226, g: 0.69731647, b: 0.11485406, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -25080,7 +25080,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
@@ -29259,7 +29259,7 @@ Transform:
   m_Children:
   - {fileID: 6831222592207053471}
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5627915710466077965
 MonoBehaviour:
@@ -29274,12 +29274,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  isInifinty: 1
-  fireRate: 12
-  ammoRemain: 2000
-  magAmmo: 100
-  magCapacity: 100
-  damage: 15
+  isInifinty: 0
+  fireRate: 7
+  ammoRemain: 1000
+  magAmmo: 40
+  magCapacity: 40
+  damage: 20
   shootingAngle: 30
   raycastOrigin: {fileID: 781156039725122233}
   tracerEffect: {fileID: 6919128151455992844, guid: 0c16051605a91df4c92d82f1962d9d21, type: 3}
@@ -29288,14 +29288,14 @@ MonoBehaviour:
   - {fileID: 9115815505213777178}
   - {fileID: 9115815505213777178}
   hitEffect: {fileID: 1247462234392539282}
-  bulletSpeed: 200
+  bulletSpeed: 250
   bulletDrop: 0
   maxBounces: 0
-  reloadTime: 3
+  reloadTime: 3.5
   turnSmoothVelocity: 3
-  firePivot: {fileID: 517744139243331415}
+  firePivot: {fileID: 4748293671714642504}
   attackRadius: 45
-  fieldOfView: 330
+  fieldOfView: 360
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 64
