@@ -89,4 +89,9 @@ public class GateController : MonoBehaviour,IDamageable
     {
         //throw new NotImplementedException();
     }
+
+    public bool IsDead()
+    {
+        return false;
+    }
 }

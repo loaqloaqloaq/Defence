@@ -4,4 +4,6 @@ public interface IDamageable
 
     //ƒ_ƒ[ƒWˆ—
     public void Damage(int damage);
+
+    public bool IsDead();
 }

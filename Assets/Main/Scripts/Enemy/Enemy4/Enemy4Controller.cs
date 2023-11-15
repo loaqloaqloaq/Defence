@@ -271,4 +271,8 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
             dead = true;
         }
     }
+    public bool IsDead()
+    {
+        return dead;
+    }
 }

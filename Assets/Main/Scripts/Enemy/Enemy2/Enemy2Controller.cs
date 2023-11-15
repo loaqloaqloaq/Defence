@@ -18,7 +18,7 @@ public class Enemy2Controller : MonoBehaviour, IDamageable
     public bool attacking,attacked;
 
     private float destoryTimer, destoryTime;
-    public bool dead { get; private set; }
+    private bool dead;
 
     public Transform target;
     public Transform player;
@@ -202,5 +202,10 @@ public class Enemy2Controller : MonoBehaviour, IDamageable
             child.GetComponent<Collider>().enabled = enable;
             setCollider(child.gameObject, enable);
         }        
+    }
+
+    public bool IsDead()
+    {
+        return dead;
     }
 }

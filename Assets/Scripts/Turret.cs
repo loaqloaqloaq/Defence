@@ -72,16 +72,10 @@ public class Turret : MonoBehaviour
 
     private bool IsTargetDead(Transform target)
     {
-        if (target.GetComponent<LivingEntity>().dead)
+        if (target.GetComponent<IDamageable>().IsDead())
         {
             return true;
         }
-        /*
-        if (target.GetComponent<Enemy1Controller>().dead  || target.GetComponent<Enemy2Controller>().dead)
-        {
-            return true;
-        }
-        */
         return false;
     }
 

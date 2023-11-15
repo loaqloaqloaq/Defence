@@ -18,7 +18,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
     public bool attacking,attacked;
 
     private float destoryTimer, destoryTime;
-    public bool dead { get; private set; }
+    private bool dead;
 
     public Transform target;
     public Transform gate,gate1,gate2,gate3, player;
@@ -224,5 +224,9 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
             animator.SetTrigger("die");
             dead = true;
         }
+    }
+    public bool IsDead()
+    {
+        return dead;
     }
 }

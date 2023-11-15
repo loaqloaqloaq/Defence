@@ -223,4 +223,8 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
             setCollider(child.gameObject, enable);
         }        
     }
+    public bool IsDead()
+    {
+        return dead;
+    }
 }
