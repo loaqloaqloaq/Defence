@@ -228,19 +228,22 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
             exp.transform.localScale = new Vector3(scale, scale, scale);
             Destroy(gameObject);
             float playerToExp = Vector3.Distance(player.position, exp.transform.position);
-            float gateToExp = Vector3.Distance(gate.position, exp.transform.position);
+            
 
             DamageMessage dm = new DamageMessage();
 
             dm.damager = gameObject;
-            dm.amount = ATK - (ATK * (playerToExp / expRadius));
+            
 
             pos.y = 0;
             Collider[] hitColliders = Physics.OverlapSphere(pos, expRadius);
             foreach (var hitCollider in hitColliders)
             {
                 var hitTarget = hitCollider.gameObject.GetComponent<IDamageable>();
-                if (hitTarget != null) {
+                float targetToExp = Vector3.Distance(hitCollider.transform.position, exp.transform.position);
+                dm.amount = ATK * (1 - targetToExp / expRadius);
+
+                if (hitTarget != null && dm.amount > 0) {
                     hitTarget.ApplyDamage(dm);
                 }
             }

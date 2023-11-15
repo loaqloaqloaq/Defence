@@ -53,7 +53,7 @@ MonoBehaviour:
   attackRadius: 6.2
   whatIsTarget:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 64
   rbForceTarget:
     serializedVersion: 2
     m_Bits: 576
