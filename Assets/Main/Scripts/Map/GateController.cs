@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.XR;
 
 
-public class GateController : MonoBehaviour
+public class GateController : MonoBehaviour,IDamageable
 {
     [HideInInspector]
     public float HP;
@@ -90,5 +90,10 @@ public class GateController : MonoBehaviour
         {
             EnemyBase_Manager.gameObject.GetComponent<EnemyBase_Manager>().stage[gateNumber - 1] = 1;
         }
+    }
+
+    public void Damage(int damage)
+    {
+        //throw new NotImplementedException();
     }
 }

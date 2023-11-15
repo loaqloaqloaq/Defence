@@ -27,5 +27,23 @@
       "ammo": 5,
       "health": 5
     }
+  },
+  "Enemy4": {
+    "hp": 100,
+    "moveSpeed": 5,
+    "atk": 400,   
+    "drop": {
+      "ammo": 5,
+      "health": 5
+    }
+  },
+  "Enemy5": {
+    "hp": 100,
+    "moveSpeed": 5,
+    "atk": 0,   
+    "drop": {
+      "ammo": 5,
+      "health": 5
+    }
   }
 }
