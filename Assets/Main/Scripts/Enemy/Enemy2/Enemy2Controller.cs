@@ -18,7 +18,7 @@ public class Enemy2Controller : MonoBehaviour, IDamageable
     public bool attacking,attacked;
 
     private float destoryTimer, destoryTime;
-    private bool dead;
+    public bool dead { get; private set; }
 
     public Transform target;
     public Transform player;
