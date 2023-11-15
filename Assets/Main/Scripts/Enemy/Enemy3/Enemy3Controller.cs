@@ -112,7 +112,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
                 //Debug.Log(Time.time.ToString() + " : " + Physics.Linecast(transform.position, target.transform.position));
             }
             var disToTarget = Vector3.Distance(transform.position, target.position);           
-            if (!Physics.Linecast(transform.position, target.transform.position))
+            if (!Physics.Linecast(transform.position, target.transform.position) && disToTarget < 6f)
             {
                 attacking = true;
                 //face to target

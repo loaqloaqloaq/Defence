@@ -35,6 +35,18 @@ public class EnemyGenerator : MonoBehaviour
 
         genFreq = enemyJson.genFreq;
 
+        GameObject pool= GameObject.Find("Enemy Pool");
+        if (pool == null) {
+            pool = new GameObject("Enemy Pool");
+        }
+        for (int i = 1; i <= 5; i++) {
+            if (GameObject.Find("Enemy Pool/Enemy" + i.ToString()) == null)
+            {
+                var tmp = new GameObject("Enemy" + i.ToString());
+                tmp.transform.parent = pool.transform;
+            }
+        }  
+
         RandomNewPattern();
     }
 
@@ -50,13 +62,15 @@ public class EnemyGenerator : MonoBehaviour
         pos = new Vector3(pos.x + randX, pos.y, pos.z + randZ);
         if (lastGen >= genFreq) {
             int type = currentLine[currentIndex]-1;
-            Debug.Log(type);
+            //Debug.Log(type);
             if (type >= 0 && type < enemy.Length)
                 try
                 {
-                    Instantiate(enemy[type], pos, transform.rotation);
+                    var e = Instantiate(enemy[type], pos, transform.rotation);
+                    e.transform.parent = GameObject.Find("Enemy Pool/Enemy"+ currentLine[currentIndex].ToString()).transform;
                 }
-                catch (System.NullReferenceException e) {
+                catch (System.Exception e) {
+                    Debug.Log(e.ToString());
                     Debug.LogError("line " + currentLineIndex.ToString() + ", " + currentIndex.ToString() + ": enemy type " + type.ToString() + " not found");
                 }
             else Debug.LogError("line "+currentLineIndex.ToString()+", "+currentIndex.ToString()+": enemy type "+ type.ToString()+" not found");

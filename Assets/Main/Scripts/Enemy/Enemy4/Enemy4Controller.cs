@@ -35,6 +35,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
     Collider[] colliders;
 
     //ParticleSystem ps;
+    GameObject expEffect;
 
     //çUåÇÇêHÇÁÇ¡ÇΩâÒêî
     int damage_Cnt = 0;
@@ -51,6 +52,9 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
         gate3 = GameObject.Find("Gate3").transform;
         gate = gate1 != null ? gate1 : gate2 != null ? gate2 : gate3;
         player = GameObject.Find("Player").transform;
+
+        expEffect = transform.GetChild(1).gameObject;
+        expEffect.SetActive(false);
 
         colliders = transform.GetComponents<Collider>();
 
@@ -151,12 +155,13 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
             }
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
             {
-                Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+                //Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+                expEffect.SetActive(true);
                 if (disToTarget >= 2.5f && animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.25f) {
                     ResetAfterAttack();
                     animator.Play("idle");
                 }
-                else if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+                else if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
                 {
                     Attack();
                 }
@@ -174,6 +179,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
         if (HP <= 0 && !dead)
         {
             dead = true;
+            ResetAfterAttack();
             Dead();
         }
         return true;
@@ -219,10 +225,16 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
 
             dm.damager = gameObject;
             dm.amount = ATK - (ATK * (playerToExp / maxDis));
-            if (player.GetComponent<IDamageable>() != null && dm.amount > 0) target.GetComponent<IDamageable>().ApplyDamage(dm);
 
-            dm.amount = ATK - (ATK * (gateToExp / maxDis));
-            if (player.GetComponent<IDamageable>() != null && dm.amount > 0) target.GetComponent<IDamageable>().ApplyDamage(dm);
+            Collider[] hitColliders = Physics.OverlapSphere(exp.transform.position, maxDis);
+            foreach (var hitCollider in hitColliders)
+            {
+                var hitTarget = hitCollider.gameObject.GetComponent<IDamageable>();
+                if (hitTarget != null) {
+                    hitTarget.ApplyDamage(dm);
+                }
+            }
+
             attacked = true;
         }       
     }
@@ -231,6 +243,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
     {
         attacking = false;
         attacked = false;
+        expEffect.SetActive(false);
         //GetComponent<ParticleSystem>().Stop();
     }
 

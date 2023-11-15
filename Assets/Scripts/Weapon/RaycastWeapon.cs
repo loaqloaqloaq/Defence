@@ -13,6 +13,7 @@ public class RaycastWeapon : MonoBehaviour
         public Vector3 initialVelocity;
         public TrailRenderer tracer;
         public int bounce;
+        public bool isNPC;
     }
 
     private enum SoundType
@@ -87,7 +88,7 @@ public class RaycastWeapon : MonoBehaviour
         return bullet.initialPosition + bullet.initialVelocity * bullet.time + 0.5f * gravity * bullet.time * bullet.time;
     }
 
-    public virtual Bullet CreateBullet(Vector3 position, Vector3 velocity)
+    public virtual Bullet CreateBullet(Vector3 position, Vector3 velocity, bool isNPC=false)
     {
         Bullet bullet = new Bullet();
         bullet.isSimulating = true;
@@ -97,6 +98,7 @@ public class RaycastWeapon : MonoBehaviour
         bullet.tracer = Instantiate(tracerEffect, position, Quaternion.identity);
         bullet.tracer.AddPosition(position);
         bullet.bounce = maxBounces;
+        bullet.isNPC = isNPC;
         return bullet;
     }
 
@@ -198,7 +200,7 @@ public class RaycastWeapon : MonoBehaviour
         {
             var target = hitInfo.collider.transform.GetComponent<IDamageable>();
 
-            if (target != null)
+            if (target != null && ( (bullet.isNPC && !hitInfo.transform.CompareTag("Enemy")) || (!bullet.isNPC && !hitInfo.transform.CompareTag("Gate")) ) )
             {
                 DamageMessage damageMessage;
                 damageMessage.damager = weaponHolder;
@@ -312,7 +314,7 @@ public class RaycastWeapon : MonoBehaviour
                 return;
             }
         }
-        var newBullet = CreateBullet(raycastOrigin.position, velocity);
+        var newBullet = CreateBullet(raycastOrigin.position, velocity, true);
         bullets.Add(newBullet);
     }
 
