@@ -83,7 +83,8 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
         rcw = transform.Find("Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/Weapon_Rifle 0").GetComponent<RaycastWeapon>();
         rcw.damage = ATK;
 
-        
+        transform.GetComponent<Collider>().enabled = true;
+
 
     }
 
@@ -91,7 +92,8 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
     void Update()
     {
         if (HP <= 0)
-        {   transform.GetComponent<Collider>().enabled = false;
+        {   
+            transform.GetComponent<Collider>().enabled = false;
             agent.enabled = false;
             destoryTimer += Time.deltaTime;
             if (destoryTimer >= destoryTime)
@@ -217,13 +219,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
             dead = true;
         }
     }
-
-    private void setCollider(GameObject gb,bool enable) {
-        foreach (Transform child in transform) {
-            child.GetComponent<Collider>().enabled = enable;
-            setCollider(child.gameObject, enable);
-        }        
-    }
+   
     public bool IsDead()
     {
         return dead;

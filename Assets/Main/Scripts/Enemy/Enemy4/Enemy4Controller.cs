@@ -43,54 +43,65 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
 
     float expRadius;
     float expTimer;
+
+    bool loaded = false;
     // Start is called before the first frame update
     void Start()
     {
+        if (!loaded)
+        {   
+            gate1 = GameObject.Find("Gate1").transform;
+            gate2 = GameObject.Find("Gate2").transform;
+            gate3 = GameObject.Find("Gate3").transform;            
+            player = GameObject.Find("Player").transform;
+
+            expEffect = transform.GetChild(1).gameObject;
+
+            colliders = transform.GetComponents<Collider>();
+
+            animator = GetComponent<Animator>();
+            agent = GetComponent<NavMeshAgent>();
+
+            EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+
+            EnemyJson = eg.EnemyJson.Enemy4;
+            agent.speed = EnemyJson.moveSpeed;
+            expRadius = EnemyJson.AttackRadius;
+            expTimer = EnemyJson.AttackDuration;
+
+            MAXHP = EnemyJson.hp;
+            ATK = EnemyJson.atk;
+
+            drop.Add("ammo", EnemyJson.drop.ammo);
+            drop.Add("health", EnemyJson.drop.health);
+
+            dropPrefab = eg.dropPrefab;
+            explosion = eg.explosion;
+
+            loaded = true;
+        }
 
         destoryTime = 3.0f;
         destoryTimer = 0;
         dead = false;
 
-        gate1 = GameObject.Find("Gate1").transform;
-        gate2 = GameObject.Find("Gate2").transform;
-        gate3 = GameObject.Find("Gate3").transform;
+        foreach (Collider c in colliders)
+        {
+            c.enabled = true;
+        }
+
         gate = gate1 != null ? gate1 : gate2 != null ? gate2 : gate3;
-        player = GameObject.Find("Player").transform;
-
-        expEffect = transform.GetChild(1).gameObject;
-        expEffect.SetActive(false);
-
-        colliders = transform.GetComponents<Collider>();
-
         target = gate;
 
         lastCheck = 0;
         checkFeq = 0.5f;
-
+        expEffect.SetActive(false);
+        agent.enabled = true;
         attacking = false;
 
-        animator = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
-        agent.enabled = true;        
-
-        EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
-
-        EnemyJson = eg.EnemyJson.Enemy4;
-        agent.speed = EnemyJson.moveSpeed;
-        expRadius = EnemyJson.AttackRadius;
-        expTimer = EnemyJson.AttackDuration;
-
-       MAXHP = EnemyJson.hp;
         HP = MAXHP;
-        ATK = EnemyJson.atk;        
 
-        drop.Add("ammo", EnemyJson.drop.ammo);
-        drop.Add("health", EnemyJson.drop.health);
 
-        dropPrefab = eg.dropPrefab;
-        explosion = eg.explosion;
-
-       
 
 
     }
