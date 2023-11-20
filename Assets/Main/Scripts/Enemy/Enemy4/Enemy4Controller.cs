@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class Enemy4Controller : MonoBehaviour, IDamageable
+public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
 {
     [HideInInspector]
     public float HP, MAXHP, ATK;
@@ -71,8 +71,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
 
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        //ps = GetComponent<ParticleSystem>();
-        //if (ps.isPlaying) ps.Stop();
+        agent.enabled = true;        
 
         EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
 
@@ -293,5 +292,9 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
     public bool IsDead()
     {
         return dead;
+    }
+    public void resetEnemy()
+    {
+        Start();
     }
 }
