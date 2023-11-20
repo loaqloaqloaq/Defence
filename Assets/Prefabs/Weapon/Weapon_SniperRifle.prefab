@@ -9983,8 +9983,10 @@ MonoBehaviour:
   hitEffect: {fileID: 3817866813065893935}
   bulletSpeed: 1500
   bulletDrop: 0
+  fireDistance: 1000
   maxBounces: 0
   rbForce: 13
+  maxLifeTime: 1
   timeBetFire: 1.7
 --- !u!114 &-7999184717167703922
 MonoBehaviour:

@@ -88,8 +88,8 @@ public class Enemy2Controller : MonoBehaviour, IDamageable
                     pos.y += 0.5f;
                     var exp=Instantiate(explosion, pos, transform.rotation);
                     exp.transform.localScale=new Vector3(0.7f, 0.7f, 0.7f);
-                }                
-                Destroy(gameObject);
+                }
+                transform.parent.GetComponent<EnemyController>().dead();
             }
         }
         else {  

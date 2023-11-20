@@ -115,7 +115,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
                     var exp = Instantiate(explosion, pos, transform.rotation);
                     exp.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
                 }
-                Destroy(gameObject);
+                transform.parent.GetComponent<EnemyController>().dead();
             }
         }
         else
@@ -226,14 +226,10 @@ public class Enemy4Controller : MonoBehaviour, IDamageable
             var exp = Instantiate(explosion, pos, transform.rotation);
             float scale = 0.75f * expRadius;
             exp.transform.localScale = new Vector3(scale, scale, scale);
-            Destroy(gameObject);
-            float playerToExp = Vector3.Distance(player.position, exp.transform.position);
-            
+            transform.parent.GetComponent<EnemyController>().dead(); 
 
             DamageMessage dm = new DamageMessage();
-
             dm.damager = gameObject;
-            
 
             pos.y = 0;
             Collider[] hitColliders = Physics.OverlapSphere(pos, expRadius);
