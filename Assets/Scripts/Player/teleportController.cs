@@ -11,7 +11,6 @@ public class teleportController : MonoBehaviour
     public GameObject teleportButton2;//ステージ2に行くことができるボタン
     public GameObject teleportButton3;//ステージ3に行くことができるボタン
     private GameObject[] gate = new GameObject[2];
-    public Animator animator;
 
     public bool isPause { get; private set; }
 
@@ -38,12 +37,14 @@ public class teleportController : MonoBehaviour
                 //プレイヤーがワープする先を選ぶ
                 teleportUI.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(GameObject.Find("PlayerteleportUI/stage1"));
-                Pause();
+                Time.timeScale = 0;
+                isPause = true;
             }
             else
             {
                 teleportUI.SetActive(false);
-                Resume();
+                isPause = false;
+                Time.timeScale = 1;
             }
         }
         OnTeleportPoint();
@@ -54,35 +55,6 @@ public class teleportController : MonoBehaviour
         Cursor.visible = isVisible;
         Cursor.lockState = isVisible ? CursorLockMode.None : CursorLockMode.Locked;
     }
-    //一時停止&再開
-    public void Pause()
-    {
-        isPause = true;
-        animator.Play("pause_Anim");
-        StartCoroutine(SetPanel(true));
-        Time.timeScale = 0;
-    }
-    public void Resume()
-    {
-        isPause = false;
-        animator.Play("resume_Anim");
-        StartCoroutine(SetPanel(false));
-        Time.timeScale = 1.0f;
-    }
-
-    //Pause UI表示
-    IEnumerator SetPanel(bool isActive)
-    {
-        //効果音
-        SoundManager.Instance.Play("Sounds/UI_Sfx/Click_Electronic_Pause", SoundManager.Sound.UI);
-
-        while (animator.GetCurrentAnimatorStateInfo(2).normalizedTime < 1.0f)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        SetMouseVisible(isActive);
-    }
-
 
     //ゲートが壊れていた場合
     void OnTeleportPoint()
@@ -111,7 +83,6 @@ public class teleportController : MonoBehaviour
         Player.GetComponent<CharacterController>().enabled = false;
         Player.transform.position = PlayerMovePoint[0].transform.position;
         Player.GetComponent<CharacterController>().enabled = true;
-        animator.Play("resume_Anim");
         Time.timeScale = 1;
     }
 
@@ -121,7 +92,6 @@ public class teleportController : MonoBehaviour
         Player.GetComponent<CharacterController>().enabled = false;
         Player.transform.position = PlayerMovePoint[1].transform.position;
         Player.GetComponent<CharacterController>().enabled = true;
-        animator.Play("resume_Anim");
         Time.timeScale = 1;
     }
 
@@ -131,7 +101,6 @@ public class teleportController : MonoBehaviour
         Player.GetComponent<CharacterController>().enabled = false;
         Player.transform.position = PlayerMovePoint[2].transform.position;
         Player.GetComponent<CharacterController>().enabled = true;
-        animator.Play("resume_Anim");
         Time.timeScale = 1;
     }
 }
