@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class Enemy3Controller : MonoBehaviour, IDamageable
+public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
 {
     [HideInInspector]
     public float HP, MAXHP, ATK;
@@ -57,6 +57,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
 
         animator = GetComponent<Animator>();       
         agent = GetComponent<NavMeshAgent>();
+        agent.enabled = true;
 
         EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
 
@@ -82,7 +83,8 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
         rcw = transform.Find("Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/Weapon_Rifle 0").GetComponent<RaycastWeapon>();
         rcw.damage = ATK;
 
-        
+        transform.GetComponent<Collider>().enabled = true;
+
 
     }
 
@@ -90,7 +92,8 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
     void Update()
     {
         if (HP <= 0)
-        {   transform.GetComponent<Collider>().enabled = false;
+        {   
+            transform.GetComponent<Collider>().enabled = false;
             agent.enabled = false;
             destoryTimer += Time.deltaTime;
             if (destoryTimer >= destoryTime)
@@ -216,15 +219,13 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
             dead = true;
         }
     }
-
-    private void setCollider(GameObject gb,bool enable) {
-        foreach (Transform child in transform) {
-            child.GetComponent<Collider>().enabled = enable;
-            setCollider(child.gameObject, enable);
-        }        
-    }
+   
     public bool IsDead()
     {
         return dead;
+    }
+    public void resetEnemy()
+    {
+        Start();
     }
 }

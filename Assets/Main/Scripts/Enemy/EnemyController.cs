@@ -3,27 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
-{
-    public int type;
-    private List<Transform> enemys = new List<Transform>();
-    // Start is called before the first frame update
-    void Start()
-    {
-        foreach (Transform child in transform)
-        {
-            enemys.Add(child);
-            child.gameObject.SetActive(false);
-        }        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+{      
 
     public void setType(int type) {
-        enemys[type-1].gameObject.SetActive(true);
+        int index = 0;
+        type--;
+        foreach (Transform child in transform)
+        {           
+            child.gameObject.SetActive(index == type);
+            if (index == type) resetEnemy(child);
+            index++;
+        }
+       
+    }
+
+    private void resetEnemy(Transform t) {
+        t.position = transform.position;
+        EnemyInterface controller = t.GetComponent<EnemyInterface>();
+        controller.resetEnemy();
     }
 
     public void dead() {
@@ -34,3 +31,9 @@ public class EnemyController : MonoBehaviour
         gameObject.SetActive(false);
     }
 }
+
+public interface EnemyInterface {
+    public void resetEnemy();
+}
+
+

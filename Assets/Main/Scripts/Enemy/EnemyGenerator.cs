@@ -82,10 +82,13 @@ public class EnemyGenerator : MonoBehaviour
                 }
             }
             if (!generated && pool.transform.childCount < maxEnemy) {
-                GameObject e = Instantiate(enemy, pos, transform.rotation);
-                e.GetComponent<EnemyController>().setType(type);
+                GameObject e = Instantiate(enemy, pos, transform.rotation);                
                 e.transform.SetParent(pool.transform, true);
-            }            
+                e.GetComponent<EnemyController>().setType(type);
+            }
+
+            currentIndex++;
+            if (currentIndex >= currentLine.Length) RandomNewPattern();
         }
     }
 
