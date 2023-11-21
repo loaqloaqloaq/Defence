@@ -28678,7 +28678,7 @@ GameObject:
   - component: {fileID: 1445416072}
   - component: {fileID: 1445416071}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: teleportUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40324,7 +40324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3402707110615175917, guid: debc79cb3d6f29f4f81bb68ae586efa8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3402707110615175923, guid: debc79cb3d6f29f4f81bb68ae586efa8, type: 3}
       propertyPath: m_RootOrder
