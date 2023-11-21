@@ -3,11 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
-{      
+{
+    int type;  
+
+    float offset = 50;
+    private void Start()
+    {        
+        type = 0;        
+    }
+    
+    void OnBecameInvisible()
+    {
+        Debug.Log("out of cam");
+        setRenders(false);
+    }
+
+    // Enable this script when the GameObject moves into the camera's view
+    void OnBecameVisible()
+    {
+        Debug.Log("view by cam");
+        setRenders(true);
+    }
+
+    public void setRenders(bool isOffScreen) {
+        var e = transform.GetChild(type);
+        if (e.GetComponent<Renderer>()) e.GetComponent<Renderer>().forceRenderingOff = !isOffScreen;
+        foreach (Renderer r in e.GetComponentsInChildren<Renderer>())
+        {
+            r.forceRenderingOff = !isOffScreen;
+        }
+    }
 
     public void setType(int type) {
         int index = 0;
         type--;
+        this.type = type;
         foreach (Transform child in transform)
         {           
             child.gameObject.SetActive(index == type);

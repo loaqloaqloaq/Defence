@@ -39,7 +39,7 @@ public class EnemyGenerator : MonoBehaviour
         patterns = enemyJson.pattern;
 
         genFreq = enemyJson.genFreq;
-        maxEnemy = 100;
+        maxEnemy = enemyJson.maxEnemy;
 
         pool = GameObject.Find("Enemy Pool");
         if (pool == null) pool = new GameObject("Enemy Pool");
