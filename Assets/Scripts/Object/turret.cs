@@ -31,7 +31,7 @@ public class turret : MonoBehaviour
     [SerializeField]
     private float enemyDistance;
     //’ÇÕ”ÍˆÍ
-    [SerializeField] private float trackingDistance;
+    [SerializeField] private float trackingRange;
     //UŒ‚”ÍˆÍ
     [SerializeField] private float atkRange;
     //“G‚ÉÅ‚à‹ß‚¢‹——£
@@ -48,7 +48,7 @@ public class turret : MonoBehaviour
         //Å‰‚Í‰½‚à‚µ‚È‚¢
         state = State.Idle;
         //‰Šú’l‚ðÝ’è
-        trackingDistance = 20.0f;
+        trackingRange = 20.0f;
         atkRange = 15.0f;
         nearEnemyDistance = 2.0f;
         enemyDamage = 1;
@@ -108,7 +108,7 @@ public class turret : MonoBehaviour
             state = State.Tracking;
         }
         //“G‚Æ‚Ì‹——£‚ª’ÇÕ”ÍˆÍŠO (20ˆÈã)
-        if (enemyDistance >= trackingDistance)
+        if (enemyDistance >= trackingRange)
         {
             //‰½‚à‚µ‚È‚¢
             state = State.Idle;
