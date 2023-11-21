@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3450743282065595222}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.9662538, y: -4.3482885, z: -14.41509}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -59,10 +59,6 @@ PrefabInstance:
     - target: {fileID: 2595014424384496030, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
       propertyPath: m_Name
       value: Enemy4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2595014424384496030, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2595014424384535998, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
       propertyPath: m_RootOrder
@@ -132,7 +128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 553309270535123319, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4708581126796201219, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
       propertyPath: m_RootOrder
@@ -244,6 +240,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy1
       objectReference: {fileID: 0}
+    - target: {fileID: 3554424129767012803, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7381853492657078325, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586285831318820378, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -309,10 +317,6 @@ PrefabInstance:
     - target: {fileID: 3554424129767012801, guid: b6e09415da3844b4281ff6d110d944c6, type: 3}
       propertyPath: m_Name
       value: Enemy2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3554424129767012801, guid: b6e09415da3844b4281ff6d110d944c6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
