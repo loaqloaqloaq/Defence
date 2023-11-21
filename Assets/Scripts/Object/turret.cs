@@ -40,6 +40,8 @@ public class turret : MonoBehaviour
     [SerializeField] private RaycastWeapon weapon;
     //敵へ与えるダメージ
     [SerializeField] private int enemyDamage;
+    //弾が当たったときのエフェクト
+    [SerializeField] ParticleSystem HitEffect;
 
     void Start()
     {
@@ -51,7 +53,7 @@ public class turret : MonoBehaviour
         nearEnemyDistance = 2.0f;
         enemyDamage = 1;
 
-        weapon = transform.Find("Gun").GetComponent<RaycastWeapon>();
+        weapon = transform.Find("turretGun").GetComponent<RaycastWeapon>();
         weapon.damage = enemyDamage;
     }
     void Update()
@@ -142,11 +144,13 @@ public class turret : MonoBehaviour
         //追跡
         Tracking();
         //弾を飛ばす処理
-        //ダメージ処理
-        IDamageable damageable = Serch().gameObject.GetComponent<IDamageable>();
-        //nullでないとき
-        if (damageable != null)
+        weapon.UpdateNPCWeapon(Time.deltaTime, fire);
+        //Hitエフェクトが発生したら
+        if (HitEffect.isPlaying)
         {
+            //最も近くの敵を取得
+            IDamageable damageable = Serch().gameObject.GetComponent<IDamageable>();
+            //その敵にダメージ処理を行う
             damageable.Damage(enemyDamage);
         }
     }
