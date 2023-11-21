@@ -32,44 +32,48 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
 
     //çUåÇÇêHÇÁÇ¡ÇΩâÒêî
     int damage_Cnt = 0;
+
+    bool loaded = false;
     // Start is called before the first frame update
     void Start()
-    {              
+    {
+        if (!loaded)
+        {
+            player = GameObject.Find("Player").transform;
 
-        destoryTime = 3.0f;
-        destoryTimer = 0;
-        dead = false;
-        
-        player = GameObject.Find("Player").transform;        
+            animator = GetComponent<Animator>();
+            agent = GetComponent<NavMeshAgent>();
 
+            EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+
+            EnemyJson = eg.EnemyJson.Enemy2;
+            agent.speed = EnemyJson.moveSpeed;
+
+            MAXHP = EnemyJson.hp;
+
+            ATK = EnemyJson.atk;
+
+            drop.Add("ammo", EnemyJson.drop.ammo);
+            drop.Add("health", EnemyJson.drop.health);
+
+            dropPrefab = eg.dropPrefab;
+            explosion = eg.explosion;
+
+            loaded = true;
+        }
+
+        HP = MAXHP;
+        agent.enabled = true;
         target = player;
 
         lastCheck = 0;
         checkFeq = 0.5f;
+        destoryTime = 3.0f;
+        destoryTimer = 0;
+        dead = false;
 
         attacking = false;
-
-        animator = GetComponent<Animator>();       
-        agent = GetComponent<NavMeshAgent>();
-        agent.enabled = true;
-
-        EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
-
-        EnemyJson = eg.EnemyJson.Enemy2;
-        agent.speed = EnemyJson.moveSpeed;
-
-        MAXHP = EnemyJson.hp;
-        HP = MAXHP;
-        ATK = EnemyJson.atk;
-
-        drop.Add("ammo", EnemyJson.drop.ammo);
-        drop.Add("health", EnemyJson.drop.health);
-
-        dropPrefab = eg.dropPrefab;
-        explosion = eg.explosion;
-
         setCollider(true);
-
     }
 
     // Update is called once per frame
