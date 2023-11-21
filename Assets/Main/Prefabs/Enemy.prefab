@@ -56,17 +56,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4425709252556897481}
     m_Modifications:
-    - target: {fileID: 2595014424382242652, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2595014424384496030, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
       propertyPath: m_Name
       value: Enemy4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2595014424384496030, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2595014424384535998, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
       propertyPath: m_RootOrder
@@ -134,38 +126,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy3
       objectReference: {fileID: 0}
-    - target: {fileID: 553309270535123319, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1201751908448173554, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2214596692153292003, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2931503169792963430, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3069965915275440892, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4137652830986491399, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4225986258515765602, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4507418809478670849, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4708581126796201219, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -210,10 +170,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8192838120755847812, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -232,10 +188,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4425709252556897481}
     m_Modifications:
-    - target: {fileID: 3554424129753347427, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3554424129766646819, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -283,10 +235,6 @@ PrefabInstance:
     - target: {fileID: 3554424129767012801, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
       propertyPath: m_Name
       value: Enemy1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3554424129767012801, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -353,10 +301,6 @@ PrefabInstance:
     - target: {fileID: 3554424129767012801, guid: b6e09415da3844b4281ff6d110d944c6, type: 3}
       propertyPath: m_Name
       value: Enemy2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3554424129767012801, guid: b6e09415da3844b4281ff6d110d944c6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
