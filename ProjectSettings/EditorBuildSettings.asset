@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Main/Scenes/Test_Map.unity
     guid: 5d96086e046b95644942b5d0d423d626
+  - enabled: 1
+    path: Assets/Result/ResultLose.unity
+    guid: a26b3d0bc3c1a13448eec82fcd4a8dcc
+  - enabled: 1
+    path: Assets/Result/ResultWin.unity
+    guid: e09ada12c21834e4fabca67a7ab9c94c
   m_configObjects: {}

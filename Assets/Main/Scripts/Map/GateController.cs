@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.XR;
+using UnityEngine.SceneManagement;
 
 
 public class GateController : MonoBehaviour,IDamageable
@@ -97,9 +98,7 @@ public class GateController : MonoBehaviour,IDamageable
         else if( gateNumber >= 3)
         {
             Debug.Log("•‰‚¯");
-        }
-        {
-
+            SceneManager.LoadScene("ResultLose");
         }
     }
 

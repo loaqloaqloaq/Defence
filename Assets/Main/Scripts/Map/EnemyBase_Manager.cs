@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 //using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EnemyBase_Manager : MonoBehaviour
@@ -123,8 +124,9 @@ public class EnemyBase_Manager : MonoBehaviour
         else
         {
             Debug.Log("èüóò");
+            SceneManager.LoadScene("ResultWin");
         }
-        
+
     }
 
 }
