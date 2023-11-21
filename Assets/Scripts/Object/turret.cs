@@ -31,7 +31,7 @@ public class turret : MonoBehaviour
     [SerializeField]
     private float enemyDistance;
     //追跡範囲
-    [SerializeField] private float trackingDistance;
+    [SerializeField] private float trackingRange;
     //攻撃範囲
     [SerializeField] private float atkRange;
     //敵に最も近い距離
@@ -40,18 +40,20 @@ public class turret : MonoBehaviour
     [SerializeField] private RaycastWeapon weapon;
     //敵へ与えるダメージ
     [SerializeField] private int enemyDamage;
+    //弾が当たったときのエフェクト
+    [SerializeField] ParticleSystem HitEffect;
 
     void Start()
     {
         //最初は何もしない
         state = State.Idle;
         //初期値を設定
-        trackingDistance = 20.0f;
+        trackingRange = 20.0f;
         atkRange = 15.0f;
         nearEnemyDistance = 2.0f;
         enemyDamage = 1;
 
-        weapon = transform.Find("Gun").GetComponent<RaycastWeapon>();
+        weapon = transform.Find("turretGun").GetComponent<RaycastWeapon>();
         weapon.damage = enemyDamage;
     }
     void Update()
@@ -106,7 +108,7 @@ public class turret : MonoBehaviour
             state = State.Tracking;
         }
         //敵との距離が追跡範囲外 (20以上)
-        if (enemyDistance >= trackingDistance)
+        if (enemyDistance >= trackingRange)
         {
             //何もしない
             state = State.Idle;
@@ -142,11 +144,13 @@ public class turret : MonoBehaviour
         //追跡
         Tracking();
         //弾を飛ばす処理
-        //ダメージ処理
-        IDamageable damageable = Serch().gameObject.GetComponent<IDamageable>();
-        //nullでないとき
-        if (damageable != null)
+        weapon.UpdateNPCWeapon(Time.deltaTime, fire);
+        //Hitエフェクトが発生したら
+        if (HitEffect.isPlaying)
         {
+            //最も近くの敵を取得
+            IDamageable damageable = Serch().gameObject.GetComponent<IDamageable>();
+            //その敵にダメージ処理を行う
             damageable.Damage(enemyDamage);
         }
     }
