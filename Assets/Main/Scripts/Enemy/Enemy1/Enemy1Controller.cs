@@ -33,45 +33,50 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
 
     //çUåÇÇêHÇÁÇ¡ÇΩâÒêî
     int damage_Cnt = 0;
+
+    bool loaded = false;
     // Start is called before the first frame update
     void Start()
-    {              
+    {
+        if (!loaded) { 
+            gate1 = GameObject.Find("Gate1").transform;
+            gate2 = GameObject.Find("Gate2").transform;
+            gate3 = GameObject.Find("Gate3").transform;
+            gate = gate1 != null ? gate1 : gate2 != null ? gate2 : gate3;
+            player = GameObject.Find("Player").transform;
 
+            animator = GetComponent<Animator>();
+            agent = GetComponent<NavMeshAgent>();
+
+            EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+
+            EnemyJson = eg.EnemyJson.Enemy1;
+            agent.speed = EnemyJson.moveSpeed;
+
+            MAXHP = EnemyJson.hp;
+            ATK = EnemyJson.atk;
+
+            if (!drop.ContainsKey("ammo")) drop.Add("ammo", EnemyJson.drop.ammo);
+            if (!drop.ContainsKey("health")) drop.Add("health", EnemyJson.drop.health);
+
+            dropPrefab = eg.dropPrefab;
+            explosion = eg.explosion;
+
+            loaded = true;
+        }
+
+
+        target = gate;
         destoryTime = 3.0f;
         destoryTimer = 0;
         dead = false;
-
-        gate1 = GameObject.Find("Gate1").transform;
-        gate2 = GameObject.Find("Gate2").transform;
-        gate3 = GameObject.Find("Gate3").transform;
-        gate = gate1!=null? gate1 : gate2!=null? gate2:gate3;
-        player = GameObject.Find("Player").transform;        
-
-        target = gate;
 
         lastCheck = 0;
         checkFeq = 0.5f;
 
         attacking = false;
-
-        animator = GetComponent<Animator>();       
-        agent = GetComponent<NavMeshAgent>();
         agent.enabled = true;
-
-        EnemyGloable eg= GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
-
-        EnemyJson = eg.EnemyJson.Enemy1;
-        agent.speed = EnemyJson.moveSpeed;
-
-        MAXHP = EnemyJson.hp;
         HP = MAXHP;
-        ATK = EnemyJson.atk;
-               
-        if(!drop.ContainsKey("ammo")) drop.Add("ammo", EnemyJson.drop.ammo);
-        if (!drop.ContainsKey("health")) drop.Add("health", EnemyJson.drop.health);
-
-        dropPrefab = eg.dropPrefab;
-        explosion = eg.explosion;
 
         setCollider(true);
     }

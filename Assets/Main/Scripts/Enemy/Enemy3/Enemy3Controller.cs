@@ -39,53 +39,48 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
 
     float fireFreq, fireCnt, fireStop, fireStopCnt;
     // Start is called before the first frame update
-    void Start()
-    {              
 
+    bool loaded = false;
+    void Start()
+    {
+        if (!loaded)
+        {
+            player = GameObject.Find("Player").transform;
+
+            animator = GetComponent<Animator>();
+            agent = GetComponent<NavMeshAgent>();            
+
+            EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+
+            EnemyJson = eg.EnemyJson.Enemy3;
+            agent.speed = EnemyJson.moveSpeed;
+            MAXHP = EnemyJson.hp;
+            ATK = EnemyJson.atk;
+            fireFreq = EnemyJson.AttackDuration;
+            fireStop = EnemyJson.AttackStop;
+
+            drop.Add("ammo", EnemyJson.drop.ammo);
+            drop.Add("health", EnemyJson.drop.health);
+
+            dropPrefab = eg.dropPrefab;
+            explosion = eg.explosion;
+            rcw = transform.Find("Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/Weapon_Rifle 0").GetComponent<RaycastWeapon>();    
+            loaded = true;
+        }
+        HP = MAXHP;
+        rcw.damage = ATK;
+        transform.GetComponent<Collider>().enabled = true;
         destoryTime = 3.0f;
         destoryTimer = 0;
         dead = false;
-        
-        player = GameObject.Find("Player").transform;        
-
+        fireCnt = 0;
+        fireStopCnt = 0;
         target = player;
 
         lastCheck = 0;
         checkFeq = 0.5f;
-
         attacking = false;
-
-        animator = GetComponent<Animator>();       
-        agent = GetComponent<NavMeshAgent>();
         agent.enabled = true;
-
-        EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
-
-        EnemyJson = eg.EnemyJson.Enemy3;
-        agent.speed = EnemyJson.moveSpeed;
-
-        MAXHP = EnemyJson.hp;
-        HP = MAXHP;
-        ATK = EnemyJson.atk;
-        fireFreq = EnemyJson.AttackDuration;
-        fireStop = EnemyJson.AttackStop;
-
-        fireCnt = 0;
-        fireStopCnt = 0;
-
-        drop.Add("ammo", EnemyJson.drop.ammo);
-        drop.Add("health", EnemyJson.drop.health);
-
-        dropPrefab = eg.dropPrefab;
-        explosion = eg.explosion;
-        
-
-        rcw = transform.Find("Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/Weapon_Rifle 0").GetComponent<RaycastWeapon>();
-        rcw.damage = ATK;
-
-        transform.GetComponent<Collider>().enabled = true;
-
-
     }
 
     // Update is called once per frame
