@@ -201,16 +201,21 @@ public class RaycastWeapon : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, distance))
         {
             var target = hitInfo.collider.transform.GetComponent<IDamageable>();
-
+            Debug.Log(transform.name + " " + (bullet.isNPC && !hitInfo.transform.CompareTag("Enemy")));
             if (target != null && ( (bullet.isNPC && !hitInfo.transform.CompareTag("Enemy")) || (!bullet.isNPC && !hitInfo.transform.CompareTag("Gate")) ) )
             {
+                Debug.Log("true" + damage);
                 DamageMessage damageMessage;
                 damageMessage.damager = weaponHolder;
                 damageMessage.amount = damage;
                 damageMessage.hitPoint = hitInfo.point;
                 damageMessage.hitNormal = hitInfo.normal;
 
-                target.ApplyDamage(damageMessage);                
+                if (!target.ApplyDamage(damageMessage))
+                {
+                    Debug.Log("n");
+                }
+                
             }
             else
             {

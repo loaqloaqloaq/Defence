@@ -1,5 +1,11 @@
+using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.AI;
 
+//-------------------------------------
+//仲間(NPC) (今のところ無敵)
+//-------------------------------------
 public class fellowNPC : MonoBehaviour
 {
     //仲間(NPC)の状態 待機、追跡、攻撃
@@ -25,27 +31,49 @@ public class fellowNPC : MonoBehaviour
     [SerializeField] private GameObject nearEnemyObj;
     //敵へ与えるダメージ
     [SerializeField] private int attack;
-    //銃口
-    [SerializeField] private GameObject muzzle;
+    //アニメーター
+    [SerializeField] private Animator animator;
+    //攻撃可能かの確認
+    [SerializeField]
+    private bool attackCheck;
+    //武器を使うのに必要なクラス
+    RaycastWeapon weapon;
 
-    //RayCastWeaponクラス
-    //[SerializeField] private RaycastWeapon weapon;
-    //弾が当たったときのエフェクト
-    //[SerializeField] ParticleSystem HitEffect;
+    //攻撃の時間をカウント
+    //float attackTimeCount;
+    //攻撃を止める時間
+    //float attackStopTime;
+    //クールタイムのカウント
+    //float coolTimeCount;
+
+
+    [SerializeField] Enemy3Controller ene;
 
     void Start()
     {
+        //animatorを取得
+        animator = GetComponent<Animator>();
+        weapon = transform.Find("root/pelvis/spine_01/spine_02/spine_03/clavicle_r/upperarm_r/lowerarm_r/hand_r/Weapon_Pistol").GetComponent<RaycastWeapon>();
         //最初は待機状態
         fellowAI = State.Idle;
         //初期値を設定
         trackingRange = 20.0f;     //追跡範囲
         atkRange = 15.0f;          //攻撃範囲
-        enemyDistanceLimit = 2.0f; //敵との距離制限 (近すぎるとき)
-        attack = 1;                //攻撃力
+        enemyDistanceLimit = 1.0f; //敵との距離制限 (近すぎるとき)
+        //攻撃力
+        attack = 10;                
+        weapon.damage = attack;
+        //攻撃の確認         
+        attackCheck = false;
+
+        //攻撃時間
+        //attackTimeCount = 0.0f;    
+        //attackStopTime = 20.0f;
     }
 
     void Update()
     {
+        //Debug.Log(ene.HP);
         //敵の情報を調べる
         enemySearch();
         //Stateの変更
@@ -72,26 +100,40 @@ public class fellowNPC : MonoBehaviour
     //待機状態の処理
     private void Idle()
     {
-
+        //攻撃不可能
+        attackCheck = false;
+        //追跡していない
+        animator.SetBool("Tracking", false);
+        //攻撃していない
+        animator.SetBool("Shooting", false);
     }
     //追跡状態の処理
     private void Tracking()
     {
+        //攻撃不可能
+        attackCheck = false;
+        //攻撃していない
+        animator.SetBool("Shooting", false);
+        //追跡している
+        animator.SetBool("Tracking", true);
         //ターゲット(敵)の座標を取得
         Vector3 targetPos = nearEnemyObj.transform.position;
         //ターゲットのY座標を自分と同じにして2次元に制限
         targetPos.y = this.transform.position.y;
         //ターゲット(敵)の方向へ向かせる
         transform.LookAt(targetPos);
-        //銃口の向く方向を指定
-        muzzle.transform.LookAt(nearEnemyObj.transform.position);
     }
     //攻撃状態の処理
     private void Attack()
     {
         //追跡
         Tracking();
+        //攻撃可能にする
+        attackCheck = true;
+        //銃を撃っている (攻撃している)
+        animator.SetBool("Shooting", true);
         //攻撃
+        weapon.UpdateNPCWeapon(Time.deltaTime, attackCheck);
     }
 
     //敵の情報を調べる
@@ -135,7 +177,7 @@ public class fellowNPC : MonoBehaviour
             //待機状態にする
             fellowAI = State.Idle;
         }
-        //敵との距離が追跡範囲外 (2以下)
+        //敵との距離が追跡範囲外 (1以下)
         else if (enemyDistance <= enemyDistanceLimit)
         {
             //待機状態にする
