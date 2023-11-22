@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class Enemy3Controller : MonoBehaviour, IDamageable
+public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
 {
     [HideInInspector]
     public float HP, MAXHP, ATK;
@@ -39,58 +39,56 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
 
     float fireFreq, fireCnt, fireStop, fireStopCnt;
     // Start is called before the first frame update
-    void Start()
-    {              
 
+    bool loaded = false;
+    void Start()
+    {
+        if (!loaded)
+        {
+            player = GameObject.Find("Player").transform;
+
+            animator = GetComponent<Animator>();
+            agent = GetComponent<NavMeshAgent>();            
+
+            EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+
+            EnemyJson = eg.EnemyJson.Enemy3;
+            agent.speed = EnemyJson.moveSpeed;
+            MAXHP = EnemyJson.hp;
+            ATK = EnemyJson.atk;
+            fireFreq = EnemyJson.AttackDuration;
+            fireStop = EnemyJson.AttackStop;
+
+            drop.Add("ammo", EnemyJson.drop.ammo);
+            drop.Add("health", EnemyJson.drop.health);
+
+            dropPrefab = eg.dropPrefab;
+            explosion = eg.explosion;
+            rcw = transform.Find("Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/Weapon_Rifle 0").GetComponent<RaycastWeapon>();    
+            loaded = true;
+        }
+        HP = MAXHP;
+        rcw.damage = ATK;
+        transform.GetComponent<Collider>().enabled = true;
         destoryTime = 3.0f;
         destoryTimer = 0;
         dead = false;
-        
-        player = GameObject.Find("Player").transform;        
-
+        fireCnt = 0;
+        fireStopCnt = 0;
         target = player;
 
         lastCheck = 0;
         checkFeq = 0.5f;
-
         attacking = false;
-
-        animator = GetComponent<Animator>();       
-        agent = GetComponent<NavMeshAgent>();
-
-        EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
-
-        EnemyJson = eg.EnemyJson.Enemy3;
-        agent.speed = EnemyJson.moveSpeed;
-
-        MAXHP = EnemyJson.hp;
-        HP = MAXHP;
-        ATK = EnemyJson.atk;
-        fireFreq = EnemyJson.fireFreq;
-        fireStop = EnemyJson.fireStop;
-
-        fireCnt = 0;
-        fireStopCnt = 0;
-
-        drop.Add("ammo", EnemyJson.drop.ammo);
-        drop.Add("health", EnemyJson.drop.health);
-
-        dropPrefab = eg.dropPrefab;
-        explosion = eg.explosion;
-        
-
-        rcw = transform.Find("Hips/Spine/Spine1/Spine2/RightShoulder/RightArm/RightForeArm/RightHand/Weapon_Rifle 0").GetComponent<RaycastWeapon>();
-        rcw.damage = ATK;
-
-        
-
+        agent.enabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (HP <= 0)
-        {   transform.GetComponent<Collider>().enabled = false;
+        {   
+            transform.GetComponent<Collider>().enabled = false;
             agent.enabled = false;
             destoryTimer += Time.deltaTime;
             if (destoryTimer >= destoryTime)
@@ -100,8 +98,8 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
                     pos.y += 0.5f;
                     var exp=Instantiate(explosion, pos, transform.rotation);
                     exp.transform.localScale=new Vector3(0.7f, 0.7f, 0.7f);
-                }                
-                Destroy(gameObject);
+                }
+                transform.parent.GetComponent<EnemyController>().dead();
             }
         }
         else {  
@@ -112,7 +110,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
                 //Debug.Log(Time.time.ToString() + " : " + Physics.Linecast(transform.position, target.transform.position));
             }
             var disToTarget = Vector3.Distance(transform.position, target.position);           
-            if (!Physics.Linecast(transform.position, target.transform.position) && disToTarget < 6f)
+            if (!Physics.Linecast(transform.position, target.transform.position) && disToTarget < 20f)
             {
                 attacking = true;
                 //face to target
@@ -216,15 +214,13 @@ public class Enemy3Controller : MonoBehaviour, IDamageable
             dead = true;
         }
     }
-
-    private void setCollider(GameObject gb,bool enable) {
-        foreach (Transform child in transform) {
-            child.GetComponent<Collider>().enabled = enable;
-            setCollider(child.gameObject, enable);
-        }        
-    }
+   
     public bool IsDead()
     {
         return dead;
+    }
+    public void resetEnemy()
+    {
+        Start();
     }
 }

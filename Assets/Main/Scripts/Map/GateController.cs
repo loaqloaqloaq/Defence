@@ -38,7 +38,7 @@ public class GateController : MonoBehaviour,IDamageable
         HPfill.SetActive(false);
         HPText = transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
 
-        HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100,2) + "%)";        
+        HPText.text = HP > 0 ? HP.ToString():"0" + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100,2) + "%)";        
         
         gaugeWidth = 30f;
         width = gaugeWidth;
@@ -46,9 +46,13 @@ public class GateController : MonoBehaviour,IDamageable
 
     // Update is called once per frame
     void Update()
-    {  
-      
+    {
 
+        if (HPfill.activeSelf){
+            var lookPos = GameObject.Find("Player").transform.position - transform.position;
+            lookPos.y = 0;
+            HPfill.transform.parent.rotation = Quaternion.LookRotation(lookPos) * Quaternion.Euler(0,180,0);           
+        }
         if ( Mathf.Abs(width-gaugeWidth) > 0.002f) {
             width += (gaugeWidth - width)*Time.deltaTime*4f;
             HPfill.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(width, 2);
@@ -72,7 +76,7 @@ public class GateController : MonoBehaviour,IDamageable
 
         HPfill.SetActive(true);
         gaugeWidth = 30f * HP / MaxHP;
-        HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
+        HPText.text = HP > 0 ? HP.ToString() : "0" + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
 
 
         return true;

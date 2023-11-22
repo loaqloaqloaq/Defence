@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.PackageManager;
 using UnityEngine;
-using static RaycastWeapon;
 
-public class turret : RaycastWeapon
+public class turret : MonoBehaviour
 {
     //タレットの状態 何もしない,追跡,攻撃
     private enum State
@@ -17,6 +18,9 @@ public class turret : RaycastWeapon
     //現在のステート
     [SerializeField] private State state;
 
+    //タレットの銃口
+    [SerializeField]
+    private GameObject turret_muzzle;
     //EnemyのTag (一番近くの敵を調べるために使う)
     [SerializeField]
     private string tagName = "Enemy";
@@ -27,32 +31,40 @@ public class turret : RaycastWeapon
     [SerializeField]
     private float enemyDistance;
     //追跡範囲
-    [SerializeField] private float trackingDistance;
+    [SerializeField] private float trackingRange;
     //攻撃範囲
     [SerializeField] private float atkRange;
-    //敵に近すぎる距離
+    //敵に最も近い距離
     [SerializeField] private float nearEnemyDistance;
-
+    //RayCastWeaponクラス
+    [SerializeField] private RaycastWeapon weapon;
+    //敵へ与えるダメージ
+    [SerializeField] private int enemyDamage;
+    //弾が当たったときのエフェクト
+    [SerializeField] ParticleSystem HitEffect;
 
     void Start()
     {
         //最初は何もしない
         state = State.Idle;
         //初期値を設定
-        trackingDistance = 10.0f;
-        atkRange = 5.0f;
+        trackingRange = 20.0f;
+        atkRange = 15.0f;
         nearEnemyDistance = 2.0f;
+        enemyDamage = 1;
+
+        weapon = transform.Find("turretGun").GetComponent<RaycastWeapon>();
+        weapon.damage = enemyDamage;
     }
     void Update()
     {
-
         //敵がいるか調べる
         nearEnemyObj = Serch();
 
         //敵がいないとき
         if (nearEnemyObj == null)
         {
-            Debug.Log("敵がフィールド上にいません");
+            //Debug.Log("敵がフィールド上にいません");
             return;
         }
         //敵がいた場合
@@ -83,20 +95,20 @@ public class turret : RaycastWeapon
     //Stateの変更
     private void changeState()
     {
-        //敵との距離が攻撃範囲内 (5以下)
+        //敵との距離が攻撃範囲内 (15以下)
         if (enemyDistance <= atkRange)
         {
             //攻撃する
             state = State.Attack;
         }
-        //敵との距離が攻撃範囲外 (5以上)
+        //敵との距離が攻撃範囲外 (15以上)
         if (enemyDistance >= atkRange)
         {
             //追跡する
             state = State.Tracking;
         }
-        //敵との距離が追跡範囲外
-        if (enemyDistance >= trackingDistance)
+        //敵との距離が追跡範囲外 (20以上)
+        if (enemyDistance >= trackingRange)
         {
             //何もしない
             state = State.Idle;
@@ -107,31 +119,40 @@ public class turret : RaycastWeapon
         }
     }
 
-    //何もしないときの処理
+    //何もしない時の処理
     private void Idle()
     {
-        //Debug.Log("何もしません");
-        this.transform.rotation = Quaternion.Euler(0.0f , 0.0f , 0.0f);
+
     }
     //追跡している時の処理
     private void Tracking()
     {
-        //Debug.Log("追跡します");
         //ターゲット(敵)の座標を取得
         Vector3 targetPos = nearEnemyObj.transform.position;
         //ターゲットのY座標を自分と同じにすることで2次元に制限する。
         targetPos.y = this.transform.position.y;
         //タレットを敵へ向ける
         transform.LookAt(targetPos);
+        //銃口の向く方向を指定
+        turret_muzzle.transform.LookAt(Serch().transform);
     }
     //攻撃している時の処理
     private void Attack()
     {
-        Debug.Log("攻撃します");
+        //攻撃中です
+        bool fire = true;
         //追跡
         Tracking();
         //弾を飛ばす処理
-        //gameObject = Shot;
+        weapon.UpdateNPCWeapon(Time.deltaTime, fire);
+        //Hitエフェクトが発生したら
+        if (HitEffect.isPlaying)
+        {
+            //最も近くの敵を取得
+            IDamageable damageable = Serch().gameObject.GetComponent<IDamageable>();
+            //その敵にダメージ処理を行う
+            damageable.Damage(enemyDamage);
+        }
     }
 
     //※Objectがたくさんいるときの対処法 (1体のみ)
@@ -154,7 +175,6 @@ public class turret : RaycastWeapon
         // objsから１つずつobj変数に取り出す
         foreach (GameObject obj in objs)
         {
-
             // objに取り出したゲームオブジェクトと、このゲームオブジェクトとの距離を計算して取得
             float distance = Vector3.Distance(obj.transform.position, transform.position);
             // nearDistanceが0(最初はこちら)、あるいはnearDistanceがdistanceよりも大きい値なら

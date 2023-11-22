@@ -14581,8 +14581,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3782704184529069710}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.1556598, y: -0.69850296, z: -0.6817425, w: 0.15195715}
+  m_LocalPosition: {x: 0.29608232, y: -0.76536393, z: 27.226576}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29219,7 +29219,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6901308941406096748}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.002523141, y: 0.9777994, z: -0.011844519, w: 0.20919296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -29301,6 +29301,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   target: {fileID: 0}
+
   bulletMaxLifeTime: 0.07
   fireSE:
     maxSENum: 10
@@ -29311,6 +29312,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 7d3d9e2371152e240870e100a6132a2f, type: 3}
 --- !u!82 &5340239322590573016
 AudioSource:
+
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}

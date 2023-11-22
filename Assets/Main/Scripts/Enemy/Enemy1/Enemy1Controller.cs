@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class Enemy1Controller : MonoBehaviour, IDamageable
+public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
 {
     [HideInInspector]
     public float HP, MAXHP, ATK;
@@ -33,58 +33,60 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
 
     //çUåÇÇêHÇÁÇ¡ÇΩâÒêî
     int damage_Cnt = 0;
+
+    bool loaded = false;
     // Start is called before the first frame update
     void Start()
-    {              
+    {
+        if (!loaded) { 
+            gate1 = GameObject.Find("Gate1").transform;
+            gate2 = GameObject.Find("Gate2").transform;
+            gate3 = GameObject.Find("Gate3").transform;
+            gate = gate1 != null ? gate1 : gate2 != null ? gate2 : gate3;
+            player = GameObject.Find("Player").transform;
 
+            animator = GetComponent<Animator>();
+            agent = GetComponent<NavMeshAgent>();
+
+            EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+
+            EnemyJson = eg.EnemyJson.Enemy1;
+            agent.speed = EnemyJson.moveSpeed;
+
+            MAXHP = EnemyJson.hp;
+            ATK = EnemyJson.atk;
+
+            if (!drop.ContainsKey("ammo")) drop.Add("ammo", EnemyJson.drop.ammo);
+            if (!drop.ContainsKey("health")) drop.Add("health", EnemyJson.drop.health);
+
+            dropPrefab = eg.dropPrefab;
+            explosion = eg.explosion;
+
+            loaded = true;
+        }
+
+
+        target = gate;
         destoryTime = 3.0f;
         destoryTimer = 0;
         dead = false;
-
-        gate1 = GameObject.Find("Gate1").transform;
-        gate2 = GameObject.Find("Gate2").transform;
-        gate3 = GameObject.Find("Gate3").transform;
-        gate = gate1!=null? gate1 : gate2!=null? gate2:gate3;
-        player = GameObject.Find("Player").transform;        
-
-        target = gate;
 
         lastCheck = 0;
         checkFeq = 0.5f;
 
         attacking = false;
-
-        animator = GetComponent<Animator>();       
-        agent = GetComponent<NavMeshAgent>();
-
-        EnemyGloable eg= GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
-
-        EnemyJson = eg.EnemyJson.Enemy1;
-        agent.speed = EnemyJson.moveSpeed;
-
-        MAXHP = EnemyJson.hp;
+        agent.enabled = true;
         HP = MAXHP;
-        ATK = EnemyJson.atk;
-               
-        drop.Add("ammo", EnemyJson.drop.ammo);
-        drop.Add("health", EnemyJson.drop.health);
 
-        dropPrefab = eg.dropPrefab;
-        explosion = eg.explosion;
-
-
+        setCollider(true);
     }
 
     // Update is called once per frame
     void Update()
     {
         if (HP <= 0)
-        {            
-            transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<BoxCollider>().enabled = false;
-            transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(0).GetComponent<BoxCollider>().enabled = false;
-            transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<BoxCollider>().enabled = false;
-            transform.GetChild(1).GetChild(0).GetChild(2).GetComponent<BoxCollider>().enabled = false;
-            transform.GetComponent<BoxCollider>().enabled = false;
+        {
+            setCollider(false);
             agent.enabled = false;
             destoryTimer += Time.deltaTime;
             if (destoryTimer >= destoryTime)
@@ -94,8 +96,8 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
                     pos.y += 0.5f;
                     var exp=Instantiate(explosion, pos, transform.rotation);
                     exp.transform.localScale=new Vector3(0.7f, 0.7f, 0.7f);
-                }                
-                Destroy(gameObject);
+                }
+                transform.parent.GetComponent<EnemyController>().dead();
             }
         }
         else {  
@@ -228,5 +230,17 @@ public class Enemy1Controller : MonoBehaviour, IDamageable
     public bool IsDead()
     {
         return dead;
+    }
+
+    public void resetEnemy()
+    {
+        Start();
+    }
+    private void setCollider(bool en) {
+        transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<BoxCollider>().enabled = en;
+        transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(0).GetComponent<BoxCollider>().enabled = en;
+        transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<BoxCollider>().enabled = en;
+        transform.GetChild(1).GetChild(0).GetChild(2).GetComponent<BoxCollider>().enabled = en;
+        transform.GetComponent<BoxCollider>().enabled = en;
     }
 }

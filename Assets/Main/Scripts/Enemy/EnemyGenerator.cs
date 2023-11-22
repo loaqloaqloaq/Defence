@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EnemyGenerator : MonoBehaviour
 {
     [SerializeField]
-    GameObject[] enemy=new GameObject[5];
+    GameObject enemy;
 
     [SerializeField, ReadOnly]
     int EnemyCnt;
@@ -23,6 +24,10 @@ public class EnemyGenerator : MonoBehaviour
     int currentLineIndex;
     int currentIndex;
 
+    GameObject pool;
+
+    int maxEnemy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,18 +39,10 @@ public class EnemyGenerator : MonoBehaviour
         patterns = enemyJson.pattern;
 
         genFreq = enemyJson.genFreq;
+        maxEnemy = enemyJson.maxEnemy;
 
-        GameObject pool= GameObject.Find("Enemy Pool");
-        if (pool == null) {
-            pool = new GameObject("Enemy Pool");
-        }
-        for (int i = 1; i <= 5; i++) {
-            if (GameObject.Find("Enemy Pool/Enemy" + i.ToString()) == null)
-            {
-                var tmp = new GameObject("Enemy" + i.ToString());
-                tmp.transform.parent = pool.transform;
-            }
-        }  
+        pool = GameObject.Find("Enemy Pool");
+        if (pool == null) pool = new GameObject("Enemy Pool");
 
         RandomNewPattern();
     }
@@ -53,32 +50,45 @@ public class EnemyGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        EnemyCnt = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        if (EnemyCnt > 100) return;
-        lastGen += Time.deltaTime;
-        int randX = Random.Range(-3, 3);
-        int randZ = Random.Range(-3, 3);
-        Vector3 pos = transform.position;
-        pos = new Vector3(pos.x + randX, pos.y, pos.z + randZ);
-        if (lastGen >= genFreq) {
-            int type = currentLine[currentIndex]-1;
-            //Debug.Log(type);
-            if (type >= 0 && type < enemy.Length)
-                try
-                {
-                    var e = Instantiate(enemy[type], pos, transform.rotation);
-                    e.transform.parent = GameObject.Find("Enemy Pool/Enemy"+ currentLine[currentIndex].ToString()).transform;
-                }
-                catch (System.Exception e) {
-                    Debug.Log(e.ToString());
-                    Debug.LogError("line " + currentLineIndex.ToString() + ", " + currentIndex.ToString() + ": enemy type " + type.ToString() + " not found");
-                }
-            else Debug.LogError("line "+currentLineIndex.ToString()+", "+currentIndex.ToString()+": enemy type "+ type.ToString()+" not found");
-            lastGen = 0;
-            currentIndex++;
-            if (currentIndex >= currentLine.Length) {
-                RandomNewPattern();
+        EnemyCnt = 0;
+        foreach (Transform e in pool.transform) {
+            if (e.gameObject.activeSelf) {
+                EnemyCnt++;
             }
+        }
+        if (EnemyCnt >= maxEnemy) return;
+
+        lastGen += Time.deltaTime;
+       
+        if (lastGen >= genFreq) {
+            lastGen = 0;
+            int randX = Random.Range(-3, 3);
+            int randZ = Random.Range(-3, 3);
+            Vector3 pos = transform.position;
+            pos = new Vector3(pos.x + randX, pos.y, pos.z + randZ);
+
+            int type = currentLine[currentIndex];
+            bool generated = false;
+
+            foreach (Transform e in pool.transform)
+            {
+                if (!e.gameObject.activeSelf) {
+                    generated = true;
+                    e.gameObject.SetActive(true); 
+                    e.transform.localPosition = pos;
+                    e.GetComponent<EnemyController>().setType(type);
+                    e.transform.SetParent(pool.transform, true);
+                    break;
+                }
+            }
+            if (!generated && pool.transform.childCount < maxEnemy) {
+                GameObject e = Instantiate(enemy, pos, transform.rotation);                
+                e.transform.SetParent(pool.transform, true);
+                e.GetComponent<EnemyController>().setType(type);
+            }
+
+            currentIndex++;
+            if (currentIndex >= currentLine.Length) RandomNewPattern();
         }
     }
 
