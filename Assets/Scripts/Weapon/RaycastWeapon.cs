@@ -63,6 +63,8 @@ public class RaycastWeapon : MonoBehaviour
 
     [SerializeField] protected float maxLifeTime = 1.2f;
 
+    [SerializeField] private LayerMask whatIsTarget;
+
     public bool reloadAvailable
     {
         get
@@ -207,11 +209,11 @@ public class RaycastWeapon : MonoBehaviour
         ray.origin = start;
         ray.direction = direction;
 
-        if (Physics.Raycast(ray, out hitInfo, distance))
+        if (Physics.Raycast(ray, out hitInfo, distance, whatIsTarget))
         {
             var target = hitInfo.collider.transform.GetComponent<IDamageable>();
-            Debug.Log(transform.name + " " + (bullet.isNPC && !hitInfo.transform.CompareTag("Enemy")));
-            if (target != null && ( (bullet.isNPC && !hitInfo.transform.CompareTag("Enemy")) || (!bullet.isNPC && !hitInfo.transform.CompareTag("Gate")) ) )
+
+            if (target != null)
             {
                 Debug.Log("true" + damage);
                 DamageMessage damageMessage;

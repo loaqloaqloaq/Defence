@@ -9922,6 +9922,9 @@ MonoBehaviour:
     audioLength: 0.2
     clip: {fileID: 8300000, guid: be09c7b6c1b55f44cbb885d671be7936, type: 3}
   maxLifeTime: 0.02
+  targetLeyer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &7479424928724557791
 MonoBehaviour:
   m_ObjectHideFlags: 0
