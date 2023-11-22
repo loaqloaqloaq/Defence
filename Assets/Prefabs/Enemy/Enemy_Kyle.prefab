@@ -99,7 +99,7 @@ Transform:
   - {fileID: 7499805570375444854}
   - {fileID: 64219170}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &530080249591140929
 Animator:
@@ -250,8 +250,8 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.34440145
-      value: 0.9211692
+      time: 0.70456994
+      value: 0.8024177
       inSlope: -1.0526316
       outSlope: -1.0526316
       tangentMode: 0

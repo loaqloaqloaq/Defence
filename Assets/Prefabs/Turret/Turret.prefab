@@ -29301,18 +29301,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   target: {fileID: 0}
-
-  bulletMaxLifeTime: 0.07
+  bulletMaxLifeTime: 0.1
   fireSE:
-    maxSENum: 10
-    initVolume: 0.75
+    maxSENum: 12
+    initVolume: 0.8
     name: turretFire
-    resourcePath: Sounds/Sfx/rifleSho1
-    audioLength: 0.25
+    resourcePath: 
+    audioLength: 0.1428571
     clip: {fileID: 8300000, guid: 7d3d9e2371152e240870e100a6132a2f, type: 3}
 --- !u!82 &5340239322590573016
 AudioSource:
-
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -29322,7 +29320,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -29331,7 +29329,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.1
+  MinDistance: 1
   MaxDistance: 45
   Pan2D: 0
   rolloffMode: 2
@@ -29342,7 +29340,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.00020000001
+      time: 0.022222223
       value: 1
       inSlope: 0
       outSlope: 0
@@ -29351,19 +29349,28 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.735715
-      value: 0.83634746
-      inSlope: -0.6665106
-      outSlope: -0.6665106
+      time: 0.63663626
+      value: 0.8084707
+      inSlope: -1.0227273
+      outSlope: -1.0227273
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.39671835
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.89051145
+      value: 0.5159254
+      inSlope: -1.1846465
+      outSlope: -1.1846465
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.6536094
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -1.0002
-      outSlope: -1.0002
+      inSlope: -1.0227273
+      outSlope: -1.0227273
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
