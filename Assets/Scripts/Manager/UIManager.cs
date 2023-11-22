@@ -121,7 +121,7 @@ public class UIManager : MonoBehaviour
     IEnumerator SetPanel(bool isActive)
     {
         //効果音
-        SoundManager.Instance.Play("Sounds/UI_Sfx/Click_Electronic_Pause", SoundManager.Sound.UI);
+        //SoundManager.Instance.Play("Sounds/UI_Sfx/Click_Electronic_Pause", SoundManager.Sound.UI);
 
         while (animator.GetCurrentAnimatorStateInfo(2).normalizedTime < 1.0f)
         {

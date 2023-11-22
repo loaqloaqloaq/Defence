@@ -41,6 +41,8 @@ public class Rocket : MonoBehaviour
 
     Vector3 start, end;
 
+    [SerializeField] private AudioData explosionSE;
+
 #if UNITY_EDITOR //unity editor内だけで動作する
     private void OnDrawGizmosSelected() //シーンでオブジェクトが選択された時に実行される関数
     {
@@ -57,6 +59,9 @@ public class Rocket : MonoBehaviour
         boxCollider = GetComponent<BoxCollider>();
         Destroy(gameObject, duration);
         collide = false;
+
+        //SE追加
+        SoundManager.Instance.AddAudioInfo(explosionSE);
     }
 
     private void SetActive(bool isActive)
@@ -105,7 +110,7 @@ public class Rocket : MonoBehaviour
                 SetActive(false);
                 collide = true;
                 explosionVFX.Emit(1);
-                SoundManager.Instance.Play("Sounds/Sfx/explosion1");
+                SoundManager.Instance.PlaySE(explosionSE.name);
                 Explosion();
             } 
         }

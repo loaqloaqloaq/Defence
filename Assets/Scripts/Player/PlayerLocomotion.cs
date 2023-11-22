@@ -34,7 +34,9 @@ public class PlayerLocomotion : MonoBehaviour
     //スタミナ
     [SerializeField] private float recoveryDuration = 3.0f;
     [SerializeField] private float sprintDuration = 20.0f;
+
     private const float maxStamina = 100.0f;
+
     private float currentStamina;
     private float lastSprintTime;
 

@@ -14886,16 +14886,12 @@ MonoBehaviour:
   magazine: {fileID: 514843262947869396}
   isInifinty: 0
   weaponName: rocket
-  soundName:
-  - rocketFire
-  - rifleReload1
-  - emptyRifle
   isFiring: 0
   fireRate: 1
   ammoRemain: 10
   magAmmo: 1
   magCapacity: 1
-  damage: 200
+  damage: 300
   raycastOrigin: {fileID: 1430727169578368036}
   raycastDestination: {fileID: 0}
   tracerEffect: {fileID: 0}
@@ -14914,7 +14910,31 @@ MonoBehaviour:
   hitEffect: {fileID: 1715300333291913085}
   bulletSpeed: 550
   bulletDrop: 0.2
+  fireDistance: 1000
   maxBounces: 0
+  rbForce: 4
+  fireSE:
+    maxSENum: 1
+    initVolume: 1
+    name: rocketFire
+    resourcePath: 
+    audioLength: 1
+    clip: {fileID: 8300000, guid: ca24307ee02e28a4c9994a4dfe814bcf, type: 3}
+  reloadSE:
+    maxSENum: 1
+    initVolume: 1
+    name: rocketRelaod
+    resourcePath: 
+    audioLength: 1
+    clip: {fileID: 8300000, guid: 36d926bfafadb3d4c8e504d234edc5d5, type: 3}
+  emptySE:
+    maxSENum: 1
+    initVolume: 1
+    name: rocketEmpty
+    resourcePath: 
+    audioLength: 1
+    clip: {fileID: 8300000, guid: 154f001fd9a35b04fa33781367c48f6d, type: 3}
+  maxLifeTime: 1.2
   rocket: {fileID: 1961524337391048081, guid: 533b84a2c4773eb45beba728424aa4ed, type: 3}
 --- !u!114 &-7999184717167703922
 MonoBehaviour:
