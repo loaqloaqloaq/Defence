@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Grenade : MonoBehaviour
@@ -18,11 +17,15 @@ public class Grenade : MonoBehaviour
 
     [SerializeField] private LayerMask whatIsTarget;
 
+    [SerializeField] private AudioData explosionSE;
+
     //コンポネント取得
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
+
+        SoundManager.Instance?.AddAudioInfo(explosionSE);
     }
 
     public void StartExplosion(float delay)
@@ -56,7 +59,7 @@ public class Grenade : MonoBehaviour
         
         //VFX・SFX再生
         explosionVFX.Play();
-        SoundManager.Instance.Play("Sounds/Sfx/explosion1");
+        SoundManager.Instance.PlaySE(explosionSE.name);
 
         SetActive(false);
 

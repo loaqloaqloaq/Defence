@@ -148,6 +148,6 @@ public class ResultScene : MonoBehaviour
 
     public void PlaySound(string soundName)
     {
-        SoundManager.Instance.Play("Sounds/UI_Sfx/" + soundName, SoundManager.Sound.UI);
+        //SoundManager.Instance.PlaySE("Sounds/UI_Sfx/" + soundName, SoundManager.Sound.UI);
     }
 }

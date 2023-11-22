@@ -27,9 +27,6 @@ public class Enemy : LivingEntity
     [SerializeField] private Transform attackRoot; // 
     [SerializeField] private Transform eyeTransform; //視野の基準
 
-    [SerializeField] private string hitSoundType;
-    [SerializeField] private string deathSoundType;
-
     [Range(0.01f, 2f)] [SerializeField] private float turnSmoothTime = 0.1f; //回転の遅延時間
     private float turnSmoothVelocity; //回転の実時間変化量
 
@@ -51,6 +48,11 @@ public class Enemy : LivingEntity
 
     private RaycastHit[] hits = new RaycastHit[10]; //攻撃時に接触したオブジェクトを配列で読み込む
     private List<LivingEntity> lastAttackedTargets = new List<LivingEntity>(); //
+
+    [SerializeField] private AudioData hitSE;
+    [SerializeField] private AudioData deadSE;
+
+    private AudioSource audioSource;
 
     private bool hasTarget => targetEntity != null && !targetEntity.dead; //いま追跡する対象が存在する＆死んでいない
 
@@ -89,6 +91,11 @@ public class Enemy : LivingEntity
 
         //攻撃するときに対象との距離
         agent.stoppingDistance = attackDistance;
+
+        //SEの追加
+        audioSource =GetComponent<AudioSource>();   
+        SoundManager.Instance.AddAudioInfo(hitSE);
+        SoundManager.Instance.AddAudioInfo(deadSE);
     }
 
     // 初期設定
@@ -288,7 +295,7 @@ public class Enemy : LivingEntity
         EffectManager.Instance.PlayHitEffect(damageMessage.hitPoint, damageMessage.hitNormal,
             transform, EffectManager.EffectType.Flesh);
 
-        SoundManager.Instance.Play("Sounds/Sfx/HitSound/" + hitSoundType);
+        SoundManager.Instance.PlaySE(hitSE.name, audioSource);
 
         return true;
     }
@@ -361,6 +368,6 @@ public class Enemy : LivingEntity
         animator.SetTrigger("Die");
 
         GameManager.Instance?.AddKillCount();
-        SoundManager.Instance?.Play("Sounds/Sfx/HitSound/" + deathSoundType.ToString());
+        SoundManager.Instance?.PlaySE(deadSE.name, audioSource);
     }
 }

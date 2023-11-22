@@ -9864,7 +9864,7 @@ Transform:
   - {fileID: 5196347269177439138}
   - {fileID: 5196297777752726262}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6360325984832206524
 MonoBehaviour:
@@ -9882,10 +9882,6 @@ MonoBehaviour:
   magazine: {fileID: 5192832457053926158}
   isInifinty: 1
   weaponName: pistol
-  soundName:
-  - pistolShot
-  - psitolReload
-  - emptyPistol
   isFiring: 0
   fireRate: 1
   ammoRemain: 150
@@ -9904,6 +9900,27 @@ MonoBehaviour:
   fireDistance: 1000
   maxBounces: 0
   rbForce: 4
+  fireSE:
+    maxSENum: 8
+    initVolume: 1
+    name: pistolFire
+    resourcePath: 
+    audioLength: 0.15
+    clip: {fileID: 8300000, guid: 242534c49eb0f41bcafc7cc8fb1d7c17, type: 3}
+  reloadSE:
+    maxSENum: 1
+    initVolume: 1
+    name: pistolReload
+    resourcePath: 
+    audioLength: 1
+    clip: {fileID: 8300000, guid: 2ecad5f0b1964724daaaa54f8bb3f4a8, type: 3}
+  emptySE:
+    maxSENum: 3
+    initVolume: 1
+    name: pistolEmpty
+    resourcePath: 
+    audioLength: 0.2
+    clip: {fileID: 8300000, guid: be09c7b6c1b55f44cbb885d671be7936, type: 3}
   maxLifeTime: 0.02
 --- !u!114 &7479424928724557791
 MonoBehaviour:
