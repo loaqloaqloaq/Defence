@@ -15,6 +15,13 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
 
     [SerializeField] Transform respawnPosition;
 
+    [SerializeField] private AudioData pickUpSE;
+
+    private void Awake()
+    {
+        SoundManager.Instance?.AddAudioInfo(pickUpSE);
+    }
+
     //コンポネント取得
     private void Start()
     {
@@ -85,7 +92,7 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         {
             item.Use(gameObject);
             //GameManager.Instance.AddItemCount();
-            SoundManager.Instance.Play("Sounds/Sfx/PickUp");
+            SoundManager.Instance.PlaySE(pickUpSE.name);
         }
     }
 }

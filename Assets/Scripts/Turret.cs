@@ -71,7 +71,11 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private Transform target;
 
-    float maxLifeTime = 0.04f;
+    [Range(0.05f, 2.0f)][SerializeField] float bulletMaxLifeTime = 0.1f;
+
+    [SerializeField] private AudioData fireSE;
+
+    private AudioSource audioSource;
 
     private bool IsTargetDead(Transform target)
     {
@@ -116,17 +120,16 @@ public class Turret : MonoBehaviour
 
     public virtual void Awake()
     {
+        audioSource =GetComponent<AudioSource>();
 
-    }
-
-    private void Update()
-    {
-        UpdateTurret(state);
+        SoundManager.Instance.AddAudioInfo(fireSE);
     }
 
     private void FixedUpdate()
     {
         if (state == State.Attack) { Rotate(); }
+
+        UpdateTurret(state);
     }
 
 
@@ -223,7 +226,7 @@ public class Turret : MonoBehaviour
         Vector3 lookDirection = target.position - firePivot.position;
         lookDirection.Normalize();
 
-        firePivot.rotation = Quaternion.Slerp(firePivot.rotation, Quaternion.LookRotation(lookDirection), turnSmoothVelocity * Time.deltaTime);
+        firePivot.rotation = Quaternion.Slerp(firePivot.rotation, Quaternion.LookRotation(lookDirection), turnSmoothVelocity * Time.fixedDeltaTime);
     } 
 
     private bool IsTargetOnShootingLine(Transform target)
@@ -304,7 +307,7 @@ public class Turret : MonoBehaviour
     {
         bullets.ForEach(bullet =>
         {
-            if (bullet.time > maxLifeTime) // 일정 시간이 지나툈E자동으로 off
+            if (bullet.time > bulletMaxLifeTime) // 일정 시간이 지나툈E자동으로 off
             {
                 bullet.tracer.gameObject.SetActive(false);
                 bullet.isSimulating = false;
@@ -349,7 +352,7 @@ public class Turret : MonoBehaviour
             }
 
             //bullet.tracer.transform.position = hitInfo.point;
-            bullet.time = maxLifeTime;
+            bullet.time = bulletMaxLifeTime;
             end = hitInfo.point;
 
             // Bullet ricochet
@@ -414,7 +417,7 @@ public class Turret : MonoBehaviour
         {
             //temp
             case "Shot":
-                SoundManager.Instance.Play("Sounds/Sfx/rifleShot1");
+                SoundManager.Instance.PlaySE(fireSE.name, audioSource);
                 break;
 
         }

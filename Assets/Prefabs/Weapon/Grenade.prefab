@@ -103,6 +103,13 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 72
+  explosionSE:
+    maxSENum: 2
+    initVolume: 0.8
+    name: grenadeExplosion
+    resourcePath: Sounds/Sfx/explosion1
+    audioLength: 1
+    clip: {fileID: 8300000, guid: ca180d396e5316e4b807eac82770730b, type: 3}
 --- !u!1001 &3724790587822698237
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class ActiveWeapon : MonoBehaviour
         Primary = 0,　   //Primary：ライフル
         Secondary = 1,   //Secondary：ピストル
         Tertiary = 2,    //Tertiary：ロケットランチャー
-        quaternary = 3, //quaternary：スナイパーライフル
+        Quaternary = 3, //quaternary：スナイパーライフル
         Length,
     }
 
@@ -40,6 +41,8 @@ public class ActiveWeapon : MonoBehaviour
 
     private int activeWeaponIndex;
     private Vector3 aimPoint;
+
+    private weaponSlot[] duplicationSlots = { weaponSlot.Tertiary, weaponSlot.Quaternary };
 
     //コンポネント取得
     void Awake()
@@ -189,11 +192,23 @@ public class ActiveWeapon : MonoBehaviour
     //武器を装備する
     public void Equip(RaycastWeapon newWeapon)
     {
+        RaycastWeapon weapon;
+
         int weaponSlotIndex = (int)newWeapon.weaponSlot; //装備する武器のindexを読み込む
-        var weapon = GetWeapon(weaponSlotIndex); //すでに他の武器を所持しているか確認
-        if (weapon) // あったら破棄
+        var isDuplication = Array.Exists(duplicationSlots, ws => ws == newWeapon.weaponSlot);
+        
+        if (isDuplication)
         {
-            Destroy(weapon.gameObject);
+            foreach (var slot in duplicationSlots)
+            {
+                weapon = GetWeapon((int)slot); //すでに他の武器を所持しているか確認
+                if (weapon) { Destroy(weapon.gameObject); } // あったら破棄
+            }
+        }
+        else 
+        {
+            weapon = GetWeapon(weaponSlotIndex); //すでに他の武器を所持しているか確認
+            if (weapon) {Destroy(weapon.gameObject); } // あったら破棄
         }
 
         //装備、パラメータ設定
@@ -229,9 +244,9 @@ public class ActiveWeapon : MonoBehaviour
         {
             SetActiveWeapon(weaponSlot.Tertiary);
         }
-        if (playerInput.Alpha4 && equipped_Weapons[(int)weaponSlot.quaternary] != null)
+        if (playerInput.Alpha4 && equipped_Weapons[(int)weaponSlot.Quaternary] != null)
         {
-            SetActiveWeapon(weaponSlot.quaternary);
+            SetActiveWeapon(weaponSlot.Quaternary);
         }
         //グレネードを投げる
         if (playerInput.Grenade && grController.isAvailable && !isHolstered)
@@ -251,10 +266,17 @@ public class ActiveWeapon : MonoBehaviour
             case (int)weaponSlot.Secondary:
                 SetActiveWeapon(weaponSlot.Secondary);
                 break;
+            case (int)weaponSlot.Tertiary:
+                SetActiveWeapon(weaponSlot.Tertiary);
+                break;
+            case (int)weaponSlot.Quaternary:
+                SetActiveWeapon(weaponSlot.Quaternary);
+                break;
             default:
                 break;
         }
     }
+
     void SetActiveWeapon(weaponSlot weaponslot)
     {
         int holsterIndex = activeWeaponIndex; // 

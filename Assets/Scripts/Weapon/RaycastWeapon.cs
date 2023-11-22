@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class RaycastWeapon : MonoBehaviour
@@ -31,7 +32,6 @@ public class RaycastWeapon : MonoBehaviour
     public bool isInifinty;
 
     public string weaponName;
-    public string[] soundName = new string[(int)SoundType.Max];
     public bool isFiring;
     public int fireRate = 25;
     public int ammoRemain = 150;
@@ -53,6 +53,10 @@ public class RaycastWeapon : MonoBehaviour
     [SerializeField] protected float rbForce = 4.0f;
 
 
+    [SerializeField] private AudioData fireSE;
+    [SerializeField] private AudioData reloadSE;
+    [SerializeField] private AudioData emptySE;
+
     List<Bullet> bullets = new List<Bullet>();
 
     protected GameObject weaponHolder;
@@ -70,6 +74,11 @@ public class RaycastWeapon : MonoBehaviour
     public virtual void Awake()
     {
         recoil = GetComponent<WeaponRecoil>();
+
+        //SE‚Ì’Ç‰Á
+        SoundManager.Instance.AddAudioInfo(fireSE);
+        SoundManager.Instance.AddAudioInfo(reloadSE);
+        SoundManager.Instance.AddAudioInfo(emptySE);
     }
 
     public void OnEnable()
@@ -99,7 +108,7 @@ public class RaycastWeapon : MonoBehaviour
         bullet.time = 0.0f;
         bullet.tracer = Instantiate(tracerEffect, position, Quaternion.identity);
         bullet.tracer.AddPosition(position);
-        bullet.bounce = maxBounces;
+        bullet.bounce = maxBounces; 
         bullet.isNPC = isNPC;
         return bullet;
     }
@@ -325,13 +334,13 @@ public class RaycastWeapon : MonoBehaviour
         switch (soundName)
         {
             case "Shot":
-                SoundManager.Instance.Play("Sounds/Sfx/" + this.soundName[(int)SoundType.shot]);
+                SoundManager.Instance.PlaySE(fireSE.name);
                 break;
             case "Reload":
-                SoundManager.Instance.Play("Sounds/Sfx/" + this.soundName[(int)SoundType.reload]);
+                SoundManager.Instance.PlaySE(reloadSE.name);
                 break;
             case "Empty":
-                SoundManager.Instance.Play("Sounds/Sfx/" + this.soundName[(int)SoundType.empty]);
+                SoundManager.Instance.PlaySE(emptySE.name);
                 break;
             default:
                 break;

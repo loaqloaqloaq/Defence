@@ -1,6 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static AudioClipInfo;
 
 public class SoundManager : MonoBehaviour
 {
@@ -18,8 +22,6 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    private AudioSource audioPlayer;
-
     public enum Sound
     {
         BGM,
@@ -33,6 +35,14 @@ public class SoundManager : MonoBehaviour
     //directoryと一緒にサウンドリソースをDictionaryに保存
     Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 
+    Dictionary<string, AudioClipInfo> audioClipInfo = new Dictionary<string, AudioClipInfo>();
+
+    private bool IsContained(string seName)
+    { 
+        return audioClipInfo.ContainsKey(seName);
+    }
+
+
     public void Clear()
     {
         // すべてのAudioSource Stop
@@ -42,21 +52,85 @@ public class SoundManager : MonoBehaviour
             audioSource.Stop();
         }
         // サウンドリソース削除
+        audioClipInfo.Clear();
         audioClips.Clear();
     }
 
-    //directoryを受けてこのスクリプトの内で再生させる
-    public void Play(string path, Sound type = Sound.EFFECT, float pitch = 1.0f)
+    private void Update()
     {
-        AudioClip audioClip = GetOrAddAudioClip(path, type); //リソースを取得
-        Play(audioClip, type, pitch);
+        update();
     }
 
-    //サウンド再生（リソースあり）
-    public void Play(AudioClip audioClip, Sound type = Sound.EFFECT, float pitch = 1.0f)
+    public void update()
     {
-        if (audioClip == null)
+        // playing SE update
+        foreach (AudioClipInfo info in audioClipInfo.Values)
+        {
+            List<SEInfo> newList = new List<SEInfo>();
+
+            foreach (SEInfo seInfo in info.playingList)
+            {
+                seInfo.curTime = seInfo.curTime - Time.deltaTime;
+                if (seInfo.curTime > 0.0f)
+                    newList.Add(seInfo);
+                else
+                    info.stockList.Add(seInfo.index, seInfo);
+            }
+            info.playingList = newList;
+        }
+
+    }
+
+    //SE再生
+    public void PlaySE(string seName, AudioSource adSource = null, float pitch = 1.0f)
+    {
+        AudioClipInfo acInfo = GetAudioInfo(seName); //リソースを取得
+        if (acInfo == null)
+        {
+            Debug.Log("Audio Info is null");
             return;
+        }
+
+        //AudioClipInfoのClipが割り当てられなかったらリソースロード
+        if (acInfo.clip == null)
+        {
+            acInfo.clip = (AudioClip)Resources.Load(acInfo.resourcePath);
+            if (acInfo.clip == null)
+                Debug.LogWarning("SE is not found.");
+        }
+
+        float len = acInfo.audioLength;
+
+        //Stockの残りの数が０だったらSEを再生しない
+        if (acInfo.stockList.Count > 0)
+        {
+            SEInfo seInfo = acInfo.stockList.Values[0];
+            seInfo.curTime = len;
+            acInfo.playingList.Add(seInfo);
+
+            // Stockから除去
+            acInfo.stockList.Remove(seInfo.index);
+            // SE再生
+            if (adSource != null)
+            {
+                adSource.pitch = pitch;
+                adSource.PlayOneShot(acInfo.clip, seInfo.volume);
+            }
+            else
+            {
+                AudioSource audioSource = audioSources[(int)Sound.EFFECT];
+                audioSource.pitch = pitch;
+                audioSource.PlayOneShot(acInfo.clip, seInfo.volume);
+            }
+
+            //Debug.Log(seInfo.volume);
+        }
+    }
+
+    //サウンド再生(BGM・UI）
+    public void Play(string path, Sound type = Sound.UI, float pitch = 1.0f)
+    {
+        AudioClip audioClip = GetAudio(path);
 
         if (type == Sound.BGM) //Background music
         {
@@ -68,12 +142,6 @@ public class SoundManager : MonoBehaviour
             audioSource.clip = audioClip;
             audioSource.Play();
         }
-        else if (type == Sound.EFFECT) // Effect Sound
-        {
-            AudioSource audioSource = audioSources[(int)Sound.EFFECT];
-            audioSource.pitch = pitch;
-            audioSource.PlayOneShot(audioClip);
-        }
         else if (type == Sound.UI) // UI Sosund
         {
             AudioSource audioSource = audioSources[(int)Sound.UI];
@@ -83,7 +151,27 @@ public class SoundManager : MonoBehaviour
     }
 
     //サウンドリソース取得
-    AudioClip GetOrAddAudioClip(string path, Sound type = Sound.EFFECT)
+    AudioClipInfo GetAudioInfo(string seName)
+    {
+        if (!IsContained(seName))
+            return null;//既に登録されている音を返す
+
+        AudioClipInfo info = audioClipInfo[seName];
+
+        //AudioClipInfoのClipが割り当てられなかったらリソースロード
+        if (info.clip == null)
+        {
+            info.clip = (AudioClip)Resources.Load(info.resourcePath);
+            if (info.clip == null)
+                Debug.LogWarning("SE" + seName + "is not found.");
+            else
+                return audioClipInfo[seName];
+        }
+
+        return audioClipInfo[seName];
+    }
+
+    public AudioClip GetAudio(string path)
     {
         if (path.Contains("Sounds/") == false)
             path = $"Sounds/{path}"; // directoryに"Sounds/"が含まれていない場合追加
@@ -101,6 +189,40 @@ public class SoundManager : MonoBehaviour
             Debug.Log($"AudioClip Missing ! {path}");
 
         return audioClip;
+    }
+
+    public bool AddAudioInfo(string seName, AudioClip clip, int maxSE, float length, float initVolume = 1.0f, string path = "Sounds/")
+    {
+        //登録されているAudioInfoの重複を避ける
+        if (IsContained(seName)) return false;
+
+        AudioClipInfo newAcInfo = new AudioClipInfo(path, seName, maxSE, initVolume, length);
+        newAcInfo.clip = clip;
+
+        //ClipInfoに追加して管理
+        audioClipInfo.Add(newAcInfo.name, newAcInfo);
+
+        return true;
+    }
+
+    public bool AddAudioInfo(AudioData audioData)
+    {
+        //登録されているAudioInfoの重複を避ける
+        if (IsContained(audioData.name)) return false;
+
+        if (audioData.clip == null)
+        {
+            Debug.Log($"AudioClip Missing!");
+            return false;
+        }
+
+        AudioClipInfo newAcInfo = new AudioClipInfo(audioData.resourcePath, audioData.name, audioData.maxSENum, audioData.initVolume, audioData.audioLength);
+        newAcInfo.clip = audioData.clip;
+
+        //ClipInfoに追加して管理
+        audioClipInfo.Add(newAcInfo.name, newAcInfo);
+
+        return true;
     }
 
     //Volume Setting 
