@@ -8,13 +8,15 @@ public class Enemy2Navigator : MonoBehaviour
     public Transform target;    
     private Animator animator;
     private Enemy2Controller ec;
-   
+    private Transform player;
+
     // Start is called before the first frame update
-    
+
     void Start()
-    {       
+    {
         animator = GetComponent<Animator>();
-        ec = GetComponent<Enemy2Controller>();   
+        ec = GetComponent<Enemy2Controller>();
+        player = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
@@ -22,7 +24,7 @@ public class Enemy2Navigator : MonoBehaviour
     {
         if (ec?.agent?.enabled == true && !ec.attacking)
         {
-            target = ec.target ?? GameObject.Find("Player").transform;
+            target = ec.target ?? player;
             if (Vector3.Distance(transform.position, target.position) > 1.5f && !ec.attacking)
             {
                 animator.SetBool("walking", true);

@@ -12,6 +12,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
     public float HP, MAXHP, ATK;
     Dictionary<string, float> drop = new Dictionary<string, float>();
     private Animator animator;
+    EnemyGloable eg;
     [HideInInspector]
     public NavMeshAgent agent;
 
@@ -41,16 +42,21 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
     // Start is called before the first frame update
 
     bool loaded = false;
+
+    int frameDelay = 5;
+    int frameCnt = 0;
     void Start()
     {
         if (!loaded)
         {
-            player = GameObject.Find("Player").transform;
+            
 
             animator = GetComponent<Animator>();
             agent = GetComponent<NavMeshAgent>();            
 
-            EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+            eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+
+            player = eg.player;
 
             EnemyJson = eg.EnemyJson.Enemy3;
             agent.speed = EnemyJson.moveSpeed;
@@ -81,6 +87,8 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
         checkFeq = 0.5f;
         attacking = false;
         agent.enabled = true;
+
+        frameCnt = 0;
     }
 
     // Update is called once per frame
@@ -109,23 +117,28 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
                 lastCheck = 0;
                 //Debug.Log(Time.time.ToString() + " : " + Physics.Linecast(transform.position, target.transform.position));
             }
-            var disToTarget = Vector3.Distance(transform.position, target.position);           
-            if (!Physics.Linecast(transform.position, target.transform.position) && disToTarget < 20f)
+            frameCnt++;
+            if (frameCnt >= frameDelay)
             {
-                attacking = true;
-                //face to target
-                var lookPos = target.position - transform.position;
-                lookPos.y = 0;
-                Quaternion rot= Quaternion.LookRotation(lookPos) * Quaternion.Euler(0, 50, 0);               
-                transform.rotation = rot;
+                frameCnt = 0;
+                var disToTarget = Vector3.Distance(transform.position, target.position);
+                if (!Physics.Linecast(transform.position, target.transform.position) && disToTarget < 20f)
+                {
+                    attacking = true;
+                    //face to target
+                    var lookPos = target.position - transform.position;
+                    lookPos.y = 0;
+                    Quaternion rot = Quaternion.LookRotation(lookPos) * Quaternion.Euler(0, 50, 0);
+                    transform.rotation = rot;
 
-                animator.SetBool("attacking", true);                
-                Attack();
-            }
-            else {
-                ResetAfterAttack();               
-            }        
-            
+                    animator.SetBool("attacking", true);
+                    Attack();
+                }
+                else
+                {
+                    ResetAfterAttack();
+                }
+            }       
 
         }
     }

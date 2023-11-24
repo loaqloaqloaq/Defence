@@ -11,6 +11,7 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
     public float HP, MAXHP, ATK;
     Dictionary<string, float> drop = new Dictionary<string, float>();
     private Animator animator;
+    EnemyGloable eg;
     [HideInInspector]
     public NavMeshAgent agent;
 
@@ -34,17 +35,22 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
     int damage_Cnt = 0;
 
     bool loaded = false;
+
+    int frameDelay = 5;
+    int frameCnt = 0;
     // Start is called before the first frame update
     void Start()
     {
         if (!loaded)
         {
-            player = GameObject.Find("Player").transform;
+            
 
             animator = GetComponent<Animator>();
             agent = GetComponent<NavMeshAgent>();
 
-            EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+            eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+
+            player = eg.player;
 
             EnemyJson = eg.EnemyJson.Enemy2;
             agent.speed = EnemyJson.moveSpeed;
@@ -74,6 +80,8 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
 
         attacking = false;
         setCollider(true);
+
+        frameCnt = 0;
     }
 
     // Update is called once per frame
@@ -100,25 +108,33 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
             lastCheck += Time.deltaTime;
             if (lastCheck >= checkFeq)
             {
-                
+                lastCheck = 0;
             }
-            var disToTarget = Vector3.Distance(transform.position, target.position);
-            if (disToTarget < 1.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+            frameCnt++;
+            if (frameCnt >= frameDelay)
             {
-                attacking = true;
-                //face to target
-                var lookPos = target.position - transform.position;
-                lookPos.y = 0;
-                transform.rotation = Quaternion.LookRotation(lookPos);
-                animator.SetTrigger("attack");                                 
-            }
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("attack")) {
-                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.4f) {
-                    Attack();
+                frameCnt = 0;
+                var disToTarget = Vector3.Distance(transform.position, target.position);
+                if (disToTarget < 1.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+                {
+                    attacking = true;
+                    //face to target
+                    var lookPos = target.position - transform.position;
+                    lookPos.y = 0;
+                    transform.rotation = Quaternion.LookRotation(lookPos);
+                    animator.SetTrigger("attack");
                 }
-            }
-            else if(animator.GetCurrentAnimatorStateInfo(0).IsName("idle")) {
-                ResetAfterAttack();
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+                {
+                    if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.4f)
+                    {
+                        Attack();
+                    }
+                }
+                else if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+                {
+                    ResetAfterAttack();
+                }
             }
 
         }

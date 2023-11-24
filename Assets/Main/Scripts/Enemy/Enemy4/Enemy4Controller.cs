@@ -13,6 +13,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
     public float HP, MAXHP, ATK;
     Dictionary<string, float> drop = new Dictionary<string, float>();
     private Animator animator;
+    EnemyGloable eg;
     [HideInInspector]
     public NavMeshAgent agent;
 
@@ -23,7 +24,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
     private bool dead;
 
     public Transform target;
-    public Transform gate, gate1, gate2, gate3, player;
+    public Transform gate, player;
     GameObject explosion;
     Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();
 
@@ -45,16 +46,14 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
     float expTimer;
 
     bool loaded = false;
+
+    int frameDelay = 5;
+    int frameCnt = 0;
     // Start is called before the first frame update
     void Start()
     {
         if (!loaded)
         {   
-            gate1 = GameObject.Find("Gate1").transform;
-            gate2 = GameObject.Find("Gate2").transform;
-            gate3 = GameObject.Find("Gate3").transform;            
-            player = GameObject.Find("Player").transform;
-
             expEffect = transform.GetChild(1).gameObject;
 
             colliders = transform.GetComponents<Collider>();
@@ -62,7 +61,10 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
             animator = GetComponent<Animator>();
             agent = GetComponent<NavMeshAgent>();
 
-            EnemyGloable eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+            eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+
+            gate = eg.gate;
+            player = eg.player;
 
             EnemyJson = eg.EnemyJson.Enemy4;
             agent.speed = EnemyJson.moveSpeed;
@@ -85,12 +87,13 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
         destoryTimer = 0;
         dead = false;
 
+
         foreach (Collider c in colliders)
         {
             c.enabled = true;
         }
 
-        gate = gate1 != null ? gate1 : gate2 != null ? gate2 : gate3;
+        gate = eg.gate;
         target = gate;
 
         lastCheck = 0;
@@ -101,9 +104,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
 
         HP = MAXHP;
 
-
-
-
+        frameCnt = 0;
     }
 
     // Update is called once per frame
@@ -130,10 +131,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
         }
         else
         {
-            if (gate1 != null && !gate1.GetComponent<GateController>().broke) { gate = gate1; }
-            else if (gate2 != null && !gate2.GetComponent<GateController>().broke) { gate = gate2; }
-            else if (gate3 != null && !gate3.GetComponent<GateController>().broke) { gate = gate3; }
-
+            gate = eg.gate;
             lastCheck += Time.deltaTime;
             if (lastCheck >= checkFeq)
             {
@@ -159,35 +157,40 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
                     target = gate;
                 }
             }
-
-            var disToTarget = Vector3.Distance(transform.position, target.position);            
-            if (disToTarget < 2.5f && !attacking)
+            frameCnt++;
+            if (frameCnt >= frameDelay)
             {
-                attacking = true;
-                //face to target
-                var lookPos = target.position - transform.position;
-                lookPos.y = 0;
-                transform.rotation = Quaternion.LookRotation(lookPos);
-                animator.SetTrigger("attack");
-                //if (!ps.isPlaying) ps.Play();                
-            }
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-            {
-                animator.speed = 1f / expTimer;
-                //Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
-                expEffect.SetActive(true);
-                if (disToTarget >= 2.5f && animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.4f) {
-                    ResetAfterAttack();
-                    animator.Play("idle");
-                }
-                else if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
+                frameCnt = 0;
+                var disToTarget = Vector3.Distance(transform.position, target.position);
+                if (disToTarget < 2.5f && !attacking)
                 {
-                    Attack();
+                    attacking = true;
+                    //face to target
+                    var lookPos = target.position - transform.position;
+                    lookPos.y = 0;
+                    transform.rotation = Quaternion.LookRotation(lookPos);
+                    animator.SetTrigger("attack");
+                    //if (!ps.isPlaying) ps.Play();                
                 }
-            }
-            else if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
-            {
-                ResetAfterAttack();
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+                {
+                    animator.speed = 1f / expTimer;
+                    //Debug.Log(animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+                    expEffect.SetActive(true);
+                    if (disToTarget >= 2.5f && animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.4f)
+                    {
+                        ResetAfterAttack();
+                        animator.Play("idle");
+                    }
+                    else if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
+                    {
+                        Attack();
+                    }
+                }
+                else if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+                {
+                    ResetAfterAttack();
+                }
             }
 
         }

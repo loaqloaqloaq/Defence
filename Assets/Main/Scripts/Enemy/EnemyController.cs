@@ -10,21 +10,8 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {        
         type = 0;        
-    }
-    
-    void OnBecameInvisible()
-    {
-        Debug.Log("out of cam");
-        setRenders(false);
-    }
-
-    // Enable this script when the GameObject moves into the camera's view
-    void OnBecameVisible()
-    {
-        Debug.Log("view by cam");
-        setRenders(true);
-    }
-
+    }  
+    /*
     public void setRenders(bool isOffScreen) {
         var e = transform.GetChild(type);
         if (e.GetComponent<Renderer>()) e.GetComponent<Renderer>().forceRenderingOff = !isOffScreen;
@@ -33,6 +20,7 @@ public class EnemyController : MonoBehaviour
             r.forceRenderingOff = !isOffScreen;
         }
     }
+    */
 
     public void setType(int type) {
         int index = 0;
