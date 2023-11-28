@@ -5,22 +5,11 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     int type;  
-
-    float offset = 50;
+   
     private void Start()
     {        
         type = 0;        
-    }  
-    /*
-    public void setRenders(bool isOffScreen) {
-        var e = transform.GetChild(type);
-        if (e.GetComponent<Renderer>()) e.GetComponent<Renderer>().forceRenderingOff = !isOffScreen;
-        foreach (Renderer r in e.GetComponentsInChildren<Renderer>())
-        {
-            r.forceRenderingOff = !isOffScreen;
-        }
-    }
-    */
+    }      
 
     public void setType(int type) {
         int index = 0;
