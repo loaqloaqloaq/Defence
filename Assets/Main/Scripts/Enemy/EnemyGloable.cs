@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class EnemyGloable :MonoBehaviour
+public class EnemyGloable : MonoBehaviour
 {
     [SerializeField]
     TextAsset EnemyJsonFile;
@@ -12,6 +12,9 @@ public class EnemyGloable :MonoBehaviour
     public EnemyJsonReader EnemyJson;
 
     public GameObject explosion;
+
+    [SerializeField]
+    public int enemyCnt;
 
     public Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();
 
@@ -22,9 +25,9 @@ public class EnemyGloable :MonoBehaviour
     public Transform gate;
     public GateController gc;
     Transform gate1, gate2, gate3;
-    GateController g1,g2,g3;
+    GateController g1, g2, g3;
 
-    void Awake() {       
+    void Awake() {
         EnemyJson = JsonUtility.FromJson<EnemyJsonReader>(EnemyJsonFile.ToString());
         dropPrefab.Add("ammo", ammoPack);
         dropPrefab.Add("health", healthPack);
@@ -39,12 +42,14 @@ public class EnemyGloable :MonoBehaviour
         gate = gate1 != null ? gate1 : gate2 != null ? gate2 : gate3;
 
         player = GameObject.Find("Player").transform;
+
+        enemyCnt = 0;
     }
 
     void Update()
     {
-        if (gate1 != null && !g1.broke) { 
-            gate=gate1;
+        if (gate1 != null && !g1.broke) {
+            gate = gate1;
         }
         else if (gate2 != null && !g2.broke)
         {
@@ -54,5 +59,13 @@ public class EnemyGloable :MonoBehaviour
         {
             gate = gate3;
         }
+    }
+
+    public void EnemyCreated(int i=1) {
+        enemyCnt += i;
+    }
+    public void EnemyDestoried(int i = 1)
+    {
+        enemyCnt -= i;
     }
 }

@@ -26,5 +26,6 @@ public class Drop
 public class Pattern {
     public string[] pattern;
     public float genFreq;
-    public int maxEnemy;
+    public float randomRange;
+    public int maxEnemy;    
 }

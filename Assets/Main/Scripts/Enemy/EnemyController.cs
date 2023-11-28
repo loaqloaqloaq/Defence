@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    int type;  
+    int type;
+
+    EnemyGloable eg;
    
     private void Start()
     {        
-        type = 0;        
+        type = 0;   
+        eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
     }      
 
     public void setType(int type) {
@@ -17,8 +20,13 @@ public class EnemyController : MonoBehaviour
         this.type = type;
         foreach (Transform child in transform)
         {           
-            child.gameObject.SetActive(index == type);
-            if (index == type) resetEnemy(child);
+            
+            if (index == type) {
+                resetEnemy(child);
+                child.gameObject.SetActive(true);
+                if(eg == null) eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+                eg.EnemyCreated();
+            } 
             index++;
         }
        
@@ -36,6 +44,7 @@ public class EnemyController : MonoBehaviour
             child.gameObject.SetActive(false);
         }
         gameObject.SetActive(false);
+        eg.EnemyDestoried();
     }
 }
 

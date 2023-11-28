@@ -26,6 +26,7 @@ public class GateController : MonoBehaviour,IDamageable
     float width, gaugeWidth;
 
     private GameObject EnemyBase_Manager;
+    private GameObject player;
 
 
     // Start is called before the first frame update
@@ -46,6 +47,8 @@ public class GateController : MonoBehaviour,IDamageable
         gaugeWidth = 30f;
         width = gaugeWidth;
         EnemyBase_Manager = GameObject.Find("EnemyBaseManager");
+
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -53,7 +56,7 @@ public class GateController : MonoBehaviour,IDamageable
     {
 
         if (HPfill.activeSelf){
-            var lookPos = GameObject.Find("Player").transform.position - transform.position;
+            var lookPos = player.transform.position - transform.position;
             lookPos.y = 0;
             HPfill.transform.parent.rotation = Quaternion.LookRotation(lookPos) * Quaternion.Euler(0,180,0);           
         }

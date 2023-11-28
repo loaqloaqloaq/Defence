@@ -10,11 +10,10 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField]
     GameObject enemy;
 
-    [SerializeField, ReadOnly]
-    int EnemyCnt;
-
     float lastGen;
-    public float genFreq;
+    float genFreq;
+    float randomRange;
+    float randomTime;
 
     [SerializeField]
     TextAsset PatternJsonFile;
@@ -26,6 +25,8 @@ public class EnemyGenerator : MonoBehaviour
 
     GameObject pool;
 
+    EnemyGloable eg;
+
     int maxEnemy;
 
     // Start is called before the first frame update
@@ -33,35 +34,35 @@ public class EnemyGenerator : MonoBehaviour
     {
         //Instantiate(enemy, transform.position, transform.rotation);        
         lastGen = 0;
-        EnemyCnt = 0;
+       
 
         Pattern enemyJson = JsonUtility.FromJson<Pattern>(PatternJsonFile.ToString());        
         patterns = enemyJson.pattern;
 
         genFreq = enemyJson.genFreq;
+        randomRange = enemyJson.randomRange;
         maxEnemy = enemyJson.maxEnemy;
+
+        randomTime = Random.Range(-randomRange, randomRange);
 
         pool = GameObject.Find("Enemy Pool");
         if (pool == null) pool = new GameObject("Enemy Pool");
 
         RandomNewPattern();
+
+        eg= GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
     }
 
     // Update is called once per frame
     void Update()
-    {
-        EnemyCnt = 0;
-        foreach (Transform e in pool.transform) {
-            if (e.gameObject.activeSelf) {
-                EnemyCnt++;
-            }
-        }
-        if (EnemyCnt >= maxEnemy) return;
-
-        lastGen += Time.deltaTime;
+    {        
        
-        if (lastGen >= genFreq) {
+
+        lastGen += Time.deltaTime;       
+        if (lastGen >= (genFreq + randomTime) ) {
+            if (eg.enemyCnt >= maxEnemy) return;            
             lastGen = 0;
+            randomTime = Random.Range(-randomRange, randomRange);
             int randX = Random.Range(-3, 3);
             int randZ = Random.Range(-3, 3);
             Vector3 pos = transform.position;
