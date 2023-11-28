@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f601180fa392dd94987c507b33386f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponFab: {fileID: 6360325984832206524, guid: 973c1784511e9694ebac5028468af390, type: 3}
+  weaponFab: {fileID: 965815393752899145, guid: 11cc16cf4b59b924b80c659afe96d30e, type: 3}
 --- !u!114 &7591371560907683390
 MonoBehaviour:
   m_ObjectHideFlags: 0

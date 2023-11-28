@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.XR;
+using UnityEngine.SceneManagement;
 
 
 public class GateController : MonoBehaviour,IDamageable
@@ -24,6 +25,8 @@ public class GateController : MonoBehaviour,IDamageable
     TextMeshProUGUI HPText;  
     float width, gaugeWidth;
 
+    private GameObject EnemyBase_Manager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +45,7 @@ public class GateController : MonoBehaviour,IDamageable
         
         gaugeWidth = 30f;
         width = gaugeWidth;
+        EnemyBase_Manager = GameObject.Find("EnemyBaseManager");
     }
 
     // Update is called once per frame
@@ -87,6 +91,15 @@ public class GateController : MonoBehaviour,IDamageable
         GetComponent<BoxCollider>().enabled = false;
         ani.SetTrigger("break");
         HPfill.GetComponent<Animator>().SetTrigger("hideHP");
+        if (EnemyBase_Manager != null && gateNumber <= 2)
+        {
+            EnemyBase_Manager.gameObject.GetComponent<EnemyBase_Manager>().stage[gateNumber - 1] = 1;
+        }
+        else if( gateNumber >= 3)
+        {
+            Debug.Log("•‰‚¯");
+            SceneManager.LoadScene("ResultLose");
+        }
     }
 
     public void Damage(int damage)
