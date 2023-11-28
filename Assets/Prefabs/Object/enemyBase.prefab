@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 2706879452516606423}
   - component: {fileID: 1747424815710413259}
   - component: {fileID: 2510624589237194357}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: enemyBase
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -416,6 +416,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 976079340744145127}
   explosion: {fileID: 2532972853072531924, guid: b40f4969cc5dc9c41adb34150b3c46f3, type: 3}
+  HPfill: {fileID: 0}
+  HPText: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!54 &2706879452516606423
 Rigidbody:
   m_ObjectHideFlags: 0

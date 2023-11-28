@@ -9783,7 +9783,7 @@ Transform:
   - {fileID: 7918145976942017008}
   - {fileID: 635574974590365713}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &6335937663256370353
 BoxCollider:
@@ -9847,15 +9847,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   turret_muzzle: {fileID: 3291778949169029295}
-  tagName: Enemy
+  targetLayer: 
   nearEnemyObj: {fileID: 0}
   enemyDistance: 0
-  trackingDistance: 0
+  trackingRange: 0
   atkRange: 0
   nearEnemyDistance: 0
   weapon: {fileID: 4259996578730088820}
-  enemyDamage: 0
+  attack: 0
   HitEffect: {fileID: 4770850343159383277}
+  attackCheck: 0
 --- !u!1 &5093365533021631785
 GameObject:
   m_ObjectHideFlags: 0
@@ -19535,10 +19536,6 @@ MonoBehaviour:
   magazine: {fileID: 7060164819575568395}
   isInifinty: 1
   weaponName: rifle
-  soundName:
-  - rifleShot2
-  - rifleReload1
-  - emptyRifle
   isFiring: 0
   fireRate: 15
   ammoRemain: 300
@@ -19557,7 +19554,31 @@ MonoBehaviour:
   fireDistance: 100
   maxBounces: 0
   rbForce: 4
+  fireSE:
+    maxSENum: 0
+    initVolume: 0
+    name: 
+    resourcePath: 
+    audioLength: 0
+    clip: {fileID: 0}
+  reloadSE:
+    maxSENum: 0
+    initVolume: 0
+    name: 
+    resourcePath: 
+    audioLength: 0
+    clip: {fileID: 0}
+  emptySE:
+    maxSENum: 0
+    initVolume: 0
+    name: 
+    resourcePath: 
+    audioLength: 0
+    clip: {fileID: 0}
   maxLifeTime: 10
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &7611882473306922813
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
+//-------------------------------------------------
+//タレット (敵を自動で攻撃する)
+//-------------------------------------------------
 public class turret : MonoBehaviour
 {
     //タレットの状態 何もしない,追跡,攻撃
@@ -19,42 +16,39 @@ public class turret : MonoBehaviour
     [SerializeField] private State state;
 
     //タレットの銃口
-    [SerializeField]
-    private GameObject turret_muzzle;
-    //EnemyのTag (一番近くの敵を調べるために使う)
-    [SerializeField]
-    private string tagName = "Enemy";
-    //最も自分に近い敵オブジェクト
-    [SerializeField]
-    private GameObject nearEnemyObj;
+    [SerializeField] private GameObject turret_muzzle;
+    //標的のLayer (一番近くの敵を調べるために使う)
+    [SerializeField] private string targetLayer;
     //敵との距離
-    [SerializeField]
-    private float enemyDistance;
+    [SerializeField] private float enemyDistance;
     //追跡範囲
     [SerializeField] private float trackingRange;
     //攻撃範囲
     [SerializeField] private float atkRange;
-    //敵に最も近い距離
-    [SerializeField] private float nearEnemyDistance;
-    //RayCastWeaponクラス
-    [SerializeField] private RaycastWeapon weapon;
+    //敵との距離制限 (近すぎるとき)
+    [SerializeField] private float enemyDistanceLimit;
+    //最も自分に近い敵オブジェクト
+    [SerializeField] private GameObject nearEnemyObj;
     //敵へ与えるダメージ
-    [SerializeField] private int enemyDamage;
-    //弾が当たったときのエフェクト
-    [SerializeField] ParticleSystem HitEffect;
+    [SerializeField] private int attack;
+    //攻撃可能かの確認
+    [SerializeField] private bool attackCheck;
+    //武器を使うのに必要なクラス
+    [SerializeField] private RaycastWeapon weapon;
 
     void Start()
     {
-        //最初は何もしない
+        //最初は待機状態
         state = State.Idle;
         //初期値を設定
-        trackingRange = 20.0f;
-        atkRange = 15.0f;
-        nearEnemyDistance = 2.0f;
-        enemyDamage = 1;
-
-        weapon = transform.Find("turretGun").GetComponent<RaycastWeapon>();
-        weapon.damage = enemyDamage;
+        trackingRange = 20.0f;     //追跡範囲
+        atkRange = 15.0f;          //攻撃範囲
+        enemyDistanceLimit = 2.0f; //敵との距離制限 (近すぎるとき)
+        //攻撃力
+        attack = 1;
+        weapon.damage = attack;
+        //攻撃の確認         
+        attackCheck = false;
     }
     void Update()
     {
@@ -113,7 +107,7 @@ public class turret : MonoBehaviour
             //何もしない
             state = State.Idle;
         }
-        else if(enemyDistance <= nearEnemyDistance)
+        else if(enemyDistance <= enemyDistanceLimit)
         {
             state = State.Idle;
         }
@@ -122,11 +116,14 @@ public class turret : MonoBehaviour
     //何もしない時の処理
     private void Idle()
     {
-
+        //攻撃不可能
+        attackCheck = false;
     }
     //追跡している時の処理
     private void Tracking()
     {
+        //攻撃不可能
+        attackCheck = false;
         //ターゲット(敵)の座標を取得
         Vector3 targetPos = nearEnemyObj.transform.position;
         //ターゲットのY座標を自分と同じにすることで2次元に制限する。
@@ -139,20 +136,12 @@ public class turret : MonoBehaviour
     //攻撃している時の処理
     private void Attack()
     {
-        //攻撃中です
-        bool fire = true;
         //追跡
         Tracking();
+        //攻撃可能にする
+        attackCheck = true;
         //弾を飛ばす処理
-        weapon.UpdateNPCWeapon(Time.deltaTime, fire);
-        //Hitエフェクトが発生したら
-        if (HitEffect.isPlaying)
-        {
-            //最も近くの敵を取得
-            IDamageable damageable = Serch().gameObject.GetComponent<IDamageable>();
-            //その敵にダメージ処理を行う
-            damageable.Damage(enemyDamage);
-        }
+        weapon.UpdateNPCWeapon(Time.deltaTime, attackCheck);
     }
 
     //※Objectがたくさんいるときの対処法 (1体のみ)
@@ -164,7 +153,7 @@ public class turret : MonoBehaviour
         // 検索された最も近いゲームオブジェクトを代入するための変数
         GameObject searchTargetObj = null;
         // tagNameで指定されたTagを持つ、すべてのゲームオブジェクトを配列に取得
-        GameObject[] objs = GameObject.FindGameObjectsWithTag(tagName);
+        GameObject[] objs = GameObject.FindGameObjectsWithTag(targetLayer);
 
         // 取得したゲームオブジェクトが 0 ならnullを戻す(使用する場合にはnullでもエラーにならない処理にしておく)
         if (objs.Length == 0)

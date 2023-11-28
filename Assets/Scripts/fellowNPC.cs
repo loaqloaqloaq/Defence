@@ -17,8 +17,9 @@ public class fellowNPC : MonoBehaviour
     }
     //現在のステート
     [SerializeField] private State fellowAI;
-    //EnemyのTag (一番近くの敵を調べるために使う)
-    [SerializeField] private string tagName = "Enemy";
+
+    //標的のLayer (一番近くの敵を調べるために使う)
+    [SerializeField] private string targetLayer;
     //敵との距離
     [SerializeField] private float enemyDistance;
     //追跡範囲
@@ -34,26 +35,14 @@ public class fellowNPC : MonoBehaviour
     //アニメーター
     [SerializeField] private Animator animator;
     //攻撃可能かの確認
-    [SerializeField]
-    private bool attackCheck;
+    [SerializeField] private bool attackCheck;
     //武器を使うのに必要なクラス
-    RaycastWeapon weapon;
-
-    //攻撃の時間をカウント
-    //float attackTimeCount;
-    //攻撃を止める時間
-    //float attackStopTime;
-    //クールタイムのカウント
-    //float coolTimeCount;
-
-
-    [SerializeField] Enemy3Controller ene;
+    [SerializeField] RaycastWeapon weapon;
 
     void Start()
     {
         //animatorを取得
         animator = GetComponent<Animator>();
-        weapon = transform.Find("root/pelvis/spine_01/spine_02/spine_03/clavicle_r/upperarm_r/lowerarm_r/hand_r/Weapon_Pistol").GetComponent<RaycastWeapon>();
         //最初は待機状態
         fellowAI = State.Idle;
         //初期値を設定
@@ -65,15 +54,10 @@ public class fellowNPC : MonoBehaviour
         weapon.damage = attack;
         //攻撃の確認         
         attackCheck = false;
-
-        //攻撃時間
-        //attackTimeCount = 0.0f;    
-        //attackStopTime = 20.0f;
     }
 
     void Update()
     {
-        //Debug.Log(ene.HP);
         //敵の情報を調べる
         enemySearch();
         //Stateの変更
@@ -193,7 +177,7 @@ public class fellowNPC : MonoBehaviour
         //検索された最も近いゲームオブジェクトを代入するための変数
         GameObject searchTargetObj = null;
         //tagNameで指定されたTagを持つ、すべての敵を配列に取得
-        GameObject[] enemys = GameObject.FindGameObjectsWithTag(tagName);
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag(targetLayer);
 
         //取得した敵が0ならnullを返す(エラーを防ぐため)
         if (enemys.Length == 0)

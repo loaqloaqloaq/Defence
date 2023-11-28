@@ -2,23 +2,24 @@ using UnityEngine;
 using System;
 using TMPro;
 
+//-------------------------------------------------
+//敵拠点 (敵を生成する)
+//-------------------------------------------------
 public class enemyBase : MonoBehaviour, IDamageable
 {
-    private float HP;       //HP
-    private float MaxHP;    //最大HP
+    private float HP;                //HP
+    private float MaxHP;             //最大HP
     private float width, gaugeWidth; //ゲージ幅
-    
-    [SerializeField]
-    GameObject canvas;      //敵拠点UI
-    [SerializeField]
-    GameObject explosion;   //爆発エフェクト
-
-    GameObject HPfill;      //HPゲージ
-    TextMeshProUGUI HPText; //HPテキスト
-    Animator animator;      //animatior
+    [SerializeField] GameObject canvas;      //敵拠点UI
+    [SerializeField] GameObject explosion;   //爆発エフェクト
+    [SerializeField] GameObject HPfill;      //HPゲージ
+    [SerializeField] TextMeshProUGUI HPText; //HPテキスト
+    [SerializeField] Animator animator;      //アニメーター  
     void Start()
     {
+        //animatorを取得
         animator = GetComponent<Animator>();
+        //初期値を設定
         gaugeWidth = 30.0f;
         width = gaugeWidth;
         MaxHP = 500f;
@@ -33,7 +34,7 @@ public class enemyBase : MonoBehaviour, IDamageable
         //HPが0以下になったとき
         if (HP <= 0)
         {
-            Broke();
+            IsDead();
         }
         //ゲージ幅が減ったとき
         if (Mathf.Abs(width - gaugeWidth) > 0.002f)
@@ -53,10 +54,9 @@ public class enemyBase : MonoBehaviour, IDamageable
             return true;
         }
         //ダメージ処理
-        else 
+        else
         {
             HP -= damageMessage.amount;
-            Debug.Log(HP);
             animator.SetTrigger("damage");
         }
         gaugeWidth = 30f * HP / MaxHP;
@@ -65,8 +65,8 @@ public class enemyBase : MonoBehaviour, IDamageable
         return false;
     }
 
-    //破壊されたときの処理
-    private void Broke()
+    //死んだ (破壊された) ときの処理
+    public bool IsDead()
     {
         GetComponent<BoxCollider>().enabled = false;
         animator.SetTrigger("break");
@@ -78,16 +78,12 @@ public class enemyBase : MonoBehaviour, IDamageable
         exp.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
         //オブジェクトが消える
         Destroy(gameObject);
-    }
 
+        return true;
+    }
     //ダメージ処理
     public void Damage(int damage)
     {
-       //なし
-    }
-
-    public bool IsDead()
-    {
-        return false;
+        //なし
     }
 }
