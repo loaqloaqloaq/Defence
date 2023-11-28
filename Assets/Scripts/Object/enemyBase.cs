@@ -1,48 +1,64 @@
-using UnityEngine;
 using System;
 using TMPro;
+using UnityEngine;
 
+//-------------------------------------------------
+//敵拠点 (敵を生成する)
+//-------------------------------------------------
 public class enemyBase : MonoBehaviour, IDamageable
 {
-    private float HP;       //HP
-    private float MaxHP;    //最大HP
+    private float HP;                //HP
+    private float MaxHP;             //最大HP
     private float width, gaugeWidth; //ゲージ幅
-    
-    [SerializeField]
-    GameObject canvas;      //敵拠点UI
-    [SerializeField]
-    GameObject explosion;   //爆発エフェクト
+    [SerializeField] GameObject canvas;      //敵拠点UI
+    [SerializeField] GameObject explosion;   //爆発エフェクト
+    [SerializeField] GameObject HPGauge;     //HPゲージ
+    [SerializeField] TextMeshProUGUI HPText; //HPテキスト
+    [SerializeField] Animator animator;      //アニメーター
 
-    GameObject HPfill;      //HPゲージ
-    TextMeshProUGUI HPText; //HPテキスト
-    Animator animator;      //animatior
+    //攻撃をカウントする
+    private float attackCount;
+    //攻撃をする時間
+    private float attackTime;
     void Start()
     {
+        //animatorを取得
         animator = GetComponent<Animator>();
+        //初期値を設定
         gaugeWidth = 30.0f;
         width = gaugeWidth;
         MaxHP = 500f;
         HP = MaxHP;
-        HPfill = transform.GetChild(0).GetChild(0).gameObject;
-        HPfill.SetActive(true);
-        HPText = transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+        //HP表示設定
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
+
+        attackCount = 0.0f;
+        attackTime = 20.0f; //20秒に一回攻撃する
     }
     void Update()
     {
         //HPが0以下になったとき
         if (HP <= 0)
         {
-            Broke();
+            //死んだときの処理
+            IsDead();
         }
         //ゲージ幅が減ったとき
         if (Mathf.Abs(width - gaugeWidth) > 0.002f)
         {
             width += (gaugeWidth - width) * Time.deltaTime * 4f;
-            HPfill.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(width, 2);
+            HPGauge.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(width, 2);
         }
         //常に敵拠点のHPをカメラの方向に向ける
         canvas.transform.forward = Camera.main.transform.forward;
+
+
+        //20秒に一回砲撃を行う (未実装)
+        if (attackTime <= attackCount)
+        {
+            //砲撃処理
+            cannonAttack();
+        }
     }
 
     //ダメージを受ける処理
@@ -53,10 +69,9 @@ public class enemyBase : MonoBehaviour, IDamageable
             return true;
         }
         //ダメージ処理
-        else 
+        else
         {
             HP -= damageMessage.amount;
-            Debug.Log(HP);
             animator.SetTrigger("damage");
         }
         gaugeWidth = 30f * HP / MaxHP;
@@ -65,12 +80,12 @@ public class enemyBase : MonoBehaviour, IDamageable
         return false;
     }
 
-    //破壊されたときの処理
-    private void Broke()
+    //死んだ (破壊された) ときの処理
+    public bool IsDead()
     {
         GetComponent<BoxCollider>().enabled = false;
         animator.SetTrigger("break");
-        HPfill.GetComponent<Animator>().SetTrigger("hideHP");
+        HPGauge.GetComponent<Animator>().SetTrigger("hideHP");
         //爆発オブジェクトの生成
         var pos = transform.position;
         pos.y += 0.5f;
@@ -78,16 +93,19 @@ public class enemyBase : MonoBehaviour, IDamageable
         exp.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
         //オブジェクトが消える
         Destroy(gameObject);
-    }
 
+        return true;
+    }
     //ダメージ処理
     public void Damage(int damage)
     {
-       //なし
+        //なし
     }
 
-    public bool IsDead()
+    //砲撃処理
+    private void cannonAttack()
     {
-        return false;
+        //攻撃時間をリセット
+        attackCount = 0.0f;
     }
 }
