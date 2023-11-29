@@ -40,7 +40,6 @@ public class EnemyBase_Manager : MonoBehaviour
     //ÉQÅ[ÉgÇ™âÛÇÍÇΩÇ∆Ç´ÇÃèàóù
     private void Move()
     {
-        if (!playerWarp) return;
         if (stage[0] != 0 && !moveFlg[0])
         {
             if (enemyBase[0] != null) enemyBase[0].gameObject.transform.position = movePoint[3];
@@ -62,9 +61,6 @@ public class EnemyBase_Manager : MonoBehaviour
                 enemyBase[2] = obj;
             }
             moveFlg[0] = true;
-            Player.GetComponent<CharacterController>().enabled = false;
-            Player.transform.position = PlayerMovePoint[1].transform.position;
-            Player.GetComponent<CharacterController>().enabled = true;
         }
         if (stage[1] != 0 && !moveFlg[1])
         {
@@ -87,6 +83,22 @@ public class EnemyBase_Manager : MonoBehaviour
                 enemyBase[2] = obj;
             }
             moveFlg[1] = true;
+        }
+        if (!playerWarp) return;
+        PlayerMove();
+    }
+
+
+    void PlayerMove()
+    {
+        if (stage[0] != 0 && !moveFlg[0])
+        {
+            Player.GetComponent<CharacterController>().enabled = false;
+            Player.transform.position = PlayerMovePoint[1].transform.position;
+            Player.GetComponent<CharacterController>().enabled = true;
+        }
+        if (stage[1] != 0 && !moveFlg[1])
+        {
             Player.GetComponent<CharacterController>().enabled = false;
             Player.transform.position = PlayerMovePoint[2].transform.position;
             Player.GetComponent<CharacterController>().enabled = true;
