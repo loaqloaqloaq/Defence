@@ -105,11 +105,6 @@ public class GateController : MonoBehaviour,IDamageable
         }
     }
 
-    public void Damage(int damage)
-    {
-        //throw new NotImplementedException();
-    }
-
     public bool IsDead()
     {
         return false;

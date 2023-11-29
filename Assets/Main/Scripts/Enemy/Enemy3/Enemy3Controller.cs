@@ -36,7 +36,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
     EnemyData EnemyJson;
     RaycastWeapon rcw;
     //攻撃を食らった回数
-    int damage_Cnt = 0;
+    //int damage_Cnt = 0;
 
     float fireFreq, fireCnt, fireStop, fireStopCnt;
     // Start is called before the first frame update
@@ -203,7 +203,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
         animator.SetBool("attacking", false);
         animator.speed = 1;
     }
-
+    /*
     //ダメージ処理
     public void Damage(int damage)
     {
@@ -228,7 +228,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
             dead = true;
         }
     }
-   
+   */
     public bool IsDead()
     {
         return dead;
