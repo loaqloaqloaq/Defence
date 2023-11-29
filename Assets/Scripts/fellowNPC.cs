@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using UnityEngine.AI;
 
 //-------------------------------------
 //’‡ŠÔ(NPC) (¡‚Ì‚Æ‚±‚ë–³“G)
