@@ -9,6 +9,7 @@ TagManager:
   - Aim
   - CrossHairTarget
   - FollowCam
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
