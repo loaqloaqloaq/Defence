@@ -2029,7 +2029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fellowAI: 0
-  targetLayer: 
+  targetLayer: Enemy
   enemyDistance: 0
   trackingRange: 0
   atkRange: 0
@@ -2038,7 +2038,7 @@ MonoBehaviour:
   attack: 0
   animator: {fileID: 2180171520960222192}
   attackCheck: 0
-  weapon: {fileID: 0}
+  weapon: {fileID: 8385575260019251049}
 --- !u!54 &7510960031486982651
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2219,3 +2219,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2084060361119042039, guid: 0b3d9c92445d98c4c8e2a0ed9388f4ff, type: 3}
   m_PrefabInstance: {fileID: 3178387458917949909}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8385575260019251049 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6360325984832206524, guid: 0b3d9c92445d98c4c8e2a0ed9388f4ff, type: 3}
+  m_PrefabInstance: {fileID: 3178387458917949909}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13325a98e0bcb484283aae05d8cbaadc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
