@@ -56,7 +56,7 @@ MonoBehaviour:
     m_Bits: 968
   rbForceTarget:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 704
   Speed: 30
   explosionForce: 40
   modelPivot: {fileID: 4645761727602442405}

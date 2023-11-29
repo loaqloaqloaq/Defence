@@ -17,8 +17,6 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private State state;
 
-    protected PlayerInput input;
-
     public class Bullet
     {
         public bool isSimulating;
@@ -328,7 +326,7 @@ public class Turret : MonoBehaviour
         ray.origin = start;
         ray.direction = direction;
 
-        if (Physics.Raycast(ray, out hitInfo, distance))
+        if (Physics.Raycast(ray, out hitInfo, distance, whatIsTarget))
         {
             var target = hitInfo.collider.transform.GetComponent<IDamageable>();
 
