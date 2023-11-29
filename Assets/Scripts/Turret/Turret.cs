@@ -17,8 +17,6 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private State state;
 
-    protected PlayerInput input;
-
     public class Bullet
     {
         public bool isSimulating;
@@ -328,7 +326,7 @@ public class Turret : MonoBehaviour
         ray.origin = start;
         ray.direction = direction;
 
-        if (Physics.Raycast(ray, out hitInfo, distance))
+        if (Physics.Raycast(ray, out hitInfo, distance, whatIsTarget))
         {
             var target = hitInfo.collider.transform.GetComponent<IDamageable>();
 
@@ -390,9 +388,8 @@ public class Turret : MonoBehaviour
             particle.Emit(1);
         }
 
-        //temp
-        Vector3 upVector = Vector3.up;
-        var velocity = (raycastDestination.position - raycastOrigin.position).normalized * bulletSpeed;
+        float yModifier = target.GetComponent<Collider>().bounds.size.y * 0.5f;
+        var velocity = (raycastDestination.position + new Vector3(0f, yModifier, 0f) - raycastOrigin.position).normalized * bulletSpeed;
 
         foreach (var bullet in bullets)
         {
