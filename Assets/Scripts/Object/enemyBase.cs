@@ -11,15 +11,18 @@ public class EnemyBase : MonoBehaviour, IDamageable
     private float MaxHP;             //最大HP
     private float width, gaugeWidth; //ゲージ幅
     [SerializeField] GameObject canvas;      //敵拠点UI
-    [SerializeField] GameObject explosion;   //爆発エフェクト
+    [SerializeField] GameObject explosion;   //爆発(砲弾発射) エフェクト
     [SerializeField] GameObject HPGauge;     //HPゲージ
     [SerializeField] TextMeshProUGUI HPText; //HPテキスト
     [SerializeField] Animator animator;      //アニメーター
 
-    //攻撃後の時間をカウント
-    private float afterAttackCount;
-    //攻撃頻度
-    private float attackTime;
+    //砲弾発射カウント
+    private float firingCount;
+    //砲弾発射頻度
+    private float firingTime;
+    //砲弾
+    [SerializeField] GameObject cannonBall;
+
     void Start()
     {
         //animatorを取得
@@ -31,10 +34,10 @@ public class EnemyBase : MonoBehaviour, IDamageable
         HP = MaxHP;
         //HP表示設定
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
-        //攻撃後の時間をカウント
-        afterAttackCount = 0.0f;
-        //20秒に一回攻撃する
-        attackTime = 20.0f;      
+        //攻撃の時間のカウント
+        firingCount = 0.0f;
+        //5秒に一回攻撃する
+        firingTime = 5.0f;
     }
     void Update()
     {
@@ -53,12 +56,14 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //常に敵拠点のHPをカメラの方向に向ける
         canvas.transform.forward = Camera.main.transform.forward;
 
+        //攻撃の時間のカウント
+        firingCount += Time.deltaTime;
 
-        //20秒に一回砲撃を行う (未実装)
-        if (afterAttackCount >= attackTime)
+        //20秒に1回
+        if (firingCount >= firingTime)
         {
-            //砲撃処理
-            cannonAttack();
+            //砲撃発射
+            cannonfiring();
         }
     }
 
@@ -72,9 +77,12 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //ダメージ処理
         else
         {
+            //ダメージを食らう
             HP -= damageMessage.amount;
+            //animationを再生
             animator.SetTrigger("damage");
         }
+        //ゲージの更新
         gaugeWidth = 30f * HP / MaxHP;
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
 
@@ -84,15 +92,17 @@ public class EnemyBase : MonoBehaviour, IDamageable
     //死んだ (破壊された) ときの処理
     public bool IsDead()
     {
-        GetComponent<BoxCollider>().enabled = false;
+        //animationを再生
         animator.SetTrigger("break");
         HPGauge.GetComponent<Animator>().SetTrigger("hideHP");
-        //爆発オブジェクトの生成
-        var pos = transform.position;
-        pos.y += 0.5f;
-        var exp = Instantiate(explosion, pos, transform.rotation);
+        //爆発エフェクトの位置を設定
+        Vector3 expPos = this.transform.position;
+        expPos.y += 0.5f;
+        //爆発エフェクト生成
+        GameObject exp = Instantiate(explosion, expPos, this.transform.rotation);
+        //大きさの設定
         exp.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
-        //オブジェクトが消える
+        //オブジェクトを消滅
         Destroy(gameObject);
 
         return true;
@@ -103,12 +113,24 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //なし
     }
 
-    //砲撃処理
-    private void cannonAttack()
+    //砲撃発射
+    private void cannonfiring()
     {
+        //弾丸発射エフェクトの位置を設定
+        Vector3 firPos = this.transform.position;
+        firPos.y += 0.9f;
+        firPos.z += 11.0f;
+        //弾丸発射エフェクトの生成
+        GameObject shellfiring = Instantiate(explosion, firPos, Quaternion.identity);
+        //大きさの設定
+        shellfiring.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
 
-        //攻撃後から時間を計測
-        afterAttackCount += Time.deltaTime;
-        //攻撃時間をリセット
+        //発射エフェクトと同じ場所に弾丸を生成
+        cannonBall.transform.position = shellfiring.transform.position;
+        //砲弾生成
+        Instantiate(cannonBall);
+
+        //砲弾発射カウントをリセット
+        firingCount = 0.0f;
     }
 }
