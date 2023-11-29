@@ -6,7 +6,7 @@ using UnityEngine.AI;
 //-------------------------------------
 //’‡ŠÔ(NPC) (¡‚Ì‚Æ‚±‚ë–³“G)
 //-------------------------------------
-public class fellowNPC : MonoBehaviour
+public class FellowNPC : MonoBehaviour
 {
     //’‡ŠÔ(NPC)‚Ìó‘Ô ‘Ò‹@A’ÇÕAUŒ‚
     enum State

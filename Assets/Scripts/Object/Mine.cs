@@ -3,7 +3,7 @@ using UnityEngine;
 //-------------------------------------
 //’n—‹ (H‚ç‚Á‚½‚çˆê”­‚Å€‚Ê)
 //-------------------------------------
-public class mine : MonoBehaviour
+public class Mine : MonoBehaviour
 {
     //’n—‹‚ÌUŒ‚—Í
     private int   mine_Damage;

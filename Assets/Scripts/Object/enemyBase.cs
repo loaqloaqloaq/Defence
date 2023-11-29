@@ -5,7 +5,7 @@ using UnityEngine;
 //-------------------------------------------------
 //敵拠点 (敵を生成する)
 //-------------------------------------------------
-public class enemyBase : MonoBehaviour, IDamageable
+public class EnemyBase : MonoBehaviour, IDamageable
 {
     private float HP;                //HP
     private float MaxHP;             //最大HP
@@ -16,9 +16,9 @@ public class enemyBase : MonoBehaviour, IDamageable
     [SerializeField] TextMeshProUGUI HPText; //HPテキスト
     [SerializeField] Animator animator;      //アニメーター
 
-    //攻撃をカウントする
-    private float attackCount;
-    //攻撃をする時間
+    //攻撃後の時間をカウント
+    private float afterAttackCount;
+    //攻撃頻度
     private float attackTime;
     void Start()
     {
@@ -31,9 +31,10 @@ public class enemyBase : MonoBehaviour, IDamageable
         HP = MaxHP;
         //HP表示設定
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
-
-        attackCount = 0.0f;
-        attackTime = 20.0f; //20秒に一回攻撃する
+        //攻撃後の時間をカウント
+        afterAttackCount = 0.0f;
+        //20秒に一回攻撃する
+        attackTime = 20.0f;      
     }
     void Update()
     {
@@ -54,7 +55,7 @@ public class enemyBase : MonoBehaviour, IDamageable
 
 
         //20秒に一回砲撃を行う (未実装)
-        if (attackTime <= attackCount)
+        if (afterAttackCount >= attackTime)
         {
             //砲撃処理
             cannonAttack();
@@ -105,7 +106,9 @@ public class enemyBase : MonoBehaviour, IDamageable
     //砲撃処理
     private void cannonAttack()
     {
+
+        //攻撃後から時間を計測
+        afterAttackCount += Time.deltaTime;
         //攻撃時間をリセット
-        attackCount = 0.0f;
     }
 }

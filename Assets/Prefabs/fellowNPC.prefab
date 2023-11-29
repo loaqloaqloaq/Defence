@@ -1971,7 +1971,7 @@ GameObject:
   - component: {fileID: 7510960031486982651}
   - component: {fileID: 5622340683665768930}
   m_Layer: 0
-  m_Name: fellowNPC
+  m_Name: FellowNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

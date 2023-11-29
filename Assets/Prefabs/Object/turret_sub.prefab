@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3455664495227099566}
   - component: {fileID: 1486143671677102587}
   m_Layer: 0
-  m_Name: Stand
+  m_Name: stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9760,7 +9760,7 @@ GameObject:
   - component: {fileID: 1436869838172639848}
   - component: {fileID: 533896185903063115}
   m_Layer: 0
-  m_Name: turret_sub
+  m_Name: Turret_Sub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9774,7 +9774,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5009618275412524461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.69, y: 1.38, z: 6.47}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9847,16 +9847,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   turret_muzzle: {fileID: 3291778949169029295}
-  targetLayer: 
-  nearEnemyObj: {fileID: 0}
+  targetLayer: Enemy
   enemyDistance: 0
   trackingRange: 0
   atkRange: 0
-  nearEnemyDistance: 0
-  weapon: {fileID: 4259996578730088820}
+  enemyDistanceLimit: 0
+  nearEnemyObj: {fileID: 0}
   attack: 0
-  HitEffect: {fileID: 4770850343159383277}
   attackCheck: 0
+  weapon: {fileID: 4259996578730088820}
 --- !u!1 &5093365533021631785
 GameObject:
   m_ObjectHideFlags: 0
@@ -14722,7 +14721,7 @@ GameObject:
   - component: {fileID: 2533535133808989032}
   - component: {fileID: 4313988359531134450}
   m_Layer: 0
-  m_Name: Swivel
+  m_Name: swivel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
