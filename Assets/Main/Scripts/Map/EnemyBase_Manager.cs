@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 //using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EnemyBase_Manager : MonoBehaviour
-{   
+{
+    [SerializeField]
+    bool playerWarp;
+
     public GameObject[] enemyBase = new GameObject[3];　//現在マップに生成されているEnemyBase
     private Vector3[] movePoint = new Vector3[9];//EnemyBaseの移動先
     public GameObject EnemyBase_Prefab;//EnemyBaseが壊されたら再生成するためのプレファブ
     public GameObject[] PlayerMovePoint = new GameObject[3];//一時的に強制移動するため、プレイヤーの移動先
-    private GameObject Player;
-
-    [SerializeField]
-    bool playerWarp;
+    private GameObject Player;   
 
     public int[] stage = new int[2] { 0, 0 };//壊れてるゲートの確認
     private bool[] moveFlg = new bool[2] { false, false }; //移動したかの確認
@@ -40,6 +40,7 @@ public class EnemyBase_Manager : MonoBehaviour
     //ゲートが壊れたときの処理
     private void Move()
     {
+        if (playerWarp) PlayerMove();
         if (stage[0] != 0 && !moveFlg[0])
         {
             if (enemyBase[0] != null) enemyBase[0].gameObject.transform.position = movePoint[3];
@@ -84,8 +85,7 @@ public class EnemyBase_Manager : MonoBehaviour
             }
             moveFlg[1] = true;
         }
-        if (!playerWarp) return;
-        PlayerMove();
+        
     }
 
 

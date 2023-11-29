@@ -37584,6 +37584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa4e0c1bb4abd0142a4275c655c3b010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerWarp: 1
   enemyBase:
   - {fileID: 390420303}
   - {fileID: 659652306}
@@ -37593,7 +37594,6 @@ MonoBehaviour:
   - {fileID: 2069069392}
   - {fileID: 518350628}
   - {fileID: 1377756923}
-  playerWarp: 0
   stage: 0000000000000000
 --- !u!4 &1821792659
 Transform:
@@ -38212,6 +38212,50 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 115761528}
   m_SourcePrefab: {fileID: 100100000, guid: f7526adfec194cf4a8dc3bb561060031, type: 3}
+--- !u!1 &1861849414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1861849416}
+  - component: {fileID: 1861849415}
+  m_Layer: 0
+  m_Name: ----DEBUG----
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1861849415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861849414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac3e935b6ab9de941a79a2bdc862ac82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1861849416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861849414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.3115892, y: 3.548277, z: 196.60356}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1872531501 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 349ae72952d16ff40bb7fef81a321ee4, type: 3}
