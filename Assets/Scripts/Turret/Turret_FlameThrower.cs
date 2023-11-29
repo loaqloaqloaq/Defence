@@ -301,7 +301,7 @@ public class Turret_FlameThrower : MonoBehaviour
         {
             //temp
             case "Shot":
-               // SoundManager.Instance.PlaySE(fireSE.name, audioSource);
+                SoundManager.Instance.PlaySE(fireSE.name, audioSource);
                 break;
 
         }
