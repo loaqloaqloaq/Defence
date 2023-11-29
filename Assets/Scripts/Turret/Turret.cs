@@ -388,9 +388,8 @@ public class Turret : MonoBehaviour
             particle.Emit(1);
         }
 
-        //temp
-        Vector3 upVector = Vector3.up;
-        var velocity = (raycastDestination.position - raycastOrigin.position).normalized * bulletSpeed;
+        float yModifier = target.GetComponent<Collider>().bounds.size.y * 0.5f;
+        var velocity = (raycastDestination.position + new Vector3(0f, yModifier, 0f) - raycastOrigin.position).normalized * bulletSpeed;
 
         foreach (var bullet in bullets)
         {

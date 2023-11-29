@@ -204,7 +204,8 @@ public class Turret_FlameThrower : MonoBehaviour
 
     private void Rotate()
     {
-        Vector3 lookDirection = target.position - firePivot.position;
+        float yModifier = target.GetComponent<Collider>().bounds.size.y * 0.5f;
+        Vector3 lookDirection = target.position + new Vector3(0f, yModifier, 0f) - firePivot.position;
         lookDirection.Normalize();
 
         firePivot.rotation = Quaternion.Slerp(firePivot.rotation, Quaternion.LookRotation(lookDirection), turnSmoothVelocity * Time.fixedDeltaTime);
@@ -286,8 +287,8 @@ public class Turret_FlameThrower : MonoBehaviour
                 DamageMessage damageMessage;
                 damageMessage.damager = gameObject;
                 damageMessage.amount = damage;
-                damageMessage.hitPoint = Vector3.zero;
-                damageMessage.hitNormal = Vector3.zero;
+                damageMessage.hitPoint = collider.transform.position;
+                damageMessage.hitNormal = collider.transform.position - transform.position;
 
                 target.ApplyDamage(damageMessage);
             }
