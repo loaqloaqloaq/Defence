@@ -140,16 +140,16 @@ public class PlayerLocomotion : MonoBehaviour
         }
         else
         { // IsGrounded State
-            //UpdateOnGround();
+            UpdateOnGround();
         }
     }
     
     private void UpdateOnGround()
     {
-        Vector3 stepForwardAmount = rootMotion * groundSpeed * Time.deltaTime;
+        //Vector3 stepForwardAmount = rootMotion * groundSpeed * Time.deltaTime;
         Vector3 stepDownAmount = Vector3.down * stepDown * Time.deltaTime;
 
-        charController.Move(stepForwardAmount + stepDownAmount);
+        charController.Move(stepDownAmount);
         rootMotion = Vector3.zero;
 
         if (!charController.isGrounded)
