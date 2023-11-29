@@ -121,7 +121,7 @@ public class RaycastWeapon : MonoBehaviour
 
     public virtual void UpdateWeapon(float deltaTime)
     {
-        isFiring = input.isFiring || input.Fire;
+        isFiring = input.IsFiring || input.Fire;
 
         if (isFiring)
         {

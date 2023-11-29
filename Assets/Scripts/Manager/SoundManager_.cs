@@ -16,10 +16,8 @@ public class SoundManager_ : MonoBehaviour
         AudioClipInfo acc = new AudioClipInfo("path", "shot", 10, 1.0f, 1 / 25.0f);
         acc.clip = clip;
         audioClips.Add("shot", acc);
-
     }
 
-  
 
     private void Update()
     {

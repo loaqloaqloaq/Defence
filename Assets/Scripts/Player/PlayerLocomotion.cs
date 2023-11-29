@@ -61,6 +61,12 @@ public class PlayerLocomotion : MonoBehaviour
         animator.SetFloat("InputX", input.x);
         animator.SetFloat("InputY", input.y);
 
+        if (!playerInput || !playerInput.enabled)
+        {
+            input = Vector2.zero;
+            return;
+        }
+
         if (playerInput.Jump)
         {
             Jump();

@@ -10004,9 +10004,9 @@ MonoBehaviour:
     audioLength: 1
     clip: {fileID: 8300000, guid: 154f001fd9a35b04fa33781367c48f6d, type: 3}
   maxLifeTime: 1
-  targetLeyer:
+  whatIsTarget:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 960
   timeBetFire: 1.7
 --- !u!114 &-7999184717167703922
 MonoBehaviour:

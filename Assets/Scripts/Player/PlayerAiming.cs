@@ -54,6 +54,8 @@ public class PlayerAiming : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!playerInput || !playerInput.enabled) return;   
+
         SetCameraRotationSpeed();
         CameraRotate();
     }

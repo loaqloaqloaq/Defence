@@ -9964,10 +9964,6 @@ MonoBehaviour:
   magazine: {fileID: 8445133983403891062}
   isInifinty: 0
   weaponName: rifle
-  soundName:
-  - rifleShot2
-  - rifleReload1
-  - emptyRifle
   isFiring: 0
   fireRate: 7
   ammoRemain: 600
@@ -9986,7 +9982,31 @@ MonoBehaviour:
   fireDistance: 1000
   maxBounces: 0
   rbForce: 4
+  fireSE:
+    maxSENum: 0
+    initVolume: 0
+    name: 
+    resourcePath: 
+    audioLength: 0
+    clip: {fileID: 0}
+  reloadSE:
+    maxSENum: 0
+    initVolume: 0
+    name: 
+    resourcePath: 
+    audioLength: 0
+    clip: {fileID: 0}
+  emptySE:
+    maxSENum: 0
+    initVolume: 0
+    name: 
+    resourcePath: 
+    audioLength: 0
+    clip: {fileID: 0}
   maxLifeTime: 0.025
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 960
 --- !u!114 &-7999184717167703922
 MonoBehaviour:
   m_ObjectHideFlags: 0
