@@ -7,7 +7,7 @@ public class RocketLauncher : RaycastWeapon
 
     public override void UpdateWeapon(float deltaTime)
     {
-        isFiring = input.isFiring || input.Fire;
+        isFiring = input.IsFiring || input.Fire;
 
         if (isFiring)
         {

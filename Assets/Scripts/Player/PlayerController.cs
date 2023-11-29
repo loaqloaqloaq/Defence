@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Windows;
 
 public class PlayerController : MonoBehaviour //各機能担当するスクリプトを管理するスクリプト
 {
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
     private ReloadWeapon reloadWeapon;
     private PlayerHealth playerHealth;
     private GrenadeController grController;
+    private PlayerInput input;
 
     [SerializeField] Transform respawnPosition;
 
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         activeWeapon = GetComponent<ActiveWeapon>();
         reloadWeapon = GetComponent<ReloadWeapon>();
         grController = GetComponent<GrenadeController>();
+        input = GetComponent<PlayerInput>();
 
         playerHealth.OnDeath += HandleDeath; //Eventに関数追加
         Cursor.visible = false;
@@ -49,6 +52,7 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         aiming.enabled = false;
         activeWeapon.enabled = false;
         reloadWeapon.enabled = false;
+        input.enabled = false;
         
         //UI
         lifeRemains--;
@@ -76,6 +80,7 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         aiming.enabled = true;
         activeWeapon.enabled = true;
         reloadWeapon.enabled = true;
+        input.enabled = true;
         gameObject.SetActive(true); //OnEnable呼出
         Cursor.visible = false;
     }

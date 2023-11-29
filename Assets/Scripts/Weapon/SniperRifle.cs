@@ -18,7 +18,7 @@ public class SniperRifle : RaycastWeapon
 
     public override void UpdateWeapon(float deltaTime)
     {
-        isFiring = input.isFiring || input.Fire;
+        isFiring = input.IsFiring || input.Fire;
 
         if (isFiring && ReadyToFire)
         {

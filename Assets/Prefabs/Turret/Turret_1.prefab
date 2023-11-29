@@ -29240,7 +29240,7 @@ GameObject:
   - component: {fileID: 5627915710466077965}
   - component: {fileID: 5340239322590573016}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: Turret_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29254,13 +29254,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7550330679009589702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.94, y: 0, z: 27.4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6831222592207053471}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5627915710466077965
 MonoBehaviour:
@@ -29276,11 +29276,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   isInifinty: 0
-  fireRate: 7
+  fireRate: 12
   ammoRemain: 1000
   magAmmo: 40
   magCapacity: 40
-  damage: 20
+  damage: 8
   shootingAngle: 30
   raycastOrigin: {fileID: 781156039725122233}
   tracerEffect: {fileID: 6919128151455992844, guid: 0c16051605a91df4c92d82f1962d9d21, type: 3}
@@ -29301,13 +29301,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   target: {fileID: 0}
-  bulletMaxLifeTime: 0.1
+  bulletMaxLifeTime: 0.2
   fireSE:
     maxSENum: 12
-    initVolume: 0.8
+    initVolume: 0.5
     name: turretFire
     resourcePath: 
-    audioLength: 0.1428571
+    audioLength: 0.3
     clip: {fileID: 8300000, guid: 7d3d9e2371152e240870e100a6132a2f, type: 3}
 --- !u!82 &5340239322590573016
 AudioSource:

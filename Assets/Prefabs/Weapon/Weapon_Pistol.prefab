@@ -9864,7 +9864,7 @@ Transform:
   - {fileID: 5196347269177439138}
   - {fileID: 5196297777752726262}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6360325984832206524
 MonoBehaviour:
@@ -9922,9 +9922,9 @@ MonoBehaviour:
     audioLength: 0.2
     clip: {fileID: 8300000, guid: be09c7b6c1b55f44cbb885d671be7936, type: 3}
   maxLifeTime: 0.02
-  targetLeyer:
+  whatIsTarget:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 960
 --- !u!114 &7479424928724557791
 MonoBehaviour:
   m_ObjectHideFlags: 0

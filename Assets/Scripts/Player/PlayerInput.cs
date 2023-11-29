@@ -9,11 +9,13 @@ public class PlayerInput : MonoBehaviour
 
     public bool Toggle { get; private set; }
 
-    public bool isFiring { get; private set; }
+    public bool IsFiring { get; private set; }
 
     public bool Reload { get; private set; }
 
     public bool Fire { get; private set; }
+
+    public bool InterAction { get; private set; }
 
     public float Zoom { get; private set; }
     public bool zoom { get; private set; }
@@ -44,7 +46,9 @@ public class PlayerInput : MonoBehaviour
 
         Toggle = Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown("joystick button 2");
 
-        isFiring = Input.GetMouseButton(0);
+        InterAction = Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown("joystick button 3");
+
+        IsFiring = Input.GetMouseButton(0);
 
         Reload = Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown("joystick button 4");
 
@@ -69,4 +73,5 @@ public class PlayerInput : MonoBehaviour
         Alpha3 = D_YAxis < -0.05f || Input.GetKeyDown(KeyCode.Alpha3);
         Alpha4 = D_XAxis < -0.05f || Input.GetKeyDown(KeyCode.Alpha4);
     }
+
 }
