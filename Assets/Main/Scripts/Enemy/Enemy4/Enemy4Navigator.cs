@@ -5,11 +5,16 @@ using UnityEngine.AI;
 
 public class Enemy4Navigator : MonoBehaviour
 {
-    public Transform target;
+    public Transform target, destination;
     private Animator animator;
     private Enemy4Controller ec;
     private float lastRotation;
     private Transform g1, g2, g3;
+
+    private Transform routes, area, route;
+    private Vector3 checkPoint;
+    private int checkPointIndex;
+    private float offsetRange;
 
     // Start is called before the first frame update
 
@@ -21,6 +26,12 @@ public class Enemy4Navigator : MonoBehaviour
         g1 = GameObject.Find("Gate1").transform;
         g2 = GameObject.Find("Gate2").transform;
         g3 = GameObject.Find("Gate3").transform;
+
+        routes = GameObject.Find("Routes").transform;
+
+        destination = g1;
+
+        offsetRange = 10f;
     }
 
     // Update is called once per frame
@@ -54,9 +65,13 @@ public class Enemy4Navigator : MonoBehaviour
                 }
                 lastRotation = transform.localEulerAngles.y;
                 ec.agent.isStopped = false;
-                var targetPos = target.position;
-                if (target.name.StartsWith("Gate"))
-                    targetPos.x = (target.position - (target.position - transform.position).normalized * 2.2f).x;
+
+                if ((target == g2 && area != routes.GetChild(0)) || (target == g3 && area != routes.GetChild(1))) RandomRoute();
+                CheckRoute();
+
+                Vector3 targetPos = Vector3.zero;
+                if (target.CompareTag("Player")) targetPos = target.position;
+                else targetPos = checkPoint;
                 ec.agent.destination = targetPos;
 
             }
@@ -72,6 +87,41 @@ public class Enemy4Navigator : MonoBehaviour
             if (ec?.agent?.enabled == true && ec.agent.isStopped == false)
                 ec.agent.isStopped = true;
         }
+
+
+    }
+
+    void NextCheckPoint()
+    {
+        checkPointIndex++;
+        if (checkPointIndex >= route.childCount)
+        {
+            destination = ec.gate;
+            checkPoint = destination.position;
+            checkPoint.x = (destination.position - (destination.position - destination.position).normalized * 2.2f).x;
+            return;
+        }
+        destination = route.GetChild(checkPointIndex);
+        checkPoint = destination.position;
+        checkPoint.x += Random.Range(-offsetRange, offsetRange);
+        checkPoint.z += Random.Range(-offsetRange, offsetRange);
+        checkPoint.y = 0;
+    }
+    void RandomRoute()
+    {
+        if (ec.gate == g2) area = routes.GetChild(0);
+        else if (ec.gate == g3) area = routes.GetChild(1);
+        route = area.GetChild(Random.Range(0, area.childCount));
+        checkPointIndex = -1;
+        NextCheckPoint();
+    }
+
+    void CheckRoute()
+    {
+        if (destination.CompareTag("Gate")) return;
+        Vector3 pos = transform.position;
+        pos.y = 0;
+        if (Vector3.Distance(checkPoint, pos) < 0.2f) NextCheckPoint();
 
 
     }

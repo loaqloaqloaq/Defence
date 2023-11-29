@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Enemy1Navigator : MonoBehaviour
 {
@@ -41,7 +38,7 @@ public class Enemy1Navigator : MonoBehaviour
             target = ec.target ?? g1 ?? g2 ?? g3;            
             if (Vector3.Distance(transform.position, target.position) > 1.5f && !ec.attacking)
             {
-                if ( (target == g2 && area != routes.GetChild(0)) || (target == g3 && area != routes.GetChild(1)) ) RandomRoute();
+                if ( (ec.gate == g2 && area != routes.GetChild(0)) || (ec.gate == g3 && area != routes.GetChild(1)) ) RandomRoute();
                 CheckRoute();                
 
                 animator.SetBool("walking", true);
@@ -72,7 +69,7 @@ public class Enemy1Navigator : MonoBehaviour
         if (checkPointIndex >= route.childCount) {
             destination = ec.gate;
             checkPoint = destination.position;
-            checkPoint.x = (destination.position - (destination.position - destination.position).normalized * 1.5f).x;
+            checkPoint.x += Random.Range(-1.5f, 1.5f); 
             return;
         }
         destination = route.GetChild(checkPointIndex);
@@ -83,7 +80,8 @@ public class Enemy1Navigator : MonoBehaviour
     }
     void RandomRoute()
     {
-        area = routes.GetChild(0);
+        if(ec.gate == g2) area = routes.GetChild(0);
+        else if(ec.gate == g3)area = routes.GetChild(1);
         route = area.GetChild(Random.Range(0, area.childCount));
         checkPointIndex = -1;
         NextCheckPoint();

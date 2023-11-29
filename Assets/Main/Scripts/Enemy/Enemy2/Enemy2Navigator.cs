@@ -10,6 +10,7 @@ public class Enemy2Navigator : MonoBehaviour
     private Enemy2Controller ec;
     private Transform player;
 
+
     // Start is called before the first frame update
 
     void Start()
@@ -33,7 +34,6 @@ public class Enemy2Navigator : MonoBehaviour
                 if (target.name.StartsWith("Gate"))
                     targetPos.x = (target.position - (target.position - transform.position).normalized * 3f).x;
                 ec.agent.destination = targetPos;
-
             }
             else
             {

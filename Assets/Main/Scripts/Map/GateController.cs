@@ -6,7 +6,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.XR;
 using UnityEngine.SceneManagement;
-
+using System.Xml.Linq;
 
 public class GateController : MonoBehaviour,IDamageable
 {
@@ -27,6 +27,8 @@ public class GateController : MonoBehaviour,IDamageable
 
     private GameObject EnemyBase_Manager;
     private GameObject player;
+
+    NavMeshObstacle o;
 
 
     // Start is called before the first frame update
@@ -49,6 +51,8 @@ public class GateController : MonoBehaviour,IDamageable
         EnemyBase_Manager = GameObject.Find("EnemyBaseManager");
 
         player = GameObject.Find("Player");
+
+        o = transform.Find("door/nk_group-3_LOD0-3_LOD0").GetComponent<NavMeshObstacle>();
     }
 
     // Update is called once per frame
