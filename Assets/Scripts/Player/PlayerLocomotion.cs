@@ -139,8 +139,8 @@ public class PlayerLocomotion : MonoBehaviour
     
     private void UpdateOnGround()
     {
-        Vector3 stepForwardAmount = rootMotion * groundSpeed;
-        Vector3 stepDownAmount = Vector3.down * stepDown;
+        Vector3 stepForwardAmount = rootMotion * groundSpeed * Time.deltaTime;
+        Vector3 stepDownAmount = Vector3.down * stepDown * Time.deltaTime;
 
         charController.Move(stepForwardAmount + stepDownAmount);
         rootMotion = Vector3.zero;

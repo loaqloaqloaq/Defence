@@ -141,6 +141,7 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
     }
     public bool ApplyDamage(DamageMessage damageMessage)
     {
+        Debug.Log("HIT");
         HP -= damageMessage.amount;        
         if (HP <= 0 && !dead)
         {            

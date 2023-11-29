@@ -3,7 +3,7 @@ using UnityEngine;
 //-------------------------------------------------
 //タレット (敵を自動で攻撃する)
 //-------------------------------------------------
-public class turret : MonoBehaviour
+public class Turret_Sub : MonoBehaviour
 {
     //タレットの状態 何もしない,追跡,攻撃
     private enum State

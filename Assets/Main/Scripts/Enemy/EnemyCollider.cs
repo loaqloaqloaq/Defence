@@ -1,13 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class EnemyCollider : MonoBehaviour,IDamageable
 {
     Transform rootObject;
-    IDamageable root;
+    
+    public IDamageable root;
     public bool ApplyDamage(DamageMessage damageMessage)
     {
+        Debug.Log(rootObject.ToString());
         root.ApplyDamage(damageMessage);
         return true;
     }
@@ -21,9 +25,11 @@ public class EnemyCollider : MonoBehaviour,IDamageable
     void Start()
     {
         rootObject = transform.parent;
-        while (!rootObject.CompareTag("Enemy")) {
+        while (!rootObject.name.StartsWith("Enemy")) {
             rootObject = rootObject.parent;
         }
+
+        Debug.Log(rootObject.ToString());
         root = rootObject.GetComponent<IDamageable>();
     }
 
