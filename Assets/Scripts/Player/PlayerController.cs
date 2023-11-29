@@ -13,11 +13,14 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
     private ReloadWeapon reloadWeapon;
     private PlayerHealth playerHealth;
     private GrenadeController grController;
+    private PlayerTurret playerTurret;
     private PlayerInput input;
 
     [SerializeField] Transform respawnPosition;
 
     [SerializeField] private AudioData pickUpSE;
+
+    private const float respawnDelay = 4.0f;
 
     private void Awake()
     {
@@ -35,13 +38,17 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         activeWeapon = GetComponent<ActiveWeapon>();
         reloadWeapon = GetComponent<ReloadWeapon>();
         grController = GetComponent<GrenadeController>();
+        playerTurret = GetComponent<PlayerTurret>();
         input = GetComponent<PlayerInput>();
 
         playerHealth.OnDeath += HandleDeath; //Eventに関数追加
         Cursor.visible = false;
 
         //UI
-        UIManager.Instance.UpdateLifeText(lifeRemains);
+        UIManager.Instance?.UpdateLifeText(lifeRemains);
+
+        //復活位置
+        if (!respawnPosition) respawnPosition = transform;
     }
 
     //死ぬときの処理
@@ -52,16 +59,17 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         aiming.enabled = false;
         activeWeapon.enabled = false;
         reloadWeapon.enabled = false;
+        playerTurret.enabled = false;
         input.enabled = false;
         
         //UI
         lifeRemains--;
-        UIManager.Instance.UpdateLifeText(lifeRemains);
-
+        UIManager.Instance?.UpdateLifeText(lifeRemains);
+        TurretUI.Instance?.CloseUI();
         //残りライフがゼロになったらゲームオーバ
         if (lifeRemains > 0)
         {
-            Invoke("Respawn", 5f); //5秒後に復活
+            Invoke("Respawn", respawnDelay); //5秒後に復活
             grController.RefillGrenade();
         }
         else
@@ -81,8 +89,10 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         activeWeapon.enabled = true;
         reloadWeapon.enabled = true;
         input.enabled = true;
+        playerTurret.enabled = true;
         gameObject.SetActive(true); //OnEnable呼出
-        Cursor.visible = false;
+
+        UIManager.Instance?.SetMouseVisible(false);
     }
 
     //アイテムとの衝突処理
@@ -97,7 +107,7 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         {
             item.Use(gameObject);
             //GameManager.Instance.AddItemCount();
-            SoundManager.Instance.PlaySE(pickUpSE.name);
+            SoundManager.Instance?.PlaySE(pickUpSE.name);
         }
     }
 }

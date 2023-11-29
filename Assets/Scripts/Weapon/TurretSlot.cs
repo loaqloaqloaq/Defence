@@ -4,23 +4,28 @@ public class TurretSlot : MonoBehaviour
 {
     [SerializeField] private Transform pivot;
 
-    [SerializeField] private bool isOn = false;
+    public bool isTurretActive { get; private set; }
 
     private GameObject turret;
 
+    private void Start()
+    {
+        isTurretActive = false;
+    }
+
     public void CreateTurret(GameObject turret)
     {
-        if (isOn) return;
+        if (isTurretActive) return;
         
         this.turret = Instantiate(turret, transform.position, Quaternion.identity, pivot);
         turret.transform.localPosition = Vector3.zero;
-        isOn = true; 
+        isTurretActive = true; 
     }
 
     public void DestroyTurret()
     {
         Destroy(turret);
-        isOn = false;
+        isTurretActive = false;
     }
 
     public void ChangeTurret(GameObject turret)

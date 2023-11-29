@@ -215,7 +215,6 @@ public class RaycastWeapon : MonoBehaviour
 
             if (target != null)
             {
-                Debug.Log("true" + damage);
                 DamageMessage damageMessage;
                 damageMessage.damager = weaponHolder;
                 damageMessage.amount = damage;
@@ -224,7 +223,7 @@ public class RaycastWeapon : MonoBehaviour
 
                 if (!target.ApplyDamage(damageMessage))
                 {
-                    Debug.Log("n");
+                    //Wall, Floor, Box Layer Process
                 }
                 
             }
