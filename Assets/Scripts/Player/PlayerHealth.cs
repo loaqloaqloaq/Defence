@@ -11,8 +11,8 @@ public class PlayerHealth : LivingEntity
     {
         animator = GetComponent<Animator>();
 
-        SoundManager.Instance.AddAudioInfo(hitSE);
-        SoundManager.Instance.AddAudioInfo(deadSE);
+        SoundManager.Instance?.AddAudioInfo(hitSE);
+        SoundManager.Instance?.AddAudioInfo(deadSE);
     }
 
     protected override void OnEnable()
@@ -37,17 +37,17 @@ public class PlayerHealth : LivingEntity
 
     private void UpdateUI(bool anim)
     {
-        UIManager.Instance.UpdateHealth(startingHealth, health, anim);
+        UIManager.Instance?.UpdateHealth(startingHealth, health, anim);
         //UIManager.Instance.UpdateHealthText(health);
     }
 
     public override bool ApplyDamage(DamageMessage damageMessage)
     {
         if (!base.ApplyDamage(damageMessage)) return false;
-        EffectManager.Instance.PlayHitEffect(damageMessage.hitPoint, damageMessage.hitNormal,
+        EffectManager.Instance?.PlayHitEffect(damageMessage.hitPoint, damageMessage.hitNormal,
             transform, EffectManager.EffectType.Flesh);
 
-        SoundManager.Instance.PlaySE(hitSE.name);
+        SoundManager.Instance?.PlaySE(hitSE.name);
 
         UpdateUI(true);
         return true;
@@ -56,7 +56,7 @@ public class PlayerHealth : LivingEntity
     public override void Die()
     {
         base.Die();
-        SoundManager.Instance.PlaySE(deadSE.name);
+        SoundManager.Instance?.PlaySE(deadSE.name);
         animator.SetTrigger("Die");
 
         UpdateUI(false);

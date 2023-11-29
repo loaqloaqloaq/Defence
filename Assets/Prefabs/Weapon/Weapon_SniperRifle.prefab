@@ -9969,7 +9969,7 @@ MonoBehaviour:
   ammoRemain: 32
   magAmmo: 8
   magCapacity: 8
-  damage: 150
+  damage: 300
   raycastOrigin: {fileID: 1430727169578368036}
   raycastDestination: {fileID: 0}
   tracerEffect: {fileID: 6919128151455992844, guid: 0c16051605a91df4c92d82f1962d9d21, type: 3}

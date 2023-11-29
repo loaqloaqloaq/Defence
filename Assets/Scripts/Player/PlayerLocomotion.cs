@@ -28,7 +28,7 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField] float jumpDamp; //0.5
     [SerializeField] float pushPower; // 2
 
-    int isSprintingParam = Animator.StringToHash("IsSprinting");
+    private int isSprintingParam = Animator.StringToHash("IsSprinting");
     [SerializeField] Animator rigController; //アニメーションリギングコントローラ
 
     //スタミナ
@@ -58,30 +58,33 @@ public class PlayerLocomotion : MonoBehaviour
     {
         input = playerInput.input;
 
-        animator.SetFloat("InputX", input.x);
-        animator.SetFloat("InputY", input.y);
-
         if (!playerInput || !playerInput.enabled)
         {
-            input = Vector2.zero;
+            SetMoveAnimation(0, 0);
             return;
         }
 
-        if (playerInput.Jump)
-        {
-            Jump();
-        }
+        if (playerInput.Jump) { Jump(); }
 
+        if (input.sqrMagnitude > 1.0f) { input.Normalize(); }
+        Move();
         UpdateIsSprinting();
-        UpdateUI();
 
-        if (input.sqrMagnitude > 1.0f)
-        {
-            input.Normalize();
-        }
- 
+        SetMoveAnimation(input.x, input.y);
+
+        UpdateUI();
+    }
+
+    private void Move()
+    {
         Vector3 movement = transform.right * input.x + transform.forward * input.y;
         charController.Move(movement * 0.12f);
+    }
+
+    private void SetMoveAnimation(float x, float y)
+    {
+        animator.SetFloat("InputX", x);
+        animator.SetFloat("InputY", y);
     }
 
     //走る状態か確認
@@ -185,7 +188,7 @@ public class PlayerLocomotion : MonoBehaviour
     private void UpdateUI()
     {
         bool isActive = IsSprinting() || currentStamina < maxStamina;
-        UIManager.Instance.SetActiveStamina(isActive);
-        UIManager.Instance.UpdateStaminaGauge(maxStamina, currentStamina);
+        UIManager.Instance?.SetActiveStamina(isActive);
+        UIManager.Instance?.UpdateStaminaGauge(maxStamina, currentStamina);
     }
 }

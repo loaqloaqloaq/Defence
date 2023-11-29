@@ -29289,7 +29289,7 @@ MonoBehaviour:
   - {fileID: 9115815505213777178}
   - {fileID: 9115815505213777178}
   hitEffect: {fileID: 1247462234392539282}
-  bulletSpeed: 250
+  bulletSpeed: 140
   bulletDrop: 0
   maxBounces: 0
   reloadTime: 3.5
