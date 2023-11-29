@@ -67,8 +67,6 @@ public class Mine : MonoBehaviour
                 damageMessage.hitNormal = collision.transform.position - transform.position;
 
                 damageable.ApplyDamage(damageMessage);
-
-                Debug.Log("damage");
             }
         }
     }
