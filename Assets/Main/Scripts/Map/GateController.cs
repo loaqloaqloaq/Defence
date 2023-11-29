@@ -42,7 +42,7 @@ public class GateController : MonoBehaviour,IDamageable
         HPfill.SetActive(false);
         HPText = transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
 
-        HPText.text = HP > 0 ? HP.ToString():"0" + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100,2) + "%)";        
+        HPText.text = (HP > 0 ? HP.ToString():"0") + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100,2) + "%)";        
         
         gaugeWidth = 30f;
         width = gaugeWidth;
@@ -83,7 +83,7 @@ public class GateController : MonoBehaviour,IDamageable
 
         HPfill.SetActive(true);
         gaugeWidth = 30f * HP / MaxHP;
-        HPText.text = HP > 0 ? HP.ToString() : "0" + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
+        HPText.text = ( HP > 0 ? HP.ToString() : "0" )+ "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
 
 
         return true;

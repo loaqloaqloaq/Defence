@@ -12,6 +12,9 @@ public class EnemyBase_Manager : MonoBehaviour
     public GameObject[] PlayerMovePoint = new GameObject[3];//一時的に強制移動するため、プレイヤーの移動先
     private GameObject Player;
 
+    [SerializeField]
+    bool playerWarp;
+
     public int[] stage = new int[2] { 0, 0 };//壊れてるゲートの確認
     private bool[] moveFlg = new bool[2] { false, false }; //移動したかの確認
     // Start is called before the first frame update
@@ -37,6 +40,7 @@ public class EnemyBase_Manager : MonoBehaviour
     //ゲートが壊れたときの処理
     private void Move()
     {
+        if (!playerWarp) return;
         if (stage[0] != 0 && !moveFlg[0])
         {
             if (enemyBase[0] != null) enemyBase[0].gameObject.transform.position = movePoint[3];

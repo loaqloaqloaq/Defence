@@ -1,5 +1,6 @@
     using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -42,6 +43,8 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
 
     int frameDelay = 5;
     int frameCnt = 0;
+
+    List<Collider> colliders= new List<Collider>();
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +70,13 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
             dropPrefab = eg.dropPrefab;
             explosion = eg.explosion;
 
+            colliders.Add(GetComponent<Collider>());
+            colliders.Add(transform.Find("root/root.x/spine_01.x").GetComponent<Collider>());
+            colliders.Add(transform.Find("root/root.x/spine_01.x/spine_02.x/shoulder.l/arm_stretch.l").GetComponent<Collider>());
+            colliders.Add(transform.Find("root/root.x/spine_01.x/spine_02.x/shoulder.r/arm_stretch.r").GetComponent<Collider>());
+            
+            colliders.Concat(transform.Find("root/root.x/thigh_stretch.l").GetComponents<Collider>());
+            colliders.Concat(transform.Find("root/root.x/thigh_stretch.r").GetComponents<Collider>());
 
             loaded = true;            
         }
@@ -165,6 +175,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
     }
     public bool ApplyDamage(DamageMessage damageMessage)
     {
+        //Debug.Log("HIT");
         HP -= damageMessage.amount;        
         if (HP <= 0 && !dead)
         {            
@@ -250,10 +261,8 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
         Start();
     }
     private void setCollider(bool en) {
-        transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetComponent<BoxCollider>().enabled = en;
-        transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(3).GetChild(0).GetComponent<BoxCollider>().enabled = en;
-        transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<BoxCollider>().enabled = en;
-        transform.GetChild(1).GetChild(0).GetChild(2).GetComponent<BoxCollider>().enabled = en;
-        transform.GetComponent<BoxCollider>().enabled = en;
+        foreach (Collider c in colliders) { 
+            c.enabled = en;
+        }
     }
 }
