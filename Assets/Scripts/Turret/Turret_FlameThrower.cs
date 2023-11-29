@@ -287,7 +287,10 @@ public class Turret_FlameThrower : MonoBehaviour
                 DamageMessage damageMessage;
                 damageMessage.damager = gameObject;
                 damageMessage.amount = damage;
-                damageMessage.hitPoint = collider.transform.position;
+
+                float yModifier = collider.bounds.size.y * 0.5f;
+                damageMessage.hitPoint = collider.transform.position + new Vector3(0f, yModifier, 0f);
+                
                 damageMessage.hitNormal = collider.transform.position - transform.position;
 
                 target.ApplyDamage(damageMessage);

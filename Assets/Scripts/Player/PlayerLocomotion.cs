@@ -21,6 +21,7 @@ public class PlayerLocomotion : MonoBehaviour
     private bool isJumping;
 
     [SerializeField] float groundSpeed; //地面上のスピード
+    [Range(1.0f, 2.0f)][SerializeField] float speedModifier;
     [SerializeField] float jumpHeight; //3 ジャンプ力
     [SerializeField] float gravity; //15~20 重力
     [SerializeField] float stepDown; //0.3 階段 Step Amount
@@ -78,7 +79,13 @@ public class PlayerLocomotion : MonoBehaviour
     private void Move()
     {
         Vector3 movement = transform.right * input.x + transform.forward * input.y;
-        charController.Move(movement * 0.12f);
+        
+        var targetSpeed = groundSpeed;
+        
+        bool isSprinting = IsSprinting();
+        if (isSprinting) targetSpeed *= speedModifier;
+        
+        charController.Move(movement * targetSpeed * Time.deltaTime);
     }
 
     private void SetMoveAnimation(float x, float y)
@@ -133,7 +140,7 @@ public class PlayerLocomotion : MonoBehaviour
         }
         else
         { // IsGrounded State
-            UpdateOnGround();
+            //UpdateOnGround();
         }
     }
     
