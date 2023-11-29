@@ -28,8 +28,7 @@ public class EnemyCollider : MonoBehaviour,IDamageable
         while (!rootObject.name.StartsWith("Enemy")) {
             rootObject = rootObject.parent;
         }
-
-        Debug.Log(rootObject.ToString());
+        //Debug.Log(rootObject.ToString());
         root = rootObject.GetComponent<IDamageable>();
     }
 
