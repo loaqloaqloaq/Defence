@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &444115563059758310
 MeshFilter:
@@ -147,4 +147,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abf4f914ef6b534db0daa62ed59dc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mine_Damage: 300
   targetLayer: Enemy

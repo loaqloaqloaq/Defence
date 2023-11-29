@@ -40,7 +40,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
     GameObject expEffect;
 
     //攻撃を食らった回数
-    int damage_Cnt = 0;
+    //int damage_Cnt = 0;
 
     float expRadius;
     float expTimer;
@@ -279,7 +279,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
         expEffect.SetActive(false);
         //GetComponent<ParticleSystem>().Stop();
     }
-
+    /*
     //ダメージ処理
     public void Damage(int damage)
     {
@@ -304,6 +304,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
             dead = true;
         }
     }
+    */
     public bool IsDead()
     {
         return dead;

@@ -34,7 +34,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
     EnemyData EnemyJson;
 
     //攻撃を食らった回数
-    int damage_Cnt = 0;
+    //int damage_Cnt = 0;
 
     bool loaded = false;
 
@@ -226,7 +226,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
         attacking = false;
         attacked = false;
     }
-
+    /*
     //ダメージ処理
     public void Damage(int damage)
     {
@@ -251,6 +251,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
             dead = true;
         }
     }
+    */
     public bool IsDead()
     {
         return dead;

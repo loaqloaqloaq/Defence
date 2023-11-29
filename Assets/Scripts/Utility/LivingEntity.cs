@@ -60,12 +60,6 @@ public class LivingEntity : MonoBehaviour, IDamageable
         dead = true;
     }
 
-    //ダメージ処理(仮)
-    public virtual void Damage(int damage)
-    {
-        //仮処理
-    }
-
     public bool IsDead()
     {
         return dead;

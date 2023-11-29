@@ -97,11 +97,6 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
         return true;
     }
-    //ƒ_ƒ[ƒWˆ—
-    public void Damage(int damage)
-    {
-        //‚È‚µ
-    }
 
     //–CŒ‚ˆ—
     private void cannonAttack()
