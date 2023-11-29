@@ -175,7 +175,7 @@ MonoBehaviour:
     m_Bits: 0
   hitSE:
     maxSENum: 2
-    initVolume: 0.55
+    initVolume: 0.35
     name: enemy1Hit
     resourcePath: 
     audioLength: 0.5
