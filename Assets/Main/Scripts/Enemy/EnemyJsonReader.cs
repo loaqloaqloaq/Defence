@@ -14,12 +14,18 @@ public class EnemyData
 {
     public float hp,moveSpeed, atk, AttackDuration, AttackStop, AttackRadius;
     public Drop drop;
+    public Resist resist;
 }
 [Serializable]
 public class Drop 
 {
     public float ammo;
     public float health;
+}
+[Serializable]
+public class Resist
+{
+    public bool fire, bullet, explode;
 }
 
 [Serializable]

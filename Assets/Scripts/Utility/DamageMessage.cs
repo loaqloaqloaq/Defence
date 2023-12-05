@@ -7,4 +7,10 @@ public struct DamageMessage
 
     public Vector3 hitPoint;
     public Vector3 hitNormal;
+
+    public Type type;
+}
+
+public enum Type { 
+    BULLET,FIRE,EXPLODE
 }

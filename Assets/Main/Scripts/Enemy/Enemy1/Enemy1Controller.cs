@@ -33,6 +33,8 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
     TextAsset EnemyJsonFile;
     EnemyData EnemyJson;
 
+    Resist resist;
+
     //çUåÇÇêHÇÁÇ¡ÇΩâÒêî
     //int damage_Cnt = 0;
 
@@ -45,6 +47,8 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
     int frameCnt = 0;
 
     List<Collider> colliders= new List<Collider>();
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -61,8 +65,11 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
             EnemyJson = eg.EnemyJson.Enemy1;
             agent.speed = EnemyJson.moveSpeed;
 
+            resist = EnemyJson.resist;
+
             MAXHP = EnemyJson.hp;
             ATK = EnemyJson.atk;
+
 
             if (!drop.ContainsKey("ammo")) drop.Add("ammo", EnemyJson.drop.ammo);
             if (!drop.ContainsKey("health")) drop.Add("health", EnemyJson.drop.health);
@@ -175,7 +182,20 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
     }
     public bool ApplyDamage(DamageMessage damageMessage)
     {
-        //Debug.Log("HIT");
+        //Debug.Log("HIT");       
+        switch (damageMessage.type) {
+            case Type.BULLET:
+                if (resist.bullet) return true;
+                break;
+            case Type.FIRE:
+                if (resist.fire) return true;
+                break;
+            case Type.EXPLODE:
+                if (resist.explode) return true;
+                break;
+            default:
+                break;            
+        }
         HP -= damageMessage.amount;        
         if (HP <= 0 && !dead)
         {            
@@ -216,7 +236,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
 
         DamageMessage dm= new DamageMessage();
         dm.damager = gameObject;
-        dm.amount = ATK;
+        dm.amount = ATK;        
         if((target.GetComponent<GateController>() ?? null) != null) target.GetComponent<GateController>().ApplyDamage(dm);
         else if ((target.GetComponent<PlayerHealth>() ?? null) != null) target.GetComponent<PlayerHealth>().ApplyDamage(dm);   
         attacked = true;

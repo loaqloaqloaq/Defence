@@ -6,7 +6,12 @@
     "drop": {
       "ammo": 5,
       "health": 5
-    }
+    },
+    "resist": {
+      "fire": false,
+      "bullet": false,
+      "explode": false
+    } 
   },
   "Enemy2": {
     "hp": 100,
@@ -15,6 +20,11 @@
     "drop": {
       "ammo": 5,
       "health": 5
+    },
+    "resist": {
+      "fire": false,
+      "bullet": false,
+      "explode": false
     }
   },
   "Enemy3": {
@@ -26,26 +36,41 @@
     "drop": {
       "ammo": 5,
       "health": 5
+    },
+    "resist": {
+      "fire": false,
+      "bullet": false,
+      "explode": false
     }
   },
   "Enemy4": {
     "hp": 100,
     "moveSpeed": 5,
-    "atk": 400,  
-    "AttackDuration":1, 
-    "AttackRadius":3.3, 
+    "atk": 400,
+    "AttackDuration": 1,
+    "AttackRadius": 3.3,
     "drop": {
       "ammo": 5,
       "health": 5
+    },
+    "resist": {
+      "fire": false,
+      "bullet": false,
+      "explode": false
     }
   },
   "Enemy5": {
     "hp": 100,
     "moveSpeed": 5,
-    "atk": 0,      
+    "atk": 0,
     "drop": {
       "ammo": 5,
       "health": 5
+    },
+    "resist": {
+      "fire": false,
+      "bullet": false,
+      "explode": false
     }
   }
 }

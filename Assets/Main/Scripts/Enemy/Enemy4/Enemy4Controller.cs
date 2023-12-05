@@ -34,6 +34,8 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
     TextAsset EnemyJsonFile;
     EnemyData EnemyJson;
 
+    Resist resist;
+
     Collider[] colliders;
 
     //ParticleSystem ps;
@@ -68,6 +70,9 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
 
             EnemyJson = eg.EnemyJson.Enemy4;
             agent.speed = EnemyJson.moveSpeed;
+
+            resist = EnemyJson.resist;
+
             expRadius = EnemyJson.AttackRadius;
             expTimer = EnemyJson.AttackDuration;
 
