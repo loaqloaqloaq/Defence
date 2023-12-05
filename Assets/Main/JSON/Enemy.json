@@ -8,10 +8,17 @@
       "health": 5
     },
     "resist": {
+      "persent":0,
       "fire": false,
-      "bullet": false,
+      "common": false,
       "explode": false
-    } 
+    },
+    "weakness":{
+      "persent":1,
+      "fire": false,
+      "common": false,
+      "explode": false
+    }
   },
   "Enemy2": {
     "hp": 100,
@@ -22,8 +29,15 @@
       "health": 5
     },
     "resist": {
+      "persent":0,
       "fire": false,
-      "bullet": false,
+      "common": false,
+      "explode": false
+    },
+    "weakness":{
+      "persent":1,
+      "fire": false,
+      "common": false,
       "explode": false
     }
   },
@@ -38,8 +52,15 @@
       "health": 5
     },
     "resist": {
+      "persent":0,
       "fire": false,
-      "bullet": false,
+      "common": false,
+      "explode": false
+    },
+    "weakness":{
+      "persent":1,
+      "fire": false,
+      "common": false,
       "explode": false
     }
   },
@@ -54,8 +75,15 @@
       "health": 5
     },
     "resist": {
+      "persent":0,
       "fire": false,
-      "bullet": false,
+      "common": false,
+      "explode": false
+    },
+    "weakness":{
+      "persent":1,
+      "fire": false,
+      "common": false,
       "explode": false
     }
   },
@@ -68,8 +96,15 @@
       "health": 5
     },
     "resist": {
+      "persent":0,
       "fire": false,
-      "bullet": false,
+      "common": false,
+      "explode": false
+    },
+    "weakness":{
+      "persent":1,
+      "fire": false,
+      "common": false,
       "explode": false
     }
   }

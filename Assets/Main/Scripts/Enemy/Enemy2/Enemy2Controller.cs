@@ -27,7 +27,7 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
 
     Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();
     EnemyData EnemyJson;
-    Resist resist;
+    Type resist, weakness;
 
     float checkFeq, lastCheck;   
     
@@ -55,6 +55,9 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
 
             EnemyJson = eg.EnemyJson.Enemy2;
             agent.speed = EnemyJson.moveSpeed;
+
+            resist = EnemyJson.resist;
+            weakness = EnemyJson.weakness;
 
             MAXHP = EnemyJson.hp;
 
@@ -142,8 +145,26 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
     }
     public bool ApplyDamage(DamageMessage damageMessage)
     {
-        Debug.Log("HIT");
-        HP -= damageMessage.amount;        
+        float damageMuiltplier = 1f;
+
+        switch (damageMessage.attackType)
+        {
+            case AttackType.Common:
+                if (resist.common) damageMuiltplier = resist.persent;
+                if (weakness.common) damageMuiltplier = weakness.persent;
+                break;
+            case AttackType.Fire:
+                if (resist.fire) damageMuiltplier = resist.persent;
+                if (weakness.fire) damageMuiltplier = weakness.persent;
+                break;
+            case AttackType.Explosion:
+                if (resist.explode) damageMuiltplier = resist.persent;
+                if (weakness.explode) damageMuiltplier = weakness.persent;
+                break;
+            default:
+                break;
+        }
+        HP -= damageMessage.amount * damageMuiltplier;
         if (HP <= 0 && !dead)
         {            
             dead = true;
