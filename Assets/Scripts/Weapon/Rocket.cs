@@ -135,6 +135,7 @@ public class Rocket : MonoBehaviour
                 damageMessage.amount = damageAmount;
                 damageMessage.hitPoint = collider.transform.position;
                 damageMessage.hitNormal = normal;
+                damageMessage.attackType = AttackType.Common;
 
                 target.ApplyDamage(damageMessage);
 

@@ -78,6 +78,7 @@ public class Grenade : MonoBehaviour
                 damageMessage.amount = damageAmount;
                 damageMessage.hitPoint = collider.transform.position;
                 damageMessage.hitNormal = normal;
+                damageMessage.attackType = AttackType.Explosion;
 
                 target.ApplyDamage(damageMessage);
             }

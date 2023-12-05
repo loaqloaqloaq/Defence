@@ -27,6 +27,7 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
 
     Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();
     EnemyData EnemyJson;
+    Resist resist;
 
     float checkFeq, lastCheck;   
     

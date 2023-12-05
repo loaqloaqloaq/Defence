@@ -94,8 +94,8 @@ public class Enemy : LivingEntity
 
         //SEの追加
         audioSource =GetComponent<AudioSource>();   
-        SoundManager.Instance.AddAudioInfo(hitSE);
-        SoundManager.Instance.AddAudioInfo(deadSE);
+        SoundManager.Instance?.AddAudioInfo(hitSE);
+        SoundManager.Instance?.AddAudioInfo(deadSE);
     }
 
     // 初期設定
@@ -292,10 +292,10 @@ public class Enemy : LivingEntity
             targetEntity = damageMessage.damager.GetComponent<LivingEntity>();
         }
 
-        EffectManager.Instance.PlayHitEffect(damageMessage.hitPoint, damageMessage.hitNormal,
-            transform, EffectManager.EffectType.Flesh);
+        EffectManager.Instance?.PlayHitEffect(damageMessage.hitPoint, damageMessage.hitNormal,
+            transform, damageMessage.attackType);
 
-        SoundManager.Instance.PlaySE(hitSE.name, audioSource);
+        SoundManager.Instance?.PlaySE(hitSE.name, audioSource);
 
         return true;
     }

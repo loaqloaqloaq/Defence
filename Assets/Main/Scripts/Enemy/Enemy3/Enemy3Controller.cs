@@ -35,6 +35,8 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
     TextAsset EnemyJsonFile;
     EnemyData EnemyJson;
     RaycastWeapon rcw;
+
+    Resist resist;
     //UŒ‚‚ğH‚ç‚Á‚½‰ñ”
     //int damage_Cnt = 0;
 
@@ -60,6 +62,9 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
 
             EnemyJson = eg.EnemyJson.Enemy3;
             agent.speed = EnemyJson.moveSpeed;
+
+            resist = EnemyJson.resist;
+
             MAXHP = EnemyJson.hp;
             ATK = EnemyJson.atk;
             fireFreq = EnemyJson.AttackDuration;
