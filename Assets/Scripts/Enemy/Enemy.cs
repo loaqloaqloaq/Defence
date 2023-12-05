@@ -295,7 +295,10 @@ public class Enemy : LivingEntity
         EffectManager.Instance?.PlayHitEffect(damageMessage.hitPoint, damageMessage.hitNormal,
             transform, damageMessage.attackType);
 
-        SoundManager.Instance?.PlaySE(hitSE.name, audioSource);
+        if (damageMessage.attackType != AttackType.Fire)
+        {
+            SoundManager.Instance?.PlaySE(hitSE.name, audioSource);
+        }
 
         return true;
     }

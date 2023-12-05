@@ -9650,7 +9650,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3660068902633684924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.9, z: -7.6}
+  m_LocalPosition: {x: 0, y: -0.83, z: 2.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14752,13 +14752,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  firePref: {fileID: 2247100141260638289, guid: a058c0f510608b641bebaeacec21d25f, type: 3}
   isInifinty: 0
   fireRate: 10
   ammoRemain: 200
   magAmmo: 200
   magCapacity: 1500
   damage: 4
-  shootingAngle: 55
+  shootingAngle: 60
   attackRoot: {fileID: 781156039725122233}
   muzzleFlash:
   - {fileID: 3463083119071643134}
