@@ -16,11 +16,6 @@ public class EnemyCollider : MonoBehaviour,IDamageable
         return true;
     }
 
-    public void Damage(int damage)
-    {
-        
-    }
-
     // Start is called before the first frame update
     void Start()
     {

@@ -47,7 +47,7 @@ public class FellowNPC : MonoBehaviour
         atkRange = 15.0f;          //攻撃範囲
         enemyDistanceLimit = 1.0f; //敵との距離制限 (近すぎるとき)
         //攻撃力
-        attack = 10;                
+        attack = 20;                
         weapon.damage = attack;
         //攻撃の確認         
         attackCheck = false;
@@ -123,6 +123,8 @@ public class FellowNPC : MonoBehaviour
         //自分と1番距離の近い敵を探す
         nearEnemyObj = nearEnemySerch();
 
+        //インターフェースを取得
+        IDamageable obj = nearEnemyObj.gameObject.GetComponent<IDamageable>();
         //敵がいない場合
         if (nearEnemyObj == null)
         {

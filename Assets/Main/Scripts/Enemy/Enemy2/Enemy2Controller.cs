@@ -32,7 +32,7 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
     
 
     //攻撃を食らった回数
-    int damage_Cnt = 0;
+    //int damage_Cnt = 0;
 
     bool loaded = false;
 
@@ -193,6 +193,7 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
         attacked = false;
     }
 
+    /*
     //ダメージ処理
     public void Damage(int damage)
     {
@@ -217,7 +218,7 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
             dead = true;
         }
     }
-
+    */
     private void setCollider(GameObject gb,bool enable) {
         foreach (Transform child in transform) {
             child.GetComponent<Collider>().enabled = enable;

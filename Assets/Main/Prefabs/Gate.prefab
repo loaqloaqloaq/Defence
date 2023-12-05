@@ -672,6 +672,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 963417760852374429}
     m_Modifications:
+    - target: {fileID: 1000010294539876, guid: 377c57e9ef0ee0e46a586ad087ef386b, type: 3}
+      propertyPath: m_Name
+      value: nk_group-3_LOD0-3_LOD0
+      objectReference: {fileID: 0}
     - target: {fileID: 1000012579619758, guid: 377c57e9ef0ee0e46a586ad087ef386b, type: 3}
       propertyPath: m_Name
       value: door
@@ -750,6 +754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8199537160599699349, guid: 377c57e9ef0ee0e46a586ad087ef386b, type: 3}
+    - {fileID: 205000010707581854, guid: 377c57e9ef0ee0e46a586ad087ef386b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1000013051442408, guid: 377c57e9ef0ee0e46a586ad087ef386b, type: 3}
     m_AddedGameObjects: []
