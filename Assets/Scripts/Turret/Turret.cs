@@ -4,7 +4,7 @@ using Unity.Burst.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class Turret : MonoBehaviour, Abnormality
 {
     enum State
     {
@@ -73,6 +73,8 @@ public class Turret : MonoBehaviour
 
     private AudioSource audioSource;
 
+    int[] abnormality = { 0, 0 };
+
     private bool IsTargetDead(Transform target)
     {
         var ITarget = target.GetComponent<IDamageable>();
@@ -119,6 +121,8 @@ public class Turret : MonoBehaviour
         audioSource =GetComponent<AudioSource>();
 
         SoundManager.Instance?.AddAudioInfo(fireSE);
+
+        abnormality = new int[] { 0, 0 };
     }
 
     private void FixedUpdate()
@@ -131,6 +135,7 @@ public class Turret : MonoBehaviour
 
     private void UpdateTurret(State s)
     {
+        if (abnormality[(int)AbnormalityType.STOP] == 1) return;
         if (s == State.StanBy) //switch
         {
             state = State.FindTarget;
@@ -441,5 +446,19 @@ public class Turret : MonoBehaviour
             }
         }
         bullets.Clear();
+    }
+
+    public void AddAbnormality(AbnormalityType at)
+    {
+        abnormality[(int)at] = 1;
+    }
+
+    public void RemoveAbnormality(AbnormalityType at)
+    {
+        abnormality[(int)at] = 0;
+    }
+    public int[] GetAbnormality()
+    {
+        return abnormality;
     }
 }

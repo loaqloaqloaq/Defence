@@ -68,7 +68,7 @@
     "hp": 100,
     "moveSpeed": 5,
     "atk": 400,
-    "AttackDuration": 1,
+    "AttackDuration": 3,
     "AttackRadius": 3.3,
     "drop": {
       "ammo": 5,
@@ -91,6 +91,7 @@
     "hp": 100,
     "moveSpeed": 5,
     "atk": 0,
+    "AttackRadius": 3.3,
     "drop": {
       "ammo": 5,
       "health": 5

@@ -27,6 +27,8 @@ public class EnemyGloable : MonoBehaviour
     Transform gate1, gate2, gate3;
     GateController g1, g2, g3;
 
+    public GameObject[] ts;
+
     void Awake() {
         EnemyJson = JsonUtility.FromJson<EnemyJsonReader>(EnemyJsonFile.ToString());
         dropPrefab.Add("ammo", ammoPack);
@@ -44,6 +46,8 @@ public class EnemyGloable : MonoBehaviour
         player = GameObject.Find("Player").transform;
 
         enemyCnt = 0;
+
+        ts = GameObject.FindGameObjectsWithTag("Turret");
     }
 
     void Update()
