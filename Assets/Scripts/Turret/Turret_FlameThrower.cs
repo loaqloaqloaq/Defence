@@ -102,7 +102,7 @@ public class Turret_FlameThrower : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        SoundManager.Instance.AddAudioInfo(fireSE);
+        SoundManager.Instance?.AddAudioInfo(fireSE);
     }
 
     private void FixedUpdate()
@@ -286,6 +286,7 @@ public class Turret_FlameThrower : MonoBehaviour
                 DamageMessage damageMessage;
                 damageMessage.damager = gameObject;
                 damageMessage.amount = damage;
+                damageMessage.attackType = AttackType.Fire;
 
                 float yModifier = collider.bounds.size.y * 0.5f;
                 damageMessage.hitPoint = collider.transform.position + new Vector3(0f, yModifier, 0f);
@@ -303,7 +304,7 @@ public class Turret_FlameThrower : MonoBehaviour
         {
             //temp
             case "Shot":
-                SoundManager.Instance.PlaySE(fireSE.name, audioSource);
+                SoundManager.Instance?.PlaySE(fireSE.name, audioSource);
                 break;
 
         }

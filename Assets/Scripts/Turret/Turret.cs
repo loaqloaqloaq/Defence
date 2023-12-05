@@ -29,7 +29,7 @@ public class Turret : MonoBehaviour
 
     public bool isInifinty;
 
-    protected bool isFiring;
+    private bool isFiring;
     [SerializeField] int fireRate = 25;
     [SerializeField] int ammoRemain = 150;
     [SerializeField] int magAmmo;
@@ -37,25 +37,24 @@ public class Turret : MonoBehaviour
     [SerializeField] float damage = 10.0f;
     [Range(0.0f, 90.0f)][SerializeField] private float shootingAngle = 15.0f;
 
+    [SerializeField] private Transform raycastOrigin;
+    private Transform raycastDestination;
 
-    [SerializeField] protected Transform raycastOrigin;
-    protected Transform raycastDestination;
+    [SerializeField] private TrailRenderer tracerEffect;
+    [SerializeField] private ParticleSystem[] muzzleFlash;
+    [SerializeField] private ParticleSystem hitEffect;
 
-    [SerializeField] protected TrailRenderer tracerEffect;
-    [SerializeField] protected ParticleSystem[] muzzleFlash;
-    [SerializeField] protected ParticleSystem hitEffect;
-
-    [SerializeField] protected float bulletSpeed = 1000.0f;
-    [SerializeField] protected float bulletDrop = 0.0f;
-    [SerializeField] protected int maxBounces = 0;
-    [SerializeField] protected float reloadTime;
-    [Range(0.0f, 5.0f)][SerializeField] protected float turnSmoothVelocity = 3.0f;
+    [SerializeField] private float bulletSpeed = 1000.0f;
+    [SerializeField] private float bulletDrop = 0.0f;
+    [SerializeField] private int maxBounces = 0;
+    [SerializeField] private float reloadTime;
+    [Range(0.0f, 5.0f)][SerializeField] private float turnSmoothVelocity = 3.0f;
     private float reloadDuration;
 
     [SerializeField] Transform firePivot;
 
     //çUåÇîÕàÕ
-    [SerializeField] protected float attackRadius = 15.0f;
+    [SerializeField] private float attackRadius = 15.0f;
     [SerializeField] private float fieldOfView = 50f; //éãñÏäp 
 
     //private RaycastHit[] hits = new RaycastHit[10]; //çUåÇéûÇ…ê⁄êGÇµÇΩÉIÉuÉWÉFÉNÉgÇîzóÒÇ≈ì«Ç›çûÇﬁ
@@ -64,7 +63,7 @@ public class Turret : MonoBehaviour
 
     List<Bullet> bullets = new List<Bullet>();
 
-    protected GameObject weaponHolder;
+    private GameObject weaponHolder;
 
     [SerializeField] private Transform target;
 
@@ -119,7 +118,7 @@ public class Turret : MonoBehaviour
     {
         audioSource =GetComponent<AudioSource>();
 
-        SoundManager.Instance.AddAudioInfo(fireSE);
+        SoundManager.Instance?.AddAudioInfo(fireSE);
     }
 
     private void FixedUpdate()
@@ -272,7 +271,7 @@ public class Turret : MonoBehaviour
 
     Ray ray;
     RaycastHit hitInfo;
-    protected float accumulateTime;
+    private float accumulateTime;
 
     public virtual void UpdateWeapon(float deltaTime)
     {
@@ -295,12 +294,12 @@ public class Turret : MonoBehaviour
         }
     }
 
-    protected void UpdateBullets(float deltaTime)
+    private void UpdateBullets(float deltaTime)
     {
         SimulateBullet(deltaTime);
     }
 
-    protected void SimulateBullet(float deltaTime)
+    private void SimulateBullet(float deltaTime)
     {
         bullets.ForEach(bullet =>
         {
@@ -337,6 +336,7 @@ public class Turret : MonoBehaviour
                 damageMessage.amount = damage;
                 damageMessage.hitPoint = hitInfo.point;
                 damageMessage.hitNormal = hitInfo.normal;
+                damageMessage.attackType = AttackType.Common;
 
                 target.ApplyDamage(damageMessage);
             }
@@ -413,7 +413,7 @@ public class Turret : MonoBehaviour
         {
             //temp
             case "Shot":
-                SoundManager.Instance.PlaySE(fireSE.name, audioSource);
+                SoundManager.Instance?.PlaySE(fireSE.name, audioSource);
                 break;
 
         }

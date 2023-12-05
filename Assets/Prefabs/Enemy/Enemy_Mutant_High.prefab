@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3528584650386001359}
   - component: {fileID: 4562164361082995934}
   - component: {fileID: 1406273583005524507}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Enemy_Mutant_High
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -127,8 +127,6 @@ MonoBehaviour:
   state: 0
   attackRoot: {fileID: 1211493415993156561}
   eyeTransform: {fileID: 8702291185212170885}
-  hitSoundName: 
-  deathSoundName: 
   turnSmoothTime: 0.1
   startingScore: 100
   currentScore: 0
@@ -142,7 +140,20 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 0
-  hitSE: {fileID: 0}
+  hitSE:
+    maxSENum: 0
+    initVolume: 0
+    name: 
+    resourcePath: 
+    audioLength: 0
+    clip: {fileID: 0}
+  deadSE:
+    maxSENum: 0
+    initVolume: 0
+    name: 
+    resourcePath: 
+    audioLength: 0
+    clip: {fileID: 0}
 --- !u!136 &1406273583005524507
 CapsuleCollider:
   m_ObjectHideFlags: 0

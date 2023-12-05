@@ -17,13 +17,16 @@ public class EffectManager : MonoBehaviour
     public enum EffectType
     {
         Common,
+        Fire,
         Flesh
     }
-
-    public ParticleSystem commonHitEffectPrefab;
-    public ParticleSystem fleshHitEffectPrefab;
-
-    //«¨«Õ«§«¯«Èî¢ßæ
+    
+    //VFX ParticleSystem
+    [SerializeField] private ParticleSystem commonHitEffectPrefab;
+    [SerializeField] private ParticleSystem fleshHitEffectPrefab;
+    [SerializeField] private ParticleSystem fireHitEffectPrefab;
+   
+    //«¨«Õ«§«¯«Èû¾ßE
     public void PlayHitEffect(Vector3 pos, Vector3 normal, Transform parent = null,
         EffectType effectType = EffectType.Common)
     {
@@ -31,6 +34,27 @@ public class EffectManager : MonoBehaviour
 
         if (effectType == EffectType.Flesh)
             targetPrefab = fleshHitEffectPrefab;
+
+        if (effectType == EffectType.Fire)
+            targetPrefab = fireHitEffectPrefab;
+
+        var effect = Instantiate(targetPrefab, pos, Quaternion.LookRotation(normal));
+
+        if (parent != null)
+        {
+            effect.transform.SetParent(parent);
+        }
+
+        effect.Play();
+    }
+
+    public void PlayHitEffect(Vector3 pos, Vector3 normal, Transform parent = null,
+        AttackType attackType = AttackType.Common)
+    {
+        var targetPrefab = commonHitEffectPrefab;
+
+        if (attackType == AttackType.Fire)
+            targetPrefab = fireHitEffectPrefab;
 
         var effect = Instantiate(targetPrefab, pos, Quaternion.LookRotation(normal));
 

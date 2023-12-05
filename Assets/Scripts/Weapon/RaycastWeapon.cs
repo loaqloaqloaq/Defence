@@ -220,6 +220,7 @@ public class RaycastWeapon : MonoBehaviour
                 damageMessage.amount = damage;
                 damageMessage.hitPoint = hitInfo.point;
                 damageMessage.hitNormal = hitInfo.normal;
+                damageMessage.attackType = AttackType.Common;
 
                 if (!target.ApplyDamage(damageMessage))
                 {
