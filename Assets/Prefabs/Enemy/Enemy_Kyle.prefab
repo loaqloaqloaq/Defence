@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 3422742895661174573}
   - component: {fileID: 239817267161049576}
   - component: {fileID: 1565042170717120061}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Enemy_Kyle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
