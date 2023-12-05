@@ -17,6 +17,8 @@ public class Turret_FlameThrower : MonoBehaviour
 
     [SerializeField] private State state;
 
+    [SerializeField] private GameObject firePref; 
+
     public bool isInifinty;
 
     private bool isFiring;
@@ -28,7 +30,6 @@ public class Turret_FlameThrower : MonoBehaviour
     [Range(0.0f, 90.0f)][SerializeField] private float shootingAngle = 15.0f;
 
     [SerializeField] private Transform attackRoot;
-    private Transform raycastDestination;
 
     [SerializeField] private ParticleSystem[] muzzleFlash;
     [SerializeField] private ParticleSystem hitEffect;
@@ -47,8 +48,6 @@ public class Turret_FlameThrower : MonoBehaviour
 
     [SerializeField] private LayerMask whatIsTarget;//攻撃対象をLayerMaskで特定
 
-    private GameObject weaponHolder;
-
     [SerializeField] private Transform target;
 
     [SerializeField] private AudioData fireSE;
@@ -56,6 +55,8 @@ public class Turret_FlameThrower : MonoBehaviour
     private float accumulateTime;
 
     private AudioSource audioSource;
+
+    private List<DamagerFire> fireList = new List<DamagerFire>();
 
     private bool IsTargetDead(Transform target)
     {
@@ -170,7 +171,6 @@ public class Turret_FlameThrower : MonoBehaviour
             //ターゲットを設定
             if (target != null)
             {
-                raycastDestination = target;
                 state = State.Attack;
                 break;
             }
@@ -180,6 +180,8 @@ public class Turret_FlameThrower : MonoBehaviour
     //オブジェクトとターゲットの間に障害物がいるか、視野範囲内にいるか確認
     private bool IsTargetOnSight(Transform target)
     {
+        if (!target) { return false; }
+        
         RaycastHit hit;
 
         var direction = target.position - attackRoot.position;
@@ -248,12 +250,12 @@ public class Turret_FlameThrower : MonoBehaviour
         float fireInterval = 1.0f / fireRate;
         while (accumulateTime >= 0.0f)
         {
-            FireBullet();
+            Fire();
             accumulateTime -= fireInterval;
         }
     }
 
-    public virtual void FireBullet()
+    public virtual void Fire()
     {
         if (magAmmo <= 0)
         {
@@ -276,26 +278,65 @@ public class Turret_FlameThrower : MonoBehaviour
         foreach (var collider in colliders)
         {
             //オブジェクトが視野範囲内にない
-            if (!IsTargetOnSight(collider.transform))
+            if (!IsTargetOnShootingLine(collider.transform))
                 continue;
 
-            var target = collider.transform.GetComponent<IDamageable>();
+            var m_dF = collider.GetComponentInChildren<DamagerFire>();
+            if (m_dF)
+            {
+                m_dF.ReNew();
+                continue;
+            }
 
+            var target = collider.transform.GetComponent<IDamageable>();
             if (target != null)
             {
-                DamageMessage damageMessage;
-                damageMessage.damager = gameObject;
-                damageMessage.amount = damage;
-                damageMessage.attackType = AttackType.Fire;
+                DamagerFire targetFire = GetFire();
 
-                float yModifier = collider.bounds.size.y * 0.5f;
-                damageMessage.hitPoint = collider.transform.position + new Vector3(0f, yModifier, 0f);
-                
-                damageMessage.hitNormal = collider.transform.position - transform.position;
-
-                target.ApplyDamage(damageMessage);
+                ThrowFire(collider, target, targetFire);
             }
         }
+    }
+
+    private DamagerFire GetFire()
+    {
+        foreach (var fire in fireList)
+        {
+            if (!fire.gameObject.activeSelf)
+            {
+                return fire;
+            }
+        }
+        var newfire = CreateFire();
+        fireList.Add(newfire);
+
+        return newfire;
+    }
+
+
+    private void ThrowFire(Collider collider, IDamageable target, DamagerFire fire)
+    {
+        fire.gameObject.SetActive(true);
+        fire.SetTarget(target);
+
+        float yModifier = collider.bounds.size.y * 0.5f;
+        fire.transform.position = collider.transform.position + new Vector3(0f, yModifier, 0f);
+        fire.transform.parent = collider.transform;
+    }
+
+    private DamagerFire CreateFire()
+    {
+        if (!firePref)
+        {
+            Debug.Log("FirePref is NULL Reference");
+            return null;
+        }
+
+        var obj = Instantiate(firePref, transform.position, Quaternion.identity, transform);
+        var m_fD = obj.GetComponent<DamagerFire>();
+        m_fD.Initialize(transform, damage);
+        return m_fD;
+
     }
 
     public void PlaySound(string soundName)
