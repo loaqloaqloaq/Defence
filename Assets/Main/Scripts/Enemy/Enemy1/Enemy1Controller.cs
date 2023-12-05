@@ -33,7 +33,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
     TextAsset EnemyJsonFile;
     EnemyData EnemyJson;
 
-    Resist resist;
+    Type resist, weakness;
 
     //UŒ‚‚ğH‚ç‚Á‚½‰ñ”
     //int damage_Cnt = 0;
@@ -66,6 +66,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
             agent.speed = EnemyJson.moveSpeed;
 
             resist = EnemyJson.resist;
+            weakness = EnemyJson.weakness;
 
             MAXHP = EnemyJson.hp;
             ATK = EnemyJson.atk;
@@ -182,21 +183,26 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
     }
     public bool ApplyDamage(DamageMessage damageMessage)
     {
-        //Debug.Log("HIT");       
-        switch (damageMessage.type) {
-            case Type.BULLET:
-                if (resist.bullet) return true;
+        //Debug.Log("HIT");
+        float damageMuiltplier = 1f;
+        
+        switch (damageMessage.attackType) {
+            case AttackType.Common:
+                if (resist.common) damageMuiltplier=resist.persent;
+                if(weakness.common) damageMuiltplier=weakness.persent;
                 break;
-            case Type.FIRE:
-                if (resist.fire) return true;
+            case AttackType.Fire:
+                if (resist.fire) damageMuiltplier = resist.persent;
+                if (weakness.fire) damageMuiltplier = weakness.persent;
                 break;
-            case Type.EXPLODE:
-                if (resist.explode) return true;
+            case AttackType.Explosion:
+                if (resist.explode) damageMuiltplier = resist.persent;
+                if (weakness.explode) damageMuiltplier = weakness.persent;
                 break;
             default:
                 break;            
-        }
-        HP -= damageMessage.amount;        
+        }       
+        HP -= damageMessage.amount * damageMuiltplier;        
         if (HP <= 0 && !dead)
         {            
             dead = true;

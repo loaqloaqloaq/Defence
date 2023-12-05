@@ -14,7 +14,7 @@ public class EnemyData
 {
     public float hp,moveSpeed, atk, AttackDuration, AttackStop, AttackRadius;
     public Drop drop;
-    public Resist resist;
+    public Type resist, weakness;
 }
 [Serializable]
 public class Drop 
@@ -23,9 +23,10 @@ public class Drop
     public float health;
 }
 [Serializable]
-public class Resist
+public class Type
 {
-    public bool fire, bullet, explode;
+    public bool fire, common, explode;
+    public float persent;
 }
 
 [Serializable]

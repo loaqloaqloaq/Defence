@@ -34,7 +34,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
     TextAsset EnemyJsonFile;
     EnemyData EnemyJson;
 
-    Resist resist;
+    Type resist, weakness;
 
     Collider[] colliders;
 
@@ -72,6 +72,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
             agent.speed = EnemyJson.moveSpeed;
 
             resist = EnemyJson.resist;
+            weakness = EnemyJson.weakness;
 
             expRadius = EnemyJson.AttackRadius;
             expTimer = EnemyJson.AttackDuration;
@@ -202,8 +203,26 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
     }
     public bool ApplyDamage(DamageMessage damageMessage)
     {
-        Debug.Log("HIT");
-        HP -= damageMessage.amount;
+        float damageMuiltplier = 1f;
+
+        switch (damageMessage.attackType)
+        {
+            case AttackType.Common:
+                if (resist.common) damageMuiltplier = resist.persent;
+                if (weakness.common) damageMuiltplier = weakness.persent;
+                break;
+            case AttackType.Fire:
+                if (resist.fire) damageMuiltplier = resist.persent;
+                if (weakness.fire) damageMuiltplier = weakness.persent;
+                break;
+            case AttackType.Explosion:
+                if (resist.explode) damageMuiltplier = resist.persent;
+                if (weakness.explode) damageMuiltplier = weakness.persent;
+                break;
+            default:
+                break;
+        }
+        HP -= damageMessage.amount * damageMuiltplier;
         if (HP <= 0 && !dead)
         {
             dead = true;
