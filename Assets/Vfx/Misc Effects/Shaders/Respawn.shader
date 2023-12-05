@@ -110,5 +110,5 @@ Shader "Custom/Respawn" {
 		}
 		ENDCG
 	}
-	FallBack "Diffuse"
+	firstfallBack "Diffuse"
 }

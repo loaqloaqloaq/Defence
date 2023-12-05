@@ -4,7 +4,7 @@ using Unity.Burst.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 
-public class Turret_FlameThrower : MonoBehaviour
+public class Turret_FlameThrower : MonoBehaviour, Abnormality
 {
     enum State
     {
@@ -17,6 +17,8 @@ public class Turret_FlameThrower : MonoBehaviour
 
     [SerializeField] private State state;
 
+    [SerializeField] private GameObject firePref; 
+
     public bool isInifinty;
 
     private bool isFiring;
@@ -28,7 +30,6 @@ public class Turret_FlameThrower : MonoBehaviour
     [Range(0.0f, 90.0f)][SerializeField] private float shootingAngle = 15.0f;
 
     [SerializeField] private Transform attackRoot;
-    private Transform raycastDestination;
 
     [SerializeField] private ParticleSystem[] muzzleFlash;
     [SerializeField] private ParticleSystem hitEffect;
@@ -39,15 +40,13 @@ public class Turret_FlameThrower : MonoBehaviour
 
     [SerializeField] Transform firePivot;
 
-    //UŒ‚”ÍˆÍ
+    //ï¿½Uï¿½ï¿½ï¿½Íˆï¿½
     [SerializeField] private float attackRadius = 15.0f;
-    [SerializeField] private float fieldOfView = 50f; //‹–ìŠp 
+    [SerializeField] private float fieldOfView = 50f; //ï¿½ï¿½ï¿½ï¿½p 
 
-    //private RaycastHit[] hits = new RaycastHit[10]; //UŒ‚‚ÉÚG‚µ‚½ƒIƒuƒWƒFƒNƒg‚ğ”z—ñ‚Å“Ç‚İ‚Ş
+    //private RaycastHit[] hits = new RaycastHit[10]; //ï¿½Uï¿½ï¿½ï¿½ï¿½ï¿½ÉÚGï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½zï¿½ï¿½Å“Ç‚İï¿½ï¿½ï¿½
 
-    [SerializeField] private LayerMask whatIsTarget;//UŒ‚‘ÎÛ‚ğLayerMask‚Å“Á’è
-
-    private GameObject weaponHolder;
+    [SerializeField] private LayerMask whatIsTarget;//ï¿½Uï¿½ï¿½ï¿½ÎÛ‚ï¿½LayerMaskï¿½Å“ï¿½ï¿½ï¿½
 
     [SerializeField] private Transform target;
 
@@ -56,6 +55,9 @@ public class Turret_FlameThrower : MonoBehaviour
     private float accumulateTime;
 
     private AudioSource audioSource;
+
+    private List<DamagerFire> fireList = new List<DamagerFire>();
+    int[] abnormality = { 0, 0 };
 
     private bool IsTargetDead(Transform target)
     {
@@ -69,7 +71,7 @@ public class Turret_FlameThrower : MonoBehaviour
         return false;
     }
 
-#if UNITY_EDITOR //Turret‚ÌUŒ‚”ÍˆÍƒfƒoƒbƒO
+#if UNITY_EDITOR //Turretï¿½ÌUï¿½ï¿½ï¿½ÍˆÍƒfï¿½oï¿½bï¿½O
     private void OnDrawGizmosSelected()
     {
         if (attackRoot != null)
@@ -103,10 +105,13 @@ public class Turret_FlameThrower : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         SoundManager.Instance?.AddAudioInfo(fireSE);
+
+        abnormality = new int[]{ 0, 0 };
     }
 
     private void FixedUpdate()
     {
+        if (abnormality[(int)AbnormalityType.STOP] == 1) return;
         if (state == State.Attack) { Rotate(); }
 
         UpdateTurret(state);
@@ -150,48 +155,49 @@ public class Turret_FlameThrower : MonoBehaviour
 
     private void FindTarget()
     {
-        //if (target != null) target = null; // ƒ^[ƒQƒbƒg‚ª‚¢‚Ä€‚ñ‚Å‚¢‚½‚çtargetEntity‚ğ‹ó‚¯‚é
+        //if (target != null) target = null; // ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Äï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½ï¿½targetEntityï¿½ï¿½ï¿½ó‚¯‚ï¿½
 
-        //OverlapSphere‚ğ’Ê‚µ‚Ä‰¼‘z‚Ì‹…‘Ì‚Æd‚È‚é‚·‚×‚Ä‚Ìcollider‚ğ“Ç‚İ‚Ş
+        //OverlapSphereï¿½ï¿½Ê‚ï¿½ï¿½Ä‰ï¿½ï¿½zï¿½Ì‹ï¿½ï¿½Ì‚Ædï¿½È‚é‚·ï¿½×‚Ä‚ï¿½colliderï¿½ï¿½Ç‚İï¿½ï¿½ï¿½
         var colliders = Physics.OverlapSphere(attackRoot.position, attackRadius, whatIsTarget);
 
         foreach (var collider in colliders)
         {
-            //ƒIƒuƒWƒFƒNƒg‚ª‹–ì”ÍˆÍ“à‚É‚È‚¢
+            //ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÍˆÍ“ï¿½ï¿½É‚È‚ï¿½
             if (!IsTargetOnSight(collider.transform))
                 continue;
 
             target = collider.gameObject.transform;
 
-            //C³
+            //ï¿½Cï¿½ï¿½
             if (IsTargetDead(target))
                 continue;
 
-            //ƒ^[ƒQƒbƒg‚ğİ’è
+            //ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½ï¿½İ’ï¿½
             if (target != null)
             {
-                raycastDestination = target;
                 state = State.Attack;
                 break;
             }
         }
     }
 
-    //ƒIƒuƒWƒFƒNƒg‚Æƒ^[ƒQƒbƒg‚ÌŠÔ‚ÉáŠQ•¨‚ª‚¢‚é‚©A‹–ì”ÍˆÍ“à‚É‚¢‚é‚©Šm”F
+    //ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Æƒ^ï¿½[ï¿½Qï¿½bï¿½gï¿½ÌŠÔ‚Éï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚©ï¿½Aï¿½ï¿½ï¿½ï¿½ÍˆÍ“ï¿½ï¿½É‚ï¿½ï¿½é‚©ï¿½mï¿½F
     private bool IsTargetOnSight(Transform target)
     {
+        if (!target) { return false; }
+        
         RaycastHit hit;
 
         var direction = target.position - attackRoot.position;
         //direction.y = raycastOrigin.forward.y;
 
-        //‘ÎÛ‚ª‹–ì‚©‚ç”²‚¯‚Ä‚é
+        //ï¿½ÎÛ‚ï¿½ï¿½ï¿½ï¿½ì‚©ï¿½ç”²ï¿½ï¿½ï¿½Ä‚ï¿½
         if (Vector3.Angle(direction, attackRoot.forward) > fieldOfView * 0.5f)
         {
             return false;
         }
 
-        //ƒIƒuƒWƒFƒNƒg‚Æ‘ÎÛ‚ÌŠÔ‚ÉáŠQ•¨‚ª‚È‚¢‚Ì‚ğŠm”F
+        //ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Æ‘ÎÛ‚ÌŠÔ‚Éï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Ì‚ï¿½ï¿½mï¿½F
         if (Physics.Raycast(attackRoot.position, direction, out hit, attackRadius))
         {
             if (hit.transform == target)
@@ -219,7 +225,7 @@ public class Turret_FlameThrower : MonoBehaviour
 
         float angle = shootingAngle;
 
-        //‘ÎÛ‚ª‹–ì‚©‚ç”²‚¯‚Ä‚é
+        //ï¿½ÎÛ‚ï¿½ï¿½ï¿½ï¿½ì‚©ï¿½ç”²ï¿½ï¿½ï¿½Ä‚ï¿½
         if (Vector3.Angle(direction, attackRoot.forward) > angle * 0.5f)
         {
             return false;
@@ -238,7 +244,7 @@ public class Turret_FlameThrower : MonoBehaviour
         isFiring = IsTargetOnShootingLine(target);
 
         if (isFiring) { UpdateFiring(deltaTime); }
-        else { accumulateTime = 0.0f; } // << X ¼öÁ¤ ÇÊ¼E
+        else { accumulateTime = 0.0f; } // << X ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½E
 
     }
 
@@ -248,12 +254,12 @@ public class Turret_FlameThrower : MonoBehaviour
         float fireInterval = 1.0f / fireRate;
         while (accumulateTime >= 0.0f)
         {
-            FireBullet();
+            Fire();
             accumulateTime -= fireInterval;
         }
     }
 
-    public virtual void FireBullet()
+    public virtual void Fire()
     {
         if (magAmmo <= 0)
         {
@@ -270,32 +276,71 @@ public class Turret_FlameThrower : MonoBehaviour
             particle.Emit(1);
         };
         
-        //UŒ‚ˆ—
+        //ï¿½Uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         var colliders = Physics.OverlapSphere(attackRoot.position, attackRadius, whatIsTarget);
 
         foreach (var collider in colliders)
         {
-            //ƒIƒuƒWƒFƒNƒg‚ª‹–ì”ÍˆÍ“à‚É‚È‚¢
-            if (!IsTargetOnSight(collider.transform))
+            //ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÍˆÍ“ï¿½ï¿½É‚È‚ï¿½
+            if (!IsTargetOnShootingLine(collider.transform))
                 continue;
 
-            var target = collider.transform.GetComponent<IDamageable>();
+            var m_dF = collider.GetComponentInChildren<DamagerFire>();
+            if (m_dF)
+            {
+                m_dF.ReNew();
+                continue;
+            }
 
+            var target = collider.transform.GetComponent<IDamageable>();
             if (target != null)
             {
-                DamageMessage damageMessage;
-                damageMessage.damager = gameObject;
-                damageMessage.amount = damage;
-                damageMessage.attackType = AttackType.Fire;
+                DamagerFire targetFire = GetFire();
 
-                float yModifier = collider.bounds.size.y * 0.5f;
-                damageMessage.hitPoint = collider.transform.position + new Vector3(0f, yModifier, 0f);
-                
-                damageMessage.hitNormal = collider.transform.position - transform.position;
-
-                target.ApplyDamage(damageMessage);
+                ThrowFire(collider, target, targetFire);
             }
         }
+    }
+
+    private DamagerFire GetFire()
+    {
+        foreach (var fire in fireList)
+        {
+            if (!fire.gameObject.activeSelf)
+            {
+                return fire;
+            }
+        }
+        var newfire = CreateFire();
+        fireList.Add(newfire);
+
+        return newfire;
+    }
+
+
+    private void ThrowFire(Collider collider, IDamageable target, DamagerFire fire)
+    {
+        fire.gameObject.SetActive(true);
+        fire.SetTarget(target);
+
+        float yModifier = collider.bounds.size.y * 0.5f;
+        fire.transform.position = collider.transform.position + new Vector3(0f, yModifier, 0f);
+        fire.transform.parent = collider.transform;
+    }
+
+    private DamagerFire CreateFire()
+    {
+        if (!firePref)
+        {
+            Debug.Log("FirePref is NULL Reference");
+            return null;
+        }
+
+        var obj = Instantiate(firePref, transform.position, Quaternion.identity, transform);
+        var m_fD = obj.GetComponent<DamagerFire>();
+        m_fD.Initialize(transform, damage);
+        return m_fD;
+
     }
 
     public void PlaySound(string soundName)
@@ -320,5 +365,18 @@ public class Turret_FlameThrower : MonoBehaviour
         int refillAmount = ammoRemain + magAmmo >= magCapacity ? magCapacity - magAmmo : ammoRemain;
         magAmmo += refillAmount;
         ammoRemain -= refillAmount;
+    }
+
+    public void AddAbnormality(AbnormalityType at)
+    {
+        abnormality[(int)at] = 1;
+    }
+
+    public void RemoveAbnormality(AbnormalityType at)
+    {
+        abnormality[(int)at] = 0;
+    }
+    public int[] GetAbnormality() {
+        return abnormality;
     }
 }
