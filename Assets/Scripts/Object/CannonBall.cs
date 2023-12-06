@@ -51,7 +51,6 @@ public class CannonBall : MonoBehaviour
         //砲弾の行動
         Move();
         //落下ポイントにマーカーを表示
-        FallpointMarker();
     }
 
     //砲弾の行動
@@ -61,16 +60,22 @@ public class CannonBall : MonoBehaviour
         this.transform.Translate(0, ballmoveY, 0);
 
         //砲弾が30m以上、上昇したら
-        if (transform.position.y >= 30.0f)
-        {
+        if (this.transform.position.y >= 30.0f && !firstfall)
+        {        
             //砲弾の位置を設定 (プレイヤーの20m上)           
-            cannonBall_Pos = player.transform.position + new Vector3(0.0f, 20.0f, 0.0f);
+            cannonBall_Pos = player.transform.position + new Vector3(0.0f, 29.0f, 0.0f);
             //砲弾の位置を更新
             this.transform.position = cannonBall_Pos;
             //落下地点をプレイヤーの位置に設定
-            fallpoint = player.transform.position;
+            firstfall = true;
+
+            FallpointMarker();
+        }
+
+        if (firstfall)
+        {
             //砲弾を下に降下させる
-            ballmoveY = -0.1f;
+            ballmoveY = -9.8f *Time.deltaTime;
             //当たり判定を有効化する
             cannonBall_Collider.enabled = true;
             //落下開始
@@ -78,17 +83,22 @@ public class CannonBall : MonoBehaviour
         }
     }
     //落下ポイントにマーカーを表示
-    private void FallpointMarker()
+    public void FallpointMarker()
     {
+        fallpoint = player.transform.position;
+        //落下ポイントにマーカーを生成
+        var mark = Instantiate(marker, fallpoint, Quaternion.identity);
+           
+        //大きさの設定
+        mark.transform.localScale = new Vector3(2.5f, 0.001f, 2.5f);
+
+        
+
+        Destroy(mark, 1.0f);
         //落下開始時
         if (firstfall == true)
         {
-            //落下ポイントにマーカーを生成
-            mark = Instantiate(marker, fallpoint, Quaternion.identity);
-            //大きさの設定
-            mark.transform.localScale = new Vector3(2.5f, 0.001f, 2.5f);
-            //既に落下している
-            firstfall = false;
+
         }
     }
 
