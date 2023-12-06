@@ -103,6 +103,5 @@ public class DamagerFire : MonoBehaviour
         damageMessage.hitNormal = Vector3.up;
 
         m_Damageable.ApplyDamage(damageMessage);
-
     }
 }

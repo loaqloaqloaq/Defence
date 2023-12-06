@@ -99,7 +99,7 @@ Transform:
   - {fileID: 7499805570375444854}
   - {fileID: 64219170}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &530080249591140929
 Animator:
@@ -172,7 +172,7 @@ MonoBehaviour:
   runSpeed: 3
   whatIsTarget:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   hitSE:
     maxSENum: 2
     initVolume: 0.35
