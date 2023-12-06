@@ -11,9 +11,9 @@ public class Enemy5Navigator : MonoBehaviour
     private float lastRotation;    
 
     private Transform routes, area, route;
-    private Vector3 checkPoint;
+    
     private int checkPointIndex;
-    private float offsetRange;
+    private float offsetRange,offset;
 
     // Start is called before the first frame update
 
@@ -24,6 +24,7 @@ public class Enemy5Navigator : MonoBehaviour
         lastRotation = transform.localEulerAngles.y;         
 
         offsetRange = 2.5f;
+        offset = Random.Range(-offsetRange, offsetRange);
     }
 
     // Update is called once per frame
@@ -59,8 +60,9 @@ public class Enemy5Navigator : MonoBehaviour
                 lastRotation = transform.localEulerAngles.y;
                 ec.agent.isStopped = false;                
 
-                Vector3 targetPos = Vector3.zero;                
-                targetPos = checkPoint;
+                Vector3 targetPos = target.transform.position;
+                targetPos.x += offset;
+                targetPos.z += offset;
                 ec.agent.destination = targetPos;
 
             }
