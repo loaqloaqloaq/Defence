@@ -107,5 +107,5 @@ Shader "Custom/Dissolve" {
 		}
 		ENDCG
 	}
-	firstfallBack "Diffuse"
+	FallBack "Diffuse"
 }
