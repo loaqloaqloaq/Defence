@@ -57,6 +57,8 @@ public class Turret_FlameThrower : MonoBehaviour, Abnormality
     private AudioSource audioSource;
 
     private List<DamagerFire> fireList = new List<DamagerFire>();
+
+    [SerializeField]
     int[] abnormality = { 0, 0 };
 
     private bool IsTargetDead(Transform target)
@@ -284,12 +286,15 @@ public class Turret_FlameThrower : MonoBehaviour, Abnormality
             if (!IsTargetOnShootingLine(collider.transform))
                 continue;
 
+            var colliderPart = collider.GetComponent<EnemyPart>() ?? null;
+            if (colliderPart != null && colliderPart.GetPart() != Part.BODY) continue;
+
             var m_dF = collider.GetComponentInChildren<DamagerFire>();
             if (m_dF)
             {
                 m_dF.ReNew();
                 continue;
-            }
+            }           
 
             var target = collider.transform.GetComponent<IDamageable>();
             if (target != null)

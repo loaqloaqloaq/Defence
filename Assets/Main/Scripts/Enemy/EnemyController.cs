@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -21,9 +22,8 @@ public class EnemyController : MonoBehaviour
         foreach (Transform child in transform)
         {           
             
-            if (index == type) {
+            if (index == type) {                
                 resetEnemy(child);
-                child.gameObject.SetActive(true);
                 if(eg == null) eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
                 eg.EnemyCreated();
             } 
@@ -33,6 +33,7 @@ public class EnemyController : MonoBehaviour
     }
 
     private void resetEnemy(Transform t) {
+        t.gameObject.SetActive(true);
         t.position = transform.position;
         EnemyInterface controller = t.GetComponent<EnemyInterface>();
         controller.resetEnemy();

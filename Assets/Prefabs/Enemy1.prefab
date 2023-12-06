@@ -1330,7 +1330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400096, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400096, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       propertyPath: m_LocalScale.x
@@ -1771,6 +1771,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100108, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3515461409891187316}
+    - targetCorrespondingSourceObject: {fileID: 100108, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1069670659641790355}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6935815346553112863}
@@ -1874,6 +1877,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4, y: 1.8, z: 0.67}
   m_Center: {x: 0, y: 0.48, z: 0}
+--- !u!114 &1069670659641790355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424343564931241442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dfb2a6f8c60d434d9cdc4b405cd5571, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7424343564931241452 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100098, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}
@@ -1915,16 +1930,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 0
   MAXHP: 0
+  ATK: 0
   agent: {fileID: 0}
   attacking: 0
   attacked: 0
   target: {fileID: 0}
   gate: {fileID: 0}
-  gate1: {fileID: 0}
-  gate2: {fileID: 0}
-  gate3: {fileID: 0}
   player: {fileID: 0}
-  explosion: {fileID: 2532972853072531924, guid: b40f4969cc5dc9c41adb34150b3c46f3, type: 3}
 --- !u!114 &1772465016867539042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1938,6 +1950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  destination: {fileID: 0}
 --- !u!136 &393040150081768883
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class Enemy5Navigator : MonoBehaviour
 {
     public Transform target, destination;
     private Animator animator;
-    private Enemy4Controller ec;
+    private Enemy5Controller ec;
     private float lastRotation;    
 
     private Transform routes, area, route;
@@ -20,7 +20,7 @@ public class Enemy5Navigator : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        ec = GetComponent<Enemy4Controller>();
+        ec = GetComponent<Enemy5Controller>();
         lastRotation = transform.localEulerAngles.y;         
 
         offsetRange = 2.5f;

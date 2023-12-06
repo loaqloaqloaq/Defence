@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5513746450316132713}
   - component: {fileID: 8736048378845699810}
   - component: {fileID: 7191880579024373009}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneWingLeft_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,9 +92,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2080890404806324622}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,9 +126,9 @@ GameObject:
   - component: {fileID: 6854499160642100894}
   - component: {fileID: 3762595962820674523}
   - component: {fileID: 744262295212684455}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneWingRight_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,9 +207,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1771575904344751298}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level02
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,9 +239,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 899076921939874620}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level02
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -271,9 +271,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1582936953338245529}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level00
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,9 +305,9 @@ GameObject:
   - component: {fileID: 4907273098582992949}
   - component: {fileID: 2214465338585352892}
   - component: {fileID: 3770552293298616554}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneWingLeft
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -386,9 +386,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6516096065891435540}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: _UMS_LODs_
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -421,9 +421,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7184125370389083622}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level03
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -455,9 +455,9 @@ GameObject:
   - component: {fileID: 3016970985222089973}
   - component: {fileID: 1116335769669421313}
   - component: {fileID: 1425556856011963360}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneBladeLeft_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -536,9 +536,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4835115964639882813}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level00
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -568,9 +568,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8185005613711905677}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -600,9 +600,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1323842302763301407}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level03
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -634,9 +634,9 @@ GameObject:
   - component: {fileID: 4993983138264971538}
   - component: {fileID: 8021276070075031603}
   - component: {fileID: 7375414954396848995}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneWingLeft_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -715,9 +715,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4209739184708115118}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: _UMS_LODs_
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -752,9 +752,9 @@ GameObject:
   - component: {fileID: 1549606450395710399}
   - component: {fileID: 7102269518579254140}
   - component: {fileID: 8496092863038568968}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneBladeRight_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -835,9 +835,9 @@ GameObject:
   - component: {fileID: 7510404512350375800}
   - component: {fileID: 4609948239461189112}
   - component: {fileID: 8398544343865399091}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_Drone_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -918,9 +918,9 @@ GameObject:
   - component: {fileID: 4552174386283539584}
   - component: {fileID: 4099060746413560152}
   - component: {fileID: 3269193873035366470}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_Drone_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1001,9 +1001,9 @@ GameObject:
   - component: {fileID: 5163399938674099104}
   - component: {fileID: 2952172703948247089}
   - component: {fileID: 5906621617214188556}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneWingRight_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1082,9 +1082,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4199158247014484110}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level03
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1114,9 +1114,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2457156431360663544}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level02
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1146,9 +1146,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2486299896167802824}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1178,9 +1178,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7215399752448785454}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: _UMS_LODs_
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1213,9 +1213,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 612014812788601646}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level00
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1247,9 +1247,9 @@ GameObject:
   - component: {fileID: 826346627923530002}
   - component: {fileID: 7555502223989681137}
   - component: {fileID: 5042238070032713891}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneBladeLeft_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1328,9 +1328,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7036195197607326808}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1362,9 +1362,9 @@ GameObject:
   - component: {fileID: 8500574145424563297}
   - component: {fileID: 4846176208085244376}
   - component: {fileID: 8992231557793012889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneBladeRight
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1443,9 +1443,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7896605221616985615}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level02
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1477,9 +1477,9 @@ GameObject:
   - component: {fileID: 6839593010434794568}
   - component: {fileID: 4613647460155747858}
   - component: {fileID: 4284809921267832681}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneBladeLeft_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1560,9 +1560,9 @@ GameObject:
   - component: {fileID: 3259051582786716907}
   - component: {fileID: 8386489861452250311}
   - component: {fileID: 1032181626044124293}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneWingRight_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1643,9 +1643,9 @@ GameObject:
   - component: {fileID: 9037362260947525891}
   - component: {fileID: 156485989541589392}
   - component: {fileID: 1077607431132234395}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneWingLeft_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1724,9 +1724,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4930659813355290547}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level03
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1758,9 +1758,9 @@ GameObject:
   - component: {fileID: 5328440236989288635}
   - component: {fileID: 5114013572682272717}
   - component: {fileID: 1299703915525018593}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneBladeRight_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1841,9 +1841,9 @@ GameObject:
   - component: {fileID: 6177666331688874134}
   - component: {fileID: 1488038502401782591}
   - component: {fileID: 5017095272908256691}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneBladeLeft
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1922,9 +1922,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 723722826053777182}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level02
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1954,9 +1954,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4558542359180851148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: _UMS_LODs_
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1989,9 +1989,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6355245014364755357}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level00
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2023,9 +2023,9 @@ GameObject:
   - component: {fileID: 3193955374629009687}
   - component: {fileID: 7415359025013316675}
   - component: {fileID: 156200056184668364}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_Drone
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2104,9 +2104,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6552668600777544310}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level00
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2138,9 +2138,9 @@ GameObject:
   - component: {fileID: 6736498881099410968}
   - component: {fileID: 5117075061207826660}
   - component: {fileID: 1971066376350699760}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: effect
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6973,9 +6973,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4648722993111003414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level03
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7005,9 +7005,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2919166131825059522}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: _UMS_LODs_
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7042,9 +7042,9 @@ GameObject:
   - component: {fileID: 5679234456619896223}
   - component: {fileID: 7868193670795039039}
   - component: {fileID: 622004128367344075}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneWingRight
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7125,9 +7125,9 @@ GameObject:
   - component: {fileID: 6662138938484770360}
   - component: {fileID: 2224082798467061417}
   - component: {fileID: 8701718269784174735}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_DroneBladeRight_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7208,9 +7208,9 @@ GameObject:
   - component: {fileID: 1853756577796635090}
   - component: {fileID: 3909408133249240830}
   - component: {fileID: 3447738241401269673}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 000_static_PA_Drone_combined_static
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7289,9 +7289,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 861452812516112720}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7320,6 +7320,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 100000, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
       propertyPath: m_Name
       value: Enemy4
@@ -7330,9 +7338,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -8200,6 +8240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dfb2a6f8c60d434d9cdc4b405cd5571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  part: 0
 --- !u!114 &454007841803983699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8373,11 +8414,7 @@ MonoBehaviour:
   attacked: 0
   target: {fileID: 0}
   gate: {fileID: 0}
-  gate1: {fileID: 0}
-  gate2: {fileID: 0}
-  gate3: {fileID: 0}
   player: {fileID: 0}
-  EnemyJsonFile: {fileID: 4900000, guid: f1c981157521eed4fae48c4d1df9debd, type: 3}
 --- !u!114 &6669687046538934223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8391,6 +8428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  destination: {fileID: 0}
 --- !u!4 &2595014424384535988 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400008, guid: f14b6f7503476eb4e9b2afc1cc05e719, type: 3}

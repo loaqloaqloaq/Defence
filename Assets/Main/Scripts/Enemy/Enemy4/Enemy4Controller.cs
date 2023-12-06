@@ -29,9 +29,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
     Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();
 
     float checkFeq, lastCheck;
-
-    [SerializeField]
-    TextAsset EnemyJsonFile;
+    
     EnemyData EnemyJson;
 
     Type resist, weakness;
@@ -336,5 +334,9 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
     public void resetEnemy()
     {
         Start();
+    }
+    public Part GetPart()
+    {
+        return Part.BODY;
     }
 }

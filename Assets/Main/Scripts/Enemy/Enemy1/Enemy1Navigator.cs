@@ -41,8 +41,7 @@ public class Enemy1Navigator : MonoBehaviour
                 if ( (ec.gate == g2 && area != routes.GetChild(0)) || (ec.gate == g3 && area != routes.GetChild(1)) ) RandomRoute();
                 CheckRoute();                
 
-                animator.SetBool("walking", true);
-                ec.agent.isStopped = false;
+                animator.SetBool("walking", true);                
                 Vector3 targetPos = Vector3.zero;
                 if (target.CompareTag("Player")) targetPos = target.position;
                 else targetPos = checkPoint;
@@ -51,13 +50,11 @@ public class Enemy1Navigator : MonoBehaviour
             }
             else
             {
-                animator.SetBool("walking", false);
-                if (ec.agent.isStopped == false) ec.agent.isStopped = true;
+                animator.SetBool("walking", false);                
             }
         }
         else {
-            animator.SetBool("walking", false);
-            if(ec?.agent?.enabled == true  && ec.agent.isStopped == false) ec.agent.isStopped = true;
+            animator.SetBool("walking", false);            
         }
 
         

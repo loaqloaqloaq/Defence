@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
+public class Enemy2Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
 {
     [HideInInspector]
     public float HP, MAXHP, ATK;
@@ -28,6 +28,8 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
     Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();
     EnemyData EnemyJson;
     Type resist, weakness;
+
+    Dictionary<Part, bool> takingDamage = new Dictionary<Part, bool>();
 
     float checkFeq, lastCheck;   
     
@@ -65,6 +67,11 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
 
             drop.Add("ammo", EnemyJson.drop.ammo);
             drop.Add("health", EnemyJson.drop.health);
+
+            for (int i = 0; i < Enum.GetValues(typeof(Part)).Length; i++)
+            {
+                if (!takingDamage.ContainsKey((Part)i)) takingDamage.Add((Part)i, false);
+            }
 
             dropPrefab = eg.dropPrefab;
             explosion = eg.explosion;
@@ -130,6 +137,7 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
                 }
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
                 {
+                    agent.isStopped = true;
                     if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.4f)
                     {
                         Attack();
@@ -145,8 +153,23 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
     }
     public bool ApplyDamage(DamageMessage damageMessage)
     {
+        return ApplyDamage(damageMessage, Part.BODY);
+    }
+    private KeyValuePair<Part, bool>? GetTakingDamagePart()
+    {
+        foreach (var p in takingDamage)
+        {
+            if (p.Value) return p;
+        }
+        return null;
+    }
+    public bool ApplyDamage(DamageMessage damageMessage, Part part)
+    {
+        //Debug.Log("HIT");
+        KeyValuePair<Part, bool>? takingDamagePart = GetTakingDamagePart();
+        if (takingDamagePart != null && takingDamagePart.Value.Key != part) return true;
         float damageMuiltplier = 1f;
-
+        takingDamage[part] = true;
         switch (damageMessage.attackType)
         {
             case AttackType.Common:
@@ -170,6 +193,7 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
             dead = true;
             Dead();
         }
+        takingDamage[part] = false;
         return true;
     }
     private void Dead() {
@@ -213,6 +237,7 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
     private void ResetAfterAttack() { 
         attacking = false;
         attacked = false;
+        agent.isStopped = false;
     }
 
     /*
@@ -262,5 +287,9 @@ public class Enemy2Controller : MonoBehaviour, IDamageable, EnemyInterface
         transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<BoxCollider>().enabled = en;
         transform.GetChild(1).GetChild(0).GetChild(2).GetComponent<BoxCollider>().enabled = en;
         transform.GetComponent<BoxCollider>().enabled = en;
+    }
+    public Part GetPart()
+    {
+        return Part.BODY;
     }
 }

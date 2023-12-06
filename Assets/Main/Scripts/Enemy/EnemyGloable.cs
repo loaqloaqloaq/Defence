@@ -27,7 +27,7 @@ public class EnemyGloable : MonoBehaviour
     Transform gate1, gate2, gate3;
     GateController g1, g2, g3;
 
-    public GameObject[] ts;
+    public List<GameObject> ts = new List<GameObject>();
 
     void Awake() {
         EnemyJson = JsonUtility.FromJson<EnemyJsonReader>(EnemyJsonFile.ToString());
@@ -47,7 +47,7 @@ public class EnemyGloable : MonoBehaviour
 
         enemyCnt = 0;
 
-        ts = GameObject.FindGameObjectsWithTag("Turret");
+        ts.AddRange(GameObject.FindGameObjectsWithTag("Turret"));
     }
 
     void Update()
@@ -64,7 +64,12 @@ public class EnemyGloable : MonoBehaviour
             gate = gate3;
         }
     }
-
+    public void TurretCreated(GameObject t) {
+        ts.Add(t);
+    }
+    public void TurretDestoried(GameObject t) { 
+        ts.Remove(t);
+    }
     public void EnemyCreated(int i=1) {
         enemyCnt += i;
     }
