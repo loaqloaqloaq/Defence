@@ -23,7 +23,7 @@ public class SniperRifle : RaycastWeapon
         if (isFiring && ReadyToFire)
         {
             fireTime = Time.time;
-            FireBullet();
+            Fire();
         }
         else
         {
@@ -31,12 +31,12 @@ public class SniperRifle : RaycastWeapon
             recoil.Reset();
         }
 
-        SnipingControl();
+        CameraControl();
 
         UpdateBullets(deltaTime);
     }
 
-    private void SnipingControl()
+    private void CameraControl()
     {
         isAiming = input.zoom || input.Zoom >= 0.02f;
         if (isAiming)

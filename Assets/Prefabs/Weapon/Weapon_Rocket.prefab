@@ -14885,7 +14885,7 @@ MonoBehaviour:
   weaponSlot: 2
   magazine: {fileID: 514843262947869396}
   isInifinty: 0
-  weaponName: rocket
+  weaponType: rocket
   isFiring: 0
   fireRate: 1
   ammoRemain: 10
