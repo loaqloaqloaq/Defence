@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 
 //-------------------------------------------------
-//敵拠点 (敵を生成する)
+//敵拠点 (敵を生成する、砲弾を発射する)
 //-------------------------------------------------
 public class EnemyBase : MonoBehaviour, IDamageable
 {
@@ -16,6 +16,10 @@ public class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] TextMeshProUGUI HPText; //HPテキスト
     [SerializeField] Animator animator;      //アニメーター
 
+    //ダメージを受けたかの確認
+    private bool applydamage;
+    //HPを回復する時間
+    private float healTime;
     //砲弾発射カウント
     private float firingCount;
     //砲弾発射頻度
@@ -36,12 +40,15 @@ public class EnemyBase : MonoBehaviour, IDamageable
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
         //攻撃の時間のカウント
         firingCount = 0.0f;
-        //5秒に一回攻撃する
-        firingTime = 5.0f;
+        //10秒に一回攻撃する
+        firingTime = 10.0f;
+        //ダメージを受けていないを設定
+        applydamage = false;
+        healTime = 0.0f;
     }
     void Update()
     {
-        //HPが0以下になったとき
+        //HPが0以下のとき
         if (HP <= 0)
         {
             //死んだときの処理
@@ -56,20 +63,27 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //常に敵拠点のHPをカメラの方向に向ける
         canvas.transform.forward = Camera.main.transform.forward;
 
+        //ダメージを受けた時
+        if (applydamage == true)
+        {
+            //HPを回復
+            HealHP();
+        }
+
         //攻撃の時間のカウント
         firingCount += Time.deltaTime;
-
-        //20秒に1回
+        //10秒に1回
         if (firingCount >= firingTime)
         {
             //砲撃発射
-            cannonfiring();
+            Cannonfiring();
         }
     }
 
     //ダメージを受ける処理
     public bool ApplyDamage(DamageMessage damageMessage)
     {
+        //HPが0以下のとき
         if (HP <= 0)
         {
             return true;
@@ -81,6 +95,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
             HP -= damageMessage.amount;
             //animationを再生
             animator.SetTrigger("damage");
+            //ダメージを受けた
+            applydamage = true;
         }
         //ゲージの更新
         gaugeWidth = 30f * HP / MaxHP;
@@ -108,8 +124,34 @@ public class EnemyBase : MonoBehaviour, IDamageable
         return true;
     }
 
+    //HPを回復
+    private void HealHP()
+    {
+        //HPを回復する時間を加算
+        healTime += Time.deltaTime;
+
+        //ダメージを受けてから10秒以上経過したら
+        if (healTime >= 10.0f)
+        {
+            //HPを100回復
+            HP += 100.0f;
+            //時間をリセット
+            healTime = 0.0f;
+        }
+        //HPが全回復したとき
+        else if (HP >= MaxHP)
+        {
+            //HPを最初の値に戻す
+            HP = MaxHP;
+            //ダメージ受け状態をリセット
+            applydamage = false;
+        }
+        //ゲージの更新
+        gaugeWidth = 30f * HP / MaxHP;
+        HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
+    }
     //砲撃発射
-    private void cannonfiring()
+    private void Cannonfiring()
     {
         //弾丸発射エフェクトの位置を設定
         Vector3 firPos = this.transform.position;
@@ -120,11 +162,10 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //大きさの設定
         shellfiring.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
 
-        //発射エフェクトと同じ場所に弾丸を生成
+        //弾丸の位置を設定
         cannonBall.transform.position = shellfiring.transform.position;
         //砲弾生成
         Instantiate(cannonBall);
-
         //砲弾発射カウントをリセット
         firingCount = 0.0f;
     }

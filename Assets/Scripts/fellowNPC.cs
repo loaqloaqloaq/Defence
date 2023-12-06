@@ -1,8 +1,8 @@
 using UnityEngine;
 
-//-------------------------------------
-//仲間(NPC) (今のところ無敵)
-//-------------------------------------
+//----------------------------------------
+//仲間(NPC) (近づいてきた敵に自動で攻撃する)
+//----------------------------------------
 public class FellowNPC : MonoBehaviour
 {
     //仲間(NPC)の状態 待機、追跡、攻撃
@@ -123,8 +123,6 @@ public class FellowNPC : MonoBehaviour
         //自分と1番距離の近い敵を探す
         nearEnemyObj = nearEnemySerch();
 
-        //インターフェースを取得
-        IDamageable obj = nearEnemyObj.gameObject.GetComponent<IDamageable>();
         //敵がいない場合
         if (nearEnemyObj == null)
         {
