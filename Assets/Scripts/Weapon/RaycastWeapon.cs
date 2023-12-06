@@ -31,7 +31,7 @@ public class RaycastWeapon : MonoBehaviour
 
     public bool isInifinty;
 
-    public string weaponName;
+    public string weaponType;
     public bool isFiring;
     public int fireRate = 25;
     public int ammoRemain = 150;
@@ -63,7 +63,7 @@ public class RaycastWeapon : MonoBehaviour
 
     [SerializeField] protected float maxLifeTime = 1.2f;
 
-    [SerializeField] private LayerMask whatIsTarget;
+    [SerializeField] protected LayerMask whatIsTarget;
 
     public bool reloadAvailable
     {
@@ -163,7 +163,7 @@ public class RaycastWeapon : MonoBehaviour
         float fireInterval = 1.0f / fireRate;
         while (accumulateTime >= 0.0f)
         {
-            FireBullet();
+            Fire();
             accumulateTime -= fireInterval;
         }
     }
@@ -271,7 +271,7 @@ public class RaycastWeapon : MonoBehaviour
         }
     }
 
-    public virtual void FireBullet()
+    public virtual void Fire()
     {
         if (magAmmo <= 0) 
         {
@@ -280,7 +280,7 @@ public class RaycastWeapon : MonoBehaviour
         }
         --magAmmo;
         PlaySound("Shot");                    //sound
-        recoil.GernerateRecoil(weaponName);   //recoil
+        recoil.GernerateRecoil(weaponType);   //recoil
         foreach (var particle in muzzleFlash) //effect
         {
             particle.Emit(1);
@@ -312,7 +312,7 @@ public class RaycastWeapon : MonoBehaviour
         }
         --magAmmo;
         PlaySound("Shot");                    //sound
-        recoil.GernerateNPCRecoil(weaponName);   //recoil
+        recoil.GernerateNPCRecoil(weaponType);   //recoil
         foreach (var particle in muzzleFlash) //effect
         {
             particle.Emit(1);

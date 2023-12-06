@@ -9881,7 +9881,7 @@ MonoBehaviour:
   weaponSlot: 1
   magazine: {fileID: 5192832457053926158}
   isInifinty: 1
-  weaponName: pistol
+  weaponType: pistol
   isFiring: 0
   fireRate: 1
   ammoRemain: 150

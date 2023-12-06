@@ -324,7 +324,7 @@ public class ActiveWeapon : MonoBehaviour
         var weapon = GetWeapon(index);
         if (weapon)
         {
-            rigController.Play("equip_" + weapon.weaponName);
+            rigController.Play("equip_" + weapon.weaponType);
             rigController.SetBool("holster_weapon", false);
             do
             {

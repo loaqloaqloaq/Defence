@@ -125,8 +125,7 @@ public class Turret_FlameThrower : MonoBehaviour, Abnormality
             state = State.FindTarget;
             return;
         }
-        if (s == State.Reloading)
-        { ReloadProcess(); return; }
+        if (s == State.Reloading) { ReloadProcess(); return; }
         if (s == State.FindTarget) { FindTarget(); return; }
         if (s == State.Reloading) { return; }
 
@@ -340,7 +339,6 @@ public class Turret_FlameThrower : MonoBehaviour, Abnormality
         var m_fD = obj.GetComponent<DamagerFire>();
         m_fD.Initialize(transform, damage);
         return m_fD;
-
     }
 
     public void PlaySound(string soundName)
