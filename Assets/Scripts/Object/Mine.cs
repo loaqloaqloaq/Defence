@@ -57,9 +57,7 @@ public class Mine : MonoBehaviour
             //敵と接触したとき
             if (hitLayer == targetLayer)
             {
-                //敵へダメージ処理を行う   
-                //damageable.Damage(mine_Damage);
-
+                //敵へダメージ処理を行う
                 DamageMessage damageMessage = new DamageMessage();
                 damageMessage.damager = gameObject;
                 damageMessage.amount = mine_Damage;

@@ -489,7 +489,7 @@ MonoBehaviour:
   HPGauge: {fileID: 7205706304795598167}
   HPText: {fileID: 1828502158129437592}
   animator: {fileID: 2510624589237194357}
-  cannonBall: {fileID: 7625476238500056011}
+  cannonBall: {fileID: 6732254157035167464, guid: 3bd672f8b622b1c41b91586f3b3d228c, type: 3}
 --- !u!1 &7205706304795598167
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,11 +678,6 @@ PrefabInstance:
 --- !u!4 &7104695114014527857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6207673119558730834, guid: 3bd672f8b622b1c41b91586f3b3d228c, type: 3}
-  m_PrefabInstance: {fileID: 3800729399108572451}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7625476238500056011 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6732254157035167464, guid: 3bd672f8b622b1c41b91586f3b3d228c, type: 3}
   m_PrefabInstance: {fileID: 3800729399108572451}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6243251506930103849
