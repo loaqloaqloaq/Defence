@@ -9963,7 +9963,7 @@ MonoBehaviour:
   weaponSlot: 0
   magazine: {fileID: 8445133983403891062}
   isInifinty: 0
-  weaponName: rifle
+  weaponType: rifle
   isFiring: 0
   fireRate: 7
   ammoRemain: 600

@@ -9963,7 +9963,7 @@ MonoBehaviour:
   weaponSlot: 3
   magazine: {fileID: 817124530509406123}
   isInifinty: 0
-  weaponName: sniperRifle
+  weaponType: sniperRifle
   isFiring: 0
   fireRate: 1
   ammoRemain: 32

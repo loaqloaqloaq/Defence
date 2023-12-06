@@ -20,7 +20,7 @@ public class RocketLauncher : RaycastWeapon
         }
     }
 
-    public override void FireBullet()
+    public override void Fire()
     {
         if (magAmmo <= 0)
         {
@@ -29,7 +29,7 @@ public class RocketLauncher : RaycastWeapon
         }
         --magAmmo;
         PlaySound("Shot");                    //sound
-        recoil.GernerateRecoil(weaponName);   //recoil
+        recoil.GernerateRecoil(weaponType);   //recoil
 
         foreach (var particle in muzzleFlash) //effect
         {
