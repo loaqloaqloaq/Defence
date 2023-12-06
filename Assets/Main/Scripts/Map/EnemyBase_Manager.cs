@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 //using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EnemyBase_Manager : MonoBehaviour
 {
+    //プレイヤーのワープに関する変数
     [SerializeField]
     bool playerWarp;
+    public GameObject counterUI;
+    private float teleportCounter;
+    private bool teleportFlg;
 
     public GameObject[] enemyBase = new GameObject[3];　//現在マップに生成されているEnemyBase
     private Vector3[] movePoint = new Vector3[9];//EnemyBaseの移動先
@@ -16,7 +23,7 @@ public class EnemyBase_Manager : MonoBehaviour
     private GameObject Player;   
 
     public int[] stage = new int[2] { 0, 0 };//壊れてるゲートの確認
-    private bool[] moveFlg = new bool[2] { false, false }; //移動したかの確認
+    private int[] moveFlg = new int[2] { 0,0 }; //移動したかの確認
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +32,9 @@ public class EnemyBase_Manager : MonoBehaviour
             movePoint[i] = GameObject.Find("movePoint" + (i + 1)).transform.position;
         }
         Player = GameObject.Find("Player");
+        teleportCounter = 0;
+        teleportFlg = false;
+        counterUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,8 +50,8 @@ public class EnemyBase_Manager : MonoBehaviour
     //ゲートが壊れたときの処理
     private void Move()
     {
-        if (playerWarp) PlayerMove();
-        if (stage[0] != 0 && !moveFlg[0])
+        if (playerWarp && teleportFlg) WarpCounter();
+        if (stage[0] != 0 && moveFlg[0] == 0)
         {
             if (enemyBase[0] != null) enemyBase[0].gameObject.transform.position = movePoint[3];
             else
@@ -61,9 +71,10 @@ public class EnemyBase_Manager : MonoBehaviour
                 GameObject obj = Instantiate(EnemyBase_Prefab, movePoint[5], Quaternion.Euler(0, 180, 0));
                 enemyBase[2] = obj;
             }
-            moveFlg[0] = true;
+            moveFlg[0]++;
+            teleportFlg = true;
         }
-        if (stage[1] != 0 && !moveFlg[1])
+        if (stage[1] != 0 && moveFlg[1] == 0)
         {
             if (enemyBase[0] != null) enemyBase[0].gameObject.transform.position = movePoint[6];
             else
@@ -83,25 +94,47 @@ public class EnemyBase_Manager : MonoBehaviour
                 GameObject obj = Instantiate(EnemyBase_Prefab, movePoint[8], Quaternion.Euler(0, 180, 0));
                 enemyBase[2] = obj;
             }
-            moveFlg[1] = true;
+            moveFlg[1]++;
+            teleportFlg = true;
         }
-        
     }
 
+    private void WarpCounter()
+    {
+
+        //30秒後にワープ
+        if (teleportCounter <= 30.0f)
+        {
+            counterUI.SetActive(true);
+            teleportCounter += Time.deltaTime;
+            int Counter = 30 - (int)teleportCounter;
+            counterUI.GetComponent<Text>().text = Counter + "秒後に次の拠点へ移動します";
+        }
+        else
+        {
+            Debug.Log("ワープ開始");
+            PlayerMove();
+            teleportCounter = 0;
+            teleportFlg = false;
+            counterUI.SetActive(false);
+        }
+    }
 
     void PlayerMove()
     {
-        if (stage[0] != 0 && !moveFlg[0])
+        if (stage[0] != 0 && moveFlg[0] == 1 && teleportFlg)
         {
             Player.GetComponent<CharacterController>().enabled = false;
             Player.transform.position = PlayerMovePoint[1].transform.position;
             Player.GetComponent<CharacterController>().enabled = true;
+            moveFlg[0]++;
         }
-        if (stage[1] != 0 && !moveFlg[1])
+        if (stage[1] != 0 && moveFlg[1] == 1 && teleportFlg)
         {
             Player.GetComponent<CharacterController>().enabled = false;
             Player.transform.position = PlayerMovePoint[2].transform.position;
             Player.GetComponent<CharacterController>().enabled = true;
+            moveFlg[1]++;
         }
     }
 
@@ -109,7 +142,7 @@ public class EnemyBase_Manager : MonoBehaviour
     private void Retreat()
     {
         //第3ステージで破壊された場合
-        if (stage[1] != 0 && moveFlg[1])
+        if (stage[1] != 0 && moveFlg[1] == 2)
         {
             GameObject obj = Instantiate(EnemyBase_Prefab, movePoint[3], Quaternion.Euler(0, 180, 0));
             enemyBase[0] = obj;
@@ -118,10 +151,10 @@ public class EnemyBase_Manager : MonoBehaviour
             obj = Instantiate(EnemyBase_Prefab, movePoint[5], Quaternion.Euler(0, 180, 0));
             enemyBase[2] = obj;
             stage[1] = 0;
-            moveFlg[1] = false;
+            moveFlg[1] = 0;
         }
         //第2ステージですべて破壊された場合
-        else if (stage[0] != 0 && moveFlg[0])
+        else if (stage[0] != 0 && moveFlg[0] == 2)
         {
             GameObject obj = Instantiate(EnemyBase_Prefab, movePoint[0], Quaternion.Euler(0, 180, 0));
             enemyBase[0] = obj;
@@ -130,7 +163,7 @@ public class EnemyBase_Manager : MonoBehaviour
             obj = Instantiate(EnemyBase_Prefab, movePoint[2], Quaternion.Euler(0, 180, 0));
             enemyBase[2] = obj;
             stage[0] = 0;
-            moveFlg[0] = false;
+            moveFlg[0] = 0;
         }
         else
         {
