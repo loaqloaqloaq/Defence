@@ -73,6 +73,7 @@ public class Turret : MonoBehaviour, Abnormality
 
     private AudioSource audioSource;
 
+    [SerializeField]
     int[] abnormality = { 0, 0 };
 
     private bool IsTargetDead(Transform target)

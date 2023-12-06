@@ -51,7 +51,11 @@ public class FlameThrower : RaycastWeapon
             if (!IsTargetOnShootingLine(collider.transform))
                 continue;
 
+            var colliderPart = collider.GetComponent<EnemyPart>() ?? null;
+            if (colliderPart != null && colliderPart.GetPart() != Part.BODY) continue;
+
             var m_dF = collider.GetComponentInChildren<DamagerFire>();
+ 
             if (m_dF)
             {
                 m_dF.ReNew();

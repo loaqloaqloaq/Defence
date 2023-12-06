@@ -30,9 +30,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
     public GameObject ammoPack,healthPack;
 
     float checkFeq, lastCheck;
-
-    [SerializeField]
-    TextAsset EnemyJsonFile;
+  
     EnemyData EnemyJson;
     RaycastWeapon rcw;
 
@@ -260,5 +258,9 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
     public void resetEnemy()
     {
         Start();
+    }
+    public Part GetPart()
+    {
+        return Part.BODY;
     }
 }

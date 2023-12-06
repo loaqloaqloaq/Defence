@@ -24,7 +24,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     private float firingCount;
     //–C’e”­ŽË•p“x
     private float fireTime = 0f;
-    private float fireDelay = 1.0f;
+    private float fireDelay = 10.0f;
 
     //–C’e
     [SerializeField] GameObject cannonBall;
@@ -72,10 +72,11 @@ public class EnemyBase : MonoBehaviour, IDamageable
         }
 
         //10•b‚É1‰ñ
-        if (fireTime + fireDelay < Time.time)
+        fireTime += Time.deltaTime;
+        if (fireTime >= fireDelay)
         {
             //–CŒ‚”­ŽË
-            fireTime = Time.time;
+            fireTime = 0;
             Cannonfiring();
         }
     }

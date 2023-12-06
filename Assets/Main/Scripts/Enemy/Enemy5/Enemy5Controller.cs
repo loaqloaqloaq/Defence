@@ -23,14 +23,15 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
     private float destoryTimer, destoryTime;
     private bool dead;
 
-    public Transform target;    
+    public Transform target;
+
+    Abnormality turretController;    
+
     GameObject explosion;
     Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();
 
     float checkFeq, lastCheck;
-
-    [SerializeField]
-    TextAsset EnemyJsonFile;
+    
     EnemyData EnemyJson;
 
     Type resist, weakness;
@@ -136,25 +137,30 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
                 if (target == null) return;
                 frameCnt = 0;
                 var disToTarget = Vector3.Distance(transform.position, target.position);
-                if (disToTarget < 2.5f)
+                if (disToTarget < 1.5f)
                 {
-                    Gizmos.color = new Color(0.5f,0.5f,1,0.7f);
-                    Gizmos.DrawSphere(transform.position, 2.5f);
+                    attacking = true;                    
+                    if (turretController != null) turretController.AddAbnormality(AbnormalityType.STOP);
                     agent.enabled = false;
                 }
-                else {
+                else if (attacking && disToTarget >= 2.5f)
+                {
+                    attacking = false;
+                    if (turretController != null) turretController.RemoveAbnormality(AbnormalityType.STOP);
                     agent.enabled = true;
                 }
+                animator.SetBool("attack",attacking);
             }
 
         }
     }
 
     private GameObject getClosestTurret() {
-        GameObject closest = eg.ts.Length > 0 ? eg.ts[0] : null ;
+        GameObject closest = eg.ts.Count > 0 ? eg.ts[0] : null ;
         foreach (var turret in eg.ts) {
            if(Vector3.Distance(transform.position, turret.transform.position)< Vector3.Distance(transform.position, closest.transform.position)) closest = turret;
         }
+        turretController = closest?.GetComponent<Abnormality>() ?? null;       
         return closest;
     }
     public bool ApplyDamage(DamageMessage damageMessage)
@@ -178,6 +184,7 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
             default:
                 break;
         }
+
         HP -= damageMessage.amount * damageMuiltplier;
         if (HP <= 0 && !dead)
         {
@@ -213,36 +220,10 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
     }
     private void Attack()
     {
-        if (explosion != null)
-        {            
-            var pos = transform.position;
-            pos.y = 1f;
-            var exp = Instantiate(explosion, pos, transform.rotation);
-            float scale = 0.75f * expRadius;
-            exp.transform.localScale = new Vector3(scale, scale, scale);
-            transform.parent.GetComponent<EnemyController>().dead(); 
-
-            DamageMessage dm = new DamageMessage();
-            dm.damager = gameObject;
-
-            pos.y = 0;
-            Collider[] hitColliders = Physics.OverlapSphere(pos, expRadius);
-            foreach (var hitCollider in hitColliders)
-            {
-                var hitTarget = hitCollider.gameObject.GetComponent<IDamageable>();
-                float targetToExp = Vector3.Distance(hitCollider.transform.position, exp.transform.position);
-                dm.amount = ATK * (1 - targetToExp / expRadius);
-
-                if (hitTarget != null && dm.amount > 0) {
-                    hitTarget.ApplyDamage(dm);
-                }
-            }
-
-            attacked = true;
-        }       
+             
     }
 
-#if UNITY_EDITOR //Turretの攻撃範囲デバッグ
+#if UNITY_EDITOR 
     private void OnDrawGizmosSelected()
     {
         var pos = transform.position;
@@ -265,5 +246,9 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
     public void resetEnemy()
     {
         Start();
+    }
+    public Part GetPart()
+    {
+        return Part.BODY;
     }
 }

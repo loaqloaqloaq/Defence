@@ -28,8 +28,7 @@ public class Enemy2Navigator : MonoBehaviour
             target = ec.target ?? player;
             if (Vector3.Distance(transform.position, target.position) > 1.5f && !ec.attacking)
             {
-                animator.SetBool("walking", true);
-                ec.agent.isStopped = false;
+                animator.SetBool("walking", true);                
                 var targetPos = target.position;
                 if (target.name.StartsWith("Gate"))
                     targetPos.x = (target.position - (target.position - transform.position).normalized * 3f).x;
@@ -37,16 +36,12 @@ public class Enemy2Navigator : MonoBehaviour
             }
             else
             {
-                animator.SetBool("walking", false);
-                if (ec.agent.isStopped == false) ec.agent.isStopped = true;
+                animator.SetBool("walking", false);                
             }
         }
         else {
-            animator.SetBool("walking", false);
-            if (ec?.agent?.enabled == true && ec.agent.isStopped == false) ec.agent.isStopped = true;
-        }
-
-        
+            animator.SetBool("walking", false);            
+        }        
     }
 
    

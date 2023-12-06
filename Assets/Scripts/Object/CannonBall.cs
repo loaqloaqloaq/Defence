@@ -87,14 +87,10 @@ public class CannonBall : MonoBehaviour
     {
         fallpoint = player.transform.position;
         //落下ポイントにマーカーを生成
-        var mark = Instantiate(marker, fallpoint, Quaternion.identity);
+        mark = Instantiate(marker, fallpoint, Quaternion.identity);
            
         //大きさの設定
         mark.transform.localScale = new Vector3(2.5f, 0.001f, 2.5f);
-
-        
-
-        Destroy(mark, 1.0f);
         //落下開始時
         if (firstfall == true)
         {

@@ -1,15 +1,17 @@
-    using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
+public class Enemy1Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
 {
     [HideInInspector]
-    public float HP, MAXHP, ATK;
+    public float MAXHP, ATK;
+    public float HP;
     Dictionary<string, float> drop = new Dictionary<string, float>();
     private Animator animator;
     [HideInInspector]
@@ -25,12 +27,12 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
     public Transform gate, player;
     GateController gc;
     GameObject explosion;
-    Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();    
+    Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();
+    
+    Dictionary<Part,bool> takingDamage = new Dictionary<Part,bool>();
 
     float checkFeq, lastCheck;
-
-    [SerializeField]
-    TextAsset EnemyJsonFile;
+   
     EnemyData EnemyJson;
 
     Type resist, weakness;
@@ -57,27 +59,30 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
             agent = GetComponent<NavMeshAgent>();
             ec = transform.parent.GetComponent<EnemyController>();
 
+            //JSONから読み込む
             eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
-
             gate = eg.gate;
             player = eg.player;
-
             EnemyJson = eg.EnemyJson.Enemy1;
             agent.speed = EnemyJson.moveSpeed;
-
             resist = EnemyJson.resist;
             weakness = EnemyJson.weakness;
-
             MAXHP = EnemyJson.hp;
             ATK = EnemyJson.atk;
 
-
+            //ドロップ
             if (!drop.ContainsKey("ammo")) drop.Add("ammo", EnemyJson.drop.ammo);
             if (!drop.ContainsKey("health")) drop.Add("health", EnemyJson.drop.health);
+
+            for (int i = 0; i < Enum.GetValues(typeof(Part)).Length; i++) {
+                if (!takingDamage.ContainsKey((Part)i)) takingDamage.Add((Part)i, false);
+            }
+            
 
             dropPrefab = eg.dropPrefab;
             explosion = eg.explosion;
 
+            //Collidersの読み込む
             colliders.Add(GetComponent<Collider>());
             colliders.Add(transform.Find("root/root.x/spine_01.x").GetComponent<Collider>());
             colliders.Add(transform.Find("root/root.x/spine_01.x/spine_02.x/shoulder.l/arm_stretch.l").GetComponent<Collider>());
@@ -89,7 +94,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
             loaded = true;            
         }
 
-
+        //初期化設定
         target = gate;
         destoryTime = 3.0f;
         destoryTimer = 0;
@@ -104,7 +109,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
 
         setCollider(true);
 
-        frameCnt = 0;
+        frameCnt = 0;       
     }
 
     // Update is called once per frame
@@ -112,6 +117,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
     {
         if (HP <= 0)
         {
+            //死んだ処理
             setCollider(false);
             agent.enabled = false;
             destoryTimer += Time.deltaTime;
@@ -127,7 +133,9 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
             }
         }
         else {
-            gate = eg.gate;            
+            //近いゲートを読み込む
+            gate = eg.gate;
+            //一定時間あと距離チェック
             lastCheck += Time.deltaTime;
             if (lastCheck >= checkFeq)
             {
@@ -151,23 +159,26 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
                 else{
                     target = gate;
                 }
-            }
+            }            
             frameCnt++;
             if (frameCnt >= frameDelay)
             {
                 frameCnt = 0;
+                //行動処理
                 var disToTarget = Vector3.Distance(transform.position, target.position);
                 if (disToTarget < 1.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
                 {
                     attacking = true;
-                    //face to target
+                    //ターゲットに向かう
                     var lookPos = target.position - transform.position;
                     lookPos.y = 0;
                     transform.rotation = Quaternion.LookRotation(lookPos);
                     animator.SetTrigger("attack");
                 }
+                //攻撃処理
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
                 {
+                    agent.isStopped = true;
                     if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.4f)
                     {
                         Attack();
@@ -181,9 +192,21 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
 
         }
     }
-    public bool ApplyDamage(DamageMessage damageMessage)
+    public bool ApplyDamage(DamageMessage damageMessage) {
+        return ApplyDamage(damageMessage, Part.BODY);
+    }
+    private KeyValuePair<Part, bool>? GetTakingDamagePart() {
+        foreach (var p in takingDamage) {
+            if (p.Value) return p;
+        }
+        return null;
+    }   
+    public bool ApplyDamage(DamageMessage damageMessage,Part part)
     {
         //Debug.Log("HIT");
+        KeyValuePair<Part, bool>? takingDamagePart= GetTakingDamagePart();
+        if (takingDamagePart != null && takingDamagePart.Value.Key != part) return true;
+        takingDamage[part]= true;
         float damageMuiltplier = 1f;
         
         switch (damageMessage.attackType) {
@@ -202,12 +225,13 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
             default:
                 break;            
         }       
-        HP -= damageMessage.amount * damageMuiltplier;        
+        HP -= damageMessage.amount * damageMuiltplier;       
         if (HP <= 0 && !dead)
         {            
             dead = true;
             Dead();
         }
+        takingDamage[part] = false;
         return true;
     }
     private void Dead() {
@@ -251,6 +275,7 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
     private void ResetAfterAttack() { 
         attacking = false;
         attacked = false;
+        agent.isStopped = false;
     }
     /*
     //ダメージ処理
@@ -291,5 +316,10 @@ public class Enemy1Controller : MonoBehaviour, IDamageable, EnemyInterface
         foreach (Collider c in colliders) { 
             c.enabled = en;
         }
+    }
+
+    public Part GetPart()
+    {
+        return Part.BODY;
     }
 }

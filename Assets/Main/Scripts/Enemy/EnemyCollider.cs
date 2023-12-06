@@ -1,21 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
-public class EnemyCollider : MonoBehaviour,IDamageable
+public class EnemyCollider : MonoBehaviour, EnemyPart
 {
     Transform rootObject;
     
-    public IDamageable root;
+    public Part part;
+
+    public IEnemyDamageable root;
     public bool ApplyDamage(DamageMessage damageMessage)
     {
         Debug.Log(rootObject.ToString());
-        root.ApplyDamage(damageMessage);
+        root.ApplyDamage(damageMessage,part);
         return true;
     }
-
+    public Part GetPart()
+    {
+        return part;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -24,17 +25,13 @@ public class EnemyCollider : MonoBehaviour,IDamageable
             rootObject = rootObject.parent;
         }
         //Debug.Log(rootObject.ToString());
-        root = rootObject.GetComponent<IDamageable>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        root = rootObject.GetComponent<IEnemyDamageable>();
     }
 
     public bool IsDead()
     {
         return root.IsDead();
     }
+
+    
 }
