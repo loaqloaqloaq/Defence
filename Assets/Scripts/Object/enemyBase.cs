@@ -23,7 +23,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
     //–C’e”­ŽËƒJƒEƒ“ƒg
     private float firingCount;
     //–C’e”­ŽË•p“x
-    private float firingTime;
+    private float fireTime = 0f;
+    private float fireDelay = 1.0f;
+
     //–C’e
     [SerializeField] GameObject cannonBall;
 
@@ -40,8 +42,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
         //UŒ‚‚ÌŽžŠÔ‚ÌƒJƒEƒ“ƒg
         firingCount = 0.0f;
-        //10•b‚Éˆê‰ñUŒ‚‚·‚é
-        firingTime = 10.0f;
+
         //ƒ_ƒ[ƒW‚ðŽó‚¯‚Ä‚¢‚È‚¢‚ðÝ’è
         applydamage = false;
         healTime = 0.0f;
@@ -70,12 +71,11 @@ public class EnemyBase : MonoBehaviour, IDamageable
             HealHP();
         }
 
-        //UŒ‚‚ÌŽžŠÔ‚ÌƒJƒEƒ“ƒg
-        firingCount += Time.deltaTime;
         //10•b‚É1‰ñ
-        if (firingCount >= firingTime)
+        if (fireTime + fireDelay < Time.time)
         {
             //–CŒ‚”­ŽË
+            fireTime = Time.time;
             Cannonfiring();
         }
     }
@@ -165,7 +165,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //’eŠÛ‚ÌˆÊ’u‚ðÝ’è
         cannonBall.transform.position = shellfiring.transform.position;
         //–C’e¶¬
-        Instantiate(cannonBall);
+        var cb = Instantiate(cannonBall);
         //–C’e”­ŽËƒJƒEƒ“ƒg‚ðƒŠƒZƒbƒg
         firingCount = 0.0f;
     }
