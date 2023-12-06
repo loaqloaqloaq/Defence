@@ -12,7 +12,9 @@ public class TurretSlot : MonoBehaviour
     private void Start()
     {
         isTurretActive = false;
-        eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
+        var egObj = GameObject.Find("EnemyLoader");
+        if (egObj != null)
+            eg = egObj.GetComponent<EnemyGloable>();
     }
 
     public void CreateTurret(GameObject turret)
@@ -22,14 +24,14 @@ public class TurretSlot : MonoBehaviour
         this.turret = Instantiate(turret, transform.position, Quaternion.identity, pivot);
         turret.transform.localPosition = Vector3.zero;
         isTurretActive = true;
-        eg.TurretCreated(this.turret);
+        eg?.TurretCreated(this.turret);
     }
 
     public void DestroyTurret()
     {
         Destroy(turret);
         isTurretActive = false;
-        eg.TurretDestoried(this.turret);
+        eg?.TurretDestoried(this.turret);
     }
 
     public void ChangeTurret(GameObject turret)
