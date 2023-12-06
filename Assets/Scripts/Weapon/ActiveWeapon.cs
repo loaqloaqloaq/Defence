@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class ActiveWeapon : MonoBehaviour
@@ -72,7 +73,7 @@ public class ActiveWeapon : MonoBehaviour
         SetDefaultState();
     }
 
-    //初期の状態にする（primary = null secondary = pistol）
+    //初期の状態にする（primary = null secondary = pistol　Tertiary = RocketLauncher Quaternary = SniperRifle）
     private void SetDefaultState()
     {
         isHolstered = true;
@@ -84,11 +85,17 @@ public class ActiveWeapon : MonoBehaviour
         activeWeaponIndex = (int)weaponSlot.Secondary;
         rigController.SetInteger("weapon_index", activeWeaponIndex);
 
+        //所持しているすべての（拳銃を除いて）武器を破棄
         var weapon = weaponSlots[(int)weaponSlot.Primary].GetComponentInChildren<RaycastWeapon>();
-        if (weapon)
-        {
-            Destroy(weapon.gameObject);
-        }
+        if (weapon) Destroy(weapon.gameObject);
+
+        weapon = weaponSlots[(int)weaponSlot.Tertiary].GetComponentInChildren<RaycastWeapon>();
+        if (weapon) Destroy(weapon.gameObject);
+
+        weapon = weaponSlots[(int)weaponSlot.Quaternary].GetComponentInChildren<RaycastWeapon>();
+        if (weapon) Destroy(weapon.gameObject);
+
+        UIManager.Instance.UpdateWeaponSlotImage((int)weaponSlot.Secondary);
     }
 
     //標的オブジェクトを更新する
@@ -315,7 +322,7 @@ public class ActiveWeapon : MonoBehaviour
                 yield return new WaitForSeconds(0.02f);
             } while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
         }
-        UIManager.Instance.UpdateWeaponSlotImage(index, false);
+        //UIManager.Instance.UpdateWeaponSlotImage(index, false);
         isChangingWeapon = false;
     }
     IEnumerator ActivateWeapon(int index)
@@ -332,7 +339,7 @@ public class ActiveWeapon : MonoBehaviour
             } while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
             isHolstered = false;
         }
-        UIManager.Instance.UpdateWeaponSlotImage(index, true);
+        UIManager.Instance.UpdateWeaponSlotImage(index);
         isChangingWeapon = false;
     }
 

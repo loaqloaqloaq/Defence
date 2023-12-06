@@ -27,11 +27,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Crosshair crosshair;
     [SerializeField] private Image staminaBackground;
     [SerializeField] private Image staminaImage;
-    [SerializeField] private Image lifeImage;
+    [SerializeField] private Image HealthBar;
     [SerializeField] private Image[] grenadeImages = new Image[3];
     [SerializeField] private Image[] weaponSlotImages = new Image[2];
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI ammoText;
+    [SerializeField] private TextMeshProUGUI remainAmmoText;
+    [SerializeField] private TextMeshProUGUI magAmmoText;
     [SerializeField] private TextMeshProUGUI waveText;
     [SerializeField] private TextMeshProUGUI lifeText;
 
@@ -144,11 +145,13 @@ public class UIManager : MonoBehaviour
     {
         if (isInfinity)
         {
-            ammoText.text = magAmmo.ToString();
+            magAmmoText.text = magAmmo.ToString();
+            remainAmmoText.text = "∞";
         }
         else
         {
-            ammoText.text = magAmmo + " / " + remainAmmo;
+            magAmmoText.text = magAmmo.ToString();
+            remainAmmoText.text = remainAmmo.ToString();
         }
     }
     //点数更新
@@ -206,7 +209,7 @@ public class UIManager : MonoBehaviour
                 previousHealth = currentHealth;
             }
             amount = previousHealth / maxHealth;
-            lifeImage.fillAmount = amount;
+            HealthBar.fillAmount = amount;
             yield return new WaitForEndOfFrame();
         }
     }
@@ -265,15 +268,16 @@ public class UIManager : MonoBehaviour
     }
 
     //現在使っている武器のUI表示
-    public void UpdateWeaponSlotImage(int weaponSlotindex, bool isOn)
+    public void UpdateWeaponSlotImage(int weaponSlotindex)
     {
-        if (weaponSlotindex < 0 || weaponSlotindex >= weaponSlotImages.Length)
+        if (weaponSlotindex < 0) return;
+       
+        for (int i = 0; i < weaponSlotImages.Length; i++)
         {
-            return;
+            weaponSlotImages[i].enabled = (i == weaponSlotindex);
         }
-        float alpha = isOn ? 1.0f : 100 / 255.0f;
-        weaponSlotImages[weaponSlotindex].color = new Color(1, 1, 1, alpha);
     }
+
 
     //Waveクリア時のUIアニメーション再生
     public void WaveClear()
