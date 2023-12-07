@@ -29,8 +29,8 @@ public class Enemy3Navigator : MonoBehaviour
             {
                 animator.SetBool("walking", true);
                 ec.agent.isStopped = false;
-                var targetPos = target.position;               
-                ec.agent.destination = targetPos;
+                var targetPos = target.position;
+                if (Vector3.Distance(ec.agent.destination, targetPos) > 0.5f) ec.agent.destination = targetPos;
             }
             else
             {

@@ -45,7 +45,8 @@ public class Enemy1Navigator : MonoBehaviour
                 Vector3 targetPos = Vector3.zero;
                 if (target.CompareTag("Player")) targetPos = target.position;
                 else targetPos = checkPoint;
-                ec.agent.destination = targetPos;
+                
+                if(Vector3.Distance(ec.agent.destination,targetPos)>0.5f) ec.agent.destination = targetPos;
 
             }
             else
