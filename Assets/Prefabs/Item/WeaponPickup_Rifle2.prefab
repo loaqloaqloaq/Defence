@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8571426536936027795}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WeaponBone001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8571426537266265954}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WeaponRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8571426537410644435}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Dummy002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8571426537493492796}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MachineGun_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 8571426537567485129}
   - component: {fileID: 8571426537567485239}
   - component: {fileID: 8571426537567485128}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4979,7 +4979,7 @@ GameObject:
   - component: {fileID: 8571426537697957484}
   - component: {fileID: 8571426537697957482}
   - component: {fileID: 8571426537697957483}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle System 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9812,7 +9812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8571426537784178771}
   - component: {fileID: 8571426537784178770}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9905,7 +9905,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8571426537891934826}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WeaponBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9936,7 +9936,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8571426538139272709}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WeaponBone002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9968,7 +9968,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8571426538442416778}
   - component: {fileID: 8571426538442416777}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MachineGun_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10058,7 +10058,7 @@ GameObject:
   - component: {fileID: 8571426538463935153}
   - component: {fileID: 8571426538463935167}
   - component: {fileID: 8571426538463935152}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle System 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14895,7 +14895,7 @@ GameObject:
   - component: {fileID: 8571426538466839796}
   - component: {fileID: 8571426538466839797}
   - component: {fileID: 8571426538466839798}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WeaponPickup_Rifle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

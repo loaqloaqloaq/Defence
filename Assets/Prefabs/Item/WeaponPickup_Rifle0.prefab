@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 925108102712064572}
   - component: {fileID: 925108102712064574}
   - component: {fileID: 925108102712064573}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FlashHeadon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4907,7 +4907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 925108102781105824}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Weapon_Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4944,7 +4944,7 @@ GameObject:
   - component: {fileID: 925108102967733051}
   - component: {fileID: 925108102967733053}
   - component: {fileID: 925108102967733052}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Decal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9851,7 +9851,7 @@ GameObject:
   - component: {fileID: 925108103150013236}
   - component: {fileID: 925108103150013238}
   - component: {fileID: 925108103150013237}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14534,7 +14534,7 @@ GameObject:
   - component: {fileID: 925108103217224491}
   - component: {fileID: 925108103217224493}
   - component: {fileID: 925108103217224492}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HitEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19387,7 +19387,7 @@ GameObject:
   - component: {fileID: 925108103516532660}
   - component: {fileID: 925108103516532662}
   - component: {fileID: 925108103516532661}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19468,7 +19468,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 925108103597781902}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19504,7 +19504,7 @@ GameObject:
   - component: {fileID: 925108103712019560}
   - component: {fileID: 925108103712019562}
   - component: {fileID: 925108103712019561}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SciFiGunLightBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19587,7 +19587,7 @@ GameObject:
   - component: {fileID: 925108103985880324}
   - component: {fileID: 925108103985880326}
   - component: {fileID: 925108103985880325}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MuzzleFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24488,7 +24488,7 @@ GameObject:
   - component: {fileID: 925108104194873485}
   - component: {fileID: 925108104194873484}
   - component: {fileID: 925108104194873483}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WeaponPickup_Rifle0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24617,7 +24617,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 925108104537242275}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RaycasyOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24650,7 +24650,7 @@ GameObject:
   - component: {fileID: 925108104648775050}
   - component: {fileID: 925108104648775052}
   - component: {fileID: 925108104648775051}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}

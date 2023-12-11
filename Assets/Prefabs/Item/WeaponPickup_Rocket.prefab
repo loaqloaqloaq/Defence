@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9154532257925269124}
   - component: {fileID: 6165211551097952980}
   - component: {fileID: 7663736817504418432}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WeaponPickup_Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,6 +142,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1398990856388912489}
     m_Modifications:
+    - target: {fileID: 275816256092515022, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050673453681830842, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101211577461663075, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4805985959927671815, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903620157049488591, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141968201075060783, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 5829667214381886414, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -198,9 +222,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 51.2
       objectReference: {fileID: 0}
+    - target: {fileID: 5954822682234148244, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6086409740337587864, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6605922885389873524, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
       propertyPath: m_Name
       value: RocketLauncher
+      objectReference: {fileID: 0}
+    - target: {fileID: 6605922885389873524, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819470194306310629, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646155472288942793, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895128291768329597, guid: 42d90190355b43646818e5b7d227b39d, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

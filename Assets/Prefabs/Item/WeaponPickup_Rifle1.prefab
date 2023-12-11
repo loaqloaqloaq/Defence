@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9078459192341684559}
   - component: {fileID: 9078459192341684557}
   - component: {fileID: 9078459192341684558}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AssaultRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9078459192387523721}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Rifle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 9078459192927092489}
   - component: {fileID: 9078459192927092490}
   - component: {fileID: 9078459192927092491}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WeaponPickup_Rifle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 9078459193268162861}
   - component: {fileID: 9078459193268162859}
   - component: {fileID: 9078459193268162860}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Devices
   m_TagString: Untagged
   m_Icon: {fileID: 0}
