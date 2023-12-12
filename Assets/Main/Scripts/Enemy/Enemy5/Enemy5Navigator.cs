@@ -34,7 +34,7 @@ public class Enemy5Navigator : MonoBehaviour
         {
             target = ec.target;
             if (target == null) return;
-            if (Vector3.Distance(transform.position, target.position) > 2.5f )
+            if (Vector3.Distance(transform.position, target.position) > 1.5f)
             {
                 //animator.SetBool("walking", true);
                 if (transform.localEulerAngles.y > (lastRotation + 2f))

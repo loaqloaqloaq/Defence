@@ -17,6 +17,8 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
     [HideInInspector]
     public NavMeshAgent agent;
 
+    GameObject effect;
+
     [HideInInspector]
     public bool attacking, attacked;
 
@@ -77,6 +79,8 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
             dropPrefab = eg.dropPrefab;
             explosion = eg.explosion;
 
+            effect = transform.Find("effect").gameObject;
+
             loaded = true;
         }
 
@@ -96,6 +100,8 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
         agent.enabled = true;
         attacking = false;
 
+        effect.SetActive(false);
+
         HP = MAXHP;
 
         frameCnt = 0;
@@ -108,7 +114,7 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
         {
             foreach (Collider c in colliders) { 
                 c.enabled = false;
-            }
+            }            
             agent.enabled = false;
             destoryTimer += Time.deltaTime;
             if (destoryTimer >= destoryTime)
@@ -116,7 +122,7 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
                 if (explosion != null)
                 {
                     var pos = transform.position;
-                    pos.y += 0.5f - 1;
+                    pos.y = 0.5f;
                     var exp = Instantiate(explosion, pos, transform.rotation);
                     exp.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
                 }
@@ -150,6 +156,7 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
                     agent.enabled = true;
                 }
                 animator.SetBool("attack",attacking);
+                effect.SetActive(attacking);
             }
 
         }
@@ -196,8 +203,10 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
     }
     private void Dead()
     {
-        Drop();
+        Debug.Log("dead");
+        ResetAfterAttack();
         animator.SetTrigger("die");
+        Drop();        
         //GetComponent<Rigidbody>().isKinematic = true;
     }
     private void Drop()
@@ -217,11 +226,7 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
 
             prevPresent += d.Value;
         }
-    }
-    private void Attack()
-    {
-             
-    }
+    }   
 
 #if UNITY_EDITOR 
     private void OnDrawGizmosSelected()
@@ -236,7 +241,9 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
     private void ResetAfterAttack()
     {
         attacking = false;
-        attacked = false;        
+        attacked = false;
+        animator.SetBool("attack", false);
+        effect.SetActive(false);
         //GetComponent<ParticleSystem>().Stop();
     }    
     public bool IsDead()
