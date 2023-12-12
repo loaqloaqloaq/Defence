@@ -41,6 +41,20 @@ public class Enemy2Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
 
     int frameDelay = 5;
     int frameCnt = 0;
+
+    private AudioSource audioSource;
+
+    [SerializeField] private AudioData hitSE;
+    [SerializeField] private AudioData deadSE;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+
+        SoundManager.Instance?.AddAudioInfo(hitSE);
+        SoundManager.Instance?.AddAudioInfo(deadSE);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -188,9 +202,18 @@ public class Enemy2Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
                 break;
         }
         HP -= damageMessage.amount * damageMuiltplier;
+        //SE & VFX
+        EffectManager.Instance?.PlayHitEffect(damageMessage.hitPoint, damageMessage.hitNormal,
+            transform, damageMessage.attackType);
+        if (damageMessage.attackType == AttackType.Common)
+        {
+            SoundManager.Instance?.PlaySE(hitSE.name, audioSource);
+        }
+
         if (HP <= 0 && !dead)
-        {            
+        {
             dead = true;
+            SoundManager.Instance?.PlaySE(deadSE.name, audioSource);
             Dead();
         }
         takingDamage[part] = false;
@@ -229,7 +252,8 @@ public class Enemy2Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
         DamageMessage dm= new DamageMessage();
         dm.damager = gameObject;
         dm.amount = ATK;
-        if((target.GetComponent<GateController>() ?? null) != null) target.GetComponent<GateController>().ApplyDamage(dm);
+        dm.hitNormal = transform.position - target.transform.position; 
+        if ((target.GetComponent<GateController>() ?? null) != null) target.GetComponent<GateController>().ApplyDamage(dm);
         else if ((target.GetComponent<PlayerHealth>() ?? null) != null) target.GetComponent<PlayerHealth>().ApplyDamage(dm);   
         attacked = true;
     }
