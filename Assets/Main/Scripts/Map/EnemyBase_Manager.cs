@@ -14,20 +14,20 @@ public class EnemyBase_Manager : MonoBehaviour
     bool playerWarp;
     public GameObject counterUI;
     private float teleportCounter;
-    private bool teleportFlg;
+    public bool teleportFlg;
 
     public GameObject[] enemyBase = new GameObject[3];　//現在マップに生成されているEnemyBase
     private Vector3[] movePoint = new Vector3[9];//EnemyBaseの移動先
     public GameObject EnemyBase_Prefab;//EnemyBaseが壊されたら再生成するためのプレファブ
     public GameObject[] PlayerMovePoint = new GameObject[3];//一時的に強制移動するため、プレイヤーの移動先
-    private GameObject Player;   
+    private GameObject Player;
 
     public int[] stage = new int[2] { 0, 0 };//壊れてるゲートの確認
-    private int[] moveFlg = new int[2] { 0,0 }; //移動したかの確認
+    private int[] moveFlg = new int[2] { 0, 0 }; //移動したかの確認
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0;i < movePoint.Length; i++)
+        for (int i = 0; i < movePoint.Length; i++)
         {
             movePoint[i] = GameObject.Find("movePoint" + (i + 1)).transform.position;
         }
@@ -51,7 +51,51 @@ public class EnemyBase_Manager : MonoBehaviour
     private void Move()
     {
         if (playerWarp && teleportFlg) WarpCounter();
-        if (stage[0] != 0 && moveFlg[0] == 0)
+    }
+
+    private void WarpCounter()
+    {
+
+        //30秒後にワープ
+        if (teleportCounter <= 30.0f)
+        {
+            counterUI.SetActive(true);
+            teleportCounter += Time.deltaTime;
+            int Counter = 30 - (int)teleportCounter;
+            counterUI.GetComponent<Text>().text = Counter + "秒後に次の拠点へ移動します";
+        }
+        else
+        {
+            Debug.Log("ワープ開始");
+            PlayerMove();
+            EnemyBaseMove();
+            teleportCounter = 0;
+            teleportFlg = false;
+            counterUI.SetActive(false);
+        }
+    }
+
+    void PlayerMove()
+    {
+        if (stage[0] != 0 && moveFlg[0] == 0 && teleportFlg)
+        {
+            Player.GetComponent<CharacterController>().enabled = false;
+            Player.transform.position = PlayerMovePoint[1].transform.position;
+            Player.GetComponent<CharacterController>().enabled = true;
+            moveFlg[0]++;
+        }
+        if (stage[1] != 0 && moveFlg[1] == 0 && teleportFlg)
+        {
+            Player.GetComponent<CharacterController>().enabled = false;
+            Player.transform.position = PlayerMovePoint[2].transform.position;
+            Player.GetComponent<CharacterController>().enabled = true;
+            moveFlg[1]++;
+        }
+    }
+
+    private void EnemyBaseMove()
+    {
+        if (stage[0] != 0 && moveFlg[0] == 1)
         {
             if (enemyBase[0] != null) enemyBase[0].gameObject.transform.position = movePoint[3];
             else
@@ -72,9 +116,8 @@ public class EnemyBase_Manager : MonoBehaviour
                 enemyBase[2] = obj;
             }
             moveFlg[0]++;
-            teleportFlg = true;
         }
-        if (stage[1] != 0 && moveFlg[1] == 0)
+        if (stage[1] != 0 && moveFlg[1] == 1)
         {
             if (enemyBase[0] != null) enemyBase[0].gameObject.transform.position = movePoint[6];
             else
@@ -95,47 +138,8 @@ public class EnemyBase_Manager : MonoBehaviour
                 enemyBase[2] = obj;
             }
             moveFlg[1]++;
-            teleportFlg = true;
         }
-    }
 
-    private void WarpCounter()
-    {
-
-        //30秒後にワープ
-        if (teleportCounter <= 30.0f)
-        {
-            counterUI.SetActive(true);
-            teleportCounter += Time.deltaTime;
-            int Counter = 30 - (int)teleportCounter;
-            counterUI.GetComponent<Text>().text = Counter + "秒後に次の拠点へ移動します";
-        }
-        else
-        {
-            Debug.Log("ワープ開始");
-            PlayerMove();
-            teleportCounter = 0;
-            teleportFlg = false;
-            counterUI.SetActive(false);
-        }
-    }
-
-    void PlayerMove()
-    {
-        if (stage[0] != 0 && moveFlg[0] == 1 && teleportFlg)
-        {
-            Player.GetComponent<CharacterController>().enabled = false;
-            Player.transform.position = PlayerMovePoint[1].transform.position;
-            Player.GetComponent<CharacterController>().enabled = true;
-            moveFlg[0]++;
-        }
-        if (stage[1] != 0 && moveFlg[1] == 1 && teleportFlg)
-        {
-            Player.GetComponent<CharacterController>().enabled = false;
-            Player.transform.position = PlayerMovePoint[2].transform.position;
-            Player.GetComponent<CharacterController>().enabled = true;
-            moveFlg[1]++;
-        }
     }
 
     //ゲートを壊し前進したが全ての拠点が破壊されてしまった場合

@@ -6,5 +6,5 @@
   ],
   "genFreq":1.5,
   "randomRange":0.5,
-  "maxEnemy":1
+  "maxEnemy":100
 }
