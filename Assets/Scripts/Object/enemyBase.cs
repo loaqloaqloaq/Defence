@@ -28,6 +28,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     //–C’e
     [SerializeField] GameObject cannonBall;
+    [SerializeField] public bool fireCannon;
 
     void Start()
     {
@@ -71,13 +72,15 @@ public class EnemyBase : MonoBehaviour, IDamageable
             HealHP();
         }
 
-        //10•b‚É1‰ñ
-        fireTime += Time.deltaTime;
-        if (fireTime >= fireDelay)
-        {
-            //–CŒ‚”­ŽË
-            fireTime = 0;
-            Cannonfiring();
+        if (fireCannon) { 
+            //10•b‚É1‰ñ
+            fireTime += Time.deltaTime;
+            if (fireTime >= fireDelay)
+            {
+                //–CŒ‚”­ŽË
+                fireTime = 0;
+                Cannonfiring();
+            }
         }
     }
 

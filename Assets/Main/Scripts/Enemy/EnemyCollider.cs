@@ -9,7 +9,7 @@ public class EnemyCollider : MonoBehaviour, EnemyPart
     public IEnemyDamageable root;
     public bool ApplyDamage(DamageMessage damageMessage)
     {
-        Debug.Log(rootObject.ToString());
+        //Debug.Log(rootObject.ToString());
         root.ApplyDamage(damageMessage,part);
         return true;
     }

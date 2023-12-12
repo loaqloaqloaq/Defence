@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8437934624666712676}
   - component: {fileID: 7591371560907683390}
   - component: {fileID: 2243518149222598808}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WeaponPickup_SniperRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,6 +145,10 @@ PrefabInstance:
     - target: {fileID: 1002081628684102965, guid: 738161d10eb408147890082c292ae1b5, type: 3}
       propertyPath: m_Name
       value: Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002081628684102965, guid: 738161d10eb408147890082c292ae1b5, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4282086713384882398, guid: 738161d10eb408147890082c292ae1b5, type: 3}
       propertyPath: m_RootOrder
