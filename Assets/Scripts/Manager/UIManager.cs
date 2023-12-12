@@ -30,6 +30,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image HealthBar;
     [SerializeField] private Image[] grenadeImages = new Image[3];
     [SerializeField] private Image[] weaponSlotImages = new Image[2];
+    [SerializeField] private TextMeshProUGUI[] weaponSlotText = new TextMeshProUGUI[4];
+    private Color slotTextColor = new Vector4(1.0f, 1.0f, 1.0f, 0.36f);
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI remainAmmoText;
     [SerializeField] private TextMeshProUGUI magAmmoText;
@@ -275,6 +277,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < weaponSlotImages.Length; i++)
         {
             weaponSlotImages[i].enabled = (i == weaponSlotindex);
+            weaponSlotText[i].color = i == weaponSlotindex ? Color.white : slotTextColor;
         }
     }
 
