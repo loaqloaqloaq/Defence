@@ -5615,10 +5615,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7792094263946613050, guid: 5fc3b8bf2fd0ee44a907369a7300297b, type: 3}
-      propertyPath: field of view
-      value: 60
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8161,10 +8157,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponPickup_SniperRifle
       objectReference: {fileID: 0}
-    - target: {fileID: 8437934624666712676, guid: 1f31d2a4d87ed794a9c19140e3c4aa2b, type: 3}
-      propertyPath: weaponFab
-      value: 
-      objectReference: {fileID: 965815393752899145, guid: 11cc16cf4b59b924b80c659afe96d30e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
