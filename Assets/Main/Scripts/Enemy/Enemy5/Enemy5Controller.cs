@@ -49,7 +49,20 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
 
     int frameDelay = 5;
     int frameCnt = 0;
-    // Start is called before the first frame update
+
+    private AudioSource audioSource;
+
+    [SerializeField] private AudioData hitSE;
+    [SerializeField] private AudioData deadSE;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+
+        SoundManager.Instance?.AddAudioInfo(hitSE);
+        SoundManager.Instance?.AddAudioInfo(deadSE);
+    }
+
     void Start()
     {
         if (!loaded)
@@ -193,9 +206,18 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
         }
 
         HP -= damageMessage.amount * damageMuiltplier;
+
+        EffectManager.Instance?.PlayHitEffect(damageMessage.hitPoint, damageMessage.hitNormal,
+           transform, damageMessage.attackType);
+        if (damageMessage.attackType == AttackType.Common)
+        {
+            SoundManager.Instance?.PlaySE(hitSE.name, audioSource);
+        }
+
         if (HP <= 0 && !dead)
         {
             dead = true;
+            SoundManager.Instance?.PlaySE(deadSE.name, audioSource);
             ResetAfterAttack();
             Dead();
         }

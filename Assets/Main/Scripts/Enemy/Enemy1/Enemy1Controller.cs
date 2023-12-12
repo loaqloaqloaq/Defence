@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
@@ -50,7 +51,20 @@ public class Enemy1Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
 
     List<Collider> colliders= new List<Collider>();
 
-    
+    private AudioSource audioSource;
+
+    [SerializeField] private AudioData hitSE;
+    [SerializeField] private AudioData deadSE;
+
+
+    private void Awake()
+    {
+       audioSource = GetComponent<AudioSource>();
+
+       SoundManager.Instance?.AddAudioInfo(hitSE);
+       SoundManager.Instance?.AddAudioInfo(deadSE);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -225,10 +239,20 @@ public class Enemy1Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
             default:
                 break;            
         }       
-        HP -= damageMessage.amount * damageMuiltplier;       
-        if (HP <= 0 && !dead)
+        HP -= damageMessage.amount * damageMuiltplier;
+
+        //SE & VFX
+        EffectManager.Instance?.PlayHitEffect(damageMessage.hitPoint, damageMessage.hitNormal,
+            transform, damageMessage.attackType);
+        if (damageMessage.attackType == AttackType.Common)
+        {
+            SoundManager.Instance?.PlaySE(hitSE.name, audioSource);
+        }
+
+        if (HP <= 0 && !dead)        
         {            
             dead = true;
+            SoundManager.Instance?.PlaySE(deadSE.name, audioSource);
             Dead();
         }
         takingDamage[part] = false;
