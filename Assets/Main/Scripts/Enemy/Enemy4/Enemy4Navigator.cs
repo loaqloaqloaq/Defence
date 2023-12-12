@@ -36,7 +36,7 @@ public class Enemy4Navigator : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {        
         if (ec?.agent?.enabled == true && !ec.attacking)
         {
             target = ec.target ?? g1 ?? g2 ?? g3;
@@ -65,8 +65,8 @@ public class Enemy4Navigator : MonoBehaviour
                 }
                 lastRotation = transform.localEulerAngles.y;
                 ec.agent.isStopped = false;
-
-                if ((target == g2 && area != routes.GetChild(0)) || (target == g3 && area != routes.GetChild(1))) RandomRoute();
+                if (target == g1) checkPoint = g1.position;
+                else if ((target == g2 && area != routes.GetChild(0)) || (target == g3 && area != routes.GetChild(1))) RandomRoute();
                 CheckRoute();
 
                 Vector3 targetPos = Vector3.zero;
