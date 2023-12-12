@@ -78,7 +78,7 @@ public class Turret : MonoBehaviour, Abnormality
 
     private bool IsTargetDead(Transform target)
     {
-        var ITarget = target.GetComponent<IDamageable>();
+        var ITarget = target?.GetComponent<IDamageable>()??null;
 
         if (ITarget != null)
         {

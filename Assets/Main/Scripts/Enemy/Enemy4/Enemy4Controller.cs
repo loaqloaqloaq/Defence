@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
+public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
 {
     [HideInInspector]
     public float HP, MAXHP, ATK;
@@ -56,7 +56,7 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
         {   
             expEffect = transform.GetChild(1).gameObject;
 
-            colliders = transform.GetComponents<Collider>();
+            colliders = transform.GetComponentsInChildren<Collider>();
 
             animator = GetComponent<Animator>();
             agent = GetComponent<NavMeshAgent>();
@@ -201,8 +201,11 @@ public class Enemy4Controller : MonoBehaviour, IDamageable, EnemyInterface
     }
     public bool ApplyDamage(DamageMessage damageMessage)
     {
+        return ApplyDamage(damageMessage, Part.BODY);
+    }      
+    public bool ApplyDamage(DamageMessage damageMessage,Part part)
+    {       
         float damageMuiltplier = 1f;
-
         switch (damageMessage.attackType)
         {
             case AttackType.Common:

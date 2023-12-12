@@ -32,7 +32,7 @@ public class Enemy2Navigator : MonoBehaviour
                 var targetPos = target.position;
                 if (target.name.StartsWith("Gate"))
                     targetPos.x = (target.position - (target.position - transform.position).normalized * 3f).x;
-                ec.agent.destination = targetPos;
+                if (Vector3.Distance(ec.agent.destination, targetPos) > 0.5f) ec.agent.destination = targetPos;
             }
             else
             {

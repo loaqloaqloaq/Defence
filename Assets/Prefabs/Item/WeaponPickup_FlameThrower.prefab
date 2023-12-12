@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6775799625237045159}
   - component: {fileID: 1290052026256448278}
   - component: {fileID: 9094448112784150449}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WeaponPickup_FlameThrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,6 +145,10 @@ PrefabInstance:
     - target: {fileID: 520686837810110241, guid: 49ce038478385b84b87e5a2367ff1224, type: 3}
       propertyPath: m_Name
       value: Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 520686837810110241, guid: 49ce038478385b84b87e5a2367ff1224, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 896789476554360219, guid: 49ce038478385b84b87e5a2367ff1224, type: 3}
       propertyPath: m_RootOrder

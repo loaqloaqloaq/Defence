@@ -10,6 +10,7 @@ TagManager:
   - CrossHairTarget
   - FollowCam
   - CheckPoint
+  - Turret
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,8 @@ TagManager:
   - Floor
   - Box
   - TurretSlot
-  - 
-  - 
+  - Weapon
+  - MiniMap
   - 
   - 
   - 
