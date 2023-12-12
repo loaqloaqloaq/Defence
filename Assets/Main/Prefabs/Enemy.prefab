@@ -57,13 +57,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4425709252556897481}
     m_Modifications:
+    - target: {fileID: 1356736838704668305, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356736838704668305, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2595014424384496030, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
       propertyPath: m_Name
       value: Enemy4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2595014424384496030, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2595014424384535998, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
       propertyPath: m_RootOrder
@@ -304,9 +308,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy3
       objectReference: {fileID: 0}
-    - target: {fileID: 553309270535123319, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 4391732332479693328, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391732332479693328, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4708581126796201219, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
       propertyPath: m_RootOrder
@@ -631,6 +639,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy1
       objectReference: {fileID: 0}
+    - target: {fileID: 3700533141694057188, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700533141694057188, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -886,6 +902,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4425709252556897481}
     m_Modifications:
+    - target: {fileID: 3503170622718790047, guid: b6e09415da3844b4281ff6d110d944c6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503170622718790047, guid: b6e09415da3844b4281ff6d110d944c6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3554424129766646819, guid: b6e09415da3844b4281ff6d110d944c6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1164,6 +1188,13 @@ PrefabInstance:
     - target: {fileID: 5839441564097341409, guid: 99686c0c67d5f0d4787a7b43f9b49ebb, type: 3}
       propertyPath: deadSE.audioLength
       value: 1
+    - target: {fileID: 4937105371748598345, guid: 99686c0c67d5f0d4787a7b43f9b49ebb, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937105371748598345, guid: 99686c0c67d5f0d4787a7b43f9b49ebb, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8360766054580509094, guid: 99686c0c67d5f0d4787a7b43f9b49ebb, type: 3}
       propertyPath: m_RootOrder
@@ -1212,10 +1243,6 @@ PrefabInstance:
     - target: {fileID: 8360766054580733318, guid: 99686c0c67d5f0d4787a7b43f9b49ebb, type: 3}
       propertyPath: m_Name
       value: Enemy5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8360766054580733318, guid: 99686c0c67d5f0d4787a7b43f9b49ebb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
