@@ -24,7 +24,7 @@ public class CannonBall : MonoBehaviour
     //砲弾の落下地点マーカー
     [SerializeField] private GameObject marker;
     //マーカー削除用
-    private GameObject mark;
+    //private GameObject mark;
     //落下地点取得用座標
     private Vector3 fallpoint;
     //最初に落ちた瞬間
@@ -39,7 +39,7 @@ public class CannonBall : MonoBehaviour
         //砲弾の攻撃力を設定
         cannonBall_Damage = 80;
         //マーカー削除用はnull
-        mark = null;
+        //mark = null;
         //砲弾の落下地点の初期設定
         fallpoint = Vector3.zero;
         //落下していない
