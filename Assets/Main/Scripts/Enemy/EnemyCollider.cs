@@ -10,7 +10,14 @@ public class EnemyCollider : MonoBehaviour, EnemyPart
     public bool ApplyDamage(DamageMessage damageMessage)
     {
         //Debug.Log(rootObject.ToString());
-        root.ApplyDamage(damageMessage,part);
+        try
+        {
+            root.ApplyDamage(damageMessage, part);
+        }
+        catch (System.Exception e) { 
+            Debug.LogError(e);
+            root.ApplyDamage(damageMessage);
+        }
         return true;
     }
     public Part GetPart()

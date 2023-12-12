@@ -38,7 +38,8 @@ public class Enemy1Navigator : MonoBehaviour
             target = ec.target ?? g1 ?? g2 ?? g3;            
             if (Vector3.Distance(transform.position, target.position) > 1.5f && !ec.attacking)
             {
-                if ( (ec.gate == g2 && area != routes.GetChild(0)) || (ec.gate == g3 && area != routes.GetChild(1)) ) RandomRoute();
+                if (target == g1) checkPoint = g1.position;
+                else if ((target == g2 && area != routes.GetChild(0)) || (target == g3 && area != routes.GetChild(1))) RandomRoute();                
                 CheckRoute();                
 
                 animator.SetBool("walking", true);                

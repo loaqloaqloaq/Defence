@@ -83,8 +83,8 @@ public class DamagerFire : MonoBehaviour
     private IEnumerator Stanby()
     {
         stanby = true;
-
-        yield return new WaitForSeconds(1.0f);
+        transform.parent = null;
+        yield return new WaitForSeconds(0.5f);
         
         gameObject.SetActive(false);
         transform.parent = p_Transform;

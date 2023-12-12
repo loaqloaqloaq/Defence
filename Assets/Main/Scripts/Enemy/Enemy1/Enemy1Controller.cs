@@ -266,7 +266,8 @@ public class Enemy1Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
 
         DamageMessage dm= new DamageMessage();
         dm.damager = gameObject;
-        dm.amount = ATK;        
+        dm.amount = ATK;
+        dm.hitNormal = transform.position - target.transform.position;
         if((target.GetComponent<GateController>() ?? null) != null) target.GetComponent<GateController>().ApplyDamage(dm);
         else if ((target.GetComponent<PlayerHealth>() ?? null) != null) target.GetComponent<PlayerHealth>().ApplyDamage(dm);   
         attacked = true;
