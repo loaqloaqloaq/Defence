@@ -77,8 +77,7 @@ public class Enemy1Navigator : MonoBehaviour
         destination = route.GetChild(checkPointIndex);
         checkPoint = destination.position;
         checkPoint.x += Random.Range(-offsetRange, offsetRange);
-        checkPoint.z += Random.Range(-offsetRange, offsetRange);
-        checkPoint.y = 0;
+        checkPoint.z += Random.Range(-offsetRange, offsetRange);        
     }
     void RandomRoute()
     {
@@ -93,8 +92,10 @@ public class Enemy1Navigator : MonoBehaviour
     void CheckRoute() {
         if (destination.CompareTag("Gate")) return;
         Vector3 pos = transform.position;
+        Vector3 checkPos = checkPoint;
         pos.y = 0;
-        if (Vector3.Distance(checkPoint, pos) < 0.2f) NextCheckPoint();
+        checkPos.y = 0;
+        if (Vector3.Distance(checkPos, pos) < 0.2f) NextCheckPoint();
 
 
     }

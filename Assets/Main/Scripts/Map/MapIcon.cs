@@ -65,7 +65,7 @@ public class MapIcon : MonoBehaviour
     }
 
     public void SetFill(float hp) {
-        if (bigMapIcon.transform.GetChild(1)) bigMapIcon.transform.GetChild(1).GetComponent<Image>().fillAmount = 1 - hp;
-        if (miniMapIcon.transform.GetChild(1)) miniMapIcon.transform.GetChild(1).GetComponent<Image>().fillAmount = 1 - hp;        
+        if (bigMapIcon.transform.GetChild(0).GetChild(0)) bigMapIcon.transform.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = 1 - hp;
+        if (miniMapIcon.transform.GetChild(0).GetChild(0)) miniMapIcon.transform.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = 1 - hp;        
     }
 }
