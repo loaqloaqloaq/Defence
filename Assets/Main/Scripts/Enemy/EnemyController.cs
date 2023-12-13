@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
 {
     int type;
 
-    EnemyGloable eg;
+    EnemyGloable eg;    
    
     private void Start()
     {        
@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
     private void resetEnemy(Transform t) {
         t.gameObject.SetActive(true);
         t.position = transform.position;
-        EnemyInterface controller = t.GetComponent<EnemyInterface>();
+        EnemyInterface controller = t.GetComponent<EnemyInterface>();       
         controller.resetEnemy();
     }
 
