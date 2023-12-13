@@ -137,6 +137,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8082801402876741700, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
+      propertyPath: deadSE.clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 00d1d12e4a476104886cb7fdf3e1c0eb, type: 3}
     - target: {fileID: 8708083048669659020, guid: 8a15250fad80f8a46912504fffe1944a, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.7
@@ -267,6 +271,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7684062632669335789, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
+      propertyPath: deadSE.clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 00d1d12e4a476104886cb7fdf3e1c0eb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -285,6 +293,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4425709252556897481}
     m_Modifications:
+    - target: {fileID: 1538845396968759557, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
+      propertyPath: deadSE.clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 00d1d12e4a476104886cb7fdf3e1c0eb, type: 3}
     - target: {fileID: 3554424129766646819, guid: d33f6237b300a4a48b87227983d79b4b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -503,6 +515,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7667162323414539654, guid: b6e09415da3844b4281ff6d110d944c6, type: 3}
+      propertyPath: deadSE.clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 00d1d12e4a476104886cb7fdf3e1c0eb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -565,6 +581,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5839441564097341409, guid: 99686c0c67d5f0d4787a7b43f9b49ebb, type: 3}
+      propertyPath: deadSE.clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 00d1d12e4a476104886cb7fdf3e1c0eb, type: 3}
     - target: {fileID: 8360766054580509094, guid: 99686c0c67d5f0d4787a7b43f9b49ebb, type: 3}
       propertyPath: m_RootOrder
       value: 25
