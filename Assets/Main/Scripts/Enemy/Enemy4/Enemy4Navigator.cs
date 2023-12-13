@@ -68,8 +68,7 @@ public class Enemy4Navigator : MonoBehaviour
                 if (routes == null) target = ec.target;
                 else
                 {
-                    if (target == g1) checkPoint = g1.position;
-                    else if ((target == g2 && area != routes.GetChild(0)) || (target == g3 && area != routes.GetChild(1))) RandomRoute();
+                    if ((target == g1 && area != routes.GetChild(0)) || (target == g2 && area != routes.GetChild(1)) || (target == g3 && area != routes.GetChild(2))) RandomRoute();
                     CheckRoute();
                 }
 
@@ -113,8 +112,9 @@ public class Enemy4Navigator : MonoBehaviour
     }
     void RandomRoute()
     {
-        if (ec.gate == g2) area = routes.GetChild(0);
-        else if (ec.gate == g3) area = routes.GetChild(1);
+        if (ec.gate == g1) area = routes.GetChild(0);
+        else if (ec.gate == g2) area = routes.GetChild(1);
+        else if (ec.gate == g3) area = routes.GetChild(2);
         route = area.GetChild(Random.Range(0, area.childCount));
         checkPointIndex = -1;
         NextCheckPoint();
