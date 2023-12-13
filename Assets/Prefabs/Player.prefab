@@ -749,14 +749,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1799385375434098742}
-  m_LocalRotation: {x: 0.52416843, y: -0.37521288, z: 0.5805032, w: -0.49747238}
-  m_LocalPosition: {x: -0.3583, y: 0.0196, z: 0.1322}
+  m_LocalRotation: {x: 0.40053505, y: -0.489012, z: 0.5080011, w: -0.5851272}
+  m_LocalPosition: {x: -0.332, y: 0.03, z: 0.053}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1799385376549011504}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -4.927, y: -279.762, z: -102.962}
+  m_LocalEulerAnglesHint: {x: 1.611, y: -281.59302, z: -80.614}
 --- !u!1 &1799385375519608658
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,7 +974,7 @@ Transform:
   - {fileID: 2394552938683614275}
   - {fileID: 5385076077625590515}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1799385376026310230
 Animator:
@@ -1229,7 +1229,7 @@ MonoBehaviour:
     name: playerDead
     resourcePath: 
     audioLength: 0
-    clip: {fileID: 8300000, guid: b3398482b7f4d0c40a510905654bc2af, type: 3}
+    clip: {fileID: 8300000, guid: 00d1d12e4a476104886cb7fdf3e1c0eb, type: 3}
 --- !u!114 &893034550300866139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5019,14 +5019,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8177971397586484559}
-  m_LocalRotation: {x: 0.68889606, y: -0.5449987, z: 0.37562308, w: -0.29547587}
-  m_LocalPosition: {x: -0.292, y: -0.041, z: 0.154}
+  m_LocalRotation: {x: 0.6083462, y: -0.62378395, z: 0.37965757, w: -0.31091586}
+  m_LocalPosition: {x: -0.295, y: -0.028, z: 0.026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5505905075244316784}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0.133, y: -237.09799, z: -103.376}
+  m_LocalEulerAnglesHint: {x: 5.472, y: -238.617, z: -91.638}
 --- !u!1 &8736791659677528962
 GameObject:
   m_ObjectHideFlags: 0
@@ -5304,6 +5304,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4503629101150638369, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
+      propertyPath: m_DynamicPixelsPerUnit
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4555071532345071344, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -5319,6 +5323,10 @@ PrefabInstance:
     - target: {fileID: 4924323857925394839, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
       propertyPath: m_Name
       value: MapIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367292964286612222, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
+      propertyPath: m_DynamicPixelsPerUnit
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7841344145092064343, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
       propertyPath: bigMapIcon

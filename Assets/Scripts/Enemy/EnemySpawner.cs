@@ -140,7 +140,7 @@ public class EnemySpawner : MonoBehaviour
         enemies.Add(enemy);
         //enemy.OnDeath += () => enemies.Remove(enemy);
         //enemy.OnDeath += () => Destroy(enemy, 10f); //livingEntity에 내장되어 있는 OnDeath이벤트
-        enemy.OnDeath += () => GameManager.Instance.AddScore(enemy.currentScore); //
+        //enemy.OnDeath += () => GameManager.Instance.AddScore(enemy.currentScore); //
     }
 
     //シーンにすでにインスタンス化しているオブジェクトをWaveに合わせて更新

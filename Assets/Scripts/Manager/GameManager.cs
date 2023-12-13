@@ -4,9 +4,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     //Singleton
+    private float timer;
+    [SerializeField] float playTime;
     private static GameManager instance;
+    [SerializeField]
+    Timer timerScript;
     public static GameManager Instance
-    {
+    {        
         get
         {
             if (instance == null) instance = FindObjectOfType<GameManager>();
@@ -22,6 +26,23 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         if (Instance != this) Destroy(gameObject); 
         Record.Init();
+
+        
+        timer = playTime * 60;
+    }
+    private void Update()
+    {
+
+        if (timer <= 0)
+        {
+            ToResultScene();
+        }
+        else TimerUpdate();
+    }
+
+    void TimerUpdate() {
+        timer -= Time.deltaTime;
+        if(timerScript) timerScript.setTimerString(timer);
     }
     public void EndGame()
     {
@@ -34,13 +55,13 @@ public class GameManager : MonoBehaviour
     //結果シーンに移る
     public void ToResultScene()
     {
-        SceneManager.LoadScene("ResultScene");
+        //SceneManager.LoadScene("ResultScene");
     }
 
     //タイトルシーンに移る
     public void ReturnToTitle()
     {
-        SceneManager.LoadScene("Title");
+        //SceneManager.LoadScene("Title");
     }
 
     //ゲームシーンをRestart
@@ -51,26 +72,4 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    //点数更新
-    public void AddScore(int newScore)
-    {
-        if (!isGameover)
-        {
-
-            Record.score += newScore;
-            UIManager.Instance.SetNextScore(Record.score);
-        }
-    }
-
-    //獲得したアイテムの数を増やす
-    public void AddItemCount()
-    {
-        ++Record.itemCount;
-    }
-
-    //倒した敵の数を増やす
-    public void AddKillCount()
-    {
-        ++Record.killCount;
-    }
 }

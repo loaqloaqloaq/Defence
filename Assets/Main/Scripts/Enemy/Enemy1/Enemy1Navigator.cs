@@ -23,7 +23,7 @@ public class Enemy1Navigator : MonoBehaviour
         g2 = GameObject.Find("Gate2").transform;
         g3 = GameObject.Find("Gate3").transform;
 
-        routes = GameObject.Find("Routes").transform;
+        routes = GameObject.Find("Routes")?.transform??null;
 
         destination = g1;
 
@@ -38,16 +38,20 @@ public class Enemy1Navigator : MonoBehaviour
             target = ec.target ?? g1 ?? g2 ?? g3;            
             if (Vector3.Distance(transform.position, target.position) > 1.5f && !ec.attacking)
             {
-                if (target == g1) checkPoint = g1.position;
-                else if ((target == g2 && area != routes.GetChild(0)) || (target == g3 && area != routes.GetChild(1))) RandomRoute();                
-                CheckRoute();                
+                if (routes == null) target = ec.target;
+                else
+                {                    
+                    if ((target == g1 && area != routes.GetChild(0))||(target == g2 && area != routes.GetChild(1)) || (target == g3 && area != routes.GetChild(2))) RandomRoute();
+                    CheckRoute();
+                }
 
                 animator.SetBool("walking", true);                
                 Vector3 targetPos = Vector3.zero;
                 if (target.CompareTag("Player")) targetPos = target.position;
                 else targetPos = checkPoint;
                 
-                if(Vector3.Distance(ec.agent.destination,targetPos)>0.5f) ec.agent.destination = targetPos;
+                //if(Vector3.Distance(ec.agent.destination,targetPos)>0.5f)
+                ec.agent.destination = targetPos;
 
             }
             else
@@ -79,8 +83,9 @@ public class Enemy1Navigator : MonoBehaviour
     }
     void RandomRoute()
     {
-        if(ec.gate == g2) area = routes.GetChild(0);
-        else if(ec.gate == g3)area = routes.GetChild(1);
+        if(ec.gate == g1) area = routes.GetChild(0);
+        else if(ec.gate == g2) area = routes.GetChild(1);
+        else if(ec.gate == g3)area = routes.GetChild(2);
         route = area.GetChild(Random.Range(0, area.childCount));
         checkPointIndex = -1;
         NextCheckPoint();

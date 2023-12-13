@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapIcon : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class MapIcon : MonoBehaviour
     Canvas miniMapIcon, bigMapIcon;
     
     float currentZoom;
-    bool isPickUpWeapon;
+    bool notChara;   
 
     GameObject player;
 
@@ -17,17 +18,23 @@ public class MapIcon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
-        mc = GameObject.Find("UiMap").GetComponent<MapController>();
-        player = GameObject.Find("Player");
-        if (bigMapIcon==null) bigMapIcon = transform.GetChild(0).GetComponent<Canvas>();
-        if(miniMapIcon==null) miniMapIcon = transform.GetChild(1).GetComponent<Canvas>();
-        bigMapIcon.worldCamera = eg.mapCam;
-        miniMapIcon.worldCamera = eg.miniMapCam;        
-        isPickUpWeapon = transform.parent.name.StartsWith("Weapon")||transform.parent.name.StartsWith("Grenade");
+        eg = GameObject.Find("EnemyLoader")?.GetComponent<EnemyGloable>();
+        mc = GameObject.Find("UiMap")?.GetComponent<MapController>();
+        player = GameObject.FindWithTag("Player");
+
+        if (bigMapIcon == null) bigMapIcon = transform.GetChild(0).GetComponent<Canvas>();
+        if (miniMapIcon == null) miniMapIcon = transform.GetChild(1).GetComponent<Canvas>();
+        if (eg)
+        {
+            bigMapIcon.worldCamera = eg.mapCam;
+            miniMapIcon.worldCamera = eg.miniMapCam;
+        }
+
+        notChara = transform.parent.name.StartsWith("Weapon")||transform.parent.name.StartsWith("Grenade")|| transform.parent.name.StartsWith("enemyBase") || transform.parent.name.StartsWith("Gate");
+        
 
         normalScaleX = bigMapIcon.transform.localScale.x;
-        normalScaleY = bigMapIcon.transform.localScale.y;
+        normalScaleY = bigMapIcon.transform.localScale.y;        
 
         SetScale();
 
@@ -40,17 +47,25 @@ public class MapIcon : MonoBehaviour
             SetScale();
         }
 
-        if (isPickUpWeapon) {
+        if (notChara)
+        {
             bigMapIcon.transform.eulerAngles = new Vector3(90, -90, 0);
             miniMapIcon.transform.eulerAngles = new Vector3(90, player.transform.eulerAngles.y, 0);
         }
+        
+
 
     }
 
     void SetScale() {
-        currentZoom = mc.zoomPresent;
+        if (mc) currentZoom = mc.zoomPresent;
         var scaleX = normalScaleX * (1 - 0.5f * currentZoom);
         var scaleY = normalScaleY * (1 - 0.5f * currentZoom);
         bigMapIcon.transform.localScale = new Vector3(scaleX, scaleY, 1);
+    }
+
+    public void SetFill(float hp) {
+        if (bigMapIcon.transform.GetChild(1)) bigMapIcon.transform.GetChild(1).GetComponent<Image>().fillAmount = 1 - hp;
+        if (miniMapIcon.transform.GetChild(1)) miniMapIcon.transform.GetChild(1).GetComponent<Image>().fillAmount = 1 - hp;        
     }
 }

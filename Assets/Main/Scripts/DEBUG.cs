@@ -23,13 +23,14 @@ public class DEBUG : MonoBehaviour
         gateDestory.amount = 1000;
 
         eb=new EnemyBase[] { 
-            GameObject.Find("enemyBase1").GetComponent<EnemyBase>(),
-            GameObject.Find("enemyBase2").GetComponent<EnemyBase>(),
-            GameObject.Find("enemyBase3").GetComponent<EnemyBase>()
+            GameObject.Find("enemyBase1")?.GetComponent<EnemyBase>()??null,
+            GameObject.Find("enemyBase2")?.GetComponent<EnemyBase>()??null,
+            GameObject.Find("enemyBase3")?.GetComponent<EnemyBase>()??null
         };
 
         foreach (EnemyBase b in eb) {
-            b.fireCannon = fireCannonEnabled;
+            if (b != null) 
+                b.fireCannon = fireCannonEnabled;
         }
 
     }

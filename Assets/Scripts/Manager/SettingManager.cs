@@ -81,7 +81,7 @@ public class SettingManager : MonoBehaviour
     //確認ボタン
     public void OKButtonClicked()
     {
-        var data = DataManager.Instance.data;
+        //var data = DataManager.Instance.data;
         //解像度
         /*
         Screen.SetResolution(resolutions[resolutionNum].width,
@@ -90,10 +90,10 @@ public class SettingManager : MonoBehaviour
         */
         //カメラセッティング
         SetPlayerCameraAxis();
-        data.SetCameraSetting(xAxis, yAxis);
-        data.SetVolumeSetting(musicVolume, sfxVolume);
+        //data.SetCameraSetting(xAxis, yAxis);
+        //data.SetVolumeSetting(musicVolume, sfxVolume);
 
-        DataManager.Instance.SaveGameData();
+        //DataManager.Instance.SaveGameData();
     }
 
     //キャラクタのカメラ速度設定
@@ -150,8 +150,10 @@ public class SettingManager : MonoBehaviour
     //PCに保存されている既存の設定値をロードする　
     public void LoadSettings() 
     {
+        //temp
+        return;
         //データマネージャーからロード
-        DataManager.Instance.LoadGameData();
+        DataManager.Instance?.LoadGameData();
         var data = DataManager.Instance.data;
         //無ければロードしない
         if (data == null)
