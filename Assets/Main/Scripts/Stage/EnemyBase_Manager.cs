@@ -93,15 +93,11 @@ public class EnemyBase_Manager : MonoBehaviour
     {
         if (stage[0] != 0 && !moveFlg[0])
         {
-            Player.GetComponent<CharacterController>().enabled = false;
-            Player.transform.position = PlayerMovePoint[1].transform.position;
-            Player.GetComponent<CharacterController>().enabled = true;
+            Player.GetComponent<PlayerTeleport>().TeleportTo(PlayerMovePoint[1].transform.position);           
         }
         if (stage[1] != 0 && !moveFlg[1])
         {
-            Player.GetComponent<CharacterController>().enabled = false;
-            Player.transform.position = PlayerMovePoint[2].transform.position;
-            Player.GetComponent<CharacterController>().enabled = true;
+            Player.GetComponent<PlayerTeleport>().TeleportTo(PlayerMovePoint[2].transform.position);            
         }
     }
 
