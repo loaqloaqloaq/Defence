@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         if (Instance != this) Destroy(gameObject); 
-        Record.Init();
+        //Record.Init();
     }
     public void EndGame()
     {
@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
     {
         if (!isGameover)
         {
-
             Record.score += newScore;
             UIManager.Instance.SetNextScore(Record.score);
         }

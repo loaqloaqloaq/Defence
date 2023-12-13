@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
@@ -40,6 +41,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private RectTransform aimPointRect;
 
+    private EventSystem eventSystem;
+    [SerializeField] private Button firstSelectedButton;
+
     //クロスヘア＆エイムポイント
     private float crosshairSize = 0.7f;
     private float sizeLerpTime = 0.1f;
@@ -54,11 +58,15 @@ public class UIManager : MonoBehaviour
 
     private Animator animator;
 
+    private PlayerInput playerInput;
+    
     public bool isPause { get; private set; }
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        eventSystem = FindObjectOfType<EventSystem>();
+        playerInput = FindObjectOfType<PlayerInput>(); 
         aimPointStartSize = aimPointRect.sizeDelta.x;
         currentScore = 0;
         nextScore = 0;
@@ -74,9 +82,9 @@ public class UIManager : MonoBehaviour
             return;
         }
         */
-        UpdateScore();
-        
-        if (Input.GetKeyDown(KeyCode.Escape) && !settingUI.activeSelf)
+        //UpdateScore();
+
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 7")) && !settingUI.activeSelf)
         {
             if (!isPause)
             {
@@ -109,8 +117,10 @@ public class UIManager : MonoBehaviour
     {
         isPause = true;
         animator.Play("pause_Anim");
+        if (firstSelectedButton != null) { eventSystem.SetSelectedGameObject(firstSelectedButton.gameObject); }
         StartCoroutine(SetPanel(true));
         Time.timeScale = 0;
+        playerInput.enabled = false;
     }
     public void Resume()
     {
@@ -118,13 +128,24 @@ public class UIManager : MonoBehaviour
         animator.Play("resume_Anim");
         StartCoroutine(SetPanel(false));
         Time.timeScale = 1.0f;
+        playerInput.enabled = true;
+    }
+
+    public void Restart()
+    {
+        GameManager.Instance?.Restart();
+    }
+
+    public void Title()
+    {
+        GameManager.Instance?.Restart();
     }
 
     //Pause UI表示
     IEnumerator SetPanel(bool isActive)
     {
         //効果音
-        //SoundManager.Instance.Play("Sounds/UI_Sfx/Click_Electronic_Pause", SoundManager.Sound.UI);
+        SoundManager.Instance.Play("Sounds/UI_Sfx/Click_Electronic_Pause", SoundManager.Sound.UI);
 
         while (animator.GetCurrentAnimatorStateInfo(2).normalizedTime < 1.0f)
         {
