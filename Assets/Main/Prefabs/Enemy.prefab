@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy3
       objectReference: {fileID: 0}
+    - target: {fileID: 553309270535123319, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2842104456321042342, guid: 28bfcdb2a0a796f418f7d99c8fa2d757, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -442,6 +446,10 @@ PrefabInstance:
     - target: {fileID: 3554424129767012801, guid: b6e09415da3844b4281ff6d110d944c6, type: 3}
       propertyPath: m_Name
       value: Enemy2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3554424129767012801, guid: b6e09415da3844b4281ff6d110d944c6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4382946195431701756, guid: b6e09415da3844b4281ff6d110d944c6, type: 3}
       propertyPath: m_SizeDelta.x
