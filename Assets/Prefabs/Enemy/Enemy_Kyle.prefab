@@ -186,7 +186,7 @@ MonoBehaviour:
     name: enemydead
     resourcePath: 
     audioLength: 0.5
-    clip: {fileID: 8300000, guid: e4a0940b69512cb45bec8dfe898e7ca5, type: 3}
+    clip: {fileID: 8300000, guid: 00d1d12e4a476104886cb7fdf3e1c0eb, type: 3}
 --- !u!136 &239817267161049576
 CapsuleCollider:
   m_ObjectHideFlags: 0

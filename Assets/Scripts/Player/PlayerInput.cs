@@ -30,6 +30,8 @@ public class PlayerInput : MonoBehaviour
     public bool Alpha3 { get; private set; }
     public bool Alpha4 { get; private set; }
 
+    public bool Minimap { get; private set; }
+
     // Update is called once per frame
     void Update()
     {
