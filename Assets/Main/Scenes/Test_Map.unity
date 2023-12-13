@@ -22782,6 +22782,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 302385695500774857, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
+      propertyPath: lengthInSec
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 302385695500774857, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594105238838554158, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
+      propertyPath: lengthInSec
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594105238838554158, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1799385376033495472, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
       propertyPath: m_RootOrder
       value: 28
@@ -22829,6 +22845,30 @@ PrefabInstance:
     - target: {fileID: 1799385376033719698, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837721656324971241, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
+      propertyPath: lengthInSec
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837721656324971241, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436437333017886492, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
+      propertyPath: lengthInSec
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436437333017886492, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8954373772900899587, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
+      propertyPath: lengthInSec
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8954373772900899587, guid: 86974e4c4ec540b468c9f1f9e831d13c, type: 3}
+      propertyPath: simulationSpeed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
