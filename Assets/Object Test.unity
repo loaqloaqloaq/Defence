@@ -3019,10 +3019,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5669252747935032409, guid: b1046f32f6c230847a5ddbdfc9d4f198, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5762428968717545223, guid: b1046f32f6c230847a5ddbdfc9d4f198, type: 3}
       propertyPath: m_Name
       value: ThornTrap
@@ -3030,13 +3026,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3820471980468670020, guid: b1046f32f6c230847a5ddbdfc9d4f198, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6771200817908166814}
-    - targetCorrespondingSourceObject: {fileID: 3820471980468670020, guid: b1046f32f6c230847a5ddbdfc9d4f198, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6771200817908166817}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1046f32f6c230847a5ddbdfc9d4f198, type: 3}
 --- !u!1 &1264692848643353903
 GameObject:
@@ -7445,58 +7435,6 @@ Transform:
   m_Father: {fileID: 5505905075553738069}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0.133, y: -237.09799, z: -103.376}
---- !u!1 &6771200817908166813 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3820471980468670020, guid: b1046f32f6c230847a5ddbdfc9d4f198, type: 3}
-  m_PrefabInstance: {fileID: 1102777351606297230}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6771200817908166814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6771200817908166813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92530183a14d1154bac749aae199a92d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetLayer: Enemy
-  spearsDamage: 5
-  spearsMoveSpeed: 0
-  spearsPos: {x: 0, y: 0}
-  AttackCount: 0
-  ResetCount: 0
-  spearAttackTime: 5
-  spearResetTime: 15
---- !u!54 &6771200817908166817
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6771200817908166813}
-  serializedVersion: 4
-  m_Mass: 100
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 122
-  m_CollisionDetection: 0
 --- !u!1 &6911697205300879107
 GameObject:
   m_ObjectHideFlags: 3
