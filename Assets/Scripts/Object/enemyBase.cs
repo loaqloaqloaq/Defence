@@ -21,7 +21,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     //HPを回復する時間
     private float healTime;
     //砲弾発射カウント
-    private float firingCount;
+    //private float firingCount;
     //砲弾発射頻度
     private float fireTime = 0f;
     private float fireDelay = 10.0f;
@@ -42,7 +42,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //HP表示設定
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
         //攻撃の時間のカウント
-        firingCount = 0.0f;
+        //firingCount = 0.0f;
 
         //ダメージを受けていないを設定
         applydamage = false;
@@ -171,6 +171,6 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //砲弾生成
         var cb = Instantiate(cannonBall);
         //砲弾発射カウントをリセット
-        firingCount = 0.0f;
+        //firingCount = 0.0f;
     }
 }
