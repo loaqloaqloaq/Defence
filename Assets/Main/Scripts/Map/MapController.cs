@@ -7,7 +7,6 @@ public class MapController : MonoBehaviour
     [SerializeField] GameObject[] children;
     Camera cam;
     [SerializeField] float maxZoom, minZoom;
-    UIManager uiManager;
 
     Vector2 prevPos, curPos;
 
@@ -28,10 +27,9 @@ public class MapController : MonoBehaviour
         }
         cam = children[0].GetComponent<Camera>();
 
-        playerInput=GameObject.Find("Player")?.GetComponent<PlayerInput>()??null;
-        uiManager = GameObject.Find("UIManager")?.GetComponent<UIManager>() ?? null;
+        playerInput = GameObject.FindWithTag("Player")?.GetComponent<PlayerInput>() ?? null;
 
-        player = GameObject.Find("Player").transform;
+        player = GameObject.FindWithTag("Player").transform;
 
         prevPos =Vector2.zero; curPos=Vector2.zero;
 
@@ -47,14 +45,17 @@ public class MapController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool isPause = false;
+        if (UIManager.Instance) isPause = UIManager.Instance.isPause;
+
         //マップの表示や非表示
-        if (Input.GetKeyDown(KeyCode.M)) {
+        if (Input.GetKeyDown(KeyCode.M) && !isPause) {
             enable = !enable;
             foreach (GameObject child in children) { 
                 child.SetActive(enable);
             }
-            if(playerInput) playerInput.enabled=!enable;
-            uiManager.SetMouseVisible(enable);
+            if (playerInput) playerInput.enabled = !enable;
+            UIManager.Instance?.SetMouseVisible(enable);
             //mapCanvas.enabled = enable;
             if (player) {
                 cam.transform.position = new Vector3(

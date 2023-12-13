@@ -18,15 +18,17 @@ public class MapIcon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
-        mc = GameObject.Find("UiMap").GetComponent<MapController>();
-        player = GameObject.Find("Player");
+        eg = GameObject.Find("EnemyLoader")?.GetComponent<EnemyGloable>();
+        mc = GameObject.Find("UiMap")?.GetComponent<MapController>();
+        player = GameObject.FindWithTag("Player");
 
-        if (bigMapIcon==null) bigMapIcon = transform.GetChild(0).GetComponent<Canvas>();
-        if(miniMapIcon==null) miniMapIcon = transform.GetChild(1).GetComponent<Canvas>();
-
-        bigMapIcon.worldCamera = eg.mapCam;
-        miniMapIcon.worldCamera = eg.miniMapCam;        
+        if (bigMapIcon == null) bigMapIcon = transform.GetChild(0).GetComponent<Canvas>();
+        if (miniMapIcon == null) miniMapIcon = transform.GetChild(1).GetComponent<Canvas>();
+        if (eg)
+        {
+            bigMapIcon.worldCamera = eg.mapCam;
+            miniMapIcon.worldCamera = eg.miniMapCam;
+        }
 
         notChara = transform.parent.name.StartsWith("Weapon")||transform.parent.name.StartsWith("Grenade")|| transform.parent.name.StartsWith("enemyBase") || transform.parent.name.StartsWith("Gate");
         
@@ -56,7 +58,7 @@ public class MapIcon : MonoBehaviour
     }
 
     void SetScale() {
-        currentZoom = mc.zoomPresent;
+        if (mc) currentZoom = mc.zoomPresent;
         var scaleX = normalScaleX * (1 - 0.5f * currentZoom);
         var scaleY = normalScaleY * (1 - 0.5f * currentZoom);
         bigMapIcon.transform.localScale = new Vector3(scaleX, scaleY, 1);
