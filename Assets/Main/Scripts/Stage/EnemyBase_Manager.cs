@@ -4,7 +4,6 @@ using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 //using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EnemyBase_Manager : MonoBehaviour
