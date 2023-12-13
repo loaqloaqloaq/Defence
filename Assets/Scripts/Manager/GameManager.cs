@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     //Singleton
-    private float timer;
+    public float timer;
     [SerializeField] float playTime;
     private static GameManager instance;
     [SerializeField]
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     //結果シーンに移る
     public void ToResultScene()
     {
-        //SceneManager.LoadScene("ResultScene");
+        SceneManager.LoadScene("Result");
     }
 
     //タイトルシーンに移る
