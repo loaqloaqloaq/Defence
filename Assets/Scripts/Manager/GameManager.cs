@@ -4,11 +4,14 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     //Singleton
-    public float timer;
-    [SerializeField] float playTime;
+    public float timer;    
     private static GameManager instance;
-    [SerializeField]
-    Timer timerScript;
+
+    [SerializeField] Timer timerScript;
+    [SerializeField] ScrapUI scrapUI;
+    [SerializeField] float playTime;
+    [SerializeField] public int scrap;
+
     public static GameManager Instance
     {        
         get
@@ -26,8 +29,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         if (Instance != this) Destroy(gameObject); 
         Record.Init();
-
-        
+    }
+    private void Start()
+    {
         timer = playTime * 60;
     }
     private void Update()
@@ -68,8 +72,16 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-
         SceneManager.LoadScene(sceneName);
     }
 
+    public void AddScrap(int amount) { 
+        scrap+=amount;
+        if (scrapUI) scrapUI.SetScrapText();
+    }
+
+    public void DeductScrap(int amount){
+        scrap -= amount;
+        if (scrapUI) scrapUI.SetScrapText();
+    }
 }

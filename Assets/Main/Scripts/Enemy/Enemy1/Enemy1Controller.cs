@@ -13,6 +13,7 @@ public class Enemy1Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
     [HideInInspector]
     public float MAXHP, ATK;
     public float HP;
+    int reward;
     Dictionary<string, float> drop = new Dictionary<string, float>();
     private Animator animator;
     [HideInInspector]
@@ -83,6 +84,7 @@ public class Enemy1Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
             weakness = EnemyJson.weakness;
             MAXHP = EnemyJson.hp;
             ATK = EnemyJson.atk;
+            reward = EnemyJson.reward;
 
             //ÉhÉçÉbÉv
             if (!drop.ContainsKey("ammo")) drop.Add("ammo", EnemyJson.drop.ammo);
@@ -261,6 +263,7 @@ public class Enemy1Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
     private void Dead() {
         Drop();
         animator.SetTrigger("die");
+        GameManager.Instance.AddScrap(reward);
         //GetComponent<Rigidbody>().isKinematic = true;
     }
     private void Drop() {

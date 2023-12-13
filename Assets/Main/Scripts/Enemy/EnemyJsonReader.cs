@@ -13,6 +13,7 @@ public class EnemyJsonReader
 public class EnemyData 
 {
     public float hp,moveSpeed, atk, AttackDuration, AttackStop, AttackRadius;
+    public int reward;
     public Drop drop;
     public Type resist, weakness;
 }

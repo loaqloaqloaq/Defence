@@ -10,6 +10,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
 {
     [HideInInspector]
     public float HP, MAXHP, ATK;
+    int reward;
     Dictionary<string, float> drop = new Dictionary<string, float>();
     private Animator animator;
     EnemyGloable eg;
@@ -79,6 +80,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
 
             MAXHP = EnemyJson.hp;
             ATK = EnemyJson.atk;
+            reward = EnemyJson.reward;
             fireFreq = EnemyJson.AttackDuration;
             fireStop = EnemyJson.AttackStop;
 
@@ -201,6 +203,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
         Drop();
         animator.speed = 1;
         animator.SetTrigger("die");
+        GameManager.Instance.AddScrap(reward);
         //GetComponent<Rigidbody>().isKinematic = true;
     }
     private void Drop() {

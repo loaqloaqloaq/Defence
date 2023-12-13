@@ -45,7 +45,7 @@ public class EnemyController : MonoBehaviour
             child.gameObject.SetActive(false);
         }
         gameObject.SetActive(false);
-        eg.EnemyDestoried();
+        eg.EnemyDestoried();       
     }
 }
 
