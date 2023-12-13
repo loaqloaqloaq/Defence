@@ -370,7 +370,7 @@ public class Enemy : LivingEntity
         animator.applyRootMotion = true;
         animator.SetTrigger("Die");
 
-        GameManager.Instance?.AddKillCount();
+        //GameManager.Instance?.AddKillCount();
         SoundManager.Instance?.PlaySE(deadSE.name, audioSource);
     }
 }

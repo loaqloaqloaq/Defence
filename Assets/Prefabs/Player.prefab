@@ -5304,6 +5304,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4503629101150638369, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
+      propertyPath: m_DynamicPixelsPerUnit
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4555071532345071344, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -5319,6 +5323,10 @@ PrefabInstance:
     - target: {fileID: 4924323857925394839, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
       propertyPath: m_Name
       value: MapIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7367292964286612222, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
+      propertyPath: m_DynamicPixelsPerUnit
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7841344145092064343, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
       propertyPath: bigMapIcon

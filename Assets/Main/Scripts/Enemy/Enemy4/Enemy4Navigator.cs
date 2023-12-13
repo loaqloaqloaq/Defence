@@ -27,7 +27,7 @@ public class Enemy4Navigator : MonoBehaviour
         g2 = GameObject.Find("Gate2").transform;
         g3 = GameObject.Find("Gate3").transform;
 
-        routes = GameObject.Find("Routes").transform;
+        routes = GameObject.Find("Routes")?.transform??null;
 
         destination = g1;
 
@@ -65,9 +65,13 @@ public class Enemy4Navigator : MonoBehaviour
                 }
                 lastRotation = transform.localEulerAngles.y;
                 ec.agent.isStopped = false;
-                if (target == g1) checkPoint = g1.position;
-                else if ((target == g2 && area != routes.GetChild(0)) || (target == g3 && area != routes.GetChild(1))) RandomRoute();
-                CheckRoute();
+                if (routes == null) target = ec.target;
+                else
+                {
+                    if (target == g1) checkPoint = g1.position;
+                    else if ((target == g2 && area != routes.GetChild(0)) || (target == g3 && area != routes.GetChild(1))) RandomRoute();
+                    CheckRoute();
+                }
 
                 Vector3 targetPos = Vector3.zero;
                 if (target.CompareTag("Player")) targetPos = target.position;

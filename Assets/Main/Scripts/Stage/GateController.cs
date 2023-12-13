@@ -88,8 +88,7 @@ public class GateController : MonoBehaviour,IDamageable
         HPfill.SetActive(true);
         gaugeWidth = 30f * HP / MaxHP;
         HPText.text = ( HP > 0 ? HP.ToString() : "0" )+ "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
-
-
+        transform.Find("MapIcon").GetComponent<MapIcon>().SetFill(Math.Max((HP / MaxHP),0f));
         return true;
     }
 
@@ -97,7 +96,7 @@ public class GateController : MonoBehaviour,IDamageable
         broke = true;
         GetComponent<BoxCollider>().enabled = false;
         ani.SetTrigger("break");
-        HPfill.GetComponent<Animator>().SetTrigger("hideHP");
+        HPfill.GetComponent<Animator>().SetTrigger("hideHP");        
         if (EnemyBase_Manager != null && gateNumber <= 2)
         {
             EnemyBase_Manager.gameObject.GetComponent<EnemyBase_Manager>().stage[gateNumber - 1] = 1;
