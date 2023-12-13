@@ -12,11 +12,11 @@ public class EnemyCollider : MonoBehaviour, EnemyPart
         //Debug.Log(rootObject.ToString());
         try
         {
-            root.ApplyDamage(damageMessage, part);
+            root?.ApplyDamage(damageMessage, part);
         }
         catch (System.Exception e) { 
             Debug.LogError(e);
-            root.ApplyDamage(damageMessage);
+            root?.ApplyDamage(damageMessage);
         }
         return true;
     }

@@ -1,21 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MiniMapCameraController : MonoBehaviour
 {
-    // Start is called before the first frame update
     Transform player;
-    void Start()
+
+    void Awake()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.FindWithTag("Player").transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         Vector3 pos= player.position;
+
         transform.position = new Vector3(pos.x, transform.position.y, pos.z);
+        
         transform.eulerAngles = new Vector3(
             transform.eulerAngles.x,
             player.eulerAngles.y,
