@@ -36,7 +36,7 @@ Transform:
   - {fileID: 696881554373936641}
   - {fileID: 4736139120799673402}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3185681535649293256
 MeshFilter:
@@ -225,6 +225,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 939498833427713566}
     m_Modifications:
+    - target: {fileID: 989390212125594982, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 989390212125594982, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 989390212125594982, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2128534596566540957, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
       propertyPath: m_Name
       value: Image

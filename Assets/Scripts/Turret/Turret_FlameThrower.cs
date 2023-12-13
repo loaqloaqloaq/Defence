@@ -62,15 +62,16 @@ public class Turret_FlameThrower : MonoBehaviour, Abnormality
     int[] abnormality = { 0, 0 };
 
     private bool IsTargetDead(Transform target)
-    {
+    {       
         var ITarget = target.GetComponent<IDamageable>();
 
         if (ITarget != null)
         {
+            Debug.Log(target.name);
             return ITarget.IsDead();
         }
 
-        return false;
+        return true;
     }
 
 #if UNITY_EDITOR //Turret�̍U���͈̓f�o�b�O

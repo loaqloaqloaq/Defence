@@ -37,7 +37,8 @@ public class EnemyCollider : MonoBehaviour, EnemyPart
 
     public bool IsDead()
     {
-        return root.IsDead();
+        if (root != null) return root.IsDead();
+        else return true;
     }
 
     

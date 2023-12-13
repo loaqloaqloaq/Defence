@@ -9,6 +9,7 @@ public class MapIcon : MonoBehaviour
     
     float currentZoom;
     bool isPickUpWeapon;
+    bool isEnemyBase;
 
     GameObject player;
 
@@ -28,11 +29,12 @@ public class MapIcon : MonoBehaviour
             bigMapIcon.worldCamera = eg.mapCam;
             miniMapIcon.worldCamera = eg.miniMapCam;
         }
-      
+
         isPickUpWeapon = transform.parent.name.StartsWith("Weapon")||transform.parent.name.StartsWith("Grenade");
+        isEnemyBase = transform.parent.name.StartsWith("enemyBase");
 
         normalScaleX = bigMapIcon.transform.localScale.x;
-        normalScaleY = bigMapIcon.transform.localScale.y;
+        normalScaleY = bigMapIcon.transform.localScale.y;        
 
         SetScale();
 
@@ -45,10 +47,13 @@ public class MapIcon : MonoBehaviour
             SetScale();
         }
 
-        if (isPickUpWeapon) {
+        if (isPickUpWeapon || isEnemyBase)
+        {
             bigMapIcon.transform.eulerAngles = new Vector3(90, -90, 0);
             miniMapIcon.transform.eulerAngles = new Vector3(90, player.transform.eulerAngles.y, 0);
         }
+        
+
 
     }
 

@@ -225,8 +225,9 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
     }
     private void Dead()
     {
-        Debug.Log("dead");
+        //Debug.Log("dead");
         ResetAfterAttack();
+        animator.speed = 1;
         animator.SetTrigger("die");
         Drop();        
         //GetComponent<Rigidbody>().isKinematic = true;
