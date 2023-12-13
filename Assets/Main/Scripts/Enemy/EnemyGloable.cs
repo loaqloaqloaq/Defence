@@ -11,6 +11,8 @@ public class EnemyGloable : MonoBehaviour
 
     public EnemyJsonReader EnemyJson;
 
+    [SerializeField] public Camera miniMapCam, mapCam;
+
     public GameObject explosion;
 
     [SerializeField]
