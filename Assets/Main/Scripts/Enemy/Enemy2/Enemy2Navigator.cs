@@ -29,10 +29,8 @@ public class Enemy2Navigator : MonoBehaviour
             if (Vector3.Distance(transform.position, target.position) > 1.5f && !ec.attacking)
             {
                 animator.SetBool("walking", true);                
-                var targetPos = target.position;
-                if (target.name.StartsWith("Gate"))
-                    targetPos.x = (target.position - (target.position - transform.position).normalized * 3f).x;
-                if (Vector3.Distance(ec.agent.destination, targetPos) > 0.5f) ec.agent.destination = targetPos;
+                var targetPos = target.position;               
+                ec.agent.destination = targetPos;
             }
             else
             {

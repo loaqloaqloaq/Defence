@@ -31,7 +31,7 @@ public class Enemy4Navigator : MonoBehaviour
 
         destination = g1;
 
-        offsetRange = 10f;
+        offsetRange = 5f;
     }
 
     // Update is called once per frame
@@ -75,7 +75,7 @@ public class Enemy4Navigator : MonoBehaviour
                 Vector3 targetPos = Vector3.zero;
                 if (target.CompareTag("Player")) targetPos = target.position;
                 else targetPos = checkPoint;
-                if (Vector3.Distance(ec.agent.destination, targetPos) > 0.5f) ec.agent.destination = targetPos;
+                ec.agent.destination = targetPos;
 
             }
             else
