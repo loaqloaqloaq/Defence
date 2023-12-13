@@ -31,3 +31,4 @@
 - ゲート：https://assetstore.unity.com/packages/3d/chainlink-fences-73107
 - 敵1&2：https://assetstore.unity.com/packages/3d/characters/robots/robot-metallic-humanoid-171295
 - 敵3：https://assetstore.unity.com/packages/3d/characters/robots/robot-soldier-142438
+- ワープエフェクト：https://www.pngwing.com/en/free-png-bniag
