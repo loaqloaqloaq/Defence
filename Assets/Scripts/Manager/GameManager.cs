@@ -3,14 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    //Singleton
-    public float timer;    
+    //Singleton       
     private static GameManager instance;
 
     [SerializeField] Timer timerScript;
     [SerializeField] ScrapUI scrapUI;
     [SerializeField] float playTime;
     [SerializeField] public int scrap;
+
+    public float timer;
 
     public static GameManager Instance
     {        
