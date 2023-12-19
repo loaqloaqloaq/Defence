@@ -100,7 +100,6 @@ public class PlayerAiming : MonoBehaviour
 
         if (isSniping)
         {
-
             return;
         }
 

@@ -30,7 +30,11 @@ public class PlayerTurret : MonoBehaviour
     {
         input = GetComponent<PlayerInput>();
 
-        if (TurretUI.Instance) TurretUI.Instance.closeUI += EnableInput;
+        if (TurretUI.Instance)
+        {
+            TurretUI.Instance.openUI += input.InitInputXY;
+            TurretUI.Instance.closeUI += EnableInput;
+        }
 
         rayDestination = GameObject.FindWithTag("CrossHairTarget").transform;
         if (rayDestination == null) { Debug.Log("turretRayDestination is Null"); }

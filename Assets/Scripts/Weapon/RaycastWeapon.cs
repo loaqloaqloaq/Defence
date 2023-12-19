@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RaycastWeapon : MonoBehaviour
 {
-    protected PlayerInput input; 
+    protected PlayerInput input;
 
      public class Bullet
     {
@@ -275,7 +275,16 @@ public class RaycastWeapon : MonoBehaviour
     {
         if (magAmmo <= 0) 
         {
-            PlaySound("Empty");
+            //Reload
+            var reload = input.GetComponent<ReloadWeapon>();
+            if (reloadAvailable)
+            {
+                reload?.StartReload();
+            }
+            else
+            {
+                PlaySound("Empty");
+            }
             return; 
         }
         --magAmmo;

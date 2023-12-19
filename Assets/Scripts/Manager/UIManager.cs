@@ -84,16 +84,11 @@ public class UIManager : MonoBehaviour
         */
         //UpdateScore();
 
-        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 7")) && !settingUI.activeSelf)
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 7")) 
+            && !settingUI.activeSelf)
         {
-            if (!isPause)
-            {
-                Pause();
-            }
-            else
-            {
-                Resume();
-            }
+            if (!isPause) { Pause();} 
+            else { Resume(); }
         }
     }
 
@@ -128,6 +123,19 @@ public class UIManager : MonoBehaviour
         animator.Play("resume_Anim");
         StartCoroutine(SetPanel(false));
         Time.timeScale = 1.0f;
+
+        var turretUI = TurretUI.Instance;
+
+        if (turretUI) 
+        {
+            if (turretUI.isOpened)
+            {
+                SetMouseVisible(true);
+                eventSystem.SetSelectedGameObject(turretUI.firstSelectedButton.gameObject);
+                return;
+            }
+        }
+
         playerInput.enabled = true;
     }
 

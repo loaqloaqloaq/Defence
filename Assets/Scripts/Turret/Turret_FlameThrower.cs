@@ -67,7 +67,6 @@ public class Turret_FlameThrower : MonoBehaviour, Abnormality
 
         if (ITarget != null)
         {
-            Debug.Log(target.name);
             return ITarget.IsDead();
         }
 
