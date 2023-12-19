@@ -141,7 +141,7 @@ public class PlayerAiming : MonoBehaviour
             return;
         }
 
-        uiManager.SetEnableCanvas_Player(false);
+        //uiManager.SetEnableCanvas_Player(false);
         uiManager.SetEnableCanvas_Sniping(true);
     }
 
@@ -157,7 +157,7 @@ public class PlayerAiming : MonoBehaviour
             return;
         }
 
-        uiManager.SetEnableCanvas_Player(true);
+        //uiManager.SetEnableCanvas_Player(true);
         uiManager.SetEnableCanvas_Sniping(false);
     }
 
