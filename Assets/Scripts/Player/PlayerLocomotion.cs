@@ -58,7 +58,6 @@ public class PlayerLocomotion : MonoBehaviour
     void Update()
     {
         input = playerInput.input;
-
         if (!playerInput || !playerInput.enabled)
         {
             SetMoveAnimation(0, 0);
@@ -68,24 +67,26 @@ public class PlayerLocomotion : MonoBehaviour
         if (playerInput.Jump) { Jump(); }
 
         if (input.sqrMagnitude > 1.0f) { input.Normalize(); }
-        Move();
-        UpdateIsSprinting();
 
         SetMoveAnimation(input.x, input.y);
+        UpdateIsSprinting();
 
         UpdateUI();
     }
 
-    private void Move()
+
+    private void FixedUpdate()
     {
-        Vector3 movement = transform.right * input.x + transform.forward * input.y;
-        
-        var targetSpeed = groundSpeed;
-        
-        bool isSprinting = IsSprinting();
-        if (isSprinting) targetSpeed *= speedModifier;
-        
-        charController.Move(movement * targetSpeed * Time.deltaTime);
+        if (!playerInput || !playerInput.enabled) input = Vector2.zero;
+
+        if (isJumping)
+        { //  Is In Air State
+            UpdateInAir();
+        }
+        else
+        { // IsGrounded State
+            UpdateOnGround();
+        }
     }
 
     private void SetMoveAnimation(float x, float y)
@@ -97,6 +98,7 @@ public class PlayerLocomotion : MonoBehaviour
     //走る状態か確認
     bool IsSprinting()
     {
+        if (input.x < -0.5f || input.x > 0.5f) { return false; } 
         if (input.y < 0.1f || currentStamina <= 0) { return false; }
 
         bool notThrowing = rigController.GetCurrentAnimatorStateInfo(3).shortNameHash
@@ -132,28 +134,22 @@ public class PlayerLocomotion : MonoBehaviour
         currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
     }
 
-    private void FixedUpdate()
-    {
-        if (isJumping)
-        { //  Is In Air State
-            UpdateInAir();
-        }
-        else
-        { // IsGrounded State
-            UpdateOnGround();
-        }
-    }
     
     private void UpdateOnGround()
     {
-        //Vector3 stepForwardAmount = rootMotion * groundSpeed * Time.deltaTime;
-        Vector3 stepDownAmount = Vector3.down * stepDown * Time.deltaTime;
+        rootMotion = transform.right * input.x + transform.forward * input.y;
+        var targetSpeed = groundSpeed;
+        bool isSprinting = IsSprinting();
+        if (isSprinting) targetSpeed *= speedModifier;
 
-        charController.Move(stepDownAmount);
-        rootMotion = Vector3.zero;
+        Vector3 stepForwardAmount = rootMotion * targetSpeed * Time.fixedDeltaTime;
+        Vector3 stepDownAmount = Vector3.down * stepDown;
+
+        charController.Move(stepDownAmount + stepForwardAmount * targetSpeed * Time.deltaTime);
 
         if (!charController.isGrounded)
         {
+            //Debug.Log("In Air State");
             SetInAir(0);
         }
     }
@@ -180,7 +176,7 @@ public class PlayerLocomotion : MonoBehaviour
     private void SetInAir(float jumpVelocity)
     {
         isJumping = true;
-        velocity = animator.velocity * groundSpeed * jumpDamp;
+        velocity = charController.velocity;
         velocity.y = jumpVelocity;
 
         animator.SetBool("IsJumping", true);

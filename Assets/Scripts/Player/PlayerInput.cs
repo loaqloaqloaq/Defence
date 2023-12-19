@@ -76,4 +76,8 @@ public class PlayerInput : MonoBehaviour
         Alpha4 = D_XAxis < -0.05f || Input.GetKeyDown(KeyCode.Alpha4);
     }
 
+    public void InitInputXY()
+    {
+        input = Vector2.zero;
+    }
 }

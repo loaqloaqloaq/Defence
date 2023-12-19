@@ -23,12 +23,14 @@ public class TurretUI : MonoBehaviour
     private EventSystem eventSystem;
 
     [SerializeField] private GameObject turretUIBackGround;
-    [SerializeField] private Button firstSelectedButton;
+    [SerializeField] public Button firstSelectedButton;
     [SerializeField] private TextMeshProUGUI guideText;
 
     //Unity Action 
     public event Action openUI;
     public event Action closeUI;
+
+    public bool isOpened { get; private set; }
 
     private void Awake()
     {
@@ -84,11 +86,13 @@ public class TurretUI : MonoBehaviour
 
         turretUIBackGround.SetActive(true);
         UIManager.Instance.SetMouseVisible(true);
+        isOpened = true;
     }
     private void Disable()
     {
         UIManager.Instance.SetMouseVisible(false);
         turretUIBackGround.SetActive(false);
+        isOpened = false;
     }
 
     //UNIY Action

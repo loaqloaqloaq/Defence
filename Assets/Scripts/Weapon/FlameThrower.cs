@@ -32,7 +32,16 @@ public class FlameThrower : RaycastWeapon
     {
         if (magAmmo <= 0)
         {
-            PlaySound("Empty");
+            //Reload
+            var reload = input.GetComponent<ReloadWeapon>();
+            if (reloadAvailable)
+            {
+                reload?.StartReload();
+            }
+            else
+            {
+                PlaySound("Empty");
+            }
             return;
         }
         --magAmmo;

@@ -44,12 +44,17 @@ public class ReloadWeapon : MonoBehaviour
             {
                 if (weapon.reloadAvailable)
                 {
-                    //リロードアニメーション再生
-                    rigController.SetTrigger("reload_weapon");
-                    isReloading = true;
+                    StartReload();
                 }
             }
         }
+    }
+
+    public void StartReload()
+    {
+        //リロードアニメーション再生
+        rigController.SetTrigger("reload_weapon");
+        isReloading = true;
     }
 
     //リロードアニメーションからの呼出　
