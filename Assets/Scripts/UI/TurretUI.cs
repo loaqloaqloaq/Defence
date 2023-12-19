@@ -113,7 +113,7 @@ public class TurretUI : MonoBehaviour
     private void Enable()
     {
         if (firstSelectedButton != null) { eventSystem.SetSelectedGameObject(firstSelectedButton.gameObject); }
-
+        errorMessage.text = "";
         turretUIBackGround.SetActive(true);
         UIManager.Instance.SetMouseVisible(true);
         isOpened = true;
