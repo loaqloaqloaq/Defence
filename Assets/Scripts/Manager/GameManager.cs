@@ -78,11 +78,13 @@ public class GameManager : MonoBehaviour
 
     public void AddScrap(int amount) { 
         scrap+=amount;
+        if (scrap >= 999999) scrap = 999999;
         if (scrapUI) scrapUI.SetScrapText();
     }
 
     public void DeductScrap(int amount){
         scrap -= amount;
+        if (scrap <= 0) scrap = 0;
         if (scrapUI) scrapUI.SetScrapText();
     }
 }

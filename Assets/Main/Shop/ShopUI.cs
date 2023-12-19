@@ -85,7 +85,11 @@ public class ShopUI : MonoBehaviour
             errorMessage.text = "NOT ENOUGH SCRAP!";
             return;
         }
-        //”ƒ‚¤
+        else {
+            errorMessage.text = "";
+            //”ƒ‚¤
+        }
+
         //ŽÀ‘•’†
     }
 

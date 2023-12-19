@@ -18975,6 +18975,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1561704138723963970, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5554893452609229334, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -39049,7 +39053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa4e0c1bb4abd0142a4275c655c3b010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerWarp: 1
+  playerWarp: 0
   enemyBase:
   - {fileID: 390420303}
   - {fileID: 659652306}

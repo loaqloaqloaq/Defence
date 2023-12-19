@@ -42,13 +42,6 @@ public class TurretJsonLoader : MonoBehaviour
             return Instance.getData().t3;
         }
     }
-
-
-    [SerializeField]
-    public TextAsset TurretJsonFile;
-
-    public TurretData turretData=null;
-
     public static TurretJsonLoader Instance
     {
         get
@@ -57,7 +50,11 @@ public class TurretJsonLoader : MonoBehaviour
             return instance;
         }
     }
-    
+
+    [SerializeField]
+    public TextAsset TurretJsonFile;
+    public TurretData turretData = null;
+
 
     void Awake()
     {
