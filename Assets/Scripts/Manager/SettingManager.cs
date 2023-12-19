@@ -153,7 +153,7 @@ public class SettingManager : MonoBehaviour
         //temp
         return;
         //データマネージャーからロード
-        DataManager.Instance?.LoadGameData();
+        //DataManager.Instance?.LoadGameData();
         var data = DataManager.Instance.data;
         //無ければロードしない
         if (data == null)
