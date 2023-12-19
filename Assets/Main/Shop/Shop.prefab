@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8250582518157010771}
   - component: {fileID: 5633653069173774984}
   - component: {fileID: 6902120953139543085}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,8 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2678123241637628824}
-  - component: {fileID: 5244817833753210696}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,17 +135,5 @@ Transform:
   m_Children:
   - {fileID: 204098366290207771}
   m_Father: {fileID: 0}
-  m_RootOrder: 32
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5244817833753210696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6174681155710983887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a26ecac9a438b44c9acc35fd1b7b10d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
