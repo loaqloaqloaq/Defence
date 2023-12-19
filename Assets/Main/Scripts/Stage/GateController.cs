@@ -100,6 +100,7 @@ public class GateController : MonoBehaviour,IDamageable
         if (EnemyBase_Manager != null && gateNumber <= 2)
         {
             EnemyBase_Manager.gameObject.GetComponent<EnemyBase_Manager>().stage[gateNumber - 1] = 1;
+            EnemyBase_Manager.gameObject.GetComponent<EnemyBase_Manager>().moveFlg[gateNumber - 1] = true;
             EnemyBase_Manager.gameObject.GetComponent<EnemyBase_Manager>().teleportFlg = true;
         }
         else if( gateNumber >= 3)
