@@ -111,6 +111,11 @@ public class Turret_FlameThrower : MonoBehaviour, Abnormality
         abnormality = new int[]{ 0, 0 };
     }
 
+    public void Start()
+    {
+        damage = TurretJsonLoader.T2.atk;
+    }
+
     private void FixedUpdate()
     {
         if (abnormality[(int)AbnormalityType.STOP] == 1) return;

@@ -59,6 +59,15 @@ public class DEBUG : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.F7))
+        {
+            GameManager.Instance.AddScrap(9999);
+        }
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            GameManager.Instance.DeductScrap(9999);
+        }
+
 
 
     }

@@ -30,11 +30,13 @@ public class Turret : MonoBehaviour, Abnormality
     public bool isInifinty;
 
     private bool isFiring;
+
     [SerializeField] int fireRate = 25;
     [SerializeField] int ammoRemain = 150;
     [SerializeField] int magAmmo;
     [SerializeField] int magCapacity = 30;
     [SerializeField] float damage = 10.0f;
+
     [Range(0.0f, 90.0f)][SerializeField] private float shootingAngle = 15.0f;
 
     [SerializeField] private Transform raycastOrigin;
@@ -124,6 +126,11 @@ public class Turret : MonoBehaviour, Abnormality
         SoundManager.Instance?.AddAudioInfo(fireSE);
 
         abnormality = new int[] { 0, 0 };
+    }
+
+    public void Start()
+    {
+        damage = TurretJsonLoader.T1.atk;
     }
 
     private void FixedUpdate()

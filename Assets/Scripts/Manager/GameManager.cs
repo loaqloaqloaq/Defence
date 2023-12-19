@@ -3,10 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    //Singleton
+    //Singleton       
     private static GameManager instance;
+
+    [SerializeField] Timer timerScript;
+    [SerializeField] ScrapUI scrapUI;
+    [SerializeField] float playTime;
+    [SerializeField] public int scrap;
+
+    public float timer;
+
     public static GameManager Instance
-    {
+    {        
         get
         {
             if (instance == null) instance = FindObjectOfType<GameManager>();
@@ -21,7 +29,25 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         if (Instance != this) Destroy(gameObject); 
-        //Record.Init();
+        Record.Init();
+    }
+    private void Start()
+    {
+        timer = playTime * 60;
+    }
+    private void Update()
+    {
+
+        if (timer <= 0)
+        {
+            ToResultScene();
+        }
+        else TimerUpdate();
+    }
+
+    void TimerUpdate() {
+        timer -= Time.deltaTime;
+        if(timerScript) timerScript.setTimerString(timer);
     }
     public void EndGame()
     {
@@ -34,42 +60,31 @@ public class GameManager : MonoBehaviour
     //結果シーンに移る
     public void ToResultScene()
     {
-        SceneManager.LoadScene("ResultScene");
+        SceneManager.LoadScene("Result");
     }
 
     //タイトルシーンに移る
     public void ReturnToTitle()
     {
-        SceneManager.LoadScene("Title");
+        //SceneManager.LoadScene("Title");
     }
 
     //ゲームシーンをRestart
     public void Restart()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-
         SceneManager.LoadScene(sceneName);
     }
 
-    //点数更新
-    public void AddScore(int newScore)
-    {
-        if (!isGameover)
-        {
-            Record.score += newScore;
-            UIManager.Instance.SetNextScore(Record.score);
-        }
+    public void AddScrap(int amount) { 
+        scrap+=amount;
+        if (scrap >= 999999) scrap = 999999;
+        if (scrapUI) scrapUI.SetScrapText();
     }
 
-    //獲得したアイテムの数を増やす
-    public void AddItemCount()
-    {
-        ++Record.itemCount;
-    }
-
-    //倒した敵の数を増やす
-    public void AddKillCount()
-    {
-        ++Record.killCount;
+    public void DeductScrap(int amount){
+        scrap -= amount;
+        if (scrap <= 0) scrap = 0;
+        if (scrapUI) scrapUI.SetScrapText();
     }
 }

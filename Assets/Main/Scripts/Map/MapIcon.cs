@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapIcon : MonoBehaviour
 {
@@ -8,8 +9,7 @@ public class MapIcon : MonoBehaviour
     Canvas miniMapIcon, bigMapIcon;
     
     float currentZoom;
-    bool isPickUpWeapon;
-    bool isEnemyBase;
+    bool notChara;   
 
     GameObject player;
 
@@ -30,8 +30,8 @@ public class MapIcon : MonoBehaviour
             miniMapIcon.worldCamera = eg.miniMapCam;
         }
 
-        isPickUpWeapon = transform.parent.name.StartsWith("Weapon")||transform.parent.name.StartsWith("Grenade");
-        isEnemyBase = transform.parent.name.StartsWith("enemyBase");
+        notChara = transform.parent.name.StartsWith("Weapon")||transform.parent.name.StartsWith("Grenade")|| transform.parent.name.StartsWith("enemyBase") || transform.parent.name.StartsWith("Gate");
+        
 
         normalScaleX = bigMapIcon.transform.localScale.x;
         normalScaleY = bigMapIcon.transform.localScale.y;        
@@ -47,7 +47,7 @@ public class MapIcon : MonoBehaviour
             SetScale();
         }
 
-        if (isPickUpWeapon || isEnemyBase)
+        if (notChara)
         {
             bigMapIcon.transform.eulerAngles = new Vector3(90, -90, 0);
             miniMapIcon.transform.eulerAngles = new Vector3(90, player.transform.eulerAngles.y, 0);
@@ -62,5 +62,10 @@ public class MapIcon : MonoBehaviour
         var scaleX = normalScaleX * (1 - 0.5f * currentZoom);
         var scaleY = normalScaleY * (1 - 0.5f * currentZoom);
         bigMapIcon.transform.localScale = new Vector3(scaleX, scaleY, 1);
+    }
+
+    public void SetFill(float hp) {
+        if (bigMapIcon.transform.GetChild(0).GetChild(0)) bigMapIcon.transform.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = 1 - hp;
+        if (miniMapIcon.transform.GetChild(0).GetChild(0)) miniMapIcon.transform.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = 1 - hp;        
     }
 }

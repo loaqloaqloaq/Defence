@@ -63,7 +63,7 @@ public class Enemy5Navigator : MonoBehaviour
                 Vector3 targetPos = target.transform.position;
                 targetPos.x += offset;
                 targetPos.z += offset;
-                if (Vector3.Distance(ec.agent.destination, targetPos) > 0.5f) ec.agent.destination = targetPos;
+                ec.agent.destination = targetPos;
 
             }
             else

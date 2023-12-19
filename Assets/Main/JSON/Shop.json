@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "name": "ammo",
+      "cost": 50
+    },
+    {
+      "name": "health",
+      "cost": 50
+    },
+    {
+      "name": "rifle",
+      "cost": 100
+    },
+    {
+      "name": "flame thrower",
+      "cost": 100
+    },
+    {
+      "name": "rocket launcher",
+      "cost": 100
+    }
+  ]
+}
+

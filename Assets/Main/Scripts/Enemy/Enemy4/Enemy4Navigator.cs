@@ -27,11 +27,11 @@ public class Enemy4Navigator : MonoBehaviour
         g2 = GameObject.Find("Gate2").transform;
         g3 = GameObject.Find("Gate3").transform;
 
-        routes = GameObject.Find("Routes").transform;
+        routes = GameObject.Find("Routes")?.transform??null;
 
         destination = g1;
 
-        offsetRange = 10f;
+        offsetRange = 5f;
     }
 
     // Update is called once per frame
@@ -65,14 +65,17 @@ public class Enemy4Navigator : MonoBehaviour
                 }
                 lastRotation = transform.localEulerAngles.y;
                 ec.agent.isStopped = false;
-                if (target == g1) checkPoint = g1.position;
-                else if ((target == g2 && area != routes.GetChild(0)) || (target == g3 && area != routes.GetChild(1))) RandomRoute();
-                CheckRoute();
+                if (routes == null) target = ec.target;
+                else
+                {
+                    if ((target == g1 && area != routes.GetChild(0)) || (target == g2 && area != routes.GetChild(1)) || (target == g3 && area != routes.GetChild(2))) RandomRoute();
+                    CheckRoute();
+                }
 
                 Vector3 targetPos = Vector3.zero;
                 if (target.CompareTag("Player")) targetPos = target.position;
                 else targetPos = checkPoint;
-                if (Vector3.Distance(ec.agent.destination, targetPos) > 0.5f) ec.agent.destination = targetPos;
+                ec.agent.destination = targetPos;
 
             }
             else
@@ -104,13 +107,13 @@ public class Enemy4Navigator : MonoBehaviour
         destination = route.GetChild(checkPointIndex);
         checkPoint = destination.position;
         checkPoint.x += Random.Range(-offsetRange, offsetRange);
-        checkPoint.z += Random.Range(-offsetRange, offsetRange);
-        checkPoint.y = 0;
+        checkPoint.z += Random.Range(-offsetRange, offsetRange);        
     }
     void RandomRoute()
     {
-        if (ec.gate == g2) area = routes.GetChild(0);
-        else if (ec.gate == g3) area = routes.GetChild(1);
+        if (ec.gate == g1) area = routes.GetChild(0);
+        else if (ec.gate == g2) area = routes.GetChild(1);
+        else if (ec.gate == g3) area = routes.GetChild(2);
         route = area.GetChild(Random.Range(0, area.childCount));
         checkPointIndex = -1;
         NextCheckPoint();
@@ -120,8 +123,10 @@ public class Enemy4Navigator : MonoBehaviour
     {
         if (destination.CompareTag("Gate")) return;
         Vector3 pos = transform.position;
+        Vector3 checkPos = checkPoint;
         pos.y = 0;
-        if (Vector3.Distance(checkPoint, pos) < 0.2f) NextCheckPoint();
+        checkPos.y = 0;
+        if (Vector3.Distance(checkPos, pos) < 0.2f) NextCheckPoint();
 
 
     }

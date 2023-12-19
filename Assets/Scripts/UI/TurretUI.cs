@@ -25,6 +25,7 @@ public class TurretUI : MonoBehaviour
     [SerializeField] private GameObject turretUIBackGround;
     [SerializeField] public Button firstSelectedButton;
     [SerializeField] private TextMeshProUGUI guideText;
+    [SerializeField] private TextMeshProUGUI errorMessage;
 
     //Unity Action 
     public event Action openUI;
@@ -37,6 +38,13 @@ public class TurretUI : MonoBehaviour
         eventSystem = FindObjectOfType<EventSystem>();
         openUI += Enable;
         closeUI += Disable;
+        errorMessage.text = "";
+    }
+    private void Start()
+    {
+        transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text = String.Format("{0:000000}", TurretJsonLoader.T1.cost);
+        transform.GetChild(0).GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text = String.Format("{0:000000}", TurretJsonLoader.T2.cost);
+        transform.GetChild(0).GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = String.Format("{0:000000}", TurretJsonLoader.T3.cost);
     }
 
     //スロットを取得してUIを表示
@@ -50,7 +58,29 @@ public class TurretUI : MonoBehaviour
     public void CreateTurret(GameObject turret)
     {
         if (!turretSlot) { return; }
-
+        bool enoughScrap = false;
+        int cost = 0;
+        switch (turret.name) {
+            case "Turret_1":
+                enoughScrap = TurretJsonLoader.T1.cost <= GameManager.Instance.scrap;
+                cost = TurretJsonLoader.T1.cost;
+                break;
+            case "Turret_2":
+                enoughScrap = TurretJsonLoader.T2.cost <= GameManager.Instance.scrap;
+                cost = TurretJsonLoader.T2.cost;
+                break;
+            case "Turret_3":
+                enoughScrap = TurretJsonLoader.T3.cost <= GameManager.Instance.scrap;
+                cost = TurretJsonLoader.T3.cost;
+                break;
+            default:                
+                break;
+        }
+        if (!enoughScrap) {
+            errorMessage.text = "NOT ENOUGH SCRAP!";
+            return;
+        }
+        GameManager.Instance.DeductScrap(cost);
         //既にタレットが設置されているか確認
         if (turretSlot.isTurretActive)
         {

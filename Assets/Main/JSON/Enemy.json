@@ -3,6 +3,7 @@
     "hp": 100,
     "moveSpeed": 4,
     "atk": 10,
+    "reward": 100,
     "drop": {
       "ammo": 5,
       "health": 5
@@ -24,18 +25,19 @@
     "hp": 100,
     "moveSpeed": 4,
     "atk": 10,
+    "reward": 100,
     "drop": {
       "ammo": 5,
       "health": 5
     },
     "resist": {
-      "persent":0,
+      "persent": 0,
       "fire": false,
       "common": false,
       "explode": false
     },
-    "weakness":{
-      "persent":1,
+    "weakness": {
+      "persent": 1,
       "fire": false,
       "common": false,
       "explode": false
@@ -45,6 +47,7 @@
     "hp": 100,
     "moveSpeed": 2,
     "atk": 10,
+    "reward": 100,
     "AttackDuration": 1,
     "AttackStop": 1.5,
     "drop": {
@@ -52,13 +55,13 @@
       "health": 5
     },
     "resist": {
-      "persent":0,
+      "persent": 0,
       "fire": false,
       "common": false,
       "explode": false
     },
-    "weakness":{
-      "persent":1,
+    "weakness": {
+      "persent": 1,
       "fire": false,
       "common": false,
       "explode": false
@@ -68,6 +71,7 @@
     "hp": 100,
     "moveSpeed": 5,
     "atk": 400,
+    "reward": 100,
     "AttackDuration": 3,
     "AttackRadius": 3.3,
     "drop": {
@@ -75,13 +79,13 @@
       "health": 5
     },
     "resist": {
-      "persent":0,
+      "persent": 0,
       "fire": false,
       "common": false,
       "explode": false
     },
-    "weakness":{
-      "persent":1,
+    "weakness": {
+      "persent": 1,
       "fire": false,
       "common": false,
       "explode": false
@@ -91,19 +95,20 @@
     "hp": 100,
     "moveSpeed": 5,
     "atk": 0,
+    "reward": 100,
     "AttackRadius": 3.3,
     "drop": {
       "ammo": 5,
       "health": 5
     },
     "resist": {
-      "persent":0,
+      "persent": 0,
       "fire": false,
       "common": false,
       "explode": false
     },
-    "weakness":{
-      "persent":1,
+    "weakness": {
+      "persent": 1,
       "fire": false,
       "common": false,
       "explode": false
