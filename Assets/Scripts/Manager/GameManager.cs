@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
         if (timer <= 0)
         {
-            Record.result = "Failed";
+            Record.resultID = 1; //仮
             ToResultScene();
         }
         else TimerUpdate();
