@@ -110,7 +110,7 @@ Transform:
   - {fileID: 4541135192053058975}
   - {fileID: 5835549232315904332}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8028297364508348738
 BoxCollider:
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammo: 300
-  targetSlot: 1
+  targetSlot: 0
 --- !u!1 &5835549231559569789
 GameObject:
   m_ObjectHideFlags: 0
