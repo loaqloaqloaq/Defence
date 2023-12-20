@@ -26,7 +26,7 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
 
     public Transform target;
     public Transform gate, player;
-    GameObject explosion;
+    [SerializeField]GameObject explosion;
     Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();
 
     float checkFeq, lastCheck;
@@ -280,7 +280,7 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
         if (explosion != null)
         {            
             var pos = transform.position;
-            pos.y = 1f;
+            pos.y += 0.5f;
             var exp = Instantiate(explosion, pos, transform.rotation);
             float scale = 0.75f * expRadius;
             exp.transform.localScale = new Vector3(scale, scale, scale);
