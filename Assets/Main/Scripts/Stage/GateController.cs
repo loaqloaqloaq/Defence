@@ -107,7 +107,9 @@ public class GateController : MonoBehaviour,IDamageable
         else if( gateNumber >= 3)
         {
             Debug.Log("•‰‚¯");
-            SceneManager.LoadScene("ResultLose");
+            Record.resultID = 3;
+            SceneManager.LoadScene("Result");
+            //SceneManager.LoadScene("ResultLose");
         }
     }
 
