@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
 
         if (timer <= 0)
         {
+            Record.result = "Failed";
             ToResultScene();
         }
         else TimerUpdate();

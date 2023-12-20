@@ -32,7 +32,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image[] grenadeImages = new Image[3];
     [SerializeField] private Image[] weaponSlotImages = new Image[2];
     [SerializeField] private TextMeshProUGUI[] weaponSlotText = new TextMeshProUGUI[4];
-    private Color slotTextColor = new Vector4(1.0f, 1.0f, 1.0f, 0.36f);
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI remainAmmoText;
     [SerializeField] private TextMeshProUGUI magAmmoText;
@@ -43,6 +42,8 @@ public class UIManager : MonoBehaviour
 
     private EventSystem eventSystem;
     [SerializeField] private Button firstSelectedButton;
+
+    private Color slotTextColor = new Vector4(1.0f, 1.0f, 1.0f, 0.56f);
 
     //クロスヘア＆エイムポイント
     private float crosshairSize = 0.7f;
@@ -330,5 +331,11 @@ public class UIManager : MonoBehaviour
     public void SetEnableCanvas_Sniping(bool isEnable)
     {
         canvas_Sniping.enabled = isEnable;
+    }
+
+    public void UpdateWeaponSlot(int index, bool isActive)
+    {
+        if (index < 0 || index >= weaponSlotText.Length) return;
+        weaponSlotText[index].GetComponentInChildren<Image>().enabled = isActive;
     }
 }
