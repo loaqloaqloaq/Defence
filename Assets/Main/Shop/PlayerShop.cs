@@ -22,7 +22,7 @@ public class PlayerShop : MonoBehaviour
 
     private Transform rayDestination;
 
-    [SerializeField] private LayerMask shopLayer;
+    [SerializeField] private LayerMask shopLayer;    
 
     private bool stanby;
 
@@ -83,10 +83,16 @@ public class PlayerShop : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, rayDistance, shopLayer))
         {
-            //Debug.Log(hitInfo.collider.name);
-            var newShop = hitInfo.collider.gameObject;
-            if (newShop != null) { 
-                shop = newShop;               
+            var disToTarget = Vector3.Distance(transform.position, hitInfo.transform.position);
+            Debug.Log(disToTarget);
+            if (disToTarget < 1.8f)
+            {
+                
+                var newShop = hitInfo.collider.gameObject;
+                if (newShop != null)
+                {
+                    shop = newShop;
+                }
             }
         }
         else

@@ -444,7 +444,7 @@ Transform:
   - {fileID: 6318714995093383061}
   - {fileID: 4696779994798406435}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3873295939370766500
 MonoBehaviour:
@@ -466,7 +466,7 @@ MonoBehaviour:
   minZoom: 100
   whatIsTarget:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 16384
   maxZ:
   - 402
   - 166.6

@@ -151,7 +151,9 @@ public class EnemyBase_Manager : MonoBehaviour
         else
         {
             Debug.Log("Ÿ—˜");
-            SceneManager.LoadScene("ResultWin");
+            Record.resultID = 2;
+            SceneManager.LoadScene("Result");
+            //SceneManager.LoadScene("ResultWin");
         }
 
     }
