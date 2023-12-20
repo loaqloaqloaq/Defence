@@ -9,9 +9,11 @@ using UnityEngine.SceneManagement;
 using System.Xml.Linq;
 
 public class GateController : MonoBehaviour,IDamageable
-{
+{   
+    
     [HideInInspector]
     public float HP;
+    [SerializeField]
     private float MaxHP;
     private Animator ani;
 
@@ -33,8 +35,7 @@ public class GateController : MonoBehaviour,IDamageable
 
     // Start is called before the first frame update
     void Start()
-    {
-        MaxHP = 100f;
+    {       
         HP = MaxHP;
         ani= GetComponent<Animator>();
         broke = false;
@@ -44,7 +45,7 @@ public class GateController : MonoBehaviour,IDamageable
         HPfill.SetActive(false);
         HPText = transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
 
-        HPText.text = (HP > 0 ? HP.ToString():"0") + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100,2) + "%)";        
+        HPText.text = (HP > 0 ? Math.Round(HP,0).ToString():"0") + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100,2) + "%)";        
         
         gaugeWidth = 30f;
         width = gaugeWidth;

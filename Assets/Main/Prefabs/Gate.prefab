@@ -426,7 +426,7 @@ Transform:
   - {fileID: 380169228947957036}
   - {fileID: 3109046478757321951}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &2914084737055963306
 MonoBehaviour:
@@ -721,6 +721,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 92f136bfc8259f54ebd0e753ac5284e9, type: 3}
+    - target: {fileID: 3222691757239841986, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3222691757239841986, guid: c818702fe7182d0439bfa92fbc482960, type: 3}
       propertyPath: m_Color.g
       value: 1
