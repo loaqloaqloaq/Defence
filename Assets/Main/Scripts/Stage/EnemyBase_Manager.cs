@@ -152,8 +152,9 @@ public class EnemyBase_Manager : MonoBehaviour
         {
             Debug.Log("Ÿ—˜");
             Record.resultID = 2;
+            PlayerPrefs.SetInt("killCount", GameManager.Instance.killCount);
+            PlayerPrefs.SetInt("playerDamagedCount", GameManager.Instance.playerDamagedCount);
             SceneManager.LoadScene("Result");
-            //SceneManager.LoadScene("ResultWin");
         }
 
     }

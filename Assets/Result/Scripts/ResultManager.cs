@@ -43,8 +43,6 @@ public class ResultManager : MonoBehaviour
         takenDamage　= PlayerPrefs.GetInt("playerDamagedCount", 0);
         usedScrapCount = PlayerPrefs.GetInt("usedScrap", 0);
         clearTime = PlayerPrefs.GetFloat("timer", 0.0f);
-
-        Debug.Log(" " + clearTime);
         //リザルト画面のTextをセット
         SetText();
     }
@@ -133,7 +131,7 @@ public class ResultManager : MonoBehaviour
         if (Record.resultID == 1)
         {
             //表示するテキストを設定
-            resultText.text = "Clear";
+            resultText.text = "Clear!!!!!";
             killText.text = "Kill:" + killCount.ToString();
             takenDamageText.text = "Taken Damage:" + takenDamage.ToString();
             scrapText.text = "Used Scrap:" + usedScrapCount.ToString();
@@ -142,7 +140,7 @@ public class ResultManager : MonoBehaviour
         else if (Record.resultID == 2)
         {
             //表示するテキストを設定
-            resultText.text = "Clear";
+            resultText.text = "Clear!!!!!";
             killText.text = "Kill:" + killCount.ToString();
             takenDamageText.text = "Taken Damage:" + takenDamage.ToString();
 

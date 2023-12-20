@@ -11,11 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] ScrapUI scrapUI;
     [SerializeField] float playTime;
     [SerializeField] public int scrap;
-
     public int killCount;
-    public float playerDamagedCount;
+    public int playerDamagedCount;
     public int usedScrap;
-
     public float timer;
 
     public static GameManager Instance
@@ -73,8 +71,8 @@ public class GameManager : MonoBehaviour
     public void ToResultScene()
     {
         PlayerPrefs.SetInt("killCount",killCount);
+        PlayerPrefs.SetInt("playerDamagedCount", playerDamagedCount);
         PlayerPrefs.SetInt("usedScrap", usedScrap);
-        PlayerPrefs.SetFloat("playerDamagedCount", playerDamagedCount);
         SceneManager.LoadScene("Result");
     }
 
