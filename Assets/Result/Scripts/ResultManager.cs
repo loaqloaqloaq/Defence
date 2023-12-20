@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -23,9 +24,9 @@ public class ResultManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scrapText;
     //消費したスクラップの数
     private int usedScrapCount;
-
     //クリアタイム
-    //[SerializeField] private TextMeshProUGUI clearTimeText;
+    [SerializeField] private TextMeshProUGUI clearTimeText;
+    private float clearTime;
 
     //今、選択しているボタン
     private GameObject nowSelectButton;
@@ -41,6 +42,9 @@ public class ResultManager : MonoBehaviour
         killCount = PlayerPrefs.GetInt("killCount", 0);
         takenDamage　= PlayerPrefs.GetInt("playerDamagedCount", 0);
         usedScrapCount = PlayerPrefs.GetInt("usedScrap", 0);
+        clearTime = PlayerPrefs.GetFloat("timer", 0.0f);
+
+        Debug.Log(" " + clearTime);
         //リザルト画面のTextをセット
         SetText();
     }
@@ -131,8 +135,8 @@ public class ResultManager : MonoBehaviour
             //表示するテキストを設定
             resultText.text = "Clear";
             killText.text = "Kill:" + killCount.ToString();
-            takenDamageText.text = "TakenDamage:" + takenDamage.ToString();
-            scrapText.text = "UsedScrap:" + usedScrapCount.ToString();
+            takenDamageText.text = "Taken Damage:" + takenDamage.ToString();
+            scrapText.text = "Used Scrap:" + usedScrapCount.ToString();
         }
         //2:敵拠点を壊し切ってクリア
         else if (Record.resultID == 2)
@@ -140,10 +144,12 @@ public class ResultManager : MonoBehaviour
             //表示するテキストを設定
             resultText.text = "Clear";
             killText.text = "Kill:" + killCount.ToString();
-            takenDamageText.text = "TakenDamage:" + takenDamage.ToString();
+            takenDamageText.text = "Taken Damage:" + takenDamage.ToString();
 
             //クリアタイム
-            //-------------------------------------------------------------
+            float ms = clearTime * 1000;
+            string timeStr = String.Format("{0:00}:{1:00}:{2:000}", (int)ms / 60000, (int)(ms / 1000) % 60, ms % 1000);
+            clearTimeText.text = "Clear Time:" + timeStr;
         }
         //3:プレイヤの残機がなくなった or 敵拠点を全て壊された
         else if (Record.resultID == 3)
@@ -152,6 +158,5 @@ public class ResultManager : MonoBehaviour
             resultText.text = "Failed";
             killText.text = "Kill:" + killCount.ToString();
         }
-
     }
 }

@@ -13,6 +13,6 @@ static public class Record
         score = 0;
         killCount = 0;
         itemCount = 0;
-        resultID = 1; //仮
+        resultID = 0;
     }
 }

@@ -49,7 +49,8 @@ public class GameManager : MonoBehaviour
 
         if (timer <= 0)
         {
-            Record.resultID = 1; //仮
+            Debug.Log("勝利");
+            Record.resultID = 1;
             ToResultScene();
         }
         else TimerUpdate();
@@ -57,7 +58,8 @@ public class GameManager : MonoBehaviour
 
     void TimerUpdate() {
         timer -= Time.deltaTime;
-        if(timerScript) timerScript.setTimerString(timer);
+        PlayerPrefs.SetFloat("timer", playTime * 60 - timer);
+        if (timerScript) timerScript.setTimerString(timer);
     }
     public void EndGame()
     {
