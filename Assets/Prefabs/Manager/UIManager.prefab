@@ -1058,7 +1058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8970385640788756529
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4311,7 +4311,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5568,9 +5568,9 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 20, y: -17}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &7605016073516500647
 CanvasRenderer:
@@ -5653,7 +5653,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 341119091528485328}
   m_HandleRect: {fileID: 8008602104108244042}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5770,7 +5770,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9312,9 +9312,9 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_SizeDelta: {x: -17, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &8236564937940448842
 CanvasRenderer:
@@ -12951,7 +12951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: -1
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 6726777334660569014}
     m_SelectOnDown: {fileID: 0}
@@ -13419,9 +13419,9 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: -17}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2006936104051426685
 CanvasRenderer:
@@ -13694,13 +13694,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopUI: {fileID: 486793029554619044}
   playerUI: {fileID: 8541609343156395651}
+  player: {fileID: 0}
   firstSelectedButton: {fileID: 0}
   guideText: {fileID: 1247779692408263491}
   errorMessage: {fileID: 1933157895885013713}
   Button_ShopItem: {fileID: 5172741696039028971, guid: 488366e5466725541afed2a527398683, type: 3}
   shopListContent: {fileID: 950536370244954874}
-  scraps: {fileID: 0}
-  _imageList: []
+  scraps: {fileID: 1794910412858053883}
+  _imageList:
+  - key: ammo
+    value: {fileID: 21300000, guid: 309ac3eb4cc441349b63128366ca98b6, type: 3}
+  - key: health
+    value: {fileID: 21300050, guid: 309ac3eb4cc441349b63128366ca98b6, type: 3}
+  - key: rifle
+    value: {fileID: 21300046, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
+  - key: flame thrower
+    value: {fileID: 21300000, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
+  - key: rocket launcher
+    value: {fileID: 21300032, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
+  - key: sniper
+    value: {fileID: 21300034, guid: 0bd96f6f4899f644ea1ffd9b4735a5e6, type: 3}
+  - key: grenade
+    value: {fileID: 21300038, guid: 309ac3eb4cc441349b63128366ca98b6, type: 3}
+  _prefabList:
+  - key: ammo
+    value: {fileID: 4549580422657515402, guid: f4a4eef7b95967d47a00839a556d17d3, type: 3}
+  - key: health
+    value: {fileID: 3692371945894827175, guid: d68017b376389f44b9bcaa994555c022, type: 3}
+  - key: rifle
+    value: {fileID: 925108104194873481, guid: f9f814482438677499f2261e4930ef42, type: 3}
+  - key: flame thrower
+    value: {fileID: 2778821947685766446, guid: 5022092725e705d47a0658720a6c6d3c, type: 3}
+  - key: rocket launcher
+    value: {fileID: 8744942562257654918, guid: ecb13c31da22f4b419529f9da5c762f1, type: 3}
+  - key: sniper
+    value: {fileID: 4302541542781815023, guid: 1f31d2a4d87ed794a9c19140e3c4aa2b, type: 3}
+  - key: grenade
+    value: {fileID: 5160337932670183730, guid: 4a2182311f5c4124b9c82a71b2545eb8, type: 3}
 --- !u!1 &7171431460894176633
 GameObject:
   m_ObjectHideFlags: 0
@@ -17744,7 +17774,7 @@ Transform:
   - {fileID: 5880264641525729403}
   - {fileID: 1735300005795352515}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9068163846488966494
 MonoBehaviour:

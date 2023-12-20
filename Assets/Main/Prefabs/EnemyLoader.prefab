@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1442222546943776965
 MonoBehaviour:
@@ -50,23 +50,114 @@ MonoBehaviour:
       hp: 0
       moveSpeed: 0
       atk: 0
+      AttackDuration: 0
+      AttackStop: 0
+      AttackRadius: 0
+      reward: 0
       drop:
         ammo: 0
         health: 0
+      resist:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+      weakness:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
     Enemy2:
       hp: 0
       moveSpeed: 0
       atk: 0
+      AttackDuration: 0
+      AttackStop: 0
+      AttackRadius: 0
+      reward: 0
       drop:
         ammo: 0
         health: 0
+      resist:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+      weakness:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
     Enemy3:
       hp: 0
       moveSpeed: 0
       atk: 0
+      AttackDuration: 0
+      AttackStop: 0
+      AttackRadius: 0
+      reward: 0
       drop:
         ammo: 0
         health: 0
+      resist:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+      weakness:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+    Enemy4:
+      hp: 0
+      moveSpeed: 0
+      atk: 0
+      AttackDuration: 0
+      AttackStop: 0
+      AttackRadius: 0
+      reward: 0
+      drop:
+        ammo: 0
+        health: 0
+      resist:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+      weakness:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+    Enemy5:
+      hp: 0
+      moveSpeed: 0
+      atk: 0
+      AttackDuration: 0
+      AttackStop: 0
+      AttackRadius: 0
+      reward: 0
+      drop:
+        ammo: 0
+        health: 0
+      resist:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+      weakness:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+  miniMapCam: {fileID: 0}
+  mapCam: {fileID: 0}
   explosion: {fileID: 2532972853072531924, guid: b40f4969cc5dc9c41adb34150b3c46f3, type: 3}
+  enemyCnt: 0
   ammoPack: {fileID: 4549580422657515402, guid: f4a4eef7b95967d47a00839a556d17d3, type: 3}
   healthPack: {fileID: 3692371945894827175, guid: d68017b376389f44b9bcaa994555c022, type: 3}
+  player: {fileID: 0}
+  gate: {fileID: 0}
+  gc: {fileID: 0}
+  ts: []

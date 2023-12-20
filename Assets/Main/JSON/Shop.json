@@ -9,6 +9,10 @@
       "cost": 50
     },
     {
+      "name": "grenade",
+      "cost": 50
+    },
+    {
       "name": "rifle",
       "cost": 100
     },
@@ -19,7 +23,11 @@
     {
       "name": "rocket launcher",
       "cost": 100
-    }
+    },
+    {
+      "name": "sniper",
+      "cost": 100
+    }    
   ]
 }
 
