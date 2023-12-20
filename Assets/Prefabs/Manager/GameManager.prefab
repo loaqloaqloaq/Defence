@@ -52,3 +52,5 @@ MonoBehaviour:
   playerDamagedCount: 0
   usedScrap: 0
   timer: 0
+  rotateSpeed: 0.05
+  now_sky: {fileID: 2100000, guid: da04fb2a289ef1b47bf5b07b9285dd70, type: 2}

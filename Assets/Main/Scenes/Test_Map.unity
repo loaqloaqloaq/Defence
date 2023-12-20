@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5098489, g: 0.6600209, b: 0.7969431, a: 1}
+  m_IndirectSpecularColor: {r: 0.5100845, g: 0.6601457, b: 0.796957, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1108,29 +1108,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
-      propertyPath: now_sky
-      value: 
-      objectReference: {fileID: 2100000, guid: da04fb2a289ef1b47bf5b07b9285dd70, type: 2}
-    - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
       propertyPath: scrapUI
       value: 
       objectReference: {fileID: 466896143}
     - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
-      propertyPath: playTime
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
-      propertyPath: rotateSpeed
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
       propertyPath: timerScript
       value: 
       objectReference: {fileID: 1703257633}
-    - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
-      propertyPath: skybox_Night
-      value: 
-      objectReference: {fileID: 2100000, guid: 5eae8f65eabf7ee4994b422cd10214bc, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
