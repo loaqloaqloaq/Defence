@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameoverUI; 
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private GameObject settingUI;
+    [SerializeField] private GameObject ammoPanel;
     [SerializeField] private Crosshair crosshair;
     [SerializeField] private Image staminaBackground;
     [SerializeField] private Image staminaImage;
@@ -77,14 +78,6 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        /*
-        if (GameManager.Instance.isGameover)
-        {
-            return;
-        }
-        */
-        //UpdateScore();
-
         if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 7")) 
             && !settingUI.activeSelf)
         {
@@ -111,6 +104,11 @@ public class UIManager : MonoBehaviour
     //一時停止&再開
     public void Pause()
     {
+        var turretUI = TurretUI.Instance;
+        if (turretUI)
+        {
+            if (turretUI.isOpened) { turretUI.CloseUI(); }
+        }
         isPause = true;
         animator.Play("pause_Anim");
         if (firstSelectedButton != null) { eventSystem.SetSelectedGameObject(firstSelectedButton.gameObject); }
@@ -124,19 +122,6 @@ public class UIManager : MonoBehaviour
         animator.Play("resume_Anim");
         StartCoroutine(SetPanel(false));
         Time.timeScale = 1.0f;
-
-        var turretUI = TurretUI.Instance;
-
-        if (turretUI) 
-        {
-            if (turretUI.isOpened)
-            {
-                SetMouseVisible(true);
-                eventSystem.SetSelectedGameObject(turretUI.firstSelectedButton.gameObject);
-                return;
-            }
-        }
-
         playerInput.enabled = true;
     }
 
@@ -173,8 +158,16 @@ public class UIManager : MonoBehaviour
         }
     }
     //弾の数表示
-    public void UpdateAmmoText(int magAmmo, int remainAmmo, bool isInfinity)
+    public void UpdateAmmoText(int magAmmo, int remainAmmo, bool isInfinity, bool isHolstered)
     {
+        if (isHolstered)
+        {
+            ammoPanel.SetActive(false);
+            return;
+        }
+
+        if (!ammoPanel.activeSelf) ammoPanel.SetActive(true);
+
         if (isInfinity)
         {
             magAmmoText.text = magAmmo.ToString();
@@ -186,6 +179,7 @@ public class UIManager : MonoBehaviour
             remainAmmoText.text = remainAmmo.ToString();
         }
     }
+
     //点数更新
     public void SetNextScore(int newScore)
     {

@@ -2488,7 +2488,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.0006713867}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &962150402708995587
@@ -13700,6 +13700,7 @@ MonoBehaviour:
   Button_ShopItem: {fileID: 5172741696039028971, guid: 488366e5466725541afed2a527398683, type: 3}
   shopListContent: {fileID: 950536370244954874}
   scraps: {fileID: 0}
+  _imageList: []
 --- !u!1 &7171431460894176633
 GameObject:
   m_ObjectHideFlags: 0
@@ -15178,7 +15179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4983896231482254176
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17057,7 +17058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1479116033218995586
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17743,7 +17744,7 @@ Transform:
   - {fileID: 5880264641525729403}
   - {fileID: 1735300005795352515}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9068163846488966494
 MonoBehaviour:
@@ -17763,6 +17764,7 @@ MonoBehaviour:
   gameoverUI: {fileID: 9104746725280831183}
   pauseUI: {fileID: 132005584548629148}
   settingUI: {fileID: 4326243771443849759}
+  ammoPanel: {fileID: 7781566809613448044}
   crosshair: {fileID: 1855871856778524444}
   staminaBackground: {fileID: 4532705026200447661}
   staminaImage: {fileID: 6677499026163248384}
