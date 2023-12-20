@@ -49,6 +49,8 @@ public class PlayerHealth : LivingEntity
 
         SoundManager.Instance?.PlaySE(hitSE.name);
 
+        GameManager.Instance.playerDamagedCount += damageMessage.amount;
+
         UpdateUI(true);
         return true;
     }

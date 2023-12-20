@@ -386,4 +386,14 @@ public class RaycastWeapon : MonoBehaviour
         }
         bullets.Clear();
     }
+
+    public virtual void AddAmmo(int ammo)
+    {
+        ammoRemain += ammo;
+        //’Ç‰Á‚µ‚½’e”‚Í999‚ð’´‚¦‚È‚¢
+        if (ammoRemain + ammo > 999)
+        {
+            ammoRemain = 999;
+        }
+    }
 }

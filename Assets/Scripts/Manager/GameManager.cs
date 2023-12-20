@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] ScrapUI scrapUI;
     [SerializeField] float playTime;
     [SerializeField] public int scrap;
+
+    public int killCount;
+    public float playerDamagedCount;
+    public int usedScrap;
 
     public float timer;
 
@@ -33,13 +38,18 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        PlayerPrefs.DeleteAll();
         timer = playTime * 60;
+        killCount = 0;
+        playerDamagedCount = 0;
+        usedScrap = 0;
     }
     private void Update()
     {
 
         if (timer <= 0)
         {
+            Record.result = "Failed";
             ToResultScene();
         }
         else TimerUpdate();
@@ -60,6 +70,9 @@ public class GameManager : MonoBehaviour
     //結果シーンに移る
     public void ToResultScene()
     {
+        PlayerPrefs.SetInt("killCount",killCount);
+        PlayerPrefs.SetInt("usedScrap", usedScrap);
+        PlayerPrefs.SetFloat("playerDamagedCount", playerDamagedCount);
         SceneManager.LoadScene("Result");
     }
 
@@ -86,5 +99,17 @@ public class GameManager : MonoBehaviour
         scrap -= amount;
         if (scrap <= 0) scrap = 0;
         if (scrapUI) scrapUI.SetScrapText();
+        usedScrap += amount;
     }
+}
+
+
+[Serializable]
+public class SerializableKeyPair<TKey, TValue>
+{
+    [SerializeField] private TKey key;
+    [SerializeField] private TValue value;
+
+    public TKey Key => key;
+    public TValue Value => value;
 }

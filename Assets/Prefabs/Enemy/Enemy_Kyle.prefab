@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b86bb2e1d34954ba7f706706821eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 70
+  startingHealth: 250
   state: 0
   attackRoot: {fileID: 64219170}
   eyeTransform: {fileID: 7499805570375444854}
