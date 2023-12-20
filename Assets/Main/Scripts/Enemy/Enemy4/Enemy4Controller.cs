@@ -130,22 +130,13 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
     void Update()
     {
         if (HP <= 0)
-        {
-            foreach (Collider c in colliders) { 
-                c.enabled = false;
-            }
+        {  
+            animator.speed = 1;
             agent.enabled = false;
             destoryTimer += Time.deltaTime;
             if (destoryTimer >= destoryTime)
             {
-                if (explosion != null)
-                {
-                    var pos = transform.position;
-                    pos.y += 0.5f - 1;
-                    var exp = Instantiate(explosion, pos, transform.rotation);
-                    exp.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
-                }
-                transform.parent.GetComponent<EnemyController>().dead();
+                Attack();
             }
         }
         else
@@ -257,6 +248,10 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
     }
     private void Dead()
     {
+        foreach (Collider c in colliders)
+        {
+            c.enabled = false;
+        }
         Drop();
         animator.SetTrigger("die");
         GameManager.Instance.AddScrap(reward);
@@ -311,7 +306,7 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
         }       
     }
 
-#if UNITY_EDITOR //Turretの攻撃範囲デバッグ
+#if UNITY_EDITOR //攻撃範囲デバッグ
     private void OnDrawGizmosSelected()
     {
         var pos = transform.position;
