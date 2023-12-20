@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 public class ActiveWeapon : MonoBehaviour
@@ -88,14 +86,18 @@ public class ActiveWeapon : MonoBehaviour
         //所持しているすべての（拳銃を除いて）武器を破棄
         var weapon = weaponSlots[(int)weaponSlot.Primary].GetComponentInChildren<RaycastWeapon>();
         if (weapon) Destroy(weapon.gameObject);
-
+        UIManager.Instance?.UpdateWeaponSlot((int)weaponSlot.Primary, false);
+        
         weapon = weaponSlots[(int)weaponSlot.Tertiary].GetComponentInChildren<RaycastWeapon>();
         if (weapon) Destroy(weapon.gameObject);
+        UIManager.Instance?.UpdateWeaponSlot((int)weaponSlot.Tertiary, false);
 
         weapon = weaponSlots[(int)weaponSlot.Quaternary].GetComponentInChildren<RaycastWeapon>();
         if (weapon) Destroy(weapon.gameObject);
+        UIManager.Instance?.UpdateWeaponSlot((int)weaponSlot.Quaternary, false);
 
         UIManager.Instance.UpdateWeaponSlotImage((int)weaponSlot.Secondary);
+
     }
 
     //標的オブジェクトを更新する
@@ -209,13 +211,21 @@ public class ActiveWeapon : MonoBehaviour
             foreach (var slot in duplicationSlots)
             {
                 weapon = GetWeapon((int)slot); //すでに他の武器を所持しているか確認
-                if (weapon) { Destroy(weapon.gameObject); } // あったら破棄
+                if (weapon) 
+                {
+                    Destroy(weapon.gameObject);
+                    UIManager.Instance?.UpdateWeaponSlot((int)weapon.weaponSlot, false);
+                } // あったら破棄
             }
         }
         else 
         {
-            weapon = GetWeapon(weaponSlotIndex); //すでに他の武器を所持しているか確認
-            if (weapon) {Destroy(weapon.gameObject); } // あったら破棄
+            weapon = GetWeapon(weaponSlotIndex); 
+            if (weapon) 
+            {
+                Destroy(weapon.gameObject);
+                UIManager.Instance?.UpdateWeaponSlot((int)weapon.weaponSlot, false);
+            }
         }
 
         //装備、パラメータ設定
@@ -225,12 +235,13 @@ public class ActiveWeapon : MonoBehaviour
         weapon.recoil.characterAiming = characterAiming;
         weapon.recoil.rigController = rigController;
         weapon.transform.SetParent(weaponSlots[weaponSlotIndex], false); 
-        equipped_Weapons[weaponSlotIndex] = weapon; 
+        equipped_Weapons[weaponSlotIndex] = weapon;
 
         //SetActiveWeapon(newWeapon.weaponSlot); 
+        UIManager.Instance?.UpdateWeaponSlot(weaponSlotIndex, true);
     }
 
-    //Num1 key : Rifle,  Num2 key : Pistol　武器選択処理 
+    //武器選択処理 
     private void UpdateWeaponControl()
     {
         if (isChangingWeapon) { return; }
