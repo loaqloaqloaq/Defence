@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float playTime;
     [SerializeField] public int scrap;
 
-    public float timer;
+    [SerializeField] public float timer;
 
     public static GameManager Instance
     {        
@@ -33,13 +33,14 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        timer = playTime * 60;
+       timer = playTime * 60;
     }
     private void Update()
     {
 
         if (timer <= 0)
         {
+            Record.result = "Failed";
             ToResultScene();
         }
         else TimerUpdate();
