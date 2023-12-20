@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.PackageManager;
+//using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class FlameThrower : RaycastWeapon
@@ -15,18 +15,18 @@ public class FlameThrower : RaycastWeapon
 
 
     //攻撃範囲のデバッグ
-    private void OnDrawGizmosSelected()
-    {
-        if (raycastOrigin != null)
-        {
-            var leftEyeRotation = Quaternion.AngleAxis(-shootingAngle * 0.5f, Vector3.up);
+    //private void OnDrawGizmosSelected()
+    //{
+    //    if (raycastOrigin != null)
+    //    {
+    //        var leftEyeRotation = Quaternion.AngleAxis(-shootingAngle * 0.5f, Vector3.up);
 
-            var leftRayDirection = leftEyeRotation * raycastOrigin.forward;
-
-            Handles.color = new Color(1f, 0.2f, 1f, 1.0f);
-            Handles.DrawSolidArc(raycastOrigin.position, Vector3.up, leftRayDirection, shootingAngle, fireDistance);
-        }
-    }
+    //        var leftRayDirection = leftEyeRotation * raycastOrigin.forward;
+            
+    //        //Handles.color = new Color(1f, 0.2f, 1f, 1.0f);
+    //        //Handles.DrawSolidArc(raycastOrigin.position, Vector3.up, leftRayDirection, shootingAngle, fireDistance);
+    //    }
+    //}
 
     public override void Fire()
     {
