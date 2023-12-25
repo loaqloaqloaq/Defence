@@ -37,15 +37,16 @@ public class WarningController : MonoBehaviour
     RectTransform dialogueRT, maskRT;    
     Vector2 dialogueSize,maskSize;
 
-    string msg,key;
+    string key;
 
     bool show;
     float showTimer;
     // Start is called before the first frame update
     void Start()
     {
-        if(!dialogue)dialogue = transform.GetChild(0).gameObject;
-        if(messages.Length<=0) messages = new TextMeshProUGUI[]{ 
+        dialogue = transform.GetChild(0).gameObject;
+        dialogue.SetActive(true);
+        if (messages.Length<=0) messages = new TextMeshProUGUI[]{ 
             dialogue.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>(),
             dialogue.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>()
         };
@@ -62,9 +63,7 @@ public class WarningController : MonoBehaviour
         textStartPos = messages[0].rectTransform.anchoredPosition;
 
         show = false;
-        showTimer = 0;
-
-        msg = "";
+        showTimer = 0;     
 
         foreach (var message in messages)
         {
@@ -72,6 +71,7 @@ public class WarningController : MonoBehaviour
             message.GetComponent<ScrollingText>().textStartPos = textStartPos;
         }
 
+        key = "";
         dialogue.SetActive(false);       
     }
 
@@ -130,20 +130,19 @@ public class WarningController : MonoBehaviour
         showTimer = time;
     }
     void Show(string msg) {
-        int index = 0;
-        this.msg = msg;
-        
+        int index = 0;        
+        dialogue.SetActive(true);
+
         foreach (var message in messages)
         {
             message.GetComponent<ScrollingText>().SetMessage(msg, index);
             index++;
         }
         show = true;
-        dialogue.SetActive(true);
+        
     }
     void SetText(string msg) {
-        int index = 0;
-        this.msg = msg;
+        int index = 0;       
         foreach (var message in messages)
         {
             message.GetComponent<ScrollingText>().SetMessage(msg, index, false);

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8435248775537443001}
   m_Layer: 0
   m_Name: Enemy Generator
-  m_TagString: Untagged
+  m_TagString: EnemyGenerator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8435248775537443001
 MonoBehaviour:
@@ -45,6 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 3450743282065595222, guid: 94f434d33a7ce9447a540b6603d0a859, type: 3}
-  EnemyCnt: 0
-  genFreq: 0.5
   PatternJsonFile: {fileID: 4900000, guid: c48560d8b90d6d347b2a615993db19f1, type: 3}

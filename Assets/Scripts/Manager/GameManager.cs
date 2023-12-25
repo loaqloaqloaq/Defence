@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     void TimerUpdate() {
         timer -= Time.deltaTime;
+        EnemyGeneratorManager.Instance.ChangeMaxEnemy(timer / (playTime * 60));
         PlayerPrefs.SetFloat("timer", playTime * 60 - timer);
         if (timerScript) timerScript.setTimerString(timer);
     }

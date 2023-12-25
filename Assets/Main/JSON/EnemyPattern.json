@@ -6,5 +6,18 @@
   ],
   "genFreq":3,
   "randomRange":0.2,
-  "maxEnemy":100
+  "maxEnemy": [
+    {
+      "timeLeftPresent": 1,
+      "maxEnemy": 20
+    },
+    {
+      "timeLeftPresent": 0.5,
+      "maxEnemy": 50
+    },
+    {
+      "timeLeftPresent": 0.2,
+      "maxEnemy": 100
+    }
+  ]
 }
