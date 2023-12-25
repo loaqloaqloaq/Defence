@@ -42,11 +42,12 @@ public class WarningController : MonoBehaviour
     bool show;
     float showTimer;
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         dialogue = transform.GetChild(0).gameObject;
         dialogue.SetActive(true);
-        if (messages.Length<=0) messages = new TextMeshProUGUI[]{ 
+        if (messages.Length <= 0) messages = new TextMeshProUGUI[]{
             dialogue.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>(),
             dialogue.transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>()
         };
@@ -57,22 +58,25 @@ public class WarningController : MonoBehaviour
         colorChangeSpeed = 1f;
         scrollSpeed = 500f;
 
-        dialogueImage = dialogue.GetComponent<Image>();        
-        dialogueColor = Color.red;        
+        dialogueImage = dialogue.GetComponent<Image>();
+        dialogueColor = Color.red;
         dialogueImage.color = dialogueColor;
-        textStartPos = messages[0].rectTransform.anchoredPosition;
+        textStartPos = new Vector3(860, -17, 0);
 
         show = false;
-        showTimer = 0;     
+        showTimer = 0;
 
         foreach (var message in messages)
         {
             message.GetComponent<ScrollingText>().scrollSpeed = scrollSpeed;
             message.GetComponent<ScrollingText>().textStartPos = textStartPos;
         }
-
+        setTextVisible(false);
         key = "";
-        dialogue.SetActive(false);       
+    }
+    void Start()
+    {       
+            
     }
 
     // Update is called once per frame
@@ -85,28 +89,33 @@ public class WarningController : MonoBehaviour
             if (dialogueColor.g >= 1) colorChangeSpeed = -1f;
             else if (dialogueColor.g <= 0) colorChangeSpeed = 1f;
 
-            showTimer -= Time.deltaTime;
-            if (showTimer <= 0) show = false;
-
             if (dialogue.activeSelf && dialogueSize.x < 1000)
             {
+                setTextVisible(true);
                 dialogueSize.x += 2000 * Time.deltaTime;
                 dialogueRT.sizeDelta = dialogueSize;
                 maskSize.x += 1700 * Time.deltaTime;
                 maskRT.sizeDelta = maskSize;
+
+                showTimer -= Time.deltaTime;
+                if (showTimer <= 0) show = false;
             }
         }
         else if (dialogue.activeSelf)
         {
             if (dialogueSize.x > 0)
             {
+                setTextVisible(false);
                 dialogueSize.x -= 2000 * Time.deltaTime;
                 dialogueRT.sizeDelta = dialogueSize;
                 maskSize.x -= 1700 * Time.deltaTime;
                 maskRT.sizeDelta = maskSize;
             }
             else Hide();
-        } 
+        }
+        else {
+            dialogue.SetActive(false);
+        }
         
     }
 
@@ -127,6 +136,7 @@ public class WarningController : MonoBehaviour
         else {
             SetText(msg);
         }
+        show = true;
         showTimer = time;
     }
     void Show(string msg) {
@@ -137,8 +147,7 @@ public class WarningController : MonoBehaviour
         {
             message.GetComponent<ScrollingText>().SetMessage(msg, index);
             index++;
-        }
-        show = true;
+        }        
         
     }
     void SetText(string msg) {
@@ -153,6 +162,13 @@ public class WarningController : MonoBehaviour
         dialogue.SetActive(false);
         key = "";
              
+    }
+
+    void setTextVisible(bool visible) {
+        foreach (var message in messages)
+        {
+            message.enabled = visible;            
+        }
     }
     
 
