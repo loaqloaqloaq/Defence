@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
 using Unity.VisualScripting;
 
 public class ShopUI : MonoBehaviour

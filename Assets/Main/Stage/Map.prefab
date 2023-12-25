@@ -725,7 +725,7 @@ Transform:
   - {fileID: 5326280913435704814}
   - {fileID: 4854467155489716973}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5469553819465290822
 GameObject:
@@ -24916,29 +24916,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2914084737055963306, guid: 5e939871286b608429a8234669cbf384, type: 3}
-      propertyPath: MaxHP
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 2914084737055963306, guid: 5e939871286b608429a8234669cbf384, type: 3}
-      propertyPath: gateNumber
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6047312707321043700, guid: 5e939871286b608429a8234669cbf384, type: 3}
       propertyPath: m_Name
       value: Gate1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6047312707321043700, guid: 5e939871286b608429a8234669cbf384, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7531266217296596478, guid: 5e939871286b608429a8234669cbf384, type: 3}
-      propertyPath: m_Size.x
-      value: -0.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 7531266217296596478, guid: 5e939871286b608429a8234669cbf384, type: 3}
-      propertyPath: m_Size.z
-      value: 4.97
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31320,6 +31300,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8495144390707394062}
     m_Modifications:
+    - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
+      propertyPath: playTime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 688066711271674836, guid: 6b6dbe045dd71e048be45684dc4d97df, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -31363,10 +31347,6 @@ PrefabInstance:
     - target: {fileID: 688066711271674836, guid: 6b6dbe045dd71e048be45684dc4d97df, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
-      propertyPath: playTime
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
