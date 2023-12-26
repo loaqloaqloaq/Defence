@@ -12,6 +12,7 @@ TagManager:
   - CheckPoint
   - Turret
   - Shop
+  - EnemyGenerator
   layers:
   - Default
   - TransparentFX

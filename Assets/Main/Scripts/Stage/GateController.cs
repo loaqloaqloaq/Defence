@@ -19,9 +19,7 @@ public class GateController : MonoBehaviour,IDamageable
 
     public int gateNumber;
     [HideInInspector]
-    public bool broke;    
-
-    NavMeshObstacle o1;
+    public bool broke; 
 
     GameObject HPfill;
     TextMeshProUGUI HPText;  
@@ -38,8 +36,7 @@ public class GateController : MonoBehaviour,IDamageable
     {       
         HP = MaxHP;
         ani= GetComponent<Animator>();
-        broke = false;
-        o1 = transform.GetChild(0).GetChild(0).GetComponent<NavMeshObstacle>();
+        broke = false;       
 
         HPfill = transform.GetChild(3).GetChild(0).gameObject;
         HPfill.SetActive(false);
@@ -53,7 +50,7 @@ public class GateController : MonoBehaviour,IDamageable
 
         player = GameObject.Find("Player");
 
-        o = transform.Find("door/nk_group-3_LOD0-3_LOD0").GetComponent<NavMeshObstacle>();
+        o = transform.Find("door").GetChild(0).GetComponent<NavMeshObstacle>();
     }
 
     // Update is called once per frame
@@ -72,10 +69,10 @@ public class GateController : MonoBehaviour,IDamageable
 
         if (ani.GetCurrentAnimatorStateInfo(0).IsName("break") && ani.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
         {
-            o1.enabled = false;           
+            o.enabled = false;           
         }
         else {
-            o1.enabled = true;            
+            o.enabled = true;            
         }
     }
    
@@ -84,18 +81,25 @@ public class GateController : MonoBehaviour,IDamageable
         if (HP <= 0) return true;        
         HP -= damageMessage.amount;
         if (HP <= 0) Broke();
-        else ani.SetTrigger("damage");
+        else
+        {
+            ani.SetTrigger("damage");
+            var warningMsg = "GATE " + gateNumber + " IS UNDER ATTACK!!   HP LEFT: " + Math.Round(HP / MaxHP * 100, 2) + "%";
+            WarningController.ShowWarning("gateAttacked",warningMsg, 2);
+        }
 
         HPfill.SetActive(true);
-        gaugeWidth = 30f * HP / MaxHP;
-        HPText.text = ( HP > 0 ? HP.ToString() : "0" )+ "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
+        gaugeWidth = 30f * HP / MaxHP;        
+        HPText.text =   HP.ToString() + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
         transform.Find("MapIcon").GetComponent<MapIcon>().SetFill(Math.Max((HP / MaxHP),0f));
         return true;
     }
 
     private void Broke(){
         broke = true;
+        HP = 0;
         GetComponent<BoxCollider>().enabled = false;
+        WarningController.ShowWarning("gateDestroyed", "GATE " + gateNumber + " HAS BEEN DESTROYED!!",5);
         ani.SetTrigger("break");
         HPfill.GetComponent<Animator>().SetTrigger("hideHP");        
         if (EnemyBase_Manager != null && gateNumber <= 2)
@@ -109,8 +113,8 @@ public class GateController : MonoBehaviour,IDamageable
         {
             Debug.Log("•‰‚¯");
             Record.resultID = 3;
+            PlayerPrefs.SetInt("killCount", GameManager.Instance.killCount);
             SceneManager.LoadScene("Result");
-            //SceneManager.LoadScene("ResultLose");
         }
     }
 

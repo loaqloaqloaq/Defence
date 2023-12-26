@@ -11,11 +11,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] ScrapUI scrapUI;
     [SerializeField] float playTime;
     [SerializeField] public int scrap;
-
     public int killCount;
-    public float playerDamagedCount;
+    public int playerDamagedCount;
     public int usedScrap;
-
     public float timer;
 
     //スカイボックスを回転させる
@@ -70,6 +68,7 @@ public class GameManager : MonoBehaviour
 
     void TimerUpdate() {
         timer -= Time.deltaTime;
+        EnemyGeneratorManager.Instance.ChangeMaxEnemy(timer / (playTime * 60));
         PlayerPrefs.SetFloat("timer", playTime * 60 - timer);
         if (timerScript) timerScript.setTimerString(timer);
     }
@@ -85,8 +84,8 @@ public class GameManager : MonoBehaviour
     public void ToResultScene()
     {
         PlayerPrefs.SetInt("killCount",killCount);
+        PlayerPrefs.SetInt("playerDamagedCount", playerDamagedCount);
         PlayerPrefs.SetInt("usedScrap", usedScrap);
-        PlayerPrefs.SetFloat("playerDamagedCount", playerDamagedCount);
         SceneManager.LoadScene("Result");
     }
 
