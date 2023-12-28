@@ -27,8 +27,7 @@ public class WarningController : MonoBehaviour
 
     [SerializeField] GameObject dialogue;
     [SerializeField] TextMeshProUGUI[] messages;
-    Image dialogueImage;
-    [SerializeField] float showTime;
+    Image dialogueImage;   
     [SerializeField] float colorChangeSpeed;
     [SerializeField] float scrollSpeed;
     Color dialogueColor;
@@ -39,8 +38,8 @@ public class WarningController : MonoBehaviour
 
     string key;
 
-    bool show;
-    float showTimer;
+    [SerializeField] bool show;
+    [SerializeField] float showTimer;
     // Start is called before the first frame update
 
     private void Awake()
@@ -73,11 +72,7 @@ public class WarningController : MonoBehaviour
         }
         setTextVisible(false);
         key = "";
-    }
-    void Start()
-    {       
-            
-    }
+    }  
 
     // Update is called once per frame
     void Update()
@@ -96,7 +91,9 @@ public class WarningController : MonoBehaviour
                 dialogueRT.sizeDelta = dialogueSize;
                 maskSize.x += 1700 * Time.deltaTime;
                 maskRT.sizeDelta = maskSize;
-
+            }
+            else
+            {
                 showTimer -= Time.deltaTime;
                 if (showTimer <= 0) show = false;
             }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5133163499696771065}
   - component: {fileID: 1442222546943776965}
+  - component: {fileID: 5829751208796661597}
   m_Layer: 0
   m_Name: EnemyLoader
   m_TagString: Untagged
@@ -161,3 +162,19 @@ MonoBehaviour:
   gate: {fileID: 0}
   gc: {fileID: 0}
   ts: []
+--- !u!114 &5829751208796661597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814670879726100184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f6edacd17ff014448d8ad2238fc327f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generators: []
+  enemy: {fileID: 3450743282065595222, guid: 94f434d33a7ce9447a540b6603d0a859, type: 3}
+  PatternJsonFile: {fileID: 4900000, guid: c48560d8b90d6d347b2a615993db19f1, type: 3}
+  maxEnemy: 0
