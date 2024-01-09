@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class SunController : MonoBehaviour
@@ -8,12 +9,12 @@ public class SunController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (rotateSpeed <= 0) rotateSpeed = 20f;
+        if (rotateSpeed <= 0) rotateSpeed = 1f;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        transform.Rotate(rotateSpeed * Time.deltaTime, rotateSpeed * Time.deltaTime, 0);
+    {               
+       transform.Rotate(-rotateSpeed*Time.deltaTime, 0, 0, Space.Self);       
     }
 }
