@@ -117,17 +117,20 @@ public class EnemyGeneratorManager : MonoBehaviour
             if (timeLeftPersent <= m.timeLeftPresent) maxEnemy = m.maxEnemy;
         }
     }
-    public void UpdateGeneratorList(bool add, GameObject gen) {
-        Debug.Log("Called"+ (add?"add":"remvoe"));
+    public int UpdateGeneratorList( GameObject gen, int i = -1 ) {
+        int index=-1;
         currentGenerator = 0;
-        if (add) {
-            var exist = generators.FindIndex(i => i == gen);
+        if (i==-1) {
+            var exist = generators.FindIndex(g => g == gen);
             if(exist == -1) generators.Add(gen);
+            index = generators.FindIndex(g => g == gen);
         }
         else {
-            generators.RemoveAll(p => p == gen);
+            generators.RemoveAt(i);
         }
         
+        Debug.Log("Called" + (i == -1 ? "add" : "remove")+" "+generators.Count);
+        return index;
     }
 
 
