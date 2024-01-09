@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ public class EnemyGeneratorManager : MonoBehaviour
         }
     }
     
-    [SerializeField] GameObject[] generators;
+    [SerializeField] List<GameObject> generators;
 
     [SerializeField] GameObject enemy;
 
@@ -44,7 +45,7 @@ public class EnemyGeneratorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        generators = GameObject.FindGameObjectsWithTag("EnemyGenerator");
+        generators = GameObject.FindGameObjectsWithTag("EnemyGenerator").ToList();
 
         lastGen = 0;
 
@@ -57,7 +58,7 @@ public class EnemyGeneratorManager : MonoBehaviour
 
         maxEnemy = max[0].maxEnemy;
 
-        randomTime = Random.Range(-randomRange, randomRange);
+        randomTime = UnityEngine.Random.Range(-randomRange, randomRange);
 
         pool = GameObject.Find("Enemy Pool");
         if (pool == null) pool = new GameObject("Enemy Pool");
@@ -77,7 +78,7 @@ public class EnemyGeneratorManager : MonoBehaviour
         {
             if (eg.enemyCnt >= maxEnemy) return;
             lastGen = 0;
-            randomTime = Random.Range(-randomRange, randomRange);  
+            randomTime = UnityEngine.Random.Range(-randomRange, randomRange);  
 
             int type = currentLine[currentIndex];
             bool generated = false;
@@ -94,11 +95,11 @@ public class EnemyGeneratorManager : MonoBehaviour
             if (!generated && pool.transform.childCount < maxEnemy)
             {
                 GameObject e = Instantiate(enemy);
-                e.transform.SetParent(pool.transform, true);
-                generators[currentGenerator].GetComponent<EnemyGenerator>().SpawnEnemy(type, e.transform, pool);                
+                e.transform.SetParent(pool.transform, true);                
+                generators[currentGenerator].GetComponent<EnemyGenerator>().SpawnEnemy(type, e.transform, pool); 
             }
-            currentGenerator++;
-            if (currentGenerator >= generators.Length) currentGenerator = 0;
+            currentGenerator++;            
+            currentGenerator = currentGenerator % generators.Count;            
             currentIndex++;
             if (currentIndex >= currentLine.Length) RandomNewPattern();
         }
@@ -106,7 +107,7 @@ public class EnemyGeneratorManager : MonoBehaviour
 
     private void RandomNewPattern()
     {
-        currentLineIndex = Random.Range(0, patterns.Length);
+        currentLineIndex = UnityEngine.Random.Range(0, patterns.Length);
         currentLine = patterns[currentLineIndex].Split(",").Select(i => int.Parse(i)).ToArray();
         currentIndex = 0;
     }
@@ -116,5 +117,19 @@ public class EnemyGeneratorManager : MonoBehaviour
             if (timeLeftPersent <= m.timeLeftPresent) maxEnemy = m.maxEnemy;
         }
     }
+    public void UpdateGeneratorList(bool add, GameObject gen) {
+        Debug.Log("Called"+ (add?"add":"remvoe"));
+        currentGenerator = 0;
+        if (add) {
+            var exist = generators.FindIndex(i => i == gen);
+            if(exist == -1) generators.Add(gen);
+        }
+        else {
+            generators.RemoveAll(p => p == gen);
+        }
+        
+    }
+
+
 
 }
