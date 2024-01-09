@@ -7,8 +7,7 @@ public class SunController : MonoBehaviour
 {
     private Material skybox;     
     private float Tfactor;
-
-    [SerializeField] Material nightSkyBox;
+    
     [SerializeField] float rotateSpeed;
     [SerializeField] bool isNight;
     [SerializeField] float NightValue, DayValue;
@@ -23,8 +22,9 @@ public class SunController : MonoBehaviour
         if (DayValue <= 0) DayValue = 0.5f;
         if (DayNigntChangeSpeed <= 0) DayNigntChangeSpeed = 0.5f;
 
-        Tfactor = DayValue;
-        skybox.SetColor("_Tint", new Color(Tfactor, Tfactor, Tfactor, 1));
+        Tfactor = 0;
+        skybox.SetFloat("_value", Tfactor);
+        
     }
 
     // Update is called once per frame
@@ -35,19 +35,18 @@ public class SunController : MonoBehaviour
 
         isNight = transform.localRotation.eulerAngles.x > 200f;
 
-        if (isNight && Tfactor >= NightValue)
+        if (isNight && Tfactor < 1)
         {
-            Tfactor -= Time.deltaTime * DayNigntChangeSpeed;
-            skybox.SetColor("_Tint", new Color(Tfactor, Tfactor, Tfactor, 1));
-            if (Tfactor <= NightValue) { 
-            
-            }
-        }
-        else if(!isNight && Tfactor <= DayValue) {
             Tfactor += Time.deltaTime * DayNigntChangeSpeed;
-            skybox.SetColor("_Tint", new Color(Tfactor, Tfactor, Tfactor, 1));
+            skybox.SetFloat("_value", Tfactor);
+        }
+        else if(!isNight && Tfactor > 0) {   
+            Tfactor -= Time.deltaTime * DayNigntChangeSpeed;
+            skybox.SetFloat("_value", Tfactor);
         }
 
 
-    }
+    }  
 }
+
+
