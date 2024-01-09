@@ -132,29 +132,29 @@ public class ResultManager : MonoBehaviour
         {
             //表示するテキストを設定
             resultText.text = "Clear!!!!!";
-            killText.text = "Kill:" + killCount.ToString();
-            takenDamageText.text = "Taken Damage:" + takenDamage.ToString();
-            scrapText.text = "Used Scrap:" + usedScrapCount.ToString();
+            killText.text = "キル数:" + killCount.ToString();
+            takenDamageText.text = "受けたダメージ量:" + takenDamage.ToString();
+            scrapText.text = "使ったスクラップの数:" + usedScrapCount.ToString();
         }
         //2:敵拠点を壊し切ってクリア
         else if (Record.resultID == 2)
         {
             //表示するテキストを設定
             resultText.text = "Clear!!!!!";
-            killText.text = "Kill:" + killCount.ToString();
-            takenDamageText.text = "Taken Damage:" + takenDamage.ToString();
+            killText.text = "キル数:" + killCount.ToString();
+            takenDamageText.text = "受けたダメージ量:" + takenDamage.ToString();
 
             //クリアタイム
             float ms = clearTime * 1000;
             string timeStr = String.Format("{0:00}:{1:00}:{2:000}", (int)ms / 60000, (int)(ms / 1000) % 60, ms % 1000);
-            clearTimeText.text = "Clear Time:" + timeStr;
+            clearTimeText.text = "クリアタイム:" + timeStr;
         }
         //3:プレイヤの残機がなくなった or 敵拠点を全て壊された
         else if (Record.resultID == 3)
         {
             //表示するテキストを設定
             resultText.text = "Failed";
-            killText.text = "Kill:" + killCount.ToString();
+            killText.text = "キル数:" + killCount.ToString();
         }
     }
 }
