@@ -32,6 +32,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     void Start()
     {
+        EnemyGeneratorManager.Instance.UpdateGeneratorList(true,this.gameObject);
         //animatorを取得
         animator = GetComponent<Animator>();
         //初期値を設定
@@ -123,6 +124,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //大きさの設定
         exp.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
         //オブジェクトを消滅
+        EnemyGeneratorManager.Instance.UpdateGeneratorList(false,this.gameObject);
         Destroy(gameObject);
 
         return true;

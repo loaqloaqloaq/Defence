@@ -30,8 +30,7 @@ public class SunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {               
-        transform.Rotate(-rotateSpeed*Time.deltaTime, 0, 0, Space.Self);
-        Debug.Log(transform.localRotation.eulerAngles);
+        transform.Rotate(-rotateSpeed*Time.deltaTime, 0, 0, Space.Self);        
 
         isNight = transform.localRotation.eulerAngles.x > 200f;
 

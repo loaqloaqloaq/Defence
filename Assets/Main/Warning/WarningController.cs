@@ -142,7 +142,7 @@ public class WarningController : MonoBehaviour
 
         foreach (var message in messages)
         {
-            message.GetComponent<ScrollingText>().SetMessage(msg, index);
+            message.GetComponent<ScrollingText>().SetMessage(msg, index,true);
             index++;
         }        
         
