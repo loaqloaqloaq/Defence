@@ -6,14 +6,14 @@ using UnityEngine;
 public class FellowNPC : MonoBehaviour
 {
     //仲間(NPC)の状態 待機、追跡、攻撃
-    enum State
+    public enum State
     {
         Idle,
         Tracking,
         Attack
     }
     //現在のステート
-    [SerializeField] private State fellowAI;
+    [SerializeField] public State fellowAI;
 
     //標的のLayer (一番近くの敵を調べるために使う)
     [SerializeField] private string targetLayer;

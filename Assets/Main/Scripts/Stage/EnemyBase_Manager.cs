@@ -68,14 +68,33 @@ public class EnemyBase_Manager : MonoBehaviour
         else
         {
             Debug.Log("ワープ開始");
+            NPCMove();
             PlayerMove();
-            EnemyBaseMove();
+            EnemyBaseMove();            
             teleportCounter = 0;
             teleportFlg = false;
             counterUI.SetActive(false);
         }
     }
 
+    void NPCMove() 
+    {
+        var NPCs = GameObject.FindGameObjectsWithTag("NPC");
+        if (stage[0] != 0 && moveFlg[0])
+        {
+            NPCTeleport(NPCs,1);
+        }
+        if (stage[1] != 0 && moveFlg[1])
+        {
+            NPCTeleport(NPCs,2);
+        }
+    }
+    void NPCTeleport(GameObject[] NPCs,int area) {
+        foreach(var NPC in NPCs) {
+            var nav=NPC.GetComponent<NPCNavigator>();
+            nav.TeleportToNextRoute(area);
+        }
+    }
     void PlayerMove()
     {
         if (stage[0] != 0 && moveFlg[0])
