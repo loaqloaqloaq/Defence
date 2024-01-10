@@ -53,7 +53,7 @@ public class ResultManager : MonoBehaviour
         clearTime = PlayerPrefs.GetFloat("timer", 0.0f);
         //リザルト画面で表示する物をセット
         SetResult();
-        // 再生
+        //オーディオの再生
         audioSource.Play();
     }
 
