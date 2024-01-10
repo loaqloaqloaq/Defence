@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -62,7 +63,7 @@ public class EnemyBase_Manager : MonoBehaviour
             counterUI.SetActive(true);
             teleportCounter += Time.deltaTime;
             int Counter = 30 - (int)teleportCounter;
-            counterUI.GetComponent<Text>().text = Counter + "•bŒã‚ÉŽŸ‚Ì‹’“_‚ÖˆÚ“®‚µ‚Ü‚·";
+            counterUI.GetComponent<TextMeshProUGUI>().text = Counter + "•bŒã‚ÉŽŸ‚Ì‹’“_‚ÖˆÚ“®‚µ‚Ü‚·";
         }
         else
         {
