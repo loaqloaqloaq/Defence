@@ -74,7 +74,8 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         }
         else
         {
-            //GameManager.Instance.EndGame();
+            Record.resultID = 3;
+            GameManager.Instance?.ToResultScene();
         }
     }
 

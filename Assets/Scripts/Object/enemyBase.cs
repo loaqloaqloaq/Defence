@@ -1,3 +1,4 @@
+using Palmmedia.ReportGenerator.Core;
 using System;
 using TMPro;
 using UnityEngine;
@@ -29,12 +30,13 @@ public class EnemyBase : MonoBehaviour, IDamageable
     //砲弾
     [SerializeField] GameObject cannonBall;
     [SerializeField] public bool fireCannon;
+    EnemyGenerator generator;
 
     private int index;
 
     void Start()
     {
-        index=EnemyGeneratorManager.Instance.UpdateGeneratorList(this.gameObject);
+        generator = transform.Find("Enemy Generator").GetComponent<EnemyGenerator>();        
         //animatorを取得
         animator = GetComponent<Animator>();
         //初期値を設定
@@ -114,7 +116,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     //死んだ (破壊された) ときの処理
     public bool IsDead()
-    {
+    {    
         //animationを再生
         animator.SetTrigger("break");
         HPGauge.GetComponent<Animator>().SetTrigger("hideHP");
@@ -125,8 +127,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         GameObject exp = Instantiate(explosion, expPos, this.transform.rotation);
         //大きさの設定
         exp.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
-        //オブジェクトを消滅
-        EnemyGeneratorManager.Instance.UpdateGeneratorList(this.gameObject,index);
+        //オブジェクトを消滅        
         Destroy(gameObject);
 
         return true;

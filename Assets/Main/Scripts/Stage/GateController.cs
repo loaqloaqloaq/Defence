@@ -113,8 +113,7 @@ public class GateController : MonoBehaviour,IDamageable
         {
             Debug.Log("•‰‚¯");
             Record.resultID = 3;
-            PlayerPrefs.SetInt("killCount", GameManager.Instance.killCount);
-            SceneManager.LoadScene("Result");
+            GameManager.Instance?.ToResultScene();
         }
     }
 

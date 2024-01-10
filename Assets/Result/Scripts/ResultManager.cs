@@ -27,13 +27,21 @@ public class ResultManager : MonoBehaviour
     //クリアタイム
     [SerializeField] private TextMeshProUGUI clearTimeText;
     private float clearTime;
-
+    //YouWin背景
+    [SerializeField] private GameObject youWin_BG;
+    //YouLose背景
+    [SerializeField] private GameObject youLose_BG;
+    //BGM
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip youWin;
+    [SerializeField] private AudioClip youLose;
     //今、選択しているボタン
     private GameObject nowSelectButton;
     //前、選択されていたボタン
     private GameObject prevSelectButton;
     //デフォルトの不透明度
     float defaultOpacity;
+
     void Start()
     {
         //デフォルトの不透明度を設定
@@ -43,8 +51,10 @@ public class ResultManager : MonoBehaviour
         takenDamage　= PlayerPrefs.GetInt("playerDamagedCount", 0);
         usedScrapCount = PlayerPrefs.GetInt("usedScrap", 0);
         clearTime = PlayerPrefs.GetFloat("timer", 0.0f);
-        //リザルト画面のTextをセット
-        SetText();
+        //リザルト画面で表示する物をセット
+        SetResult();
+        // 再生
+        audioSource.Play();
     }
 
     void Update()
@@ -124,37 +134,48 @@ public class ResultManager : MonoBehaviour
         //SoundManager.Instance.Play(enterSE, SoundManager.Sound.UI);
     }
 
-    //リザルト画面のTextをセット
-    private void SetText()
+    //リザルト画面で表示する物をセット
+    private void SetResult()
     {
-        //1:自分の拠点を守り切ってクリア
+        //1:時間が切れるまで自陣の拠点を守る
         if (Record.resultID == 1)
         {
             //表示するテキストを設定
-            resultText.text = "Clear!!!!!";
+            resultText.text = "YouWin!!!!!";
             killText.text = "キル数:" + killCount.ToString();
             takenDamageText.text = "受けたダメージ量:" + takenDamage.ToString();
             scrapText.text = "使ったスクラップの数:" + usedScrapCount.ToString();
+            //YouWinの時の背景を表示
+            youWin_BG.SetActive(true);
+            //BGMを変更
+            audioSource.clip = youWin;
         }
-        //2:敵拠点を壊し切ってクリア
+        //2:敵の前線基地を全て破壊する
         else if (Record.resultID == 2)
         {
             //表示するテキストを設定
-            resultText.text = "Clear!!!!!";
+            resultText.text = "YouWin!!!!!";
             killText.text = "キル数:" + killCount.ToString();
             takenDamageText.text = "受けたダメージ量:" + takenDamage.ToString();
-
             //クリアタイム
             float ms = clearTime * 1000;
             string timeStr = String.Format("{0:00}:{1:00}:{2:000}", (int)ms / 60000, (int)(ms / 1000) % 60, ms % 1000);
             clearTimeText.text = "クリアタイム:" + timeStr;
+            //YouWinの時の背景を表示
+            youWin_BG.SetActive(true);
+            //BGMを変更
+            audioSource.clip = youWin;
         }
-        //3:プレイヤの残機がなくなった or 敵拠点を全て壊された
+        //3:プレイヤーの残機がなくなる or 最終拠点が壊される
         else if (Record.resultID == 3)
         {
             //表示するテキストを設定
-            resultText.text = "Failed";
+            resultText.text = "YouLose";
             killText.text = "キル数:" + killCount.ToString();
+            //YouLoseの時の背景を表示
+            youLose_BG.SetActive(true);
+            //BGMを変更
+            audioSource.clip = youLose;
         }
     }
 }
