@@ -11,8 +11,8 @@ public class PlayerAiming : MonoBehaviour
     public Cinemachine.AxisState xAxis;
     public Cinemachine.AxisState yAxis;
 
-    private float xStartSpeed;
-    private float yStartSpeed;
+    private float xSpeed;
+    private float ySpeed;
 
     public bool isAiming { get; private set; }
     public bool isSniping { get; private set; }
@@ -48,8 +48,8 @@ public class PlayerAiming : MonoBehaviour
 
     private void Start()
     {
-        xStartSpeed = xAxis.m_MaxSpeed;
-        yStartSpeed = yAxis.m_MaxSpeed;
+        xSpeed = xAxis.m_MaxSpeed;
+        ySpeed = yAxis.m_MaxSpeed;
     }
 
     void FixedUpdate()
@@ -76,18 +76,18 @@ public class PlayerAiming : MonoBehaviour
     {
         if (isSniping)
         {
-            xAxis.m_MaxSpeed = xStartSpeed * axisModifier * 0.4f;
-            yAxis.m_MaxSpeed = yStartSpeed * axisModifier * 0.4f;
+            xAxis.m_MaxSpeed = xSpeed * axisModifier * 0.4f;
+            yAxis.m_MaxSpeed = ySpeed * axisModifier * 0.4f;
         }
         else if (isAiming)
         {
-            xAxis.m_MaxSpeed = xStartSpeed * axisModifier;
-            yAxis.m_MaxSpeed = yStartSpeed * axisModifier;
+            xAxis.m_MaxSpeed = xSpeed * axisModifier;
+            yAxis.m_MaxSpeed = ySpeed * axisModifier;
         }
         else
         {
-            xAxis.m_MaxSpeed = xStartSpeed;
-            yAxis.m_MaxSpeed = yStartSpeed;
+            xAxis.m_MaxSpeed = xSpeed;
+            yAxis.m_MaxSpeed = ySpeed;
         }
     }
 
@@ -161,4 +161,11 @@ public class PlayerAiming : MonoBehaviour
         uiManager.SetEnableCanvas_Sniping(false);
     }
 
+    public void SetAxisSpeed(float xAxis, float yAxis)
+    {
+        if (yAxis < 0f || xAxis < 0f) return;
+        
+        xSpeed = xAxis;
+        ySpeed = yAxis;
+    }
 }

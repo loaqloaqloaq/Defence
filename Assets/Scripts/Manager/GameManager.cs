@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-
         if (timer <= 0)
         {
             Debug.Log("勝利");
@@ -68,16 +67,16 @@ public class GameManager : MonoBehaviour
 
     void TimerUpdate() {
         timer -= Time.deltaTime;
-        EnemyGeneratorManager.Instance.ChangeMaxEnemy(timer / (playTime * 60));
+        EnemyGeneratorManager.Instance?.ChangeMaxEnemy(timer / (playTime * 60));
         PlayerPrefs.SetFloat("timer", playTime * 60 - timer);
         if (timerScript) timerScript.setTimerString(timer);
     }
     public void EndGame()
     {
         isGameover = true;
-        UIManager.Instance.SetActiveGameoverUI(true);
-        UIManager.Instance.SetMouseVisible(true);
-        UIManager.Instance.SetActiveCrosshair(false);
+        UIManager.Instance?.SetActiveGameoverUI(true);
+        UIManager.Instance?.SetMouseVisible(true);
+        UIManager.Instance?.SetActiveCrosshair(false);
     }
 
     //結果シーンに移る

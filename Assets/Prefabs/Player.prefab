@@ -977,7 +977,7 @@ Transform:
   - {fileID: 5385076077625590515}
   - {fileID: 5711423090593061627}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1799385376026310230
 Animator:
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   xAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 200
+    m_MaxSpeed: 300
     m_AccelTime: 0.02
     m_DecelTime: 0.02
     m_InputAxisName: Mouse X
@@ -1135,7 +1135,7 @@ MonoBehaviour:
   yAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 150
+    m_MaxSpeed: 175
     m_AccelTime: 0.02
     m_DecelTime: 0.02
     m_InputAxisName: Mouse Y
