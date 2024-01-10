@@ -71,7 +71,7 @@ public class TitleManager : MonoBehaviour
     //選択しているボタンのエフェクトを変える
     private void ChangeButtonEffect()
     {
-        nowSelectButton.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        //nowSelectButton.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         foreach (Button button in FindObjectsOfType<Button>())
         {
             if (button.gameObject != nowSelectButton)
@@ -79,7 +79,7 @@ public class TitleManager : MonoBehaviour
                 Image image = button.GetComponent<Image>();
                 if (image != null)
                 {
-                    image.color = new Color(1, 1, 1, defaultOpacity);
+                    //image.color = new Color(1, 1, 1, defaultOpacity);
                 }
             }
         }
