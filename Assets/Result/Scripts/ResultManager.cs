@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,13 +10,23 @@ using UnityEngine.UI;
 //-----------------------------------------
 public class ResultManager : MonoBehaviour
 {
-    //結果 (YouWin or YouLose)
+    //結果 (テキスト)
     [SerializeField] private TextMeshProUGUI resultText;
-
-    //敵を倒した数 (仮)
-    //[SerializeField] private TextMeshProUGUI killText;
-    //クリアタイム (仮)
-    //[SerializeField] private TextMeshProUGUI clearTimeText;
+    //敵を倒した数 (テキスト)
+    [SerializeField] private TextMeshProUGUI killText;
+    //敵を倒した数
+    private int killCount;
+    //被ダメージ量 (テキスト)
+    [SerializeField] private TextMeshProUGUI takenDamageText;
+    //被ダメージ量
+    private int takenDamage;
+    //消費したスクラップの数 (テキスト)
+    [SerializeField] private TextMeshProUGUI scrapText;
+    //消費したスクラップの数
+    private int usedScrapCount;
+    //クリアタイム
+    [SerializeField] private TextMeshProUGUI clearTimeText;
+    private float clearTime;
 
     //今、選択しているボタン
     private GameObject nowSelectButton;
@@ -27,6 +38,11 @@ public class ResultManager : MonoBehaviour
     {
         //デフォルトの不透明度を設定
         defaultOpacity = 0.8f;
+        //値を取得
+        killCount = PlayerPrefs.GetInt("killCount", 0);
+        takenDamage　= PlayerPrefs.GetInt("playerDamagedCount", 0);
+        usedScrapCount = PlayerPrefs.GetInt("usedScrap", 0);
+        clearTime = PlayerPrefs.GetFloat("timer", 0.0f);
         //リザルト画面のTextをセット
         SetText();
     }
@@ -111,10 +127,34 @@ public class ResultManager : MonoBehaviour
     //リザルト画面のTextをセット
     private void SetText()
     {
-        //仮設定
-        if (Record.result == "Failed")
-        { resultText.text = "Failed"; }
-        else
-        { resultText.text = "Clear"; }
+        //1:自分の拠点を守り切ってクリア
+        if (Record.resultID == 1)
+        {
+            //表示するテキストを設定
+            resultText.text = "Clear!!!!!";
+            killText.text = "キル数:" + killCount.ToString();
+            takenDamageText.text = "受けたダメージ量:" + takenDamage.ToString();
+            scrapText.text = "使ったスクラップの数:" + usedScrapCount.ToString();
+        }
+        //2:敵拠点を壊し切ってクリア
+        else if (Record.resultID == 2)
+        {
+            //表示するテキストを設定
+            resultText.text = "Clear!!!!!";
+            killText.text = "キル数:" + killCount.ToString();
+            takenDamageText.text = "受けたダメージ量:" + takenDamage.ToString();
+
+            //クリアタイム
+            float ms = clearTime * 1000;
+            string timeStr = String.Format("{0:00}:{1:00}:{2:000}", (int)ms / 60000, (int)(ms / 1000) % 60, ms % 1000);
+            clearTimeText.text = "クリアタイム:" + timeStr;
+        }
+        //3:プレイヤの残機がなくなった or 敵拠点を全て壊された
+        else if (Record.resultID == 3)
+        {
+            //表示するテキストを設定
+            resultText.text = "Failed";
+            killText.text = "キル数:" + killCount.ToString();
+        }
     }
 }

@@ -96,8 +96,7 @@ public class MapController : MonoBehaviour, IPointerClickHandler
                 }
             }
             if (Input.GetMouseButtonUp(0)&& mouseHoldTime < 0.2f)
-            {
-                Debug.Log("Clicked "+ Input.mousePosition.ToString());
+            {                
                 
             }
         }
@@ -120,6 +119,8 @@ public class MapController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left) return;
+        
         if (mouseHoldTime >= 0.2f) return;
         Vector2 curosr = new Vector2(0, 0);
 
@@ -153,9 +154,12 @@ public class MapController : MonoBehaviour, IPointerClickHandler
 
         if (Physics.Raycast(MapRay, out hit, Mathf.Infinity, whatIsTarget))
         {
-            //Debug.Log("miniMapHit: " + hit.point.ToString());
-            player.GetComponent<PlayerTeleport>().TeleportTo(hit.point);
-            SetVisible(false);
+            Debug.Log("miniMapHit: " + hit.collider.gameObject.name);
+            ShopController hitObj = hit.collider.gameObject.GetComponent<ShopController>();
+            if (hitObj != null) {
+                player.GetComponent<PlayerTeleport>().TeleportTo(hitObj.GetSpawnPoint());
+                SetVisible(false);
+            }            
         }
 
     }

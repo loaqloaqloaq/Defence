@@ -35,5 +35,11 @@ public class Pattern {
     public string[] pattern;
     public float genFreq;
     public float randomRange;
-    public int maxEnemy;    
+    public MaxEnemy[] maxEnemy;    
+}
+
+[Serializable]
+public class MaxEnemy {
+    public float timeLeftPresent;
+    public int maxEnemy;
 }

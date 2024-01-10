@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3578588381432519277
 MonoBehaviour:
@@ -44,3 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d20de68d9725e246afba533b5706877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerScript: {fileID: 0}
+  scrapUI: {fileID: 0}
+  playTime: 10
+  scrap: 0
+  killCount: 0
+  playerDamagedCount: 0
+  usedScrap: 0
+  timer: 0
+  rotateSpeed: 0.05
+  now_sky: {fileID: 2100000, guid: da04fb2a289ef1b47bf5b07b9285dd70, type: 2}

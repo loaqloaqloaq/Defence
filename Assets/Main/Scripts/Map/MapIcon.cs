@@ -30,7 +30,7 @@ public class MapIcon : MonoBehaviour
             miniMapIcon.worldCamera = eg.miniMapCam;
         }
 
-        notChara = transform.parent.name.StartsWith("Weapon")||transform.parent.name.StartsWith("Grenade")|| transform.parent.name.StartsWith("enemyBase") || transform.parent.name.StartsWith("Gate");
+        notChara = transform.parent.name.StartsWith("Weapon")||transform.parent.name.StartsWith("Grenade")|| transform.parent.name.StartsWith("enemyBase") || transform.parent.name.StartsWith("Gate") || transform.parent.name.StartsWith("Shop");
         
 
         normalScaleX = bigMapIcon.transform.localScale.x;

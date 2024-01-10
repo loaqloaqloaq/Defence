@@ -30,8 +30,11 @@ public class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] GameObject cannonBall;
     [SerializeField] public bool fireCannon;
 
+    private int index;
+
     void Start()
     {
+        index=EnemyGeneratorManager.Instance.UpdateGeneratorList(this.gameObject);
         //animatorを取得
         animator = GetComponent<Animator>();
         //初期値を設定
@@ -123,6 +126,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //大きさの設定
         exp.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
         //オブジェクトを消滅
+        EnemyGeneratorManager.Instance.UpdateGeneratorList(this.gameObject,index);
         Destroy(gameObject);
 
         return true;

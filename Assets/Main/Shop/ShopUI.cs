@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
 using Unity.VisualScripting;
 
 public class ShopUI : MonoBehaviour
@@ -27,6 +26,7 @@ public class ShopUI : MonoBehaviour
     private EventSystem eventSystem;
     [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject playerUI;
+    [SerializeField] private GameObject player;
     [SerializeField] private Button firstSelectedButton;
     [SerializeField] private TextMeshProUGUI guideText;
     [SerializeField] private TextMeshProUGUI errorMessage;
@@ -35,13 +35,15 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private GameObject shopListContent;
     [SerializeField] private TextMeshProUGUI scraps;   
    
-    [SerializeField] private SerializableKeyPair<string, Sprite>[] _imageList = default;
+    [SerializeField] private SerializableKeyPair<string, Sprite>[] _imageList = default;    
+    private Dictionary<string, Sprite> imageList => _imageList.ToDictionary(p => p.Key, p => p.Value);
 
-    private Dictionary<string, Sprite> _imageListDictionary;
-    private Dictionary<string, Sprite> imageList => _imageListDictionary ??= _imageList.ToDictionary(p => p.Key, p => p.Value);   
+    [SerializeField] private SerializableKeyPair<string, GameObject>[] _prefabList = default;
+    private Dictionary<string, GameObject> prefabList => _prefabList.ToDictionary(p => p.Key, p => p.Value);
 
     bool loadedItem;
     List<GameObject> buttons = new List<GameObject>();
+    int scarp;
 
     //Unity Action 
     public event Action openUI;
@@ -54,11 +56,12 @@ public class ShopUI : MonoBehaviour
         openUI += Enable;
         closeUI += Disable;
 
-        if(!guideText) guideText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        if (!player) player = GameObject.Find("Player");
+
+        if (!guideText) guideText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         if(!shopUI) shopUI = transform.GetChild(1).gameObject;
         if(!scraps) scraps = transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>();
-        if(!eventSystem) eventSystem = FindObjectOfType<EventSystem>();
-        scraps.text = String.Format("{0:000000}", GameManager.Instance.scrap);
+        if(!eventSystem) eventSystem = FindObjectOfType<EventSystem>();        
         if (errorMessage) errorMessage.text = "";
         guideText.enabled = false;
         shopUI.SetActive(false);
@@ -83,14 +86,21 @@ public class ShopUI : MonoBehaviour
             rectTransform.localPosition = new Vector3(x, y);
 
             Image icon = button.transform.GetChild(0).GetComponent<Image>();
-            string[] squareIconKey = { "ammo", "health" };
+            string[] highIconKey = { "ammo", "health", "grenade" };
             if (!imageList.ContainsKey(item.name)) icon.sprite = null;
             else {
                 icon.sprite = imageList[item.name];
-                float height = 50;
-                float width = imageList[item.name].rect.width*(height / imageList[item.name].rect.height);
-                if (squareIconKey.Contains(item.name)) icon.rectTransform.sizeDelta = new Vector2(width, height);
-                //Debug.Log(item.name + ": " + imageList[item.name].rect.width + " , "+imageList[item.name].rect.height);     
+                if (highIconKey.Contains(item.name))
+                {
+                    float height = 50;
+                    float width = imageList[item.name].rect.width * (height / imageList[item.name].rect.height);
+                    icon.rectTransform.sizeDelta = new Vector2(width, height);
+                }
+                else {
+                    float width = 150;
+                    float height = imageList[item.name].rect.height * (width / imageList[item.name].rect.width);                    
+                    icon.rectTransform.sizeDelta = new Vector2(width, height);
+                }
             }
             
             button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = item.name;
@@ -104,18 +114,6 @@ public class ShopUI : MonoBehaviour
                 x = 25;
             }
         }
-
-        //set button
-        for (int i = 0; i < buttons.Count; i++) {
-            Button b = buttons[i].GetComponent<Button>();
-            Navigation navigation = b.navigation;
-            navigation.mode = Navigation.Mode.Explicit;
-            if (i > 0) navigation.selectOnLeft = buttons[i - 1].GetComponent<Button>();
-            else navigation.selectOnLeft = buttons[i+5].GetComponent<Button>();
-            if (i > 5) navigation.selectOnLeft = buttons[i - 1].GetComponent<Button>();
-            else navigation.selectOnLeft = buttons[i - 5].GetComponent<Button>();
-        }
-       
 
         loadedItem = true;
     }
@@ -132,6 +130,8 @@ public class ShopUI : MonoBehaviour
             //”ƒ‚¤
             GameManager.Instance.DeductScrap(item.cost);
             scraps.text = String.Format("{0:000000}", GameManager.Instance.scrap);
+            IItem shopItem = prefabList[item.name].GetComponent<IItem>()??null;
+            if (shopItem != null) shopItem.Use(player);
         }
 
         //ŽÀ‘•’†
@@ -161,10 +161,21 @@ public class ShopUI : MonoBehaviour
     //UNIY Action
     public void OpenUI()
     {
+        scarp = GameManager.Instance.scrap;
+        scraps.text = String.Format("{0:000000}", scarp);
+        errorMessage.text = "";
         openUI();
     }
     public void CloseUI()
     {
         closeUI();
+    }
+
+    private void Update()
+    {
+        if (scarp != GameManager.Instance.scrap) {
+            scarp -=(int) ((scarp - GameManager.Instance.scrap) * 0.5f * Time.deltaTime);
+            scraps.text = String.Format("{0:000000}", scarp);
+        }
     }
 }

@@ -64,7 +64,7 @@ public class Enemy4Navigator : MonoBehaviour
                     animator.SetBool("left", false);
                 }
                 lastRotation = transform.localEulerAngles.y;
-                ec.agent.isStopped = false;
+                
                 if (routes == null) target = ec.target;
                 else
                 {
@@ -73,6 +73,8 @@ public class Enemy4Navigator : MonoBehaviour
                 }
 
                 Vector3 targetPos = Vector3.zero;
+                if (!ec.agent.enabled) ec.agent.enabled = true;
+                ec.agent.isStopped = false;
                 if (target.CompareTag("Player")) targetPos = target.position;
                 else targetPos = checkPoint;
                 ec.agent.destination = targetPos;

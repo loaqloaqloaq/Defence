@@ -22,10 +22,6 @@ public class TitleManager : MonoBehaviour
     //操作確認画面の表示状態
     bool explanation = false;
 
-    //SE
-    //[SerializeField] private AudioClip enterSE;
-    //[SerializeField] private AudioClip exitSE;
-
     void Start()
     {
         //デフォルトの不透明度を設定

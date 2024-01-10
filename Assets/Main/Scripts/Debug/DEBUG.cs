@@ -12,6 +12,7 @@ public class DEBUG : MonoBehaviour
     [SerializeField] bool escEnabled;
 
     [SerializeField] bool fireCannonEnabled;
+    [SerializeField][Range(1, 10)] float timeScale;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +33,8 @@ public class DEBUG : MonoBehaviour
             if (b != null) 
                 b.fireCannon = fireCannonEnabled;
         }
+
+        timeScale = 1;
 
     }
 
@@ -67,6 +70,8 @@ public class DEBUG : MonoBehaviour
         {
             GameManager.Instance.DeductScrap(9999);
         }
+
+        Time.timeScale = timeScale;
 
 
 

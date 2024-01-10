@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5133163499696771065}
   - component: {fileID: 1442222546943776965}
+  - component: {fileID: 5829751208796661597}
   m_Layer: 0
   m_Name: EnemyLoader
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1442222546943776965
 MonoBehaviour:
@@ -50,23 +51,130 @@ MonoBehaviour:
       hp: 0
       moveSpeed: 0
       atk: 0
+      AttackDuration: 0
+      AttackStop: 0
+      AttackRadius: 0
+      reward: 0
       drop:
         ammo: 0
         health: 0
+      resist:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+      weakness:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
     Enemy2:
       hp: 0
       moveSpeed: 0
       atk: 0
+      AttackDuration: 0
+      AttackStop: 0
+      AttackRadius: 0
+      reward: 0
       drop:
         ammo: 0
         health: 0
+      resist:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+      weakness:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
     Enemy3:
       hp: 0
       moveSpeed: 0
       atk: 0
+      AttackDuration: 0
+      AttackStop: 0
+      AttackRadius: 0
+      reward: 0
       drop:
         ammo: 0
         health: 0
+      resist:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+      weakness:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+    Enemy4:
+      hp: 0
+      moveSpeed: 0
+      atk: 0
+      AttackDuration: 0
+      AttackStop: 0
+      AttackRadius: 0
+      reward: 0
+      drop:
+        ammo: 0
+        health: 0
+      resist:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+      weakness:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+    Enemy5:
+      hp: 0
+      moveSpeed: 0
+      atk: 0
+      AttackDuration: 0
+      AttackStop: 0
+      AttackRadius: 0
+      reward: 0
+      drop:
+        ammo: 0
+        health: 0
+      resist:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+      weakness:
+        fire: 0
+        common: 0
+        explode: 0
+        persent: 0
+  miniMapCam: {fileID: 0}
+  mapCam: {fileID: 0}
   explosion: {fileID: 2532972853072531924, guid: b40f4969cc5dc9c41adb34150b3c46f3, type: 3}
+  enemyCnt: 0
   ammoPack: {fileID: 4549580422657515402, guid: f4a4eef7b95967d47a00839a556d17d3, type: 3}
   healthPack: {fileID: 3692371945894827175, guid: d68017b376389f44b9bcaa994555c022, type: 3}
+  player: {fileID: 0}
+  gate: {fileID: 0}
+  gc: {fileID: 0}
+  ts: []
+--- !u!114 &5829751208796661597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814670879726100184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f6edacd17ff014448d8ad2238fc327f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generators: []
+  enemy: {fileID: 3450743282065595222, guid: 94f434d33a7ce9447a540b6603d0a859, type: 3}
+  PatternJsonFile: {fileID: 4900000, guid: c48560d8b90d6d347b2a615993db19f1, type: 3}
+  maxEnemy: 0

@@ -11,12 +11,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] ScrapUI scrapUI;
     [SerializeField] float playTime;
     [SerializeField] public int scrap;
-
     public int killCount;
-    public float playerDamagedCount;
+    public int playerDamagedCount;
     public int usedScrap;
-
     public float timer;
+
+    //スカイボックスを回転させる
+    [Range(0.01f, 0.1f)]
+    public float rotateSpeed;
+    public Material now_sky;
+    //public Material skybox_Night;
+    private float rotationRepeatValue;
+    //private float maxtime;
+
 
     public static GameManager Instance
     {        
@@ -43,21 +50,27 @@ public class GameManager : MonoBehaviour
         killCount = 0;
         playerDamagedCount = 0;
         usedScrap = 0;
+        //maxtime = timer;
     }
     private void Update()
     {
 
         if (timer <= 0)
         {
-            Record.result = "Failed";
+            Debug.Log("勝利");
+            Record.resultID = 1;
             ToResultScene();
         }
         else TimerUpdate();
+
+        SkyRotation();
     }
 
     void TimerUpdate() {
         timer -= Time.deltaTime;
-        if(timerScript) timerScript.setTimerString(timer);
+        EnemyGeneratorManager.Instance.ChangeMaxEnemy(timer / (playTime * 60));
+        PlayerPrefs.SetFloat("timer", playTime * 60 - timer);
+        if (timerScript) timerScript.setTimerString(timer);
     }
     public void EndGame()
     {
@@ -71,8 +84,8 @@ public class GameManager : MonoBehaviour
     public void ToResultScene()
     {
         PlayerPrefs.SetInt("killCount",killCount);
+        PlayerPrefs.SetInt("playerDamagedCount", playerDamagedCount);
         PlayerPrefs.SetInt("usedScrap", usedScrap);
-        PlayerPrefs.SetFloat("playerDamagedCount", playerDamagedCount);
         SceneManager.LoadScene("Result");
     }
 
@@ -100,6 +113,19 @@ public class GameManager : MonoBehaviour
         if (scrap <= 0) scrap = 0;
         if (scrapUI) scrapUI.SetScrapText();
         usedScrap += amount;
+    }
+    private void SkyRotation()
+    {
+        rotationRepeatValue = Mathf.Repeat(now_sky.GetFloat("_Rotation") + rotateSpeed, 360f);
+
+        now_sky.SetFloat("_Rotation", rotationRepeatValue);
+
+        //SkyBoxを切り替える
+        //if (timer / maxtime < 0.5)
+        //{
+        //    RenderSettings.skybox = skybox_Night;
+        //    now_sky = skybox_Night;
+        //}
     }
 }
 

@@ -26,7 +26,7 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
 
     public Transform target;
     public Transform gate, player;
-    GameObject explosion;
+    [SerializeField]GameObject explosion;
     Dictionary<string, GameObject> dropPrefab = new Dictionary<string, GameObject>();
 
     float checkFeq, lastCheck;
@@ -137,6 +137,7 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
             if (destoryTimer >= destoryTime)
             {
                 Attack();
+                transform.parent.GetComponent<EnemyController>().dead();
             }
         }
         else
@@ -246,13 +247,13 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
         }
         return true;
     }
-    private void Dead()
+    private void Dead(bool drop = true)
     {
         foreach (Collider c in colliders)
         {
             c.enabled = false;
         }
-        Drop();
+        if(drop) Drop();
         animator.SetTrigger("die");
         GameManager.Instance.AddScrap(reward);
         //GetComponent<Rigidbody>().isKinematic = true;
@@ -280,7 +281,7 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
         if (explosion != null)
         {            
             var pos = transform.position;
-            pos.y = 1f;
+            pos.y += 0.5f;
             var exp = Instantiate(explosion, pos, transform.rotation);
             float scale = 0.75f * expRadius;
             exp.transform.localScale = new Vector3(scale, scale, scale);
@@ -288,8 +289,7 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
 
             DamageMessage dm = new DamageMessage();
             dm.damager = gameObject;
-
-            pos.y = 0;
+            
             Collider[] hitColliders = Physics.OverlapSphere(pos, expRadius);
             foreach (var hitCollider in hitColliders)
             {
@@ -309,8 +309,7 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
 #if UNITY_EDITOR //攻撃範囲デバッグ
     private void OnDrawGizmosSelected()
     {
-        var pos = transform.position;
-        pos.y = 0;
+        var pos = transform.position;        
         Gizmos.color = new Color(1f, 0f, 0f, 0.15f);
         Gizmos.DrawSphere(pos, expRadius);      
      }
