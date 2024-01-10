@@ -6,7 +6,7 @@ using UnityEngine;
 public class Mine : MonoBehaviour
 {
     //地雷の攻撃力
-    [SerializeField] private int   mine_Damage;
+    [SerializeField] private int mine_Damage;
     //ダメージ発生カウント
     private float damage_countDown;
     //消滅する時間
@@ -19,10 +19,10 @@ public class Mine : MonoBehaviour
     void Start()
     {
         //初期値を設定
-        //mine_Damage = 500;       //ダメージ
         damage_countDown = 0.0f; //ダメージ発生カウント
         destroy_Time = 20.0f;    //消滅する時間
-        contact = false;         //接触しない
+        //接触していない
+        contact = false;         
     }
 
     void Update()
@@ -63,7 +63,6 @@ public class Mine : MonoBehaviour
                 damageMessage.amount = mine_Damage;
                 damageMessage.hitPoint = collision.transform.position;
                 damageMessage.hitNormal = collision.transform.position - transform.position;
-
                 damageable.ApplyDamage(damageMessage);
             }
         }

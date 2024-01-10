@@ -1,4 +1,3 @@
-using Palmmedia.ReportGenerator.Core;
 using System;
 using TMPro;
 using UnityEngine;
@@ -26,17 +25,12 @@ public class EnemyBase : MonoBehaviour, IDamageable
     //–C’e”­Ë•p“x
     private float fireTime = 0f;
     private float fireDelay = 10.0f;
-
     //–C’e
     [SerializeField] GameObject cannonBall;
     [SerializeField] public bool fireCannon;
-    EnemyGenerator generator;
-
-    private int index;
 
     void Start()
     {
-        generator = transform.Find("Enemy Generator").GetComponent<EnemyGenerator>();        
         //animator‚ğæ“¾
         animator = GetComponent<Animator>();
         //‰Šú’l‚ğİ’è
@@ -46,9 +40,6 @@ public class EnemyBase : MonoBehaviour, IDamageable
         HP = MaxHP;
         //HP•\¦İ’è
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
-        //UŒ‚‚ÌŠÔ‚ÌƒJƒEƒ“ƒg
-        //firingCount = 0.0f;
-
         //ƒ_ƒ[ƒW‚ğó‚¯‚Ä‚¢‚È‚¢‚ğİ’è
         applydamage = false;
         healTime = 0.0f;
@@ -170,12 +161,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
         GameObject shellfiring = Instantiate(explosion, firPos, Quaternion.identity);
         //‘å‚«‚³‚Ìİ’è
         shellfiring.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
-
         //’eŠÛ‚ÌˆÊ’u‚ğİ’è
         cannonBall.transform.position = shellfiring.transform.position;
         //–C’e¶¬
         var cb = Instantiate(cannonBall);
-        //–C’e”­ËƒJƒEƒ“ƒg‚ğƒŠƒZƒbƒg
-        //firingCount = 0.0f;
     }
 }

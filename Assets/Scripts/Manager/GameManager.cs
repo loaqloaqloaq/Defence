@@ -20,9 +20,7 @@ public class GameManager : MonoBehaviour
     [Range(0.01f, 0.1f)]
     public float rotateSpeed;
     public Material now_sky;
-    //public Material skybox_Night;
     private float rotationRepeatValue;
-    //private float maxtime;
 
 
     public static GameManager Instance
@@ -50,7 +48,6 @@ public class GameManager : MonoBehaviour
         killCount = 0;
         playerDamagedCount = 0;
         usedScrap = 0;
-        //maxtime = timer;
     }
     private void Update()
     {
@@ -87,13 +84,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("usedScrap", usedScrap);
         SceneManager.LoadScene("Result");
     }
-
-    //タイトルシーンに移る
-    public void ReturnToTitle()
-    {
-        //SceneManager.LoadScene("Title");
-    }
-
+    
     //ゲームシーンをRestart
     public void Restart()
     {
@@ -118,16 +109,8 @@ public class GameManager : MonoBehaviour
         rotationRepeatValue = Mathf.Repeat(now_sky.GetFloat("_Rotation") + rotateSpeed, 360f);
 
         now_sky.SetFloat("_Rotation", rotationRepeatValue);
-
-        //SkyBoxを切り替える
-        //if (timer / maxtime < 0.5)
-        //{
-        //    RenderSettings.skybox = skybox_Night;
-        //    now_sky = skybox_Night;
-        //}
     }
 }
-
 
 [Serializable]
 public class SerializableKeyPair<TKey, TValue>

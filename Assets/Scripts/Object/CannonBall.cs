@@ -23,8 +23,6 @@ public class CannonBall : MonoBehaviour
     [SerializeField] private Collider cannonBall_Collider;
     //砲弾の落下地点マーカー
     [SerializeField] private GameObject marker;
-    //マーカー削除用
-    //private GameObject mark;
     //落下地点取得用座標
     private Vector3 fallpoint;
     //最初に落ちた瞬間
@@ -50,7 +48,6 @@ public class CannonBall : MonoBehaviour
     {
         //砲弾の行動
         Move();
-        //落下ポイントにマーカーを表示
     }
 
     //砲弾の行動
@@ -68,7 +65,7 @@ public class CannonBall : MonoBehaviour
             this.transform.position = cannonBall_Pos;
             //落下地点をプレイヤーの位置に設定
             firstfall = true;
-
+            //落下ポイントにマーカーを表示
             FallpointMarker();
         }
 
@@ -86,16 +83,6 @@ public class CannonBall : MonoBehaviour
     public void FallpointMarker()
     {
         fallpoint = player.transform.position;
-        //落下ポイントにマーカーを生成
-        //mark = Instantiate(marker, fallpoint, Quaternion.identity);
-           
-        //大きさの設定
-        //mark.transform.localScale = new Vector3(2.5f, 0.001f, 2.5f);
-        //落下開始時
-        if (firstfall == true)
-        {
-
-        }
     }
 
     //爆発 (接触)が起きた時の処理
@@ -128,7 +115,6 @@ public class CannonBall : MonoBehaviour
             damageMessage.amount = cannonBall_Damage;
             damageMessage.hitPoint = collision.transform.position;
             damageMessage.hitNormal = collision.transform.position - transform.position;
-
             player.GetComponent<PlayerHealth>().ApplyDamage(damageMessage);
         }
         //爆発を発生させる

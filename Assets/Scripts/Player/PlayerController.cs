@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         else
         {
             Record.resultID = 3;
-            GameManager.Instance?.ToResultScene();
+            Invoke("toResult", 5); //5秒後にリザルトシーンへ移行
         }
     }
 
@@ -94,6 +94,12 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         gameObject.SetActive(true); //OnEnable呼出
 
         UIManager.Instance?.SetMouseVisible(false);
+    }
+
+    //リザルトシーンへ移行
+    private void toResult()
+    {
+        GameManager.Instance?.ToResultScene();
     }
 
     //アイテムとの衝突処理
