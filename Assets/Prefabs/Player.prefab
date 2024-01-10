@@ -1135,7 +1135,7 @@ MonoBehaviour:
   yAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 175
+    m_MaxSpeed: 150
     m_AccelTime: 0.02
     m_DecelTime: 0.02
     m_InputAxisName: Mouse Y
