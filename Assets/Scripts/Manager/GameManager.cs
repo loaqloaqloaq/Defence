@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public enum InputDevice{
+        KEYBOARD,GAMEPAD
+    };
+    public InputDevice lastInputDevice;
     //Singleton       
     private static GameManager instance;
 
@@ -21,6 +26,8 @@ public class GameManager : MonoBehaviour
     public float rotateSpeed;
     public Material now_sky;
     private float rotationRepeatValue;
+    //private float maxtime;
+    List<string> GamePadKey=new List<string>();
 
 
     public static GameManager Instance
@@ -30,6 +37,21 @@ public class GameManager : MonoBehaviour
             if (instance == null) instance = FindObjectOfType<GameManager>();
 
             return instance;
+        }
+    }
+    public static InputDevice LastInputDevice
+    {
+        get
+        {   
+            return Instance.lastInputDevice;
+        }
+    }
+
+    public static bool IsNight
+    {
+        get
+        {
+            return FindObjectOfType<SunController>().isNight;
         }
     }
 
@@ -48,6 +70,10 @@ public class GameManager : MonoBehaviour
         killCount = 0;
         playerDamagedCount = 0;
         usedScrap = 0;
+        //maxtime = timer;
+
+        lastInputDevice = InputDevice.KEYBOARD; 
+        
     }
     private void Update()
     {
@@ -60,6 +86,17 @@ public class GameManager : MonoBehaviour
         else TimerUpdate();
 
         SkyRotation();
+
+        //入力デバイス
+        if (Input.anyKeyDown)
+        {
+             if(Input.inputString=="" && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1)) lastInputDevice = InputDevice.GAMEPAD;
+             else lastInputDevice = InputDevice.KEYBOARD;
+
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
+                lastInputDevice = InputDevice.GAMEPAD;
+            }
+        }
     }
 
     void TimerUpdate() {
