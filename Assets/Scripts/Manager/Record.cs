@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Tracing;
-
-static public class Record 
+﻿static public class Record 
 {
     //プレイ中に点数とかかわるすべてをこのクラスに追加
     static public int score;
