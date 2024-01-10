@@ -28,7 +28,7 @@ public class EnemyGenerator : MonoBehaviour
 
     public void OnDestroy()
     {
-        EnemyGeneratorManager.Instance.UpdateGeneratorList(gameObject, index);
+        if(EnemyGeneratorManager.Instance) EnemyGeneratorManager.Instance.UpdateGeneratorList(gameObject, index);
     }
 
 }

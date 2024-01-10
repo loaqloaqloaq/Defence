@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
              if(Input.inputString=="" && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1)) lastInputDevice = InputDevice.GAMEPAD;
              else lastInputDevice = InputDevice.KEYBOARD;
 
-            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) {
+            if ( (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && !(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) )) {
                 lastInputDevice = InputDevice.GAMEPAD;
             }
         }

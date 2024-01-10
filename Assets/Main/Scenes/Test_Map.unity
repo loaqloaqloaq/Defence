@@ -1351,6 +1351,30 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 218.7
       objectReference: {fileID: 0}
+    - target: {fileID: 1960332924043655809, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: m_Color.b
+      value: 0.11792451
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960332924043655809, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: m_Color.g
+      value: 0.11792451
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960332924043655809, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683030004846278478, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: m_Color.b
+      value: 0.11792451
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683030004846278478, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: m_Color.g
+      value: 0.11792451
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683030004846278478, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3827091939085343905, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
       propertyPath: m_SizeDelta.x
       value: 218.7
@@ -2552,6 +2576,14 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2492722083025438693, guid: 0fb7f290798f2a843a6e310c52fd095b, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2761153240042724416, guid: 0fb7f290798f2a843a6e310c52fd095b, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5458706777332017555, guid: 0fb7f290798f2a843a6e310c52fd095b, type: 3}
       propertyPath: m_Name
       value: Map
@@ -2599,6 +2631,10 @@ PrefabInstance:
     - target: {fileID: 5622283044463992280, guid: 0fb7f290798f2a843a6e310c52fd095b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5756850201032796582, guid: 0fb7f290798f2a843a6e310c52fd095b, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3253,7 +3289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1861849416
 Transform:
   m_ObjectHideFlags: 0
