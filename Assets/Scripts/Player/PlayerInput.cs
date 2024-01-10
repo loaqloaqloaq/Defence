@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -31,6 +32,41 @@ public class PlayerInput : MonoBehaviour
     public bool Alpha4 { get; private set; }
 
     public bool Minimap { get; private set; }
+    public bool controllerConnected { get; private set; }
+    IEnumerator CheckForControllers()
+    {
+        while (true)
+        {
+            string[] controllers = Input.GetJoystickNames();
+
+            int length = 0;
+
+            foreach (string controller in controllers)@
+            {
+                if (controller.Length > 0)@++length;
+            }
+
+            if (!controllerConnected && length > 0)
+            {
+                controllerConnected = true;
+                Debug.Log("Connected");
+
+            }
+            else if (controllerConnected && length == 0)
+            {
+                controllerConnected = false;
+                Debug.Log("Disconnected");
+            }
+
+
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    void Awake()
+    {
+        StartCoroutine(CheckForControllers());
+    }
 
     // Update is called once per frame
     void Update()

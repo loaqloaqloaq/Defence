@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -19,36 +18,59 @@ public class SettingManager : MonoBehaviour
     }
     private static SettingManager instance;
 
-    public TMP_Dropdown resolutionDropdown;
     //フルスクリーンボタン
     public Toggle fullScreenBtn;
-    //解像度リスト
-    List<Resolution> resolutions = new List<Resolution>();
-    FullScreenMode screenMode;
-    
-    private int resolutionNum;
     
     [SerializeField] Slider bgmSlider;
     [SerializeField] Slider sfxSlider;
-    [SerializeField] Slider xAxisSlider;
-    [SerializeField] Slider yAxisSlider;
+    [SerializeField] Slider msSensitivitySlider;
 
     //Volume, Camera Speed 
     private float musicVolume;
     private float sfxVolume;
-    private float xAxis;
-    private float yAxis;
+    [SerializeField] private float xAxis;
+    [SerializeField] private float yAxis;
 
     //カメラ設定の最大・最小値
-    private const float minXAxis = 150.0f;
-    private const float maxXAxis = 450.0f;
-    private const float minYAxis = 150.0f;
-    private const float maxYAxis = 450.0f;
+    private const float minXAxis = 100.0f;
+    private const float maxXAxis = 500.0f;
+    private const float minYAxis = 100.0f;
+    private const float maxYAxis = 250.0f;
+
+    [SerializeField] private TextMeshProUGUI msSliderValueText;
+    [SerializeField] private TextMeshProUGUI bgmSliderValueText;
+    [SerializeField] private TextMeshProUGUI sfxSliderValueText;
+
+    private void Awake()
+    {
+        msSensitivitySlider.onValueChanged.AddListener(UpdateSensitivtyValueText);
+        msSensitivitySlider.onValueChanged.AddListener(SetCameraXAxis);
+        msSensitivitySlider.onValueChanged.AddListener(SetCameraYAxis);
+
+        bgmSlider.onValueChanged.AddListener(SetMusicVolume);
+        bgmSlider.onValueChanged.AddListener(UpdateBGMValueText);
+        sfxSlider.onValueChanged.AddListener(SetSfxVolume);
+        sfxSlider.onValueChanged.AddListener(UpdateSFXValueText);
+    }
+
+    private void UpdateSensitivtyValueText(float value)
+    {
+        msSliderValueText.text = (value * 100.0f).ToString("F0"); 
+    }
+    private void UpdateBGMValueText(float value)
+    {
+        bgmSliderValueText.text = (value * 100.0f).ToString("F0");
+    }
+    private void UpdateSFXValueText(float value)
+    {
+        sfxSliderValueText.text = (value * 100.0f).ToString("F0");
+    }
 
     void Start()
     {
         InitSetting();
     }
+
 
     //Set BGM, Sfx volume
     public void SetMusicVolume(float volume)
@@ -72,28 +94,19 @@ public class SettingManager : MonoBehaviour
         yAxis = minYAxis + (maxYAxis - minYAxis) * y;
     }
 
-    //UI 
-    public void ResolutuinDropboxOptionChange(int index)
-    {
-        resolutionNum = index;
-    }
-
+  
     //確認ボタン
     public void OKButtonClicked()
     {
-        //var data = DataManager.Instance.data;
-        //解像度
-        /*
-        Screen.SetResolution(resolutions[resolutionNum].width,
-            resolutions[resolutionNum].height,
-            screenMode);
-        */
+        var data = DataManager.Instance.data;
+
         //カメラセッティング
         SetPlayerCameraAxis();
-        //data.SetCameraSetting(xAxis, yAxis);
-        //data.SetVolumeSetting(musicVolume, sfxVolume);
 
-        //DataManager.Instance.SaveGameData();
+        data.SetCameraSetting(xAxis, yAxis);
+        data.SetVolumeSetting(musicVolume, sfxVolume);
+
+        DataManager.Instance.SaveGameData();
     }
 
     //キャラクタのカメラ速度設定
@@ -102,58 +115,21 @@ public class SettingManager : MonoBehaviour
         var charAim = FindObjectOfType<PlayerAiming>();
         if (charAim)
         {
-            charAim.xAxis.m_MaxSpeed = xAxis;
-            charAim.yAxis.m_MaxSpeed = yAxis;
+            charAim.SetAxisSpeed(xAxis, yAxis);
         }
-    }
-
-    public void FullScreenBtn(bool isFull)
-    {
-        screenMode = isFull ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
     }
 
     //初期化
     private void InitSetting()
     {
-        for (int i = 0; i < Screen.resolutions.Length; i++)
-        {
-            resolutions.Add(Screen.resolutions[i]);
-            /*
-            if (Screen.resolutions[i].refreshRate == 60)
-            {
-                //
-            }
-            */
-        }
-        resolutionDropdown.options.Clear();
-
-        //解像度ドロップダウンのオプション初期化
-        int optionNum = 0;
-        foreach (var resolution in resolutions)
-        {
-            TMP_Dropdown.OptionData option = new TMP_Dropdown.OptionData();
-            option.text = resolution.width + " x " + resolution.height + " " + resolution.refreshRateRatio + "";
-            resolutionDropdown.options.Add(option);
-
-            if (resolution.width == Screen.width && resolution.height == Screen.height)
-            {
-                resolutionDropdown.value = optionNum;
-            }
-            ++optionNum;
-        }
-        resolutionDropdown.RefreshShownValue();
-        fullScreenBtn.isOn = Screen.fullScreenMode.Equals(FullScreenMode.FullScreenWindow) ? true : false;
-
-        //LoadSettings();
+        LoadSettings();
     }
 
     //PCに保存されている既存の設定値をロードする　
     public void LoadSettings() 
     {
-        //temp
-        return;
         //データマネージャーからロード
-        //DataManager.Instance?.LoadGameData();
+        DataManager.Instance?.LoadGameData();
         var data = DataManager.Instance.data;
         //無ければロードしない
         if (data == null)
@@ -163,16 +139,18 @@ public class SettingManager : MonoBehaviour
 
         //Camera
         xAxis = data.data[(int)Data.dataType.xAxis];
-        yAxis = data.data[(int)Data.dataType.xAxis];
+        yAxis = data.data[(int)Data.dataType.yAxis];
         SetPlayerCameraAxis();
-        xAxisSlider.value = (xAxis - minXAxis) / (maxXAxis - minXAxis);
-        yAxisSlider.value = (yAxis - minYAxis) / (maxYAxis - minYAxis);
+        msSensitivitySlider.value = (xAxis - minXAxis) / (maxXAxis - minXAxis);
+        UpdateSensitivtyValueText(msSensitivitySlider.value);
 
         //Volume
         musicVolume = data.data[(int)Data.dataType.musicVolume];
         sfxVolume = data.data[(int)Data.dataType.sfxVolume];
         SetMusicVolume(musicVolume);
         SetSfxVolume(sfxVolume);
+        UpdateBGMValueText(bgmSlider.value);
+        UpdateSFXValueText(sfxSlider.value);
         bgmSlider.value = musicVolume;
         sfxSlider.value = sfxVolume;
     }
