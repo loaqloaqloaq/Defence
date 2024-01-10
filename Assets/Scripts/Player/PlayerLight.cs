@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerLight : MonoBehaviour
 {
     [SerializeField] GameObject light;
+    [SerializeField] Transform CameraLookAt;
     bool lightOn;
     // Start is called before the first frame update
     void Start()
     {
-        light = transform.Find("light").gameObject;
+        if(light == null)light = transform.Find("light").gameObject;
         lightOn = false;
         light.SetActive(lightOn);
     }
@@ -21,6 +22,9 @@ public class PlayerLight : MonoBehaviour
         {
             lightOn = !lightOn;
             light.SetActive(lightOn);
+        }
+        if (lightOn && CameraLookAt) { 
+            light.transform.localEulerAngles= CameraLookAt.localEulerAngles;
         }
     }
 }
