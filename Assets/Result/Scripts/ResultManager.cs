@@ -27,6 +27,10 @@ public class ResultManager : MonoBehaviour
     //クリアタイム
     [SerializeField] private TextMeshProUGUI clearTimeText;
     private float clearTime;
+    //YouWin背景
+    [SerializeField] private GameObject youWin_BG;
+    //YouLose背景
+    [SerializeField] private GameObject youLose_BG;
 
     //今、選択しているボタン
     private GameObject nowSelectButton;
@@ -130,8 +134,10 @@ public class ResultManager : MonoBehaviour
         //1:自分の拠点を守り切ってクリア
         if (Record.resultID == 1)
         {
+            //YouWinの時の背景を表示
+            youWin_BG.SetActive(true);
             //表示するテキストを設定
-            resultText.text = "Clear!!!!!";
+            resultText.text = "YouWin!!!!!";
             killText.text = "キル数:" + killCount.ToString();
             takenDamageText.text = "受けたダメージ量:" + takenDamage.ToString();
             scrapText.text = "使ったスクラップの数:" + usedScrapCount.ToString();
@@ -139,21 +145,25 @@ public class ResultManager : MonoBehaviour
         //2:敵拠点を壊し切ってクリア
         else if (Record.resultID == 2)
         {
+            //YouWinの時の背景を表示
+            youWin_BG.SetActive(true);
             //表示するテキストを設定
-            resultText.text = "Clear!!!!!";
+            resultText.text = "YouWin!!!!!";
             killText.text = "キル数:" + killCount.ToString();
             takenDamageText.text = "受けたダメージ量:" + takenDamage.ToString();
 
             //クリアタイム
             float ms = clearTime * 1000;
-            string timeStr = String.Format("{0:00}:{1:00}:{2:000}", (int)ms / 60000, (int)(ms / 1000) % 60, ms % 1000);
+            string timeStr = String.Format("{0:0}:{1:00}:{2:000}", (int)ms / 6000, (int)(ms / 1000) % 60, ms % 1000);
             clearTimeText.text = "クリアタイム:" + timeStr;
         }
-        //3:プレイヤの残機がなくなった or 敵拠点を全て壊された
+        //3:プレイヤの残機がなくなって負け or 拠点を全て壊されて負け
         else if (Record.resultID == 3)
         {
+            //YouLoseの時の背景を表示
+            youLose_BG.SetActive(true);
             //表示するテキストを設定
-            resultText.text = "Failed";
+            resultText.text = "YouLose";
             killText.text = "キル数:" + killCount.ToString();
         }
     }
