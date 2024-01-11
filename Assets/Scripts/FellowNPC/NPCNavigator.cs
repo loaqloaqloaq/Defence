@@ -17,7 +17,7 @@ public class NPCNavigator : MonoBehaviour
     Animator animator;
     ParticleSystem[] pss;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //コンポーネントを読み込む
         npcController=GetComponent<FellowNPC>();
@@ -31,7 +31,7 @@ public class NPCNavigator : MonoBehaviour
         //チェックポイントをセット
         currentPoint = 0;        
         checkpoint = checkpoints[currentPoint];
-        agent.destination = checkpoint.position;
+        agent.destination = checkpoint.GetComponent<Checkpoint>().GetPos();
         //テレポートエフェクト
         if (teleportEffect == null) teleportEffect = transform.Find("TeleportEffect").gameObject;
         pss = teleportEffect.GetComponentsInChildren<ParticleSystem>();       
@@ -71,39 +71,53 @@ public class NPCNavigator : MonoBehaviour
     float DisToCheckPoint() {
         var chkpt = checkpoint.position;
         var npcpt = transform.position;
-        chkpt.y = npcpt.y = 0;
+        chkpt.y = npcpt.y;
         return Vector3.Distance(chkpt, npcpt);
     }
     //次のチェックポイントをセット
     void NextCheckPoint() {
         currentPoint = (currentPoint + 1) % checkpoints.Length;
         checkpoint = checkpoints[currentPoint];
-        agent.destination = checkpoint.position;
-    }
-    //次のエリアへテレポート
-    public void TeleportToNextRoute(int area) {
+        agent.destination = checkpoint.GetComponent<Checkpoint>().GetPos();
+    }    
+    //エリアへテレポート
+    public void TeleportToRoute(int area,bool playEffect=true) {
+        if (routes == null) routes = GameObject.Find("NPCRoutes").transform;
         if (area >= routes.childCount)
         {
-            Debug.LogWarning($"route ${area} not exist");//ルート見つからない時LOGに書く
+            Debug.Log($"route {area} not exist");//ルート見つからない時LOGに書く
             return; //テレポート中止
         }
-        agent.isStopped = true;
-        agent.enabled = false;//テレポート中は移動しない
-        currentRoute = area;//次のルートをセット        
-        PlayEffect();//エフェクト再生
-        Invoke("Teleport", 2.5f);
-    }
-    public void Teleport()
-    {           
+        Debug.Log($"NPC start teleporting to area {area}");
         //チェックポイントリスト更新
+        currentRoute = area;//次のルートをセット        
         route = routes.GetChild(currentRoute);
         checkpoints = Array.FindAll(route.GetComponentsInChildren<Transform>(), child => child != route.transform);
         //目的地リセット
         currentPoint = 0;
-        checkpoint = checkpoints[currentPoint];       
+        checkpoint = checkpoints[currentPoint];
+        Debug.Log(checkpoint.position.ToString());
+        //テレポート中は移動しない 
+        agent.isStopped = true;
+        agent.enabled = false;
+        
+        if (playEffect)
+        {
+            PlayEffect();//エフェクト再生
+            Invoke("Teleport", 2.5f);
+        }
+        else {
+            Invoke("Teleport", 0.1f);
+        }
+    }
+    public void Teleport()
+    {          
         transform.position = checkpoint.position;
-        agent.enabled = true;
-        agent.isStopped = false;
+        if (agent)
+        {
+            agent.enabled = true;
+            agent.isStopped = false;
+        }
     }
 
         //テレポートエフェクト

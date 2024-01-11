@@ -92,7 +92,7 @@ public class EnemyBase_Manager : MonoBehaviour
     void NPCTeleport(GameObject[] NPCs,int area) {
         foreach(var NPC in NPCs) {
             var nav=NPC.GetComponent<NPCNavigator>();
-            nav.TeleportToNextRoute(area);
+            nav.TeleportToRoute(area);
         }
     }
     void PlayerMove()

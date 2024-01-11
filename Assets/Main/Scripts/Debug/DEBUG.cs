@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class DEBUG : MonoBehaviour
 {
@@ -70,8 +71,18 @@ public class DEBUG : MonoBehaviour
         {
             GameManager.Instance.DeductScrap(9999);
         }
-        if (Input.GetKeyDown(KeyCode.F1)) Time.timeScale = ++timeScale;
-        if (Input.GetKeyDown(KeyCode.F2)) Time.timeScale = --timeScale;
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            timeScale = Time.timeScale;
+            --timeScale;
+            Time.timeScale = timeScale;
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            timeScale = Time.timeScale;
+            ++timeScale;
+            Time.timeScale = timeScale;
+        }
 
 
 

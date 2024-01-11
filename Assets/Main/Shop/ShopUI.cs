@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class ShopUI : MonoBehaviour
 {
@@ -33,8 +34,10 @@ public class ShopUI : MonoBehaviour
 
     [SerializeField] private GameObject Button_ShopItem;
     [SerializeField] private GameObject shopListContent;
-    [SerializeField] private TextMeshProUGUI scraps;   
-   
+    [SerializeField] private TextMeshProUGUI scraps;
+
+    [SerializeField] private GameObject npc;
+
     [SerializeField] private SerializableKeyPair<string, Sprite>[] _imageList = default;    
     private Dictionary<string, Sprite> imageList => _imageList.ToDictionary(p => p.Key, p => p.Value);
 
@@ -70,7 +73,7 @@ public class ShopUI : MonoBehaviour
         loadedItem = false;
     }   
     
-    public void SetGudieText(bool en) {
+    public void SetGuideText(bool en) {
         guideText.enabled = en;
     }
 
@@ -86,7 +89,7 @@ public class ShopUI : MonoBehaviour
             rectTransform.localPosition = new Vector3(x, y);
 
             Image icon = button.transform.GetChild(0).GetComponent<Image>();
-            string[] highIconKey = { "ammo", "health", "grenade" };
+            string[] highIconKey = { "ammo", "health", "grenade", "allies" };
             if (!imageList.ContainsKey(item.name)) icon.sprite = null;
             else {
                 icon.sprite = imageList[item.name];
@@ -128,15 +131,34 @@ public class ShopUI : MonoBehaviour
         else {
             errorMessage.text = "";
             //”ƒ‚¤
-            GameManager.Instance.DeductScrap(item.cost);
+            GameManager.Instance.DeductScrap(item.cost);  
+            if (prefabList.ContainsKey(item.name)) prefabList[item.name].GetComponent<IItem>().Use(player);
+            else {
+                switch (item.name) {
+                    case "allies":
+                        if(!BuyAllies()) GameManager.Instance.AddScrap(item.cost);
+                        break;
+                    default:
+                        errorMessage.text = "ITEM NOT FOUND!";
+                        GameManager.Instance.AddScrap(item.cost);
+                        break;
+                }
+            }
             scraps.text = String.Format("{0:000000}", GameManager.Instance.scrap);
-            IItem shopItem = prefabList[item.name].GetComponent<IItem>()??null;
-            if (shopItem != null) shopItem.Use(player);
-        }
-
-        //ŽÀ‘•’†
+        }        
     }
+    private bool BuyAllies() {
+        if (GameManager.Instance.isNPCFull()) {
+            errorMessage.text = "CANNOT BUY MORE ALLIES";
+            return false;
+        }
+        GameObject allies = Instantiate(npc);
+        allies.transform.parent = GameObject.Find("NPCPool").transform;       
+        allies.GetComponent<NPCNavigator>().TeleportToRoute(GameManager.Instance.currentStage, false);
+        
+        return true;
 
+    }
     private void Enable()
     {
         if (!loadedItem) LoadItem();

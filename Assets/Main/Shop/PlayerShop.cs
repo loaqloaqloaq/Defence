@@ -60,7 +60,7 @@ public class PlayerShop : MonoBehaviour
         }
 
         bool isActive = shop != null;
-        UIInstnace?.SetGudieText(isActive);
+        UIInstnace?.SetGuideText(isActive);
     }
 
     private void EnableInput()
@@ -83,8 +83,7 @@ public class PlayerShop : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, rayDistance, shopLayer))
         {
-            var disToTarget = Vector3.Distance(transform.position, hitInfo.transform.position);
-            Debug.Log(disToTarget);
+            var disToTarget = Vector3.Distance(transform.position, hitInfo.transform.position);            
             if (disToTarget < 1.8f)
             {
                 

@@ -75,7 +75,7 @@ public class Enemy1Navigator : MonoBehaviour
             return;
         }
         destination = route.GetChild(checkPointIndex);
-        checkPoint = destination.position;
+        checkPoint = destination.GetComponent<Checkpoint>().GetPos();
         checkPoint.x += Random.Range(-offsetRange, offsetRange);
         checkPoint.z += Random.Range(-offsetRange, offsetRange);        
     }

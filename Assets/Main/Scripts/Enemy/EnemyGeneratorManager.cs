@@ -127,9 +127,12 @@ public class EnemyGeneratorManager : MonoBehaviour
         }
         else {
             generators.RemoveAt(i);
+            for(index = 0; index < generators.Count; index++){
+                generators[index].GetComponent<EnemyGenerator>().index=index;
+            }
         }
         
-        Debug.Log("Called" + (i == -1 ? "add" : "remove")+" "+generators.Count);
+        //Debug.Log("Called" + (i == -1 ? "add" : "remove")+" "+generators.Count);
         return index;
     }
 

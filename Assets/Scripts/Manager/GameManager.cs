@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+[Serializable]
+public enum InputDevice
+{
+    KEYBOARD, GAMEPAD
+};
 public class GameManager : MonoBehaviour
 {
-    public enum InputDevice{
-        KEYBOARD,GAMEPAD
-    };
+    
     public InputDevice lastInputDevice;
     //Singleton       
     private static GameManager instance;
@@ -29,6 +32,10 @@ public class GameManager : MonoBehaviour
     //private float maxtime;
     List<string> GamePadKey=new List<string>();
 
+    public int currentStage;
+
+    public int NPCCount,MaxNPCCount;
+
 
     public static GameManager Instance
     {        
@@ -41,6 +48,7 @@ public class GameManager : MonoBehaviour
     }
     public static InputDevice LastInputDevice
     {
+        set { Instance.lastInputDevice = value; }
         get
         {   
             return Instance.lastInputDevice;
@@ -70,10 +78,14 @@ public class GameManager : MonoBehaviour
         killCount = 0;
         playerDamagedCount = 0;
         usedScrap = 0;
-        //maxtime = timer;
+        //maxtime = timer;        
+        lastInputDevice = InputDevice.KEYBOARD;
 
-        lastInputDevice = InputDevice.KEYBOARD; 
-        
+        if (MaxNPCCount == 0) MaxNPCCount = 5;
+        NPCCount = GameObject.FindGameObjectsWithTag("NPC").Length;
+
+        currentStage = 0;
+
     }
     private void Update()
     {
@@ -85,18 +97,7 @@ public class GameManager : MonoBehaviour
         }
         else TimerUpdate();
 
-        SkyRotation();
-
-        //入力デバイス
-        if (Input.anyKeyDown)
-        {
-             if(Input.inputString=="" && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1)) lastInputDevice = InputDevice.GAMEPAD;
-             else lastInputDevice = InputDevice.KEYBOARD;
-
-            if ( (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && !(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) )) {
-                lastInputDevice = InputDevice.GAMEPAD;
-            }
-        }
+        SkyRotation();       
     }
 
     void TimerUpdate() {
@@ -146,6 +147,9 @@ public class GameManager : MonoBehaviour
         rotationRepeatValue = Mathf.Repeat(now_sky.GetFloat("_Rotation") + rotateSpeed, 360f);
 
         now_sky.SetFloat("_Rotation", rotationRepeatValue);
+    }
+    public bool isNPCFull() {
+        return NPCCount >= MaxNPCCount;
     }
 }
 

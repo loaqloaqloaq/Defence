@@ -14,20 +14,24 @@
     },
     {
       "name": "rifle",
-      "cost": 100
+      "cost": 200
     },
     {
       "name": "flame thrower",
-      "cost": 100
+      "cost": 500
     },
     {
       "name": "rocket launcher",
-      "cost": 100
+      "cost": 1000
     },
     {
       "name": "sniper",
+      "cost": 1000
+    },
+    {
+      "name": "allies",
       "cost": 100
-    }    
+    }   
   ]
 }
 

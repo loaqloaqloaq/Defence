@@ -8,7 +8,7 @@ using UnityEngine.Rendering;
 
 public class EnemyGenerator : MonoBehaviour
 {
-    int index;
+    public int index;
 
     private void Start()
     {

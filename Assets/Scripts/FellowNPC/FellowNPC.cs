@@ -34,9 +34,9 @@ public class FellowNPC : MonoBehaviour
     //攻撃可能かの確認
     [SerializeField] private bool attackCheck;
     //武器を使うのに必要なクラス
-    [SerializeField] RaycastWeapon weapon;
+    [SerializeField] RaycastWeapon weapon;    
 
-    void Start()
+    void Awake()
     {
         //animatorを取得
         animator = GetComponent<Animator>();
@@ -51,6 +51,8 @@ public class FellowNPC : MonoBehaviour
         weapon.damage = attack;
         //攻撃の確認         
         attackCheck = false;
+        //NPC数加える
+        GameManager.Instance.NPCCount++;
     }
 
     void Update()
@@ -102,7 +104,7 @@ public class FellowNPC : MonoBehaviour
         //ターゲットのY座標を自分と同じにして2次元に制限
         targetPos.y = this.transform.position.y;
         //ターゲット(敵)の方向へ向かせる
-        transform.LookAt(targetPos);
+        transform.LookAt(new Vector3(targetPos.x, transform.position.y, targetPos.z));
     }
     //攻撃状態の処理
     private void Attack()
@@ -121,7 +123,7 @@ public class FellowNPC : MonoBehaviour
     private void enemySearch()
     {
         //自分と1番距離の近い敵を探す
-        nearEnemyObj = nearEnemySerch();
+        nearEnemyObj = nearEnemySearch();
 
         //敵がいない場合
         if (nearEnemyObj == null)
@@ -167,7 +169,7 @@ public class FellowNPC : MonoBehaviour
     }
 
     //Enemyタグの中で最も近いオブジェクトを1つ取得
-    private GameObject nearEnemySerch()
+    private GameObject nearEnemySearch()
     {
         //最も近いオブジェクトの距離を代入するための変数
         float nearDistance = 0;
@@ -197,5 +199,11 @@ public class FellowNPC : MonoBehaviour
         }
         //最も近かったオブジェクトを返す
         return searchTargetObj;
+    }
+
+    private void OnDestroy()
+    {
+        //NPC数減る
+        if(GameManager.Instance) GameManager.Instance.NPCCount--;
     }
 }
