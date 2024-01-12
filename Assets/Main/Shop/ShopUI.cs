@@ -5,8 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using static UnityEngine.EventSystems.EventTrigger;
+using System.Collections;
 
 public class ShopUI : MonoBehaviour
 {
@@ -45,8 +44,19 @@ public class ShopUI : MonoBehaviour
     private Dictionary<string, GameObject> prefabList => _prefabList.ToDictionary(p => p.Key, p => p.Value);
 
     bool loadedItem;
-    List<GameObject> buttons = new List<GameObject>();
-    int scarp;
+    Dictionary<string, GameObject> buttons = new Dictionary<string, GameObject>();
+    int scrap;
+    int Scrap
+    {
+        get {
+            return scrap;
+        }
+        set {
+            UpdateScrap(value);
+            scrap = value;
+        }
+    }
+
 
     //Unity Action 
     public event Action openUI;
@@ -83,31 +93,27 @@ public class ShopUI : MonoBehaviour
         
         foreach (ShopItem item in ShopJsonLoader.Items) {  
             GameObject button = Instantiate(Button_ShopItem, Vector3.zero, Quaternion.identity).gameObject;
-            buttons.Add(button);
+            buttons.Add(item.name,button);
             var rectTransform = button.GetComponent<RectTransform>();
             rectTransform.SetParent(shopListContent.transform);
             rectTransform.localPosition = new Vector3(x, y);
 
             Image icon = button.transform.GetChild(0).GetComponent<Image>();
-            string[] highIconKey = { "ammo", "health", "grenade", "allies" };
+            
             if (!imageList.ContainsKey(item.name)) icon.sprite = null;
             else {
                 icon.sprite = imageList[item.name];
-                if (highIconKey.Contains(item.name))
-                {
-                    float height = 50;
-                    float width = imageList[item.name].rect.width * (height / imageList[item.name].rect.height);
-                    icon.rectTransform.sizeDelta = new Vector2(width, height);
+                float height = 50;
+                float width = imageList[item.name].rect.width * (height / imageList[item.name].rect.height);
+                if (width >= 150) {
+                    width = 150;
+                    height = imageList[item.name].rect.height * (width / imageList[item.name].rect.width);
                 }
-                else {
-                    float width = 150;
-                    float height = imageList[item.name].rect.height * (width / imageList[item.name].rect.width);                    
-                    icon.rectTransform.sizeDelta = new Vector2(width, height);
-                }
+                icon.rectTransform.sizeDelta = new Vector2(width, height);                
             }
             
             button.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = item.name;
-            button.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = String.Format("{0:0000}", item.cost);
+            button.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = String.Format("{0:00000}", item.cost);
             button.GetComponent<Button>().onClick.AddListener(()=>  Buy(item));
             
             btnCnt++;
@@ -117,18 +123,19 @@ public class ShopUI : MonoBehaviour
                 x = 25;
             }
         }
-
+        UpdateButtons();
         loadedItem = true;
     }
     private void Buy(ShopItem item) {
         Debug.Log("Buy:"+item.name);
         //クスラップを確認
-        if (GameManager.Instance.scrap < item.cost)
+        if (Scrap < item.cost)
         {
-            errorMessage.text = "NOT ENOUGH SCRAP!";
+            ShowMessage("NOT ENOUGH SCRAP!");           
             return;
         }
         else {
+            bool success = true;
             errorMessage.text = "";
             //買う
             GameManager.Instance.DeductScrap(item.cost);  
@@ -136,24 +143,40 @@ public class ShopUI : MonoBehaviour
             else {
                 switch (item.name) {
                     case "allies":
-                        if(!BuyAllies()) GameManager.Instance.AddScrap(item.cost);
+                        if (!BuyAllies())
+                        {
+                            GameManager.Instance.AddScrap(item.cost);
+                            success = false;
+                        }
                         break;
                     default:
-                        errorMessage.text = "ITEM NOT FOUND!";
+                        ShowMessage("ITEM NOT FOUND!");                        
                         GameManager.Instance.AddScrap(item.cost);
+                        success = false;
                         break;
                 }
+            } 
+            if (success)
+            {                
+                ShowMessage("SUCCESS!", Color.green);
+                UpdateButtons();
+                Scrap = GameManager.Instance.scrap;
             }
-            scraps.text = String.Format("{0:000000}", GameManager.Instance.scrap);
         }        
     }
     private bool BuyAllies() {
         if (GameManager.Instance.isNPCFull()) {
-            errorMessage.text = "CANNOT BUY MORE ALLIES";
+            ShowMessage("CANNOT BUY MORE ALLIES");
             return false;
         }
         GameObject allies = Instantiate(npc, getAlliesFirstCheckPoint(), Quaternion.identity);
-        allies.transform.parent = GameObject.Find("NPCPool").transform;       
+
+        if (allies)
+        {
+            var pool = GameObject.Find("NPCPool");
+            if (!pool) pool = new GameObject("NPCPool");
+            allies.transform.parent = pool.transform;
+        }
         
         return true;
 
@@ -170,8 +193,10 @@ public class ShopUI : MonoBehaviour
         var route = routes.GetChild(area);
         var checkpoints = Array.FindAll(route.GetComponentsInChildren<Transform>(), child => child != route.transform);        
         var checkpoint = checkpoints[UnityEngine.Random.Range(0, checkpoints.Length)];
-
-        return checkpoint.GetComponent<Checkpoint>().GetPos();
+        var pos = checkpoint.GetComponent<Checkpoint>().GetPos();
+        pos.x += UnityEngine.Random.Range(-2, 2);
+        pos.z += UnityEngine.Random.Range(-2, 2);
+        return pos;
     }
     private void Enable()
     {
@@ -179,14 +204,18 @@ public class ShopUI : MonoBehaviour
         if (buttons.Count > 0)
         {
             eventSystem.SetSelectedGameObject(null);
-            eventSystem.SetSelectedGameObject(buttons[0].gameObject);
+            eventSystem.SetSelectedGameObject(Buttons(0));
+            UpdateButtons();
         }
-
+        scrap=GameManager.Instance.scrap;
+        scraps.text = String.Format("{0:000000}", GameManager.Instance.scrap);
         shopUI.SetActive(true);
         UIManager.Instance.SetMouseVisible(true);
         playerUI?.SetActive(false);
     }
-
+    GameObject Buttons(int index) { 
+        return buttons.ElementAt(index).Value.gameObject;
+    }
     private void Disable()
     {
         UIManager.Instance.SetMouseVisible(false);
@@ -196,9 +225,8 @@ public class ShopUI : MonoBehaviour
 
     //UNIY Action
     public void OpenUI()
-    {
-        scarp = GameManager.Instance.scrap;
-        scraps.text = String.Format("{0:000000}", scarp);
+    {        
+        scraps.text = String.Format("{0:000000}", GameManager.Instance.scrap);
         errorMessage.text = "";
         openUI();
     }
@@ -207,11 +235,89 @@ public class ShopUI : MonoBehaviour
         closeUI();
     }
 
-    private void Update()
+    private void UpdateButtons(string key=null) {
+        if (key != null)
+        {
+            if (buttons.ContainsKey(key))
+                UpdateButtonDesc(buttons[key], key);
+            else {
+                ShowMessage("ERROR");               
+                Debug.LogError($"button {key} not found");
+            }
+        }
+        else {
+            foreach (var (btnKey,btn) in buttons) {
+                UpdateButtonDesc(btn,btnKey);
+            }
+        }
+    }
+    private void UpdateButtonDesc(GameObject btn,string key) {
+        var tmp = btn.transform.Find("Desc").GetComponent<TextMeshProUGUI>();
+        var b = btn.GetComponent<Button>();
+        switch (key) {
+            case "allies":
+                tmp.text = $"LEFT\n<b>{GameManager.Instance.MaxNPCCount-GameManager.Instance.NPCCount}/{GameManager.Instance.MaxNPCCount}</b>";
+                if (GameManager.Instance.NPCCount >= GameManager.Instance.MaxNPCCount) b.interactable = false;
+                else {
+                    b.interactable = false;
+                }
+                break;
+            default:
+                tmp.text = "LEFT\n∞";
+                break;
+        }
+        var item = Array.Find(ShopJsonLoader.Items, i => i.name == key);
+        if (GameManager.Instance.scrap < item.cost) b.interactable = false;
+        else b.interactable = true;
+    }
+    //数字アニメション用
+    private Coroutine startedCoroutine;
+    public int CountFPS = 60;
+    public float Duration = 0.5f;
+
+    private void UpdateScrap(int target) {
+        if (startedCoroutine != null) StopCoroutine(startedCoroutine);
+        startedCoroutine = StartCoroutine(NumberAnimation(target));
+    }
+    private IEnumerator NumberAnimation(int target) {
+        WaitForSeconds wait = new WaitForSeconds(1f/CountFPS);
+        int prev = scrap;
+        int stepAmount;
+        if (target - prev < 0) {
+            stepAmount = Mathf.FloorToInt( (target - prev) / (CountFPS * Duration));
+        }
+        else {
+            stepAmount = Mathf.CeilToInt((target - prev) / (CountFPS * Duration));
+        }
+        if (prev < target)
+        {
+            while (prev < target)
+            {
+                prev += stepAmount;
+                if (prev > target) prev = target;
+                Debug.Log(prev);
+                scraps.text = String.Format("{0:000000}", prev);
+                yield return wait;
+            }            
+        }
+        else {
+            while (prev > target)
+            {
+                prev += stepAmount;
+                if (prev < target) prev = target;
+                Debug.Log(prev);
+                scraps.text = String.Format("{0:000000}", prev);
+                yield return wait;
+            }            
+        }        
+    }
+    void ShowMessage(string msg, Color? color = null)
     {
-        if (scarp != GameManager.Instance.scrap) {
-            scarp -=(int) ((scarp - GameManager.Instance.scrap) * 0.5f * Time.deltaTime);
-            scraps.text = String.Format("{0:000000}", scarp);
+        if (color == null) color = Color.red;
+        if (msg != null)
+        {
+            errorMessage.color = (Color)color;
+            errorMessage.text = msg;
         }
     }
 }

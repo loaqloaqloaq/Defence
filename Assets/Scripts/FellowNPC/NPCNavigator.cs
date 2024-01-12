@@ -82,10 +82,9 @@ public class NPCNavigator : MonoBehaviour
 
     //チェックポイントまでの距離計算
     float DisToCheckPoint() {
-        var chkpt = agent.destination;
-        var npcpt = transform.position;
-        chkpt.y = npcpt.y;
-        return Vector3.Distance(chkpt, npcpt);
+        var chkpt = agent.destination;        
+        chkpt.y = transform.position.y;
+        return Vector3.Distance(chkpt, transform.position);
     }
     //次のチェックポイントをセット
     void NextCheckPoint() {
