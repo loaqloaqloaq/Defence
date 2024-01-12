@@ -2,35 +2,35 @@
   "items": [
     {
       "name": "ammo",
-      "cost": 50
-    },
-    {
-      "name": "health",
-      "cost": 50
-    },
-    {
-      "name": "grenade",
-      "cost": 50
-    },
-    {
-      "name": "rifle",
-      "cost": 200
-    },
-    {
-      "name": "flame thrower",
       "cost": 500
     },
     {
-      "name": "rocket launcher",
+      "name": "health",
+      "cost": 500
+    },
+    {
+      "name": "grenade",
       "cost": 1000
+    },
+    {
+      "name": "rifle",
+      "cost": 2000
+    },
+    {
+      "name": "flame thrower",
+      "cost": 5000
+    },
+    {
+      "name": "rocket launcher",
+      "cost": 10000
     },
     {
       "name": "sniper",
-      "cost": 1000
+      "cost": 10000
     },
     {
       "name": "allies",
-      "cost": 100
+      "cost": 15000
     }   
   ]
 }

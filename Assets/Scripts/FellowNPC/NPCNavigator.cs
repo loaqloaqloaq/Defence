@@ -16,11 +16,13 @@ public class NPCNavigator : MonoBehaviour
     FellowNPC npcController;
     Animator animator;
     ParticleSystem[] pss;
+
+    float stopTimer, stoppedTime;
     // Start is called before the first frame update
     void Awake()
-    {
+    {        
         //コンポーネントを読み込む
-        npcController=GetComponent<FellowNPC>();
+        npcController =GetComponent<FellowNPC>();
         agent =GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         //ルートを読み込む
@@ -34,7 +36,9 @@ public class NPCNavigator : MonoBehaviour
         agent.destination = checkpoint.GetComponent<Checkpoint>().GetPos();
         //テレポートエフェクト
         if (teleportEffect == null) teleportEffect = transform.Find("TeleportEffect").gameObject;
-        pss = teleportEffect.GetComponentsInChildren<ParticleSystem>();       
+        pss = teleportEffect.GetComponentsInChildren<ParticleSystem>();
+
+        ResetStopTimer();
     }
 
     // Update is called once per frame
@@ -46,8 +50,20 @@ public class NPCNavigator : MonoBehaviour
             //攻撃中は移動しない            
             agent.isStopped = true;
         }
+        //チェックポイントの近くについたら一時停止して次のチェックポイント
+        else if (DisToCheckPoint() < 0.5f)
+        {
+            //一時停止
+            agent.isStopped = true;
+            stoppedTime += Time.deltaTime;
+            if (stoppedTime >= stopTimer)
+            {
+                NextCheckPoint();
+                ResetStopTimer();
+            }
+        }
         else {
-            //攻撃後移動開始
+            //移動開始
             agent.isStopped = false;
         }
 
@@ -61,15 +77,12 @@ public class NPCNavigator : MonoBehaviour
             animator.SetBool("Walking", true);           
         }
 
-        //チェックポイントの近くについたら次のチェックポイント
-        if (DisToCheckPoint() < 0.5f) {
-            NextCheckPoint();
-        }
+        
     }
 
     //チェックポイントまでの距離計算
     float DisToCheckPoint() {
-        var chkpt = checkpoint.position;
+        var chkpt = agent.destination;
         var npcpt = transform.position;
         chkpt.y = npcpt.y;
         return Vector3.Distance(chkpt, npcpt);
@@ -78,10 +91,16 @@ public class NPCNavigator : MonoBehaviour
     void NextCheckPoint() {
         currentPoint = (currentPoint + 1) % checkpoints.Length;
         checkpoint = checkpoints[currentPoint];
-        agent.destination = checkpoint.GetComponent<Checkpoint>().GetPos();
-    }    
+        var pos = checkpoint.GetComponent<Checkpoint>().GetPos();
+        float range = 2f;
+        Vector3 rand = new Vector3(ran(range), 0, ran(range));
+        agent.destination = pos + rand;
+    }
+    float ran(float range) { 
+        return UnityEngine.Random.Range(-range,range);
+    }
     //エリアへテレポート
-    public void TeleportToRoute(int area,bool playEffect=true) {
+    public void TeleportToRoute(int area) {
         if (routes == null) routes = GameObject.Find("NPCRoutes").transform;
         if (area >= routes.childCount)
         {
@@ -95,37 +114,33 @@ public class NPCNavigator : MonoBehaviour
         checkpoints = Array.FindAll(route.GetComponentsInChildren<Transform>(), child => child != route.transform);
         //目的地リセット
         currentPoint = 0;
-        checkpoint = checkpoints[currentPoint];
-        Debug.Log(checkpoint.position.ToString());
+        checkpoint = checkpoints[currentPoint];       
         //テレポート中は移動しない 
         agent.isStopped = true;
-        agent.enabled = false;
+        agent.enabled = false;        
         
-        if (playEffect)
-        {
-            PlayEffect();//エフェクト再生
-            Invoke("Teleport", 2.5f);
-        }
-        else {
-            Invoke("Teleport", 0.1f);
-        }
-    }
+        PlayEffect();//エフェクト再生
+        Invoke("Teleport", 2.5f);
+    }    
     public void Teleport()
     {          
-        transform.position = checkpoint.position;
+        transform.position = checkpoint.GetComponent<Checkpoint>().GetPos();
         if (agent)
         {
             agent.enabled = true;
             agent.isStopped = false;
         }
     }
-
-        //テレポートエフェクト
+    //テレポートエフェクト
     void PlayEffect()
     {
         foreach (ParticleSystem ps in pss)
         {
             ps.Play();
         }
+    }
+    void ResetStopTimer() {
+        stopTimer = 1.5f + ran(0.5f);
+        stoppedTime = 0;
     }
 }

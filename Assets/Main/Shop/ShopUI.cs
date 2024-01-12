@@ -152,12 +152,26 @@ public class ShopUI : MonoBehaviour
             errorMessage.text = "CANNOT BUY MORE ALLIES";
             return false;
         }
-        GameObject allies = Instantiate(npc);
+        GameObject allies = Instantiate(npc, getAlliesFirstCheckPoint(), Quaternion.identity);
         allies.transform.parent = GameObject.Find("NPCPool").transform;       
-        allies.GetComponent<NPCNavigator>().TeleportToRoute(GameManager.Instance.currentStage, false);
         
         return true;
 
+    }
+    private Vector3 getAlliesFirstCheckPoint(int area = -1)
+    {
+        var routes = GameObject.Find("NPCRoutes").transform;
+        if (area == -1) area = GameManager.Instance.currentStage;
+        if (area >= routes.childCount)
+        {
+            Debug.Log($"route {area} not exist");//ルート見つからない時LOGに書く
+            return Vector3.zero; //テレポート中止
+        }               
+        var route = routes.GetChild(area);
+        var checkpoints = Array.FindAll(route.GetComponentsInChildren<Transform>(), child => child != route.transform);        
+        var checkpoint = checkpoints[UnityEngine.Random.Range(0, checkpoints.Length)];
+
+        return checkpoint.GetComponent<Checkpoint>().GetPos();
     }
     private void Enable()
     {

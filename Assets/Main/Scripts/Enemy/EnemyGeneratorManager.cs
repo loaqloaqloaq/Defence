@@ -52,7 +52,7 @@ public class EnemyGeneratorManager : MonoBehaviour
         Pattern enemyJson = JsonUtility.FromJson<Pattern>(PatternJsonFile.ToString());
         patterns = enemyJson.pattern;
 
-        genFreq = enemyJson.genFreq;
+        genFreq = enemyJson.maxEnemy[0].genFreq;
         randomRange = enemyJson.randomRange;
         max = enemyJson.maxEnemy;
 
@@ -114,7 +114,11 @@ public class EnemyGeneratorManager : MonoBehaviour
 
     public void ChangeMaxEnemy(float timeLeftPersent) {
         foreach (var m in max) {
-            if (timeLeftPersent <= m.timeLeftPresent) maxEnemy = m.maxEnemy;
+            if (timeLeftPersent <= m.timeLeftPresent)
+            {
+                maxEnemy = m.maxEnemy;
+                genFreq = m.genFreq;
+            }
         }
     }
     public int UpdateGeneratorList( GameObject gen, int i = -1 ) {
