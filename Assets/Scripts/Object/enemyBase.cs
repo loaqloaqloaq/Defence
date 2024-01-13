@@ -29,7 +29,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] GameObject cannonBall;
     [SerializeField] public bool fireCannon;
 
-    void Start()
+    bool dead;
+
+    void Awake()
     {
         //animatorを取得
         animator = GetComponent<Animator>();
@@ -43,6 +45,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //ダメージを受けていないを設定
         applydamage = false;
         healTime = 0.0f;
+
+        dead = false;
     }
     void Update()
     {
@@ -50,7 +54,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         if (HP <= 0)
         {
             //死んだときの処理
-            IsDead();
+            Destroy();
         }
         //ゲージ幅が減ったとき
         if (Mathf.Abs(width - gaugeWidth) > 0.002f)
@@ -106,8 +110,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
     }
 
     //死んだ (破壊された) ときの処理
-    public bool IsDead()
-    {    
+    public void Destroy()
+    {
+        dead = true;
         //animationを再生
         animator.SetTrigger("break");
         HPGauge.GetComponent<Animator>().SetTrigger("hideHP");
@@ -119,9 +124,11 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //大きさの設定
         exp.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
         //オブジェクトを消滅        
-        Destroy(gameObject);
+        Destroy(gameObject);        
+    }
 
-        return true;
+    public bool IsDead() {
+        return dead;
     }
 
     //HPを回復

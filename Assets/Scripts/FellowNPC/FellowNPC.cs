@@ -189,7 +189,7 @@ public class FellowNPC : MonoBehaviour
             //nearEnemyに取り出した敵と、このNPC(仲間)との距離を計算して取得
             float distance = Vector3.Distance(nearEnemy.transform.position, transform.position);
             //nearDistanceが0(最初はこちら)、もしくはnearDistanceがdistanceよりも大きい値の場合
-            if (nearDistance == 0 || nearDistance > distance)
+            if ( nearDistance == 0 || (nearDistance > distance && nearEnemy.GetComponent<IDamageable>()?.IsDead()==false))
             {
                 //nearDistanceを更新
                 nearDistance = distance;
