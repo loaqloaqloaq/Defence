@@ -44,6 +44,8 @@ public class ShopUI : MonoBehaviour
     private Dictionary<string, GameObject> prefabList => _prefabList.ToDictionary(p => p.Key, p => p.Value);
 
     bool loadedItem;
+
+    public bool isOpened;
     Dictionary<string, GameObject> buttons = new Dictionary<string, GameObject>();
     int scrap;
     int Scrap
@@ -79,6 +81,7 @@ public class ShopUI : MonoBehaviour
         guideText.enabled = false;
         shopUI.SetActive(false);
 
+        isOpened = false;
 
         loadedItem = false;
     }   
@@ -227,12 +230,15 @@ public class ShopUI : MonoBehaviour
     {        
         scraps.text = String.Format("{0:000000}", GameManager.Instance.scrap);
         errorMessage.text = "";
+        isOpened = true;
         openUI();
     }
     public void CloseUI()
     {
+        isOpened = false;
         closeUI();
     }
+    
 
     private void UpdateButtons(string key=null) {
         if (key != null)

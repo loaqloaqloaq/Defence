@@ -775,6 +775,7 @@ GameObject:
   - component: {fileID: 661851006}
   - component: {fileID: 661851005}
   - component: {fileID: 661851008}
+  - component: {fileID: 661851009}
   m_Layer: 5
   m_Name: GameExit
   m_TagString: Untagged
@@ -918,6 +919,35 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &661851009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661851003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 804007041}
+          m_TargetAssemblyTypeName: MouseOverSelect, Assembly-CSharp
+          m_MethodName: mouseHover
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 661851003}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &695993723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,6 +1057,7 @@ GameObject:
   - component: {fileID: 804007039}
   - component: {fileID: 804007037}
   - component: {fileID: 804007040}
+  - component: {fileID: 804007041}
   m_Layer: 0
   m_Name: Title_Manager
   m_TagString: Untagged
@@ -1159,6 +1190,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &804007041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804007036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 061a610e0b1eb384e888dde406d74166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectable: {fileID: 0}
 --- !u!1 &851912877
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,6 +1464,7 @@ GameObject:
   - component: {fileID: 1077103675}
   - component: {fileID: 1077103674}
   - component: {fileID: 1077103677}
+  - component: {fileID: 1077103678}
   m_Layer: 5
   m_Name: Explanation
   m_TagString: Untagged
@@ -1563,6 +1608,35 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1077103678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077103672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 804007041}
+          m_TargetAssemblyTypeName: MouseOverSelect, Assembly-CSharp
+          m_MethodName: mouseHover
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1077103672}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1097611049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2039,6 +2113,7 @@ GameObject:
   - component: {fileID: 1518661547}
   - component: {fileID: 1518661546}
   - component: {fileID: 1518661549}
+  - component: {fileID: 1518661550}
   m_Layer: 5
   m_Name: GameStart
   m_TagString: Untagged
@@ -2182,6 +2257,35 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1518661550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518661544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 804007041}
+          m_TargetAssemblyTypeName: MouseOverSelect, Assembly-CSharp
+          m_MethodName: mouseHover
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1518661544}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1731111930
 GameObject:
   m_ObjectHideFlags: 0

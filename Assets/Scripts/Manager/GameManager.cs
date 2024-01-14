@@ -139,6 +139,9 @@ public class GameManager : MonoBehaviour
         string sceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(sceneName);
     }
+    public void Title() {
+        SceneManager.LoadScene("Title");
+    }
 
     public void AddScrap(int amount) { 
         scrap+=amount;

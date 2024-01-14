@@ -55,11 +55,12 @@ public class TitleManager : MonoBehaviour
         //Escapeキーを押したら
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //プログラムを終了
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
-            Application.Quit();
+            if (Explanation.activeSelf) Close_Explanation();
+            else
+            {
+                //プログラムを終了
+                GameExit();
+            }
         }
     }
 

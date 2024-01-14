@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
-using UnityEngine.AI;
-using static UnityEditor.PlayerSettings;
+
 
 public class Checkpoint : MonoBehaviour
 {

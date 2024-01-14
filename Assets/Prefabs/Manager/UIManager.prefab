@@ -5001,9 +5001,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9033925347614913743}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 9068163846488966494}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Title
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8394,9 +8394,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9033925347614913743}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 9068163846488966494}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13668,6 +13668,9 @@ MonoBehaviour:
     value: {fileID: 4302541542781815023, guid: 1f31d2a4d87ed794a9c19140e3c4aa2b, type: 3}
   - key: grenade
     value: {fileID: 5160337932670183730, guid: 4a2182311f5c4124b9c82a71b2545eb8, type: 3}
+  isOpened: 0
+  CountFPS: 60
+  Duration: 0.5
 --- !u!1 &7171431460894176633
 GameObject:
   m_ObjectHideFlags: 0

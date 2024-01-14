@@ -127,10 +127,11 @@ public class UIManager : MonoBehaviour
     public void Pause()
     {
         var turretUI = TurretUI.Instance;
-        if (turretUI)
-        {
-            if (turretUI.isOpened) { turretUI.CloseUI(); }
-        }
+        var shopUI = ShopUI.Instance;
+        
+         if (turretUI?.isOpened == true)    turretUI.CloseUI(); 
+         if (shopUI?.isOpened   == true)    shopUI.CloseUI();
+        
         isPause = true;
         animator.Play("pause_Anim");
         SetSelectedButton(firstSelectedButton);
@@ -154,7 +155,7 @@ public class UIManager : MonoBehaviour
 
     public void Title()
     {
-        GameManager.Instance?.Restart();
+        GameManager.Instance?.Title();
     }
 
     //Pause UI表示
@@ -238,19 +239,19 @@ public class UIManager : MonoBehaviour
     //体力の実時間変化処理
     IEnumerator UpdateHealthGauge(float maxHealth, float currentHealth, bool anim)
     {
-        yield return new WaitForEndOfFrame();
+        //yield return new WaitForEndOfFrame();
         isUpdatingHealth = true;
 
         if (anim){ animator.SetTrigger("helath_Trigger"); }
 
-        float growthRate = (previousHealth - currentHealth) * Time.deltaTime * 6.0f;
+        float growthRate = (previousHealth - currentHealth) * Time.deltaTime * 20.0f;
         float amount = 0;
-        float duration = 0;
+        //float duration = 0;
         
-        while (previousHealth != currentHealth && duration <= 1.0f && isUpdatingHealth)
+        while (previousHealth != currentHealth && isUpdatingHealth) //&& duration >= 1.0f 
         {
             previousHealth -= growthRate;
-            duration += Time.deltaTime;
+            //duration += Time.deltaTime;
             float gap = Mathf.Abs(currentHealth - previousHealth);
             if (gap < Mathf.Abs(growthRate * 3.0f))
             {
