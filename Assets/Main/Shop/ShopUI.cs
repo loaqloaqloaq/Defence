@@ -193,9 +193,8 @@ public class ShopUI : MonoBehaviour
         var route = routes.GetChild(area);
         var checkpoints = Array.FindAll(route.GetComponentsInChildren<Transform>(), child => child != route.transform);        
         var checkpoint = checkpoints[UnityEngine.Random.Range(0, checkpoints.Length)];
-        var pos = checkpoint.GetComponent<Checkpoint>().GetPos();
-        pos.x += UnityEngine.Random.Range(-2, 2);
-        pos.z += UnityEngine.Random.Range(-2, 2);
+        var rand = new Vector3(UnityEngine.Random.Range(-2, 2), 0, UnityEngine.Random.Range(-2, 2));
+        var pos = checkpoint.GetComponent<Checkpoint>().GetPos(rand);        
         return pos;
     }
     private void Enable()

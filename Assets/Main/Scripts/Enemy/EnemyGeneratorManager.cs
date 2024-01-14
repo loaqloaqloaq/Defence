@@ -22,6 +22,8 @@ public class EnemyGeneratorManager : MonoBehaviour
 
     [SerializeField] GameObject enemy;
 
+    [SerializeField] bool GenerateEnemy;
+
     float lastGen;
     float genFreq;
     float randomRange;
@@ -73,6 +75,7 @@ public class EnemyGeneratorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GenerateEnemy) return;
         lastGen += Time.deltaTime;
         if (lastGen >= (genFreq + randomTime))
         {

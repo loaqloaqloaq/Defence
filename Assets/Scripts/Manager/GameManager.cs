@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 [Serializable]
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     //スカイボックスを回転させる
     [Range(0.01f, 0.1f)]
+    float originalRotate;
     public float rotateSpeed;
     public Material now_sky;
     private float rotationRepeatValue;
@@ -84,6 +86,8 @@ public class GameManager : MonoBehaviour
         if (MaxNPCCount == 0) MaxNPCCount = 5;
         NPCCount = GameObject.FindGameObjectsWithTag("NPC").Length;
 
+        if (now_sky) originalRotate = now_sky.GetFloat("_Rotation");
+
         currentStage = 0;
 
     }
@@ -98,6 +102,12 @@ public class GameManager : MonoBehaviour
         else TimerUpdate();
 
         SkyRotation();       
+    }
+    private void OnDestroy()
+    {
+        //スカイボックスのマテリアルを元に戻す
+        now_sky.SetFloat("_Rotation", originalRotate);
+        
     }
 
     void TimerUpdate() {

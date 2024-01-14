@@ -17,24 +17,26 @@ public class NPCNavigator : MonoBehaviour
     Animator animator;
     ParticleSystem[] pss;
 
+    float offsetRange = 2f;
+
     float stopTimer, stoppedTime;
     // Start is called before the first frame update
     void Awake()
     {        
-        //ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ“Ç‚İ‚Ş
+        //ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’èª­ã¿è¾¼ã‚€
         npcController =GetComponent<FellowNPC>();
         agent =GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        //ƒ‹[ƒg‚ğ“Ç‚İ‚Ş
+        //ãƒ«ãƒ¼ãƒˆã‚’èª­ã¿è¾¼ã‚€
         if (routes == null) routes = GameObject.Find("NPCRoutes").transform;
         currentRoute = 0;
         route = routes.GetChild(currentRoute);
         if (route !=null) checkpoints= Array.FindAll(route.GetComponentsInChildren<Transform>(), child => child != route.transform);
-        //ƒ`ƒFƒbƒNƒ|ƒCƒ“ƒg‚ğƒZƒbƒg
+        //ãƒã‚§ãƒƒã‚¯ãƒã‚¤ãƒ³ãƒˆã‚’ã‚»ãƒƒãƒˆ
         currentPoint = 0;        
         checkpoint = checkpoints[currentPoint];
-        agent.destination = checkpoint.GetComponent<Checkpoint>().GetPos();
-        //ƒeƒŒƒ|[ƒgƒGƒtƒFƒNƒg
+        agent.destination = checkpoint.GetComponent<Checkpoint>().GetPos(Vector3.zero);
+        //ãƒ†ãƒ¬ãƒãƒ¼ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
         if (teleportEffect == null) teleportEffect = transform.Find("TeleportEffect").gameObject;
         pss = teleportEffect.GetComponentsInChildren<ParticleSystem>();
 
@@ -47,13 +49,13 @@ public class NPCNavigator : MonoBehaviour
         if (!agent.enabled) return;
         if (npcController.fellowAI == FellowNPC.State.Attack)
         {
-            //UŒ‚’†‚ÍˆÚ“®‚µ‚È‚¢            
+            //æ”»æ’ƒä¸­ã¯ç§»å‹•ã—ãªã„            
             agent.isStopped = true;
         }
-        //ƒ`ƒFƒbƒNƒ|ƒCƒ“ƒg‚Ì‹ß‚­‚É‚Â‚¢‚½‚çˆê’â~‚µ‚ÄŸ‚Ìƒ`ƒFƒbƒNƒ|ƒCƒ“ƒg
+        //ãƒã‚§ãƒƒã‚¯ãƒã‚¤ãƒ³ãƒˆã®è¿‘ãã«ã¤ã„ãŸã‚‰ä¸€æ™‚åœæ­¢ã—ã¦æ¬¡ã®ãƒã‚§ãƒƒã‚¯ãƒã‚¤ãƒ³ãƒˆ
         else if (DisToCheckPoint() < 0.5f)
         {
-            //ˆê’â~
+            //ä¸€æ™‚åœæ­¢
             agent.isStopped = true;
             stoppedTime += Time.deltaTime;
             if (stoppedTime >= stopTimer)
@@ -63,14 +65,14 @@ public class NPCNavigator : MonoBehaviour
             }
         }
         else {
-            //ˆÚ“®ŠJn
+            //ç§»å‹•é–‹å§‹
             agent.isStopped = false;
         }
 
-        //ˆÚ“®ƒAƒjƒ[ƒVƒHƒ“
+        //ç§»å‹•ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ã‚©ãƒ³
         if (agent.isStopped) {
             animator.SetBool("Walking", false);            
-            return;@//ˆÚ“®’â~’†‚Í”»’ès‚í‚È‚¢
+            return;ã€€//ç§»å‹•åœæ­¢ä¸­ã¯åˆ¤å®šè¡Œã‚ãªã„
         }
         else
         {            
@@ -80,57 +82,76 @@ public class NPCNavigator : MonoBehaviour
         
     }
 
-    //ƒ`ƒFƒbƒNƒ|ƒCƒ“ƒg‚Ü‚Å‚Ì‹——£ŒvZ
+    //ãƒã‚§ãƒƒã‚¯ãƒã‚¤ãƒ³ãƒˆã¾ã§ã®è·é›¢è¨ˆç®—
     float DisToCheckPoint() {
         var chkpt = agent.destination;        
         chkpt.y = transform.position.y;
         return Vector3.Distance(chkpt, transform.position);
     }
-    //Ÿ‚Ìƒ`ƒFƒbƒNƒ|ƒCƒ“ƒg‚ğƒZƒbƒg
+    //æ¬¡ã®ãƒã‚§ãƒƒã‚¯ãƒã‚¤ãƒ³ãƒˆã‚’ã‚»ãƒƒãƒˆ
     void NextCheckPoint() {
-        currentPoint = (currentPoint + 1) % checkpoints.Length;
+        var next = 1;
+        //ãƒ©ãƒ³ãƒ€ãƒ ã§æ¬¡ã‚„å‰ã®ãƒã‚§ãƒƒã‚¯ãƒã‚¤ãƒ³ãƒˆã‚’æ±ºã‚ã‚‹
+        int dice = UnityEngine.Random.Range(0, 2);
+        
+        if (dice == 1)
+        {
+            //æ¬¡ãŒãªã„å ´åˆã€å‰ã«è¡Œã
+            if ((checkpoints.Length - 1) > currentPoint) next = 1;
+            else next = -1;
+        }
+        else { 
+            //å‰ãŒãªã„å ´åˆã€æ¬¡ã«è¡Œã
+            if(currentPoint > 0) next = -1;
+            else next = 1;
+        }        
+        //ãƒã‚§ãƒƒã‚¯ãƒã‚¤ãƒ³ãƒˆã‚’è¨­å®š
+        currentPoint = (currentPoint + next) % checkpoints.Length;
         checkpoint = checkpoints[currentPoint];
-        var pos = checkpoint.GetComponent<Checkpoint>().GetPos();
-        float range = 2f;
-        Vector3 rand = new Vector3(ran(range), 0, ran(range));
-        agent.destination = pos + rand;
+
+        //ä¸€å®šç¯„å›²å†…ãšã‚‰ã™        
+        Vector3 rand = new Vector3(ran(offsetRange), 0, ran(offsetRange));
+        var pos = checkpoint.GetComponent<Checkpoint>().GetPos(rand);
+        Debug.Log($"{currentPoint} : {pos} : {rand}");
+        agent.destination = pos;
     }
     float ran(float range) { 
         return UnityEngine.Random.Range(-range,range);
     }
-    //ƒGƒŠƒA‚ÖƒeƒŒƒ|[ƒg
+    //ã‚¨ãƒªã‚¢ã¸ãƒ†ãƒ¬ãƒãƒ¼ãƒˆ
     public void TeleportToRoute(int area) {
         if (routes == null) routes = GameObject.Find("NPCRoutes").transform;
         if (area >= routes.childCount)
         {
-            Debug.Log($"route {area} not exist");//ƒ‹[ƒgŒ©‚Â‚©‚ç‚È‚¢LOG‚É‘‚­
-            return; //ƒeƒŒƒ|[ƒg’†~
+            Debug.Log($"route {area} not exist");//ãƒ«ãƒ¼ãƒˆè¦‹ã¤ã‹ã‚‰ãªã„æ™‚LOGã«æ›¸ã
+            return; //ãƒ†ãƒ¬ãƒãƒ¼ãƒˆä¸­æ­¢
         }
         Debug.Log($"NPC start teleporting to area {area}");
-        //ƒ`ƒFƒbƒNƒ|ƒCƒ“ƒgƒŠƒXƒgXV
-        currentRoute = area;//Ÿ‚Ìƒ‹[ƒg‚ğƒZƒbƒg        
+        //ãƒã‚§ãƒƒã‚¯ãƒã‚¤ãƒ³ãƒˆãƒªã‚¹ãƒˆæ›´æ–°
+        currentRoute = area;//æ¬¡ã®ãƒ«ãƒ¼ãƒˆã‚’ã‚»ãƒƒãƒˆ        
         route = routes.GetChild(currentRoute);
         checkpoints = Array.FindAll(route.GetComponentsInChildren<Transform>(), child => child != route.transform);
-        //–Ú“I’nƒŠƒZƒbƒg
-        currentPoint = 0;
+        //ç›®çš„åœ°ãƒªã‚»ãƒƒãƒˆ
+        currentPoint = UnityEngine.Random.Range(0, route.childCount);
         checkpoint = checkpoints[currentPoint];       
-        //ƒeƒŒƒ|[ƒg’†‚ÍˆÚ“®‚µ‚È‚¢ 
+        //ãƒ†ãƒ¬ãƒãƒ¼ãƒˆä¸­ã¯ç§»å‹•ã—ãªã„ 
         agent.isStopped = true;
         agent.enabled = false;        
         
-        PlayEffect();//ƒGƒtƒFƒNƒgÄ¶
+        PlayEffect();//ã‚¨ãƒ•ã‚§ã‚¯ãƒˆå†ç”Ÿ
         Invoke("Teleport", 2.5f);
     }    
     public void Teleport()
-    {          
-        transform.position = checkpoint.GetComponent<Checkpoint>().GetPos();
+    {
+        Vector3 rand = new Vector3(ran(offsetRange), 0, ran(offsetRange));
+        transform.position = checkpoint.GetComponent<Checkpoint>().GetPos(rand);
         if (agent)
         {
             agent.enabled = true;
             agent.isStopped = false;
         }
     }
-    //ƒeƒŒƒ|[ƒgƒGƒtƒFƒNƒg
+    //ãƒ†ãƒ¬ãƒãƒ¼ãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
     void PlayEffect()
     {
         foreach (ParticleSystem ps in pss)

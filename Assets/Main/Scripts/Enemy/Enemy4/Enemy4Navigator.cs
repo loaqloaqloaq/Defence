@@ -107,9 +107,8 @@ public class Enemy4Navigator : MonoBehaviour
             return;
         }
         destination = route.GetChild(checkPointIndex);
-        checkPoint = destination.GetComponent<Checkpoint>().GetPos();
-        checkPoint.x += Random.Range(-offsetRange, offsetRange);
-        checkPoint.z += Random.Range(-offsetRange, offsetRange);        
+        var rand = new Vector3(Random.Range(-offsetRange, offsetRange), 0, Random.Range(-offsetRange, offsetRange));
+        checkPoint = destination.GetComponent<Checkpoint>().GetPos(rand);               
     }
     void RandomRoute()
     {
