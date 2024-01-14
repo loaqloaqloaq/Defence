@@ -111,8 +111,7 @@ public class NPCNavigator : MonoBehaviour
 
         //一定範囲内ずらす        
         Vector3 rand = new Vector3(ran(offsetRange), 0, ran(offsetRange));
-        var pos = checkpoint.GetComponent<Checkpoint>().GetPos(rand);
-        Debug.Log($"{currentPoint} : {pos} : {rand}");
+        var pos = checkpoint.GetComponent<Checkpoint>().GetPos(rand);        
         agent.destination = pos;
     }
     float ran(float range) { 

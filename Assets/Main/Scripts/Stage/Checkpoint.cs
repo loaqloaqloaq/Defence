@@ -26,12 +26,10 @@ public class Checkpoint : MonoBehaviour
         }
         else if (Physics.Raycast(origin, -Vector3.up, out hitInfo, Mathf.Infinity,LayerMask.GetMask("Floor")))
         {   
-            pos = hitInfo.point;
-            Debug.LogWarning(hitInfo.transform.name);
+            pos = hitInfo.point;            
         }
         
-        Debug.DrawRay(origin, Vector3.up *999f , UnityEngine.Color.blue,10f);
-        Debug.Log(pos);
+        Debug.DrawRay(origin, Vector3.up *999f , UnityEngine.Color.blue,10f);        
         return pos;
     }
    
