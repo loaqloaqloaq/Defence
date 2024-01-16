@@ -23,6 +23,7 @@ public class TitleManager : MonoBehaviour
     {
         //最初は操作確認画面は非表示
         explanation = false;
+        Time.timeScale = 1f;
     }
 
     void Update()
@@ -79,13 +80,15 @@ public class TitleManager : MonoBehaviour
     //シーンの読み込み
     private void LoadScene()
     {
-        SceneManager.LoadScene("Test_Map");
+        //SceneManager.LoadScene("Test_Map");
+        LoadingSceneController.LoadScene("Test_Map");
     }
     //ゲームを開始
     public void GameStart()
     {
         //0.2秒後にシーンを切り替える
-        Invoke("LoadScene", 0.2f);
+        //Invoke("LoadScene", 0.2f);
+        LoadScene();
 
         //SoundManager.Instance.Play(enterSE, SoundManager.Sound.UI);
     }
