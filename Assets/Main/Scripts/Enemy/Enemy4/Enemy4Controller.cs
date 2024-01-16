@@ -106,7 +106,6 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
         destoryTimer = 0;
         dead = false;
 
-
         foreach (Collider c in colliders)
         {
             c.enabled = true;
@@ -124,6 +123,12 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
         HP = MAXHP;
 
         frameCnt = 0;
+
+        var droneModle = transform.GetChild(0);
+        var droneModlePos = droneModle.position;
+        droneModlePos.y = 1.5f;
+        droneModle.position= droneModlePos;
+
     }
 
     // Update is called once per frame
@@ -269,7 +274,16 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
                 var pos = transform.position;
                 pos.x += UnityEngine.Random.Range(-0.5f, 0.5f);
                 pos.z += UnityEngine.Random.Range(-0.5f, 0.5f);
-                pos.y = 0;
+                pos.y = 200f;
+                RaycastHit hitInfo;
+                if (Physics.Raycast(pos, Vector3.down, out hitInfo))
+                {
+                    pos = hitInfo.point;
+                }
+                else
+                {
+                    pos.y = transform.position.y;
+                }
                 Instantiate(dropPrefab[d.Key], pos, transform.rotation);
             }
 
