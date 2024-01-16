@@ -128,10 +128,12 @@ public class UIManager : MonoBehaviour
     {
         var turretUI = TurretUI.Instance;
         var shopUI = ShopUI.Instance;
+        var map= MapController.Instance;
         
-         if (turretUI?.isOpened == true)    turretUI.CloseUI(); 
-         if (shopUI?.isOpened   == true)    shopUI.CloseUI();
-        
+        if (turretUI?.isOpened  == true)    turretUI.CloseUI(); 
+        if (shopUI?.isOpened    == true)    shopUI.CloseUI();
+        if (map?.enable         == true)    map.SetVisible(false);
+
         isPause = true;
         animator.Play("pause_Anim");
         SetSelectedButton(firstSelectedButton);

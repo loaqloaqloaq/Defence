@@ -18,28 +18,35 @@ public class TitleManager : MonoBehaviour
     private GameObject prevSelectButton;
     //操作確認画面の表示状態
     bool explanation = false;
+    //イベントシステム
+    EventSystem eventSystem;
 
     void Start()
     {
         //最初は操作確認画面は非表示
         explanation = false;
         Time.timeScale = 1f;
+
+        eventSystem = EventSystem.current;
+
+        nowSelectButton = null;
+        prevSelectButton = null;
     }
 
     void Update()
     {
-        nowSelectButton = EventSystem.current.currentSelectedGameObject;
+        nowSelectButton = eventSystem.currentSelectedGameObject;
 
         if (nowSelectButton == null)
         {
             if (prevSelectButton == null)
-                EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+                eventSystem.SetSelectedGameObject(eventSystem.firstSelectedGameObject);
             else
-                EventSystem.current.SetSelectedGameObject(prevSelectButton);
+                eventSystem.SetSelectedGameObject(prevSelectButton);
 
-            nowSelectButton = EventSystem.current.currentSelectedGameObject;
+            nowSelectButton = eventSystem.currentSelectedGameObject;
         }
-        prevSelectButton = EventSystem.current.currentSelectedGameObject;
+        prevSelectButton = eventSystem.currentSelectedGameObject;
         ChangeButtonEffect();
 
         //Bキーを押したら

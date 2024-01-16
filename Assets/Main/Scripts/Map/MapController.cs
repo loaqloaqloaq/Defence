@@ -5,6 +5,13 @@ using UnityEngine.UI;
 public class MapController : MonoBehaviour, IPointerClickHandler
 {
     // Start is called before the first frame update
+    public static MapController instance;
+    public static MapController Instance
+    {
+        get { 
+            return instance ?? FindObjectOfType<MapController>();
+        }
+    }
     [SerializeField] public bool enable;
     [SerializeField] GameObject[] children;
     Camera cam;
@@ -164,7 +171,7 @@ public class MapController : MonoBehaviour, IPointerClickHandler
 
     }
 
-    private void SetVisible(bool en) {
+    public void SetVisible(bool en) {
         enable = en;
         foreach (GameObject child in children)
         {
