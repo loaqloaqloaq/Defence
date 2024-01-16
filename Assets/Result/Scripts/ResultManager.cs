@@ -24,9 +24,14 @@ public class ResultManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scrapText;
     //消費したスクラップの数
     private int usedScrapCount;
-    //クリアタイム
+    //クリアタイム (テキスト)
     [SerializeField] private TextMeshProUGUI clearTimeText;
+    //クリアタイム
     private float clearTime;
+    //残りタイム (テキスト)
+    [SerializeField] private TextMeshProUGUI remainingTimeText;
+    //残りタイム
+    private float remainingTime;
     //YouWin背景
     [SerializeField] private GameObject youWin_BG;
     //YouLose背景
@@ -50,7 +55,8 @@ public class ResultManager : MonoBehaviour
         killCount = PlayerPrefs.GetInt("killCount", 0);
         takenDamage　= PlayerPrefs.GetInt("playerDamagedCount", 0);
         usedScrapCount = PlayerPrefs.GetInt("usedScrap", 0);
-        clearTime = PlayerPrefs.GetFloat("timer", 0.0f);
+        clearTime = PlayerPrefs.GetFloat("clearTime", 0.0f);
+        remainingTime = PlayerPrefs.GetFloat("remainingTime", 0.0f);
         //リザルト画面で表示する物をセット
         SetResult();
         //オーディオの再生
@@ -172,6 +178,10 @@ public class ResultManager : MonoBehaviour
             //表示するテキストを設定
             resultText.text = "YouLose";
             killText.text = "キル数:" + killCount.ToString();
+            //残りタイム
+            float ms = remainingTime * 1000;
+            string timeStr = String.Format("{0:00}:{1:00}:{2:000}", (int)ms / 60000, (int)(ms / 1000) % 60, ms % 1000);
+            remainingTimeText.text = "残りタイム:" + timeStr;
             //YouLoseの時の背景を表示
             youLose_BG.SetActive(true);
             //BGMを変更
