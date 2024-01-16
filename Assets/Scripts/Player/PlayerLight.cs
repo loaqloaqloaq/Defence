@@ -10,7 +10,7 @@ public class PlayerLight : MonoBehaviour
     {
         if(playerLight == null) playerLight = transform.Find("light").gameObject;
         lightOn = false;
-        playerLight.SetActive(lightOn);
+        playerLight.SetActive(lightOn);        
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class PlayerLight : MonoBehaviour
         if (lightOn && CameraLookAt) {
             RaycastHit hitInfo;
             Ray ray=new Ray();
-            ray.origin = Camera.main.transform.position;
+            ray.origin = playerLight.transform.position;
             ray.direction = Camera.main.transform.forward;
             if (Physics.Raycast(ray, out hitInfo))
             {

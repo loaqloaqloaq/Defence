@@ -38,7 +38,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //‰Šú’l‚ğİ’è
         gaugeWidth = 30.0f;
         width = gaugeWidth;
-        MaxHP = 500f;
+        MaxHP = 5000f;
         HP = MaxHP;
         //HP•\¦İ’è
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
