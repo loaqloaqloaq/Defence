@@ -236,7 +236,16 @@ public class Enemy2Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
                 var pos = transform.position;
                 pos.x += UnityEngine.Random.Range(-0.5f, 0.5f);
                 pos.z += UnityEngine.Random.Range(-0.5f, 0.5f);
-                pos.y = 0;
+                pos.y = 200f;
+                RaycastHit hitInfo;
+                if (Physics.Raycast(pos, Vector3.down, out hitInfo))
+                {
+                    pos = hitInfo.point;
+                }
+                else
+                {
+                    pos.y = transform.position.y;
+                }
                 Instantiate(dropPrefab[d.Key], pos, transform.rotation);
             }
 
