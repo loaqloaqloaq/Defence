@@ -104,7 +104,7 @@ public class GateController : MonoBehaviour,IDamageable
         HPfill.GetComponent<Animator>().SetTrigger("hideHP");        
         if (EnemyBase_Manager != null && gateNumber <= 2)
         {
-
+            GameManager.Instance.currentStage = gateNumber;
             EnemyBase_Manager.gameObject.GetComponent<EnemyBase_Manager>().stage[gateNumber - 1] = 1;
             EnemyBase_Manager.gameObject.GetComponent<EnemyBase_Manager>().moveFlg[gateNumber - 1] = true;
             EnemyBase_Manager.gameObject.GetComponent<EnemyBase_Manager>().teleportFlg = true;
@@ -113,8 +113,7 @@ public class GateController : MonoBehaviour,IDamageable
         {
             Debug.Log("•‰‚¯");
             Record.resultID = 3;
-            PlayerPrefs.SetInt("killCount", GameManager.Instance.killCount);
-            SceneManager.LoadScene("Result");
+            GameManager.Instance?.ToResultScene();
         }
     }
 

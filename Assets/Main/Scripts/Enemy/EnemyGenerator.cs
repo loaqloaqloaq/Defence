@@ -1,14 +1,9 @@
-using Palmmedia.ReportGenerator.Core;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
+
 
 public class EnemyGenerator : MonoBehaviour
 {
-    int index;
+    public int index;
 
     private void Start()
     {
@@ -28,7 +23,7 @@ public class EnemyGenerator : MonoBehaviour
 
     public void OnDestroy()
     {
-        EnemyGeneratorManager.Instance.UpdateGeneratorList(gameObject, index);
+        if(EnemyGeneratorManager.Instance) EnemyGeneratorManager.Instance.UpdateGeneratorList(gameObject, index);
     }
 
 }

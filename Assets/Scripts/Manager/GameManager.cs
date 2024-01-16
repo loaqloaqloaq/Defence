@@ -1,9 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+[Serializable]
+public enum InputDevice
+{
+    KEYBOARD, GAMEPAD
+};
 public class GameManager : MonoBehaviour
 {
+    
+    public InputDevice lastInputDevice;
     //Singleton       
     private static GameManager instance;
 
@@ -18,11 +27,16 @@ public class GameManager : MonoBehaviour
 
     //スカイボックスを回転させる
     [Range(0.01f, 0.1f)]
+    float originalRotate;
     public float rotateSpeed;
     public Material now_sky;
-    //public Material skybox_Night;
     private float rotationRepeatValue;
     //private float maxtime;
+    List<string> GamePadKey=new List<string>();
+
+    public int currentStage;
+
+    public int NPCCount,MaxNPCCount;
 
 
     public static GameManager Instance
@@ -32,6 +46,22 @@ public class GameManager : MonoBehaviour
             if (instance == null) instance = FindObjectOfType<GameManager>();
 
             return instance;
+        }
+    }
+    public static InputDevice LastInputDevice
+    {
+        set { Instance.lastInputDevice = value; }
+        get
+        {   
+            return Instance.lastInputDevice;
+        }
+    }
+
+    public static bool IsNight
+    {
+        get
+        {
+            return FindObjectOfType<SunController>().isNight;
         }
     }
 
@@ -50,11 +80,19 @@ public class GameManager : MonoBehaviour
         killCount = 0;
         playerDamagedCount = 0;
         usedScrap = 0;
-        //maxtime = timer;
+        //maxtime = timer;        
+        lastInputDevice = InputDevice.KEYBOARD;
+
+        if (MaxNPCCount == 0) MaxNPCCount = 5;
+        NPCCount = GameObject.FindGameObjectsWithTag("NPC").Length;
+
+        if (now_sky) originalRotate = now_sky.GetFloat("_Rotation");
+
+        currentStage = 0;
+
     }
     private void Update()
     {
-
         if (timer <= 0)
         {
             Debug.Log("勝利");
@@ -63,21 +101,27 @@ public class GameManager : MonoBehaviour
         }
         else TimerUpdate();
 
-        SkyRotation();
+        SkyRotation();       
+    }
+    private void OnDestroy()
+    {
+        //スカイボックスのマテリアルを元に戻す
+        now_sky.SetFloat("_Rotation", originalRotate);
+        
     }
 
     void TimerUpdate() {
         timer -= Time.deltaTime;
-        EnemyGeneratorManager.Instance.ChangeMaxEnemy(timer / (playTime * 60));
+        EnemyGeneratorManager.Instance?.ChangeMaxEnemy(timer / (playTime * 60));
         PlayerPrefs.SetFloat("timer", playTime * 60 - timer);
         if (timerScript) timerScript.setTimerString(timer);
     }
     public void EndGame()
     {
         isGameover = true;
-        UIManager.Instance.SetActiveGameoverUI(true);
-        UIManager.Instance.SetMouseVisible(true);
-        UIManager.Instance.SetActiveCrosshair(false);
+        UIManager.Instance?.SetActiveGameoverUI(true);
+        UIManager.Instance?.SetMouseVisible(true);
+        UIManager.Instance?.SetActiveCrosshair(false);
     }
 
     //結果シーンに移る
@@ -88,18 +132,15 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("usedScrap", usedScrap);
         SceneManager.LoadScene("Result");
     }
-
-    //タイトルシーンに移る
-    public void ReturnToTitle()
-    {
-        //SceneManager.LoadScene("Title");
-    }
-
+    
     //ゲームシーンをRestart
     public void Restart()
     {
         string sceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(sceneName);
+    }
+    public void Title() {
+        SceneManager.LoadScene("Title");
     }
 
     public void AddScrap(int amount) { 
@@ -119,16 +160,11 @@ public class GameManager : MonoBehaviour
         rotationRepeatValue = Mathf.Repeat(now_sky.GetFloat("_Rotation") + rotateSpeed, 360f);
 
         now_sky.SetFloat("_Rotation", rotationRepeatValue);
-
-        //SkyBoxを切り替える
-        //if (timer / maxtime < 0.5)
-        //{
-        //    RenderSettings.skybox = skybox_Night;
-        //    now_sky = skybox_Night;
-        //}
+    }
+    public bool isNPCFull() {
+        return NPCCount >= MaxNPCCount;
     }
 }
-
 
 [Serializable]
 public class SerializableKeyPair<TKey, TValue>

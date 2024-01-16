@@ -32,8 +32,7 @@ public class Type
 
 [Serializable]
 public class Pattern {
-    public string[] pattern;
-    public float genFreq;
+    public string[] pattern;    
     public float randomRange;
     public MaxEnemy[] maxEnemy;    
 }
@@ -42,4 +41,5 @@ public class Pattern {
 public class MaxEnemy {
     public float timeLeftPresent;
     public int maxEnemy;
+    public float genFreq;
 }

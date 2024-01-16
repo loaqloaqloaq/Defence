@@ -1,4 +1,3 @@
-using Palmmedia.ReportGenerator.Core;
 using System;
 using TMPro;
 using UnityEngine;
@@ -26,17 +25,14 @@ public class EnemyBase : MonoBehaviour, IDamageable
     //砲弾発射頻度
     private float fireTime = 0f;
     private float fireDelay = 10.0f;
-
     //砲弾
     [SerializeField] GameObject cannonBall;
     [SerializeField] public bool fireCannon;
-    EnemyGenerator generator;
 
-    private int index;
+    bool dead;
 
-    void Start()
+    void Awake()
     {
-        generator = transform.Find("Enemy Generator").GetComponent<EnemyGenerator>();        
         //animatorを取得
         animator = GetComponent<Animator>();
         //初期値を設定
@@ -46,12 +42,11 @@ public class EnemyBase : MonoBehaviour, IDamageable
         HP = MaxHP;
         //HP表示設定
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
-        //攻撃の時間のカウント
-        //firingCount = 0.0f;
-
         //ダメージを受けていないを設定
         applydamage = false;
         healTime = 0.0f;
+
+        dead = false;
     }
     void Update()
     {
@@ -59,7 +54,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         if (HP <= 0)
         {
             //死んだときの処理
-            IsDead();
+            Destroy();
         }
         //ゲージ幅が減ったとき
         if (Mathf.Abs(width - gaugeWidth) > 0.002f)
@@ -115,8 +110,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
     }
 
     //死んだ (破壊された) ときの処理
-    public bool IsDead()
-    {    
+    public void Destroy()
+    {
+        dead = true;
         //animationを再生
         animator.SetTrigger("break");
         HPGauge.GetComponent<Animator>().SetTrigger("hideHP");
@@ -128,9 +124,11 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //大きさの設定
         exp.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
         //オブジェクトを消滅        
-        Destroy(gameObject);
+        Destroy(gameObject);        
+    }
 
-        return true;
+    public bool IsDead() {
+        return dead;
     }
 
     //HPを回復
@@ -170,12 +168,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
         GameObject shellfiring = Instantiate(explosion, firPos, Quaternion.identity);
         //大きさの設定
         shellfiring.transform.localScale = new Vector3(4.0f, 4.0f, 4.0f);
-
         //弾丸の位置を設定
         cannonBall.transform.position = shellfiring.transform.position;
         //砲弾生成
         var cb = Instantiate(cannonBall);
-        //砲弾発射カウントをリセット
-        //firingCount = 0.0f;
     }
 }

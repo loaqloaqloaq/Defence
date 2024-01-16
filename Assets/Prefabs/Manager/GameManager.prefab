@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3578588381432519276}
   - component: {fileID: 3578588381432519277}
+  - component: {fileID: 2327817967902695723}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d20de68d9725e246afba533b5706877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastInputDevice: 0
   timerScript: {fileID: 0}
   scrapUI: {fileID: 0}
   playTime: 10
@@ -53,4 +55,16 @@ MonoBehaviour:
   usedScrap: 0
   timer: 0
   rotateSpeed: 0.05
-  now_sky: {fileID: 2100000, guid: da04fb2a289ef1b47bf5b07b9285dd70, type: 2}
+  now_sky: {fileID: 2100000, guid: 29eb611dc05e53e4b8e9b4c348ef7b48, type: 2}
+--- !u!114 &2327817967902695723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3578588381432519274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 611125ec16d8f77449aabb4824074496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

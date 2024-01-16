@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -17,15 +16,11 @@ public class TitleManager : MonoBehaviour
     private GameObject nowSelectButton;
     //前、選択されていたボタン
     private GameObject prevSelectButton;
-    //デフォルトの不透明度
-    float defaultOpacity;
     //操作確認画面の表示状態
     bool explanation = false;
 
     void Start()
     {
-        //デフォルトの不透明度を設定
-        defaultOpacity = 0.8f;
         //最初は操作確認画面は非表示
         explanation = false;
     }
@@ -60,27 +55,23 @@ public class TitleManager : MonoBehaviour
         //Escapeキーを押したら
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //プログラムを終了
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
-            Application.Quit();
+            if (Explanation.activeSelf) Close_Explanation();
+            else
+            {
+                //プログラムを終了
+                GameExit();
+            }
         }
     }
 
     //選択しているボタンのエフェクトを変える
     private void ChangeButtonEffect()
     {
-        nowSelectButton.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         foreach (Button button in FindObjectsOfType<Button>())
         {
             if (button.gameObject != nowSelectButton)
             {
                 Image image = button.GetComponent<Image>();
-                if (image != null)
-                {
-                    image.color = new Color(1, 1, 1, defaultOpacity);
-                }
             }
         }
     }

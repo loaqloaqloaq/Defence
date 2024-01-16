@@ -42,7 +42,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform aimPointRect;
 
     private EventSystem eventSystem;
-    [SerializeField] private Button firstSelectedButton;
+    [SerializeField] private GameObject firstSelectedButton;
+    [SerializeField] private GameObject settingFirstButton;
 
     private Color slotTextColor = new Vector4(1.0f, 1.0f, 1.0f, 0.56f);
 
@@ -61,6 +62,8 @@ public class UIManager : MonoBehaviour
     private Animator animator;
 
     private PlayerInput playerInput;
+
+    private SettingManager settingManager;
     
     public bool isPause { get; private set; }
 
@@ -68,7 +71,8 @@ public class UIManager : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         eventSystem = FindObjectOfType<EventSystem>();
-        playerInput = FindObjectOfType<PlayerInput>(); 
+        playerInput = FindObjectOfType<PlayerInput>();
+        settingManager = GetComponent<SettingManager>();
         aimPointStartSize = aimPointRect.sizeDelta.x;
         currentScore = 0;
         nextScore = 0;
@@ -86,13 +90,30 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
+    private void SetSelectedButton(GameObject select)
+    {
+        if (select == null) return;
+        if (playerInput) 
+        {
+            if (!playerInput.controllerConnected) return; 
+        }
+
+        eventSystem.SetSelectedGameObject(select);
+    }
+
     //設定UI表示・非表示
     public void SetActiveSettingPanel(bool isActive)
     {
         settingUI.SetActive(isActive);
         if (isActive)
         {
-            GetComponent<SettingManager>().LoadSettings();
+            SetSelectedButton(settingFirstButton);
+            settingManager.LoadSettings();
+        }
+        else
+        {
+            SetSelectedButton(firstSelectedButton);
         }
     }
     //マウスカーソル表示・非表示
@@ -101,17 +122,19 @@ public class UIManager : MonoBehaviour
         Cursor.visible = isVisible;
         Cursor.lockState = isVisible ? CursorLockMode.None : CursorLockMode.Locked;
     }
+
     //一時停止&再開
     public void Pause()
     {
         var turretUI = TurretUI.Instance;
-        if (turretUI)
-        {
-            if (turretUI.isOpened) { turretUI.CloseUI(); }
-        }
+        var shopUI = ShopUI.Instance;
+        
+         if (turretUI?.isOpened == true)    turretUI.CloseUI(); 
+         if (shopUI?.isOpened   == true)    shopUI.CloseUI();
+        
         isPause = true;
         animator.Play("pause_Anim");
-        if (firstSelectedButton != null) { eventSystem.SetSelectedGameObject(firstSelectedButton.gameObject); }
+        SetSelectedButton(firstSelectedButton);
         StartCoroutine(SetPanel(true));
         Time.timeScale = 0;
         playerInput.enabled = false;
@@ -132,7 +155,7 @@ public class UIManager : MonoBehaviour
 
     public void Title()
     {
-        GameManager.Instance?.Restart();
+        GameManager.Instance?.Title();
     }
 
     //Pause UI表示
@@ -216,19 +239,19 @@ public class UIManager : MonoBehaviour
     //体力の実時間変化処理
     IEnumerator UpdateHealthGauge(float maxHealth, float currentHealth, bool anim)
     {
-        yield return new WaitForEndOfFrame();
+        //yield return new WaitForEndOfFrame();
         isUpdatingHealth = true;
 
         if (anim){ animator.SetTrigger("helath_Trigger"); }
 
-        float growthRate = (previousHealth - currentHealth) * Time.deltaTime * 6.0f;
+        float growthRate = (previousHealth - currentHealth) * Time.deltaTime * 20.0f;
         float amount = 0;
-        float duration = 0;
+        //float duration = 0;
         
-        while (previousHealth != currentHealth && duration <= 1.0f && isUpdatingHealth)
+        while (previousHealth != currentHealth && isUpdatingHealth) //&& duration >= 1.0f 
         {
             previousHealth -= growthRate;
-            duration += Time.deltaTime;
+            //duration += Time.deltaTime;
             float gap = Mathf.Abs(currentHealth - previousHealth);
             if (gap < Mathf.Abs(growthRate * 3.0f))
             {

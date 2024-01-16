@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class DEBUG : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class DEBUG : MonoBehaviour
     [SerializeField] bool escEnabled;
 
     [SerializeField] bool fireCannonEnabled;
-    [SerializeField][Range(1, 10)] float timeScale;
+    [SerializeField][Range(0, 10)] float timeScale;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,8 +71,19 @@ public class DEBUG : MonoBehaviour
         {
             GameManager.Instance.DeductScrap(9999);
         }
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            timeScale = Time.timeScale;
+            --timeScale;
+            Time.timeScale = timeScale;
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            timeScale = Time.timeScale;
+            ++timeScale;
+            Time.timeScale = timeScale;
+        }
 
-        Time.timeScale = timeScale;
 
 
 

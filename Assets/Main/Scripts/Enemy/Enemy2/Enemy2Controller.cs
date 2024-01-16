@@ -169,6 +169,7 @@ public class Enemy2Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
     }
     public bool ApplyDamage(DamageMessage damageMessage)
     {
+        Debug.Log(damageMessage.damager);
         return ApplyDamage(damageMessage, Part.BODY);
     }
     private KeyValuePair<Part, bool>? GetTakingDamagePart()

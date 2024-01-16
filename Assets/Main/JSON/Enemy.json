@@ -3,7 +3,7 @@
     "hp": 100,
     "moveSpeed": 4,
     "atk": 10,
-    "reward": 100,
+    "reward": 50,
     "drop": {
       "ammo": 5,
       "health": 5
@@ -25,7 +25,7 @@
     "hp": 100,
     "moveSpeed": 4,
     "atk": 10,
-    "reward": 100,
+    "reward": 50,
     "drop": {
       "ammo": 5,
       "health": 5
@@ -47,7 +47,7 @@
     "hp": 100,
     "moveSpeed": 2,
     "atk": 10,
-    "reward": 100,
+    "reward": 50,
     "AttackDuration": 1,
     "AttackStop": 1.5,
     "drop": {
@@ -70,7 +70,7 @@
   "Enemy4": {
     "hp": 100,
     "moveSpeed": 5,
-    "atk": 400,
+    "atk": 200,
     "reward": 100,
     "AttackDuration": 3,
     "AttackRadius": 3.3,

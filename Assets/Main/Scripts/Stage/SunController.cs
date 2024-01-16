@@ -9,9 +9,11 @@ public class SunController : MonoBehaviour
     private float Tfactor;
     
     [SerializeField] float rotateSpeed;
-    [SerializeField] bool isNight;
+    [SerializeField] public bool isNight;
     [SerializeField] float NightValue, DayValue;
-    [SerializeField] float DayNigntChangeSpeed;
+    [SerializeField] float DayNigntChangeSpeed; 
+    
+
     // Start is called before the first frame update
     void Start()
     {

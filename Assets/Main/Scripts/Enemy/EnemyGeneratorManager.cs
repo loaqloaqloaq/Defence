@@ -22,6 +22,8 @@ public class EnemyGeneratorManager : MonoBehaviour
 
     [SerializeField] GameObject enemy;
 
+    [SerializeField] bool GenerateEnemy;
+
     float lastGen;
     float genFreq;
     float randomRange;
@@ -52,7 +54,7 @@ public class EnemyGeneratorManager : MonoBehaviour
         Pattern enemyJson = JsonUtility.FromJson<Pattern>(PatternJsonFile.ToString());
         patterns = enemyJson.pattern;
 
-        genFreq = enemyJson.genFreq;
+        genFreq = enemyJson.maxEnemy[0].genFreq;
         randomRange = enemyJson.randomRange;
         max = enemyJson.maxEnemy;
 
@@ -73,6 +75,7 @@ public class EnemyGeneratorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GenerateEnemy) return;
         lastGen += Time.deltaTime;
         if (lastGen >= (genFreq + randomTime))
         {
@@ -114,7 +117,11 @@ public class EnemyGeneratorManager : MonoBehaviour
 
     public void ChangeMaxEnemy(float timeLeftPersent) {
         foreach (var m in max) {
-            if (timeLeftPersent <= m.timeLeftPresent) maxEnemy = m.maxEnemy;
+            if (timeLeftPersent <= m.timeLeftPresent)
+            {
+                maxEnemy = m.maxEnemy;
+                genFreq = m.genFreq;
+            }
         }
     }
     public int UpdateGeneratorList( GameObject gen, int i = -1 ) {
@@ -127,9 +134,12 @@ public class EnemyGeneratorManager : MonoBehaviour
         }
         else {
             generators.RemoveAt(i);
+            for(index = 0; index < generators.Count; index++){
+                generators[index].GetComponent<EnemyGenerator>().index=index;
+            }
         }
         
-        Debug.Log("Called" + (i == -1 ? "add" : "remove")+" "+generators.Count);
+        //Debug.Log("Called" + (i == -1 ? "add" : "remove")+" "+generators.Count);
         return index;
     }
 
