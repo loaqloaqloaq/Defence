@@ -42,6 +42,6 @@ public class Data
         data[(int)dataType.musicVolume] = 1.0f;
         data[(int)dataType.sfxVolume] = 1.0f;
         data[(int)dataType.xAxis] = 300.0f;
-        data[(int)dataType.yAxis] = 300.0f;
+        data[(int)dataType.yAxis] = 175.0f;
     }
 }
