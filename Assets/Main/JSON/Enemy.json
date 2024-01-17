@@ -1,4 +1,26 @@
 {
+  "EnemyGuard":{
+    "hp": 200,
+    "moveSpeed": 8,
+    "atk": 10,
+    "reward": 100,
+    "drop": {
+      "ammo": 5,
+      "health": 5
+    },
+    "resist": {
+      "persent":0,
+      "fire": false,
+      "common": false,
+      "explode": false
+    },
+    "weakness":{
+      "persent":1,
+      "fire": false,
+      "common": false,
+      "explode": false
+    }
+  },
   "Enemy1": {
     "hp": 100,
     "moveSpeed": 4,
@@ -25,7 +47,7 @@
     "hp": 100,
     "moveSpeed": 4,
     "atk": 10,
-    "reward": 50,
+    "reward": 100,
     "drop": {
       "ammo": 5,
       "health": 5

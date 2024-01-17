@@ -4,11 +4,8 @@ using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-[Serializable]
-public enum InputDevice
-{
-    KEYBOARD, GAMEPAD
-};
+using static UnityEngine.Rendering.DebugUI;
+
 public class GameManager : MonoBehaviour
 {
     
@@ -31,8 +28,7 @@ public class GameManager : MonoBehaviour
     public float rotateSpeed;
     public Material now_sky;
     private float rotationRepeatValue;
-    //private float maxtime;
-    List<string> GamePadKey=new List<string>();
+    //private float maxtime;  
 
     public int currentStage;
 
@@ -44,13 +40,15 @@ public class GameManager : MonoBehaviour
         get
         {
             if (instance == null) instance = FindObjectOfType<GameManager>();
-
             return instance;
         }
     }
     public static InputDevice LastInputDevice
     {
-        set { Instance.lastInputDevice = value; }
+        set { 
+            if(Instance.lastInputDevice!=value) UIButton.SetUIText(value);
+            Instance.lastInputDevice = value; 
+        }
         get
         {   
             return Instance.lastInputDevice;
@@ -82,6 +80,7 @@ public class GameManager : MonoBehaviour
         usedScrap = 0;
         //maxtime = timer;        
         lastInputDevice = InputDevice.KEYBOARD;
+        UIButton.SetUIText(lastInputDevice);
 
         if (MaxNPCCount == 0) MaxNPCCount = 5;
         NPCCount = GameObject.FindGameObjectsWithTag("NPC").Length;
@@ -113,7 +112,7 @@ public class GameManager : MonoBehaviour
     void TimerUpdate() {
         timer -= Time.deltaTime;
         EnemyGeneratorManager.Instance?.ChangeMaxEnemy(timer / (playTime * 60));
-        PlayerPrefs.SetFloat("timer", playTime * 60 - timer);
+        PlayerPrefs.SetFloat("clearTime", playTime * 60 - timer);
         if (timerScript) timerScript.setTimerString(timer);
     }
     public void EndGame()
@@ -130,6 +129,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("killCount",killCount);
         PlayerPrefs.SetInt("playerDamagedCount", playerDamagedCount);
         PlayerPrefs.SetInt("usedScrap", usedScrap);
+        PlayerPrefs.SetFloat("remainingTime", timer);
         SceneManager.LoadScene("Result");
     }
     

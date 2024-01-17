@@ -25,6 +25,8 @@ public class EnemyBase_Manager : MonoBehaviour
     public int[] stage = new int[2] { 0, 0 };//壊れてるゲートの確認
     public bool[] moveFlg = new bool[2] {false,false}; //ワープを一度実行するフラグ
     private bool[] BaseMove = new bool[2] { false, false }; //そのステージに一度ワープしているかの確認
+
+    private ShopController[] shopScript = new ShopController[3]; //ショップの管理
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,10 @@ public class EnemyBase_Manager : MonoBehaviour
         teleportCounter = 0;
         teleportFlg = false;
         counterUI.SetActive(false);
+        for (int i = 0; i < shopScript.Length; ++i)
+        {
+            shopScript[i] = GameObject.Find("Shop" + (i+1)).GetComponent<ShopController>();
+        }
     }
 
     // Update is called once per frame
@@ -111,13 +117,21 @@ public class EnemyBase_Manager : MonoBehaviour
     {
         if (stage[0] != 0 && moveFlg[0])
         {
-            if (enemyBase[0] != null) enemyBase[0].gameObject.transform.position = movePoint[2];
+            if (enemyBase[0] != null)
+            {
+                enemyBase[0].gameObject.transform.position = movePoint[2];
+                MoveGuard(enemyBase[0].transform.GetComponentsInChildren<EnemyGuardController>());                
+            }
             else
             {
                 GameObject obj = Instantiate(EnemyBase_Prefab, movePoint[2], Quaternion.Euler(0, 180, 0));
                 enemyBase[0] = obj;
             }
-            if (enemyBase[1] != null) enemyBase[1].gameObject.transform.position = movePoint[3];
+            if (enemyBase[1] != null)
+            {
+                enemyBase[1].gameObject.transform.position = movePoint[3];
+                MoveGuard(enemyBase[1].transform.GetComponentsInChildren<EnemyGuardController>());
+            }
             else
             {
                 GameObject obj = Instantiate(EnemyBase_Prefab, movePoint[3], Quaternion.Euler(0, 180, 0));
@@ -125,16 +139,26 @@ public class EnemyBase_Manager : MonoBehaviour
             }
             moveFlg[0] = false;
             BaseMove[0] = true;
+            shopScript[0].BreakShop();
+            shopScript[1].RevivalShop();
         }
         if (stage[1] != 0 && moveFlg[1])
         {
-            if (enemyBase[0] != null) enemyBase[0].gameObject.transform.position = movePoint[4];
+            if (enemyBase[0] != null)
+            {
+                enemyBase[0].gameObject.transform.position = movePoint[4];
+                MoveGuard(enemyBase[1].transform.GetComponentsInChildren<EnemyGuardController>());
+            }
             else
             {
                 GameObject obj = Instantiate(EnemyBase_Prefab, movePoint[4], Quaternion.Euler(0, 180, 0));
                 enemyBase[0] = obj;
             }
-            if (enemyBase[1] != null) enemyBase[1].gameObject.transform.position = movePoint[5];
+            if (enemyBase[1] != null)
+            {
+                enemyBase[1].gameObject.transform.position = movePoint[5];
+                MoveGuard(enemyBase[1].transform.GetComponentsInChildren<EnemyGuardController>());
+            }
             else
             {
                 GameObject obj = Instantiate(EnemyBase_Prefab, movePoint[5], Quaternion.Euler(0, 180, 0));
@@ -142,6 +166,14 @@ public class EnemyBase_Manager : MonoBehaviour
             }
             moveFlg[1] = false;
             BaseMove[1] = true;
+            shopScript[1].BreakShop();
+            shopScript[2].RevivalShop();
+        }
+    }
+    private void MoveGuard(EnemyGuardController[] guards)
+    {
+        foreach (var g in guards) {
+            g.TeleportRandomAroundBase();
         }
     }
 
@@ -157,6 +189,7 @@ public class EnemyBase_Manager : MonoBehaviour
             enemyBase[1] = obj;
             stage[1] = 0;
             BaseMove[1] = false;
+            shopScript[1].RevivalShop();
         }
         //第2ステージですべて破壊された場合
         else if (stage[0] != 0 && BaseMove[0])
@@ -167,6 +200,7 @@ public class EnemyBase_Manager : MonoBehaviour
             enemyBase[1] = obj;
             stage[0] = 0;
             BaseMove[0] = false;
+            shopScript[0].RevivalShop();
         }
         else
         {

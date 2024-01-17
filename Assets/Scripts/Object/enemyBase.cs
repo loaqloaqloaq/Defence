@@ -10,6 +10,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     private float HP;                //HP
     private float MaxHP;             //最大HP
     private float width, gaugeWidth; //ゲージ幅
+    private int reward;              //スクラップのドロップ量
     [SerializeField] GameObject canvas;      //敵拠点UI
     [SerializeField] GameObject explosion;   //爆発(砲弾発射) エフェクト
     [SerializeField] GameObject HPGauge;     //HPゲージ
@@ -40,6 +41,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         width = gaugeWidth;
         MaxHP = 500f;
         HP = MaxHP;
+        reward = 1000;
         //HP表示設定
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
         //ダメージを受けていないを設定
@@ -113,6 +115,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public void Destroy()
     {
         dead = true;
+        GameManager.Instance.AddScrap(reward);
         //animationを再生
         animator.SetTrigger("break");
         HPGauge.GetComponent<Animator>().SetTrigger("hideHP");
