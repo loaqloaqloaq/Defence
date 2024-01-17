@@ -37,3 +37,5 @@
 - ワープエフェクト：https://www.pngwing.com/en/free-png-bniag
 - キーアイコン(キーボード)：https://www.deviantart.com/sungraphica/art/Keyboard-Icon-collection-450-Game-Icon-981640535 
 - キーアイコン(ゲームパッド)：https://www.deviantart.com/sungraphica/art/Xbox-and-Playstation-Controller-Icon-Collection-981640469
+- UI Flashlight icon：https://www.flaticon.com/free-icon/flashlight_5009264
+- UI Map icon：https://www.flaticon.com/free-icon/map_592245

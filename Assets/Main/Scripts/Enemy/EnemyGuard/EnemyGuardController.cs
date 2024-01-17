@@ -343,8 +343,13 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
     }
 
     public void TeleportRandomAroundBase() {
-        var spwanRange = guardRange - 5f;
-        originalPos = enemyBase.position + new Vector3(UnityEngine.Random.Range(-spwanRange, spwanRange), 0, UnityEngine.Random.Range(-spwanRange, spwanRange));
+        var baseRadius = 12f;
+        var spwanRange = guardRange - 5f - baseRadius;
+        var randX = UnityEngine.Random.Range(-spwanRange, spwanRange);
+        if (randX > 0) randX += baseRadius; else randX -= baseRadius;
+        var randZ = UnityEngine.Random.Range(-spwanRange, spwanRange);
+        if (randZ > 0) randZ += baseRadius; else randZ -= baseRadius;
+        originalPos = enemyBase.position + new Vector3(randX, 0, randZ);
         agent.enabled = false;
         transform.position = originalPos;
         agent.enabled = true;

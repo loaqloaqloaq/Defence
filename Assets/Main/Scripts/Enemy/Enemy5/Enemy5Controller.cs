@@ -234,6 +234,7 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
         animator.SetTrigger("die");
         Drop();
         GameManager.Instance.AddScrap(reward);
+        if (turretController != null) turretController.RemoveAbnormality(AbnormalityType.STOP);
         //GetComponent<Rigidbody>().isKinematic = true;
     }
     private void Drop()
