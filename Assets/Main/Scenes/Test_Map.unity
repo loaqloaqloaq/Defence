@@ -9451,12 +9451,28 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 402924605522166695, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 402924605522166695, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1192.7856
+      objectReference: {fileID: 0}
+    - target: {fileID: 402924605522166695, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17.000034
+      objectReference: {fileID: 0}
     - target: {fileID: 1476222728671561052, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1476222728671561052, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2491243734813584315, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3554753182035613821, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}

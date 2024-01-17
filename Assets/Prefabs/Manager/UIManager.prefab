@@ -19675,7 +19675,7 @@ Transform:
   - {fileID: 1735300005795352515}
   - {fileID: 3037189217508534199}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9068163846488966494
 MonoBehaviour:
@@ -19783,7 +19783,11 @@ MonoBehaviour:
   interactTexts:
   - {fileID: 1247779692408263491}
   - {fileID: 7742424673256318438}
-  weaponBtns: []
+  weaponBtns:
+  - {fileID: 8469412194087184254}
+  - {fileID: 2792631416511151072}
+  - {fileID: 4380298743188512111}
+  - {fileID: 1589800436554941794}
   ButtonDesc: {fileID: 8593805498356061764}
 --- !u!1 &9051033018377331325
 GameObject:
@@ -20475,8 +20479,20 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8640323675671188661, guid: 8f710c9ff70ec4a48bfc812351138650, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640323675671188661, guid: 8f710c9ff70ec4a48bfc812351138650, type: 3}
       propertyPath: m_SizeDelta.x
       value: 218.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640323675671188661, guid: 8f710c9ff70ec4a48bfc812351138650, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1192.7856
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640323675671188661, guid: 8f710c9ff70ec4a48bfc812351138650, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17.000034
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

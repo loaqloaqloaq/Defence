@@ -39,13 +39,17 @@ public class ScrollingText : MonoBehaviour
         if(start) Invoke("SetStartPos", 0.1f);
     }
     public void SetStartPos() {
+        if (index == -1)
+        {
+            Debug.LogWarning("warning text index error");
+        }        
         Vector3 pos = textStartPos;
-        pos.x += (message.rectTransform.sizeDelta.x * 2 * index);        
+        pos.x += (message.rectTransform.rect.width * 2 * index);        
         message.rectTransform.anchoredPosition = pos;
     }
     void SetNextToOther() {
         Vector3 pos = other.GetComponent<RectTransform>().anchoredPosition ;
-        pos.x += message.rectTransform.sizeDelta.x * 2;        
+        pos.x += message.rectTransform.rect.width * 2;        
         message.rectTransform.anchoredPosition = pos;
     }
 
