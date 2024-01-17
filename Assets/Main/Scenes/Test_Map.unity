@@ -9366,6 +9366,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
+      propertyPath: scrap
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
       propertyPath: scrapUI
       value: 
       objectReference: {fileID: 466896143}
@@ -9510,6 +9514,12 @@ PrefabInstance:
     - target: {fileID: 5554893452609229334, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855138175035904259, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: m_text
+      value: '001000
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 6996476370131257320, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
       propertyPath: weaponBtns.Array.size
