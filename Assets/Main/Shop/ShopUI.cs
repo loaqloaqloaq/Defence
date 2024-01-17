@@ -47,6 +47,8 @@ public class ShopUI : MonoBehaviour
 
     public bool isOpened;
     Dictionary<string, GameObject> buttons = new Dictionary<string, GameObject>();
+
+    [SerializeField]GameObject closeBtn;
     int scrap;
     int Scrap
     {
@@ -218,6 +220,9 @@ public class ShopUI : MonoBehaviour
     GameObject Buttons(int index) { 
         return buttons.ElementAt(index).Value.gameObject;
     }
+    int ButtonsIndex(GameObject btn) {
+        return buttons.Values.ToList().IndexOf(btn);
+    }
     private void Disable()
     {
         UIManager.Instance.SetMouseVisible(false);
@@ -241,6 +246,8 @@ public class ShopUI : MonoBehaviour
     
 
     private void UpdateButtons(string key=null) {
+        var current = eventSystem.currentSelectedGameObject?.GetComponent<Button>();
+        var currentIndex = current? ButtonsIndex(current.gameObject):-1;
         if (key != null)
         {
             if (buttons.ContainsKey(key))
@@ -252,19 +259,23 @@ public class ShopUI : MonoBehaviour
         }
         else {
             foreach (var (btnKey,btn) in buttons) {
-                UpdateButtonDesc(btn,btnKey);
+                UpdateButtonDesc(btn,btnKey);                
             }
+        }        
+        if (current?.interactable==false) {
+            FindInteratableButton(currentIndex);
         }
     }
     private void UpdateButtonDesc(GameObject btn,string key) {
         var tmp = btn.transform.Find("Desc").GetComponent<TextMeshProUGUI>();
         var b = btn.GetComponent<Button>();
+        var interactable = true;
         switch (key) {
             case "allies":
                 tmp.text = $"LEFT\n<b>{GameManager.Instance.MaxNPCCount-GameManager.Instance.NPCCount}/{GameManager.Instance.MaxNPCCount}</b>";
-                if (GameManager.Instance.NPCCount >= GameManager.Instance.MaxNPCCount) b.interactable = false;
+                if (GameManager.Instance.NPCCount >= GameManager.Instance.MaxNPCCount) interactable = false;
                 else {
-                    b.interactable = false;
+                    interactable = true;
                 }
                 break;
             default:
@@ -272,8 +283,25 @@ public class ShopUI : MonoBehaviour
                 break;
         }
         var item = Array.Find(ShopJsonLoader.Items, i => i.name == key);
-        if (GameManager.Instance.scrap < item.cost) b.interactable = false;
-        else b.interactable = true;
+        if (GameManager.Instance.scrap < item.cost) b.interactable = interactable && false;
+        else b.interactable = interactable && true;
+    }
+    private void FindInteratableButton(int index) {       
+        for (int i = index - 1; i > 0; i--) {
+            if (Buttons(i).GetComponent<Button>().interactable)
+            {                
+                eventSystem.SetSelectedGameObject(Buttons(i));
+                return;
+            }
+        }
+        for (int i = index + 1; i < buttons.Count; i++) {
+            if (Buttons(i).GetComponent<Button>().interactable)
+            {
+                eventSystem.SetSelectedGameObject(Buttons(i));
+                return;
+            }
+        }        
+        if (closeBtn) eventSystem.SetSelectedGameObject(closeBtn);
     }
     //数字アニメション用
     private Coroutine startedCoroutine;

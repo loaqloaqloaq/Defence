@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class PlayerLight : MonoBehaviour
 {
-    [SerializeField] GameObject playerLight;
-    [SerializeField] Transform CameraLookAt;
+    [SerializeField] GameObject playerLight;  
     bool lightOn;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +20,7 @@ public class PlayerLight : MonoBehaviour
             lightOn = !lightOn;
             playerLight.SetActive(lightOn);
         }
-        if (lightOn && CameraLookAt) {
+        if (lightOn) {
             RaycastHit hitInfo;
             Ray ray=new Ray();
             ray.origin = playerLight.transform.position;
@@ -32,7 +31,7 @@ public class PlayerLight : MonoBehaviour
             }
             else
             {
-                playerLight.transform.localEulerAngles = CameraLookAt.localEulerAngles;
+                playerLight.transform.LookAt(Camera.main.transform.forward);
             }
             
         }
