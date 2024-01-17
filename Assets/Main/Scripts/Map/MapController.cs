@@ -141,16 +141,8 @@ public class MapController : MonoBehaviour, IPointerClickHandler
                     }
                 }
                 if (Input.GetButtonDown("Submit")) {
-                    Vector2 pos = new Vector2(0, 0);
-                    if (RectTransformUtility.ScreenPointToLocalPointInRectangle(miniMapImage.rectTransform, cursor.anchoredPosition, cam, out pos))
-                    {
-                        Texture texture = miniMapImage.texture;
-                        Rect rect = miniMapImage.rectTransform.rect;
-                        float coordX = Mathf.Clamp(0, (((pos.x - rect.x) * texture.width) / rect.width), texture.width);
-                        float coordY = Mathf.Clamp(0, (((pos.y - rect.y) * texture.height) / rect.height), texture.height);
-                        Vector2 coord = new Vector2(coordX / texture.width, coordY / texture.height);
-                        Debug.Log(coord);
-                    }
+                    var pos = GetClickedWorldPos(cursor.position, null);
+                    CastRayToWorld(pos);
                 }
             }
             else {
@@ -183,11 +175,14 @@ public class MapController : MonoBehaviour, IPointerClickHandler
         if (eventData.button != PointerEventData.InputButton.Left) return;
         
         if (mouseHoldTime >= 0.2f) return;
-        Vector2 curosr = new Vector2(0, 0);
+        var pos = GetClickedWorldPos(eventData.pressPosition, eventData.pressEventCamera);
+        CastRayToWorld(pos);
+    }
 
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(miniMapImage.rectTransform,eventData.pressPosition, eventData.pressEventCamera, out curosr))
+    private Vector2 GetClickedWorldPos(Vector2 clickedPos, Camera cam) {
+        Vector2 curosr = Vector2.zero;
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(miniMapImage.rectTransform, clickedPos, cam, out curosr))
         {
-
             Texture texture = miniMapImage.texture;
             Rect rect = miniMapImage.rectTransform.rect;
 
@@ -197,12 +192,9 @@ public class MapController : MonoBehaviour, IPointerClickHandler
             float calX = coordX / texture.width;
             float calY = coordY / texture.height;
 
-
-            curosr = new Vector2(calX, calY);
-           
-            CastRayToWorld(curosr);
+            curosr = new Vector2(calX, calY);            
         }
-
+        return curosr;
     }
 
     private void CastRayToWorld(Vector2 vec)
