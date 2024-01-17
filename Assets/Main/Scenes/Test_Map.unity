@@ -755,6 +755,11 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!224 &437058758 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2962093817411531217, guid: 5df8cf621ae925549a34327095a05aca, type: 3}
+  m_PrefabInstance: {fileID: 4079951119558121110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &440457981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1426,11 +1431,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
---- !u!224 &683664757 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8469412194087184254, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
-  m_PrefabInstance: {fileID: 811996099}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &722876682
 GameObject:
   m_ObjectHideFlags: 0
@@ -9366,10 +9366,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
-      propertyPath: scrap
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
       propertyPath: scrapUI
       value: 
       objectReference: {fileID: 466896143}
@@ -9515,32 +9511,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6855138175035904259, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
-      propertyPath: m_text
-      value: '001000
-
-'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6996476370131257320, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
-      propertyPath: weaponBtns.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6996476370131257320, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
-      propertyPath: weaponBtns.Array.data[0]
+    - target: {fileID: 7526491643248383018, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: closeBtn
       value: 
-      objectReference: {fileID: 683664757}
-    - target: {fileID: 6996476370131257320, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
-      propertyPath: weaponBtns.Array.data[1]
-      value: 
-      objectReference: {fileID: 1466366454}
-    - target: {fileID: 6996476370131257320, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
-      propertyPath: weaponBtns.Array.data[2]
-      value: 
-      objectReference: {fileID: 838571066}
-    - target: {fileID: 6996476370131257320, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
-      propertyPath: weaponBtns.Array.data[3]
-      value: 
-      objectReference: {fileID: 989501647}
+      objectReference: {fileID: 1809501672}
     - target: {fileID: 7816079881022033152, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -9558,11 +9532,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
---- !u!224 &838571066 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4380298743188512111, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
-  m_PrefabInstance: {fileID: 811996099}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &838724806
 GameObject:
   m_ObjectHideFlags: 0
@@ -9897,11 +9866,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
---- !u!224 &989501647 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1589800436554941794, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
-  m_PrefabInstance: {fileID: 811996099}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1002491469
 GameObject:
   m_ObjectHideFlags: 0
@@ -11014,11 +10978,6 @@ Transform:
   m_Father: {fileID: 1486956809}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &1466366454 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2792631416511151072, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
-  m_PrefabInstance: {fileID: 811996099}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1486956808
 GameObject:
   m_ObjectHideFlags: 0
@@ -11578,6 +11537,11 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!1 &1809501672 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6909795496680116641, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+  m_PrefabInstance: {fileID: 811996099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1821792657
 GameObject:
   m_ObjectHideFlags: 0
@@ -12549,6 +12513,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3873295939370766500, guid: 5df8cf621ae925549a34327095a05aca, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 437058758}
     - target: {fileID: 4763420533841293915, guid: 5df8cf621ae925549a34327095a05aca, type: 3}
       propertyPath: m_RootOrder
       value: 21

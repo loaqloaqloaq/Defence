@@ -83,6 +83,10 @@ public class DEBUG : MonoBehaviour
             ++timeScale;
             Time.timeScale = timeScale;
         }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            WarningController.ShowWarning("debug", "debug tesing test warning", 2);
+        }
 
 
 

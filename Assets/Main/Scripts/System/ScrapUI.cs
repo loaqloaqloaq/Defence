@@ -37,6 +37,7 @@ public class ScrapUI : MonoBehaviour
     }   
     private IEnumerator NumberAnimation(int target)
     {
+        
         WaitForSeconds wait = new WaitForSeconds(1f / CountFPS);
         int prev = scrap;
         int stepAmount;

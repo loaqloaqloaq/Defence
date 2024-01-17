@@ -18,13 +18,44 @@ public class EnemyGuardNavigator : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         ec = GetComponent<EnemyGuardController>();
-        player = GameObject.Find("Player").transform;
-        
+        player = GameObject.Find("Player").transform;        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (ec?.agent?.enabled == true)
+        {
+            target = ec.target ?? player;
+            switch (ec.state)
+            {
+                case EnemyGuardController.State.STOP:
+                    if (ec?.agent?.enabled == true && ec?.agent?.isStopped == false) ec.agent.isStopped = true;
+                    animator.SetBool("walking", false);
+                    if (Vector3.Distance(ec.enemyBase.transform.position, target.position) < ec.guardRange && Vector3.Distance(transform.position, target.position) > 1.5f)
+                    {
+                        ec.state= EnemyGuardController.State.FOLLOWING;
+                    }                    
+                    break;
+                case EnemyGuardController.State.FOLLOWING:
+                    ec.agent.isStopped = false;
+                    animator.SetBool("walking", true);
+                    var targetPos = target.position;
+                    ec.agent.destination = targetPos;
+                    if (Vector3.Distance(ec.enemyBase.transform.position, target.position) > (ec.guardRange + 10) && Vector3.Distance(transform.position, ec.enemyBase.position) > 0.2f)
+                    {
+                        ec.agent.destination = ec.originalPos;
+                    }
+                    else if (Vector3.Distance(transform.position, ec.enemyBase.position) <= 0.2f) { 
+                        ec.state= EnemyGuardController.State.STOP;
+                    }
+                    break;
+                case EnemyGuardController.State.ATTACKING:
+                    animator.SetBool("walking", false);
+                    if (ec?.agent?.enabled == true && ec?.agent?.isStopped == false) ec.agent.isStopped = true;
+                    break;
+            }
+        }
         if (ec?.agent?.enabled == true && !ec.attacking)
         {
             target = ec.target ?? player;

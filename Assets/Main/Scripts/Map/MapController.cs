@@ -17,6 +17,7 @@ public class MapController : MonoBehaviour, IPointerClickHandler
     Camera cam;
     [SerializeField] float maxZoom, minZoom;
     [SerializeField] LayerMask whatIsTarget;
+    [SerializeField] RectTransform cursor;
 
     RawImage miniMapImage;
 
@@ -28,6 +29,8 @@ public class MapController : MonoBehaviour, IPointerClickHandler
     float[] maxZ, maxX,minZ,minX; 
     float maxZdif, maxXdif, minZdif, minXdif;
     public float zoomPresent;
+
+    [SerializeField] float curMaxY, curMinY,curMaxX,curMinX;
 
     float mouseHoldTime;
 
@@ -66,22 +69,33 @@ public class MapController : MonoBehaviour, IPointerClickHandler
         if (UIManager.Instance) isPause = UIManager.Instance.isPause;
 
         //マップの表示や非表示
-        if (Input.GetKeyDown(KeyCode.M) && !isPause) {
+        if (Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown("joystick button 6") && !isPause) {
             SetVisible(!enable);
         }
         //マップのコントロール
         if (enable)
         {
             //マップスケール
+            //マウス
             if (Input.mouseScrollDelta.y != 0)
             {
-                cam.orthographicSize -= Input.mouseScrollDelta.y * 5;
+                cam.orthographicSize -= Input.mouseScrollDelta.y * 200 * Time.deltaTime;
                 if (cam.orthographicSize > maxZoom) cam.orthographicSize = maxZoom;
                 else if (cam.orthographicSize < minZoom) cam.orthographicSize = minZoom;
                 cam.transform.position = CheckMargin(cam.transform.position);
             }
+            //ゲームパッド
+            if (Input.GetKey("joystick button 4")) {               
+                cam.orthographicSize +=  200 * Time.deltaTime;
+                if (cam.orthographicSize > maxZoom) cam.orthographicSize = maxZoom;
+            }
+            if (Input.GetKey("joystick button 5")) {
+                cam.orthographicSize -=  200 * Time.deltaTime;
+                if (cam.orthographicSize < minZoom) cam.orthographicSize = minZoom;
+            }
 
             //マップ移動
+            //マウス
             if (Input.GetMouseButtonDown(0))
             {
                 curPos = Input.mousePosition;
@@ -102,13 +116,53 @@ public class MapController : MonoBehaviour, IPointerClickHandler
                     prevPos = curPos;
                 }
             }
-            if (Input.GetMouseButtonUp(0)&& mouseHoldTime < 0.2f)
-            {                
-                
+            //ゲームパッド
+            if (Input.GetAxis("RStick X") != 0 || Input.GetAxis("RStick Y") != 0) {
+                var rx = Input.GetAxis("RStick X");
+                var ry = Input.GetAxis("RStick Y");
+                Vector3 rinput =new Vector3(ry, 0, rx);
+                Vector3 pos = cam.transform.position;
+                pos -= (rinput*Time.deltaTime*200);
+                cam.transform.position = CheckMargin(pos);
+            }
+            
+            if (GameManager.LastInputDevice == InputDevice.GAMEPAD)
+            {
+                if(cursor?.gameObject.activeSelf==false) cursor.gameObject.SetActive(true);
+                if (cursor?.gameObject.activeSelf == true) {
+                    if (Input.GetAxis("LStick X") != 0 || Input.GetAxis("LStick Y") != 0)
+                    {
+                        var rx = Input.GetAxis("LStick X");
+                        var ry = Input.GetAxis("LStick Y");
+                        Vector2 rinput = new Vector2(rx, ry);
+                        Vector2 pos = cursor.anchoredPosition;
+                        pos += (rinput * Time.deltaTime * 200);
+                        cursor.anchoredPosition = CheckCursorMargin(pos);
+                    }
+                }
+                if (Input.GetButtonDown("Submit")) {
+                    Vector2 pos = new Vector2(0, 0);
+                    if (RectTransformUtility.ScreenPointToLocalPointInRectangle(miniMapImage.rectTransform, cursor.anchoredPosition, cam, out pos))
+                    {
+                        Texture texture = miniMapImage.texture;
+                        Rect rect = miniMapImage.rectTransform.rect;
+                        float coordX = Mathf.Clamp(0, (((pos.x - rect.x) * texture.width) / rect.width), texture.width);
+                        float coordY = Mathf.Clamp(0, (((pos.y - rect.y) * texture.height) / rect.height), texture.height);
+                        Vector2 coord = new Vector2(coordX / texture.width, coordY / texture.height);
+                        Debug.Log(coord);
+                    }
+                }
+            }
+            else {
+                if (cursor?.gameObject.activeSelf == true) cursor.gameObject.SetActive(false);
             }
         }
     }
-
+    Vector2 CheckCursorMargin(Vector2 pos) {
+        pos.x = pos.x > curMaxX ? curMaxX : pos.x < curMinX ? curMinX : pos.x;
+        pos.y = pos.y > curMaxY ? curMaxY : pos.y < curMinY ? curMinY : pos.y;
+        return pos;
+    }
     Vector3 CheckMargin(Vector3 pos) {
         zoomPresent = 1-((cam.orthographicSize - minZoom) / (maxZoom - minZoom));        
         float minX = this.minX[1] + minXdif * zoomPresent;
@@ -131,8 +185,7 @@ public class MapController : MonoBehaviour, IPointerClickHandler
         if (mouseHoldTime >= 0.2f) return;
         Vector2 curosr = new Vector2(0, 0);
 
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(miniMapImage.rectTransform,
-            eventData.pressPosition, eventData.pressEventCamera, out curosr))
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(miniMapImage.rectTransform,eventData.pressPosition, eventData.pressEventCamera, out curosr))
         {
 
             Texture texture = miniMapImage.texture;
@@ -180,14 +233,20 @@ public class MapController : MonoBehaviour, IPointerClickHandler
         if (playerInput) playerInput.enabled = !enable;
         UIManager.Instance?.SetMouseVisible(enable);
         //mapCanvas.enabled = enable;
-        if (player && enable)
+        if (enable)
         {
-            cam.transform.position = new Vector3(
-                player.position.x,
-                cam.transform.position.y,
-                player.position.z
-                );
-            cam.transform.position = CheckMargin(cam.transform.position);
+            if (player)
+            {
+                cam.transform.position = new Vector3(
+                    player.position.x,
+                    cam.transform.position.y,
+                    player.position.z
+                    );
+                cam.transform.position = CheckMargin(cam.transform.position);
+            }
+            if (cursor) {
+                cursor.anchoredPosition = Vector2.zero;
+            }
         }
     }
 

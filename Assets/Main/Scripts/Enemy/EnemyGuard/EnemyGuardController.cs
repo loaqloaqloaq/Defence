@@ -33,8 +33,12 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
 
     Dictionary<Part, bool> takingDamage = new Dictionary<Part, bool>();
 
-    float checkFeq, lastCheck;   
-    
+    float checkFeq, lastCheck;
+
+    public enum State { 
+        FOLLOWING,STOP,ATTACKING
+    }
+    public State state;
 
     //攻撃を食らった回数
     //int damage_Cnt = 0;
@@ -59,6 +63,7 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
 
         SoundManager.Instance?.AddAudioInfo(hitSE);
         SoundManager.Instance?.AddAudioInfo(deadSE);
+        state = State.STOP;
     }
 
     // Start is called before the first frame update
@@ -152,6 +157,7 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
                 if (disToTarget < 1.5f && animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
                 {
                     attacking = true;
+                    state = State.ATTACKING;
                     //face to target
                     var lookPos = target.position - transform.position;
                     lookPos.y = 0;
@@ -280,36 +286,11 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
 
     private void ResetAfterAttack() { 
         attacking = false;
+        state = State.STOP;
         attacked = false;
         agent.isStopped = false;
     }
-
-    /*
-    //ダメージ処理
-    public void Damage(int damage)
-    {
-        if (dead) return;
-
-        //HPを減少
-        HP -= damage;
-        //ダメージを食らった回数
-        ++damage_Cnt;
-        //HPが0以下かつ一回の攻撃で死んだとき
-        if (HP <= 0 && damage_Cnt == 1)
-        {
-            //すぐに破壊させる
-            destoryTimer = 3.0f;
-            animator.SetTrigger("die");
-            dead = true;
-        }
-        //HPが0以下かつ二回以上の攻撃で死んだとき
-        else if (HP <= 0 && damage_Cnt >= 2)
-        {
-            animator.SetTrigger("die");
-            dead = true;
-        }
-    }
-    */
+       
     private void setCollider(GameObject gb,bool enable) {
         foreach (Transform child in transform) {
             child.GetComponent<Collider>().enabled = enable;
@@ -344,7 +325,7 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
 
     public void TeleportRandomAroundBase() {
         var baseRadius = 12f;
-        var spwanRange = guardRange - 5f - baseRadius;
+        var spwanRange = baseRadius+5;
         var randX = UnityEngine.Random.Range(-spwanRange, spwanRange);
         if (randX > 0) randX += baseRadius; else randX -= baseRadius;
         var randZ = UnityEngine.Random.Range(-spwanRange, spwanRange);

@@ -85,7 +85,7 @@ public class GateController : MonoBehaviour,IDamageable
         {
             ani.SetTrigger("damage");
             var warningMsg = "GATE " + gateNumber + " IS UNDER ATTACK!!   HP LEFT: " + Math.Round(HP / MaxHP * 100, 2) + "%";
-            WarningController.Instance._ShowWarning("gateAttacked",warningMsg, 2);
+            WarningController.ShowWarning("gateAttacked",warningMsg, 2);
         }
 
         HPfill.SetActive(true);
@@ -99,7 +99,7 @@ public class GateController : MonoBehaviour,IDamageable
         broke = true;
         HP = 0;
         GetComponent<BoxCollider>().enabled = false;
-        WarningController.Instance._ShowWarning("gateDestroyed", "GATE " + gateNumber + " HAS BEEN DESTROYED!!",5);
+        WarningController.ShowWarning("gateDestroyed", "GATE " + gateNumber + " HAS BEEN DESTROYED!!",5);
         ani.SetTrigger("break");
         HPfill.GetComponent<Animator>().SetTrigger("hideHP");        
         if (EnemyBase_Manager != null && gateNumber <= 2)

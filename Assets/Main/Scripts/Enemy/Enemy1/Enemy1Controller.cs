@@ -275,7 +275,7 @@ public class Enemy1Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
                 pos.z += UnityEngine.Random.Range(-0.5f, 0.5f);
                 pos.y = 200f;
                 RaycastHit hitInfo;
-                if (Physics.Raycast(pos, Vector3.down, out hitInfo))
+                if (Physics.Raycast(pos, Vector3.down, out hitInfo, LayerMask.GetMask("FLoor")))
                 {
                     pos = hitInfo.point;
                 }
