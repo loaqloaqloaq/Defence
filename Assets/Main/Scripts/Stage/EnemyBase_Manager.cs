@@ -25,6 +25,8 @@ public class EnemyBase_Manager : MonoBehaviour
     public int[] stage = new int[2] { 0, 0 };//壊れてるゲートの確認
     public bool[] moveFlg = new bool[2] {false,false}; //ワープを一度実行するフラグ
     private bool[] BaseMove = new bool[2] { false, false }; //そのステージに一度ワープしているかの確認
+
+    private ShopController[] shopScript = new ShopController[3]; //ショップの管理
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,10 @@ public class EnemyBase_Manager : MonoBehaviour
         teleportCounter = 0;
         teleportFlg = false;
         counterUI.SetActive(false);
+        for (int i = 0; i < shopScript.Length; ++i)
+        {
+            shopScript[i] = GameObject.Find("Shop" + (i+1)).GetComponent<ShopController>();
+        }
     }
 
     // Update is called once per frame
@@ -133,6 +139,8 @@ public class EnemyBase_Manager : MonoBehaviour
             }
             moveFlg[0] = false;
             BaseMove[0] = true;
+            shopScript[0].BreakShop();
+            shopScript[1].RevivalShop();
         }
         if (stage[1] != 0 && moveFlg[1])
         {
@@ -158,6 +166,8 @@ public class EnemyBase_Manager : MonoBehaviour
             }
             moveFlg[1] = false;
             BaseMove[1] = true;
+            shopScript[1].BreakShop();
+            shopScript[2].RevivalShop();
         }
     }
     private void MoveGuard(EnemyGuardController[] guards)
@@ -179,6 +189,7 @@ public class EnemyBase_Manager : MonoBehaviour
             enemyBase[1] = obj;
             stage[1] = 0;
             BaseMove[1] = false;
+            shopScript[1].RevivalShop();
         }
         //第2ステージですべて破壊された場合
         else if (stage[0] != 0 && BaseMove[0])
@@ -189,6 +200,7 @@ public class EnemyBase_Manager : MonoBehaviour
             enemyBase[1] = obj;
             stage[0] = 0;
             BaseMove[0] = false;
+            shopScript[0].RevivalShop();
         }
         else
         {
