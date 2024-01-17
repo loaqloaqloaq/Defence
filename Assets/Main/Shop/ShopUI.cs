@@ -327,8 +327,7 @@ public class ShopUI : MonoBehaviour
             while (prev < target)
             {
                 prev += stepAmount;
-                if (prev > target) prev = target;
-                Debug.Log(prev);
+                if (prev > target) prev = target;                
                 scraps.text = String.Format("{0:000000}", prev);
                 yield return wait;
             }            
@@ -337,8 +336,7 @@ public class ShopUI : MonoBehaviour
             while (prev > target)
             {
                 prev += stepAmount;
-                if (prev < target) prev = target;
-                Debug.Log(prev);
+                if (prev < target) prev = target;              
                 scraps.text = String.Format("{0:000000}", prev);
                 yield return wait;
             }            
