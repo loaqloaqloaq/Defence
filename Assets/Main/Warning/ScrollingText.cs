@@ -26,7 +26,7 @@ public class ScrollingText : MonoBehaviour
         pos.x -= scrollSpeed * Time.deltaTime;
         message.rectTransform.anchoredPosition = pos;
 
-        if (pos.x <= message.rectTransform.rect.width * -1 * 2) {
+        if (pos.x <= message.rectTransform.sizeDelta.x * -1 * 2) {
             if (other) SetNextToOther();
             else SetStartPos();
         }         
@@ -40,12 +40,12 @@ public class ScrollingText : MonoBehaviour
     }
     public void SetStartPos() {
         Vector3 pos = textStartPos;
-        pos.x += (message.rectTransform.rect.width * 2 * index);        
+        pos.x += (message.rectTransform.sizeDelta.x * 2 * index);        
         message.rectTransform.anchoredPosition = pos;
     }
     void SetNextToOther() {
         Vector3 pos = other.GetComponent<RectTransform>().anchoredPosition ;
-        pos.x += message.rectTransform.rect.width * 2;        
+        pos.x += message.rectTransform.sizeDelta.x * 2;        
         message.rectTransform.anchoredPosition = pos;
     }
 

@@ -28,8 +28,8 @@ public class UIButton : MonoBehaviour
             }
             if (weaponBtns.Length > 0)
             foreach (var weaponBtn in weaponBtns) {
-                weaponBtn.GetChild(0).gameObject.SetActive(true);
-                weaponBtn.GetChild(1).gameObject.SetActive(false);
+                    weaponBtn.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = true;
+                    weaponBtn.GetChild(0).GetChild(1).gameObject.SetActive(false);
             }
         }
         else
@@ -45,8 +45,8 @@ public class UIButton : MonoBehaviour
             if (weaponBtns.Length > 0)
             foreach (var weaponBtn in weaponBtns)
             {
-                weaponBtn.GetChild(0).gameObject.SetActive(false);
-                weaponBtn.GetChild(1).gameObject.SetActive(true);
+                weaponBtn.GetChild(0).GetComponent<TextMeshProUGUI>().enabled = false;
+                weaponBtn.GetChild(0).GetChild(1).gameObject.SetActive(true);
             }
         }        
         foreach (Transform desc in ButtonDesc) {            
