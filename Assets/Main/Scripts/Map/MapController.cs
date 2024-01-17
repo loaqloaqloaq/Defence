@@ -32,6 +32,7 @@ public class MapController : MonoBehaviour, IPointerClickHandler
     float mouseHoldTime;
 
     Transform player;
+
     void Start()
     {
         enable = false;        
@@ -56,7 +57,6 @@ public class MapController : MonoBehaviour, IPointerClickHandler
         mouseHoldTime = 0;
 
         miniMapImage = transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<RawImage>();
-
     }
 
     // Update is called once per frame
