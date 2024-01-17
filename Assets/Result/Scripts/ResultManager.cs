@@ -44,13 +44,9 @@ public class ResultManager : MonoBehaviour
     private GameObject nowSelectButton;
     //前、選択されていたボタン
     private GameObject prevSelectButton;
-    //デフォルトの不透明度
-    float defaultOpacity;
 
     void Start()
     {
-        //デフォルトの不透明度を設定
-        defaultOpacity = 0.8f;
         //値を取得
         killCount = PlayerPrefs.GetInt("killCount", 0);
         takenDamage　= PlayerPrefs.GetInt("playerDamagedCount", 0);
@@ -77,7 +73,6 @@ public class ResultManager : MonoBehaviour
             nowSelectButton = EventSystem.current.currentSelectedGameObject;
         }
         prevSelectButton = EventSystem.current.currentSelectedGameObject;
-        ChangeButtonEffect();
 
         //"Submit"ボタン (Spaceキー)を押したら
         if (Input.GetButtonDown("Submit"))
@@ -95,36 +90,17 @@ public class ResultManager : MonoBehaviour
         }
     }
 
-    //選択しているボタンのエフェクトを変える
-    private void ChangeButtonEffect()
-    {
-        nowSelectButton.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-        foreach (Button button in FindObjectsOfType<Button>())
-        {
-            if (button.gameObject != nowSelectButton)
-            {
-                Image image = button.GetComponent<Image>();
-                if (image != null)
-                {
-                    image.color = new Color(1, 1, 1, defaultOpacity);
-                }
-            }
-        }
-    }
-
     //シーンの読み込み
     private void LoadScene_Game()
     {
-        //SceneManager.LoadScene("Test_Map");
         LoadingSceneController.LoadScene("Test_Map");
     }
     //もう一度ゲームをプレイ
     public void Retry()
     {
+        //SoundManager.Instance.Play(enterSE, SoundManager.Sound.UI);
         //0.2秒後にシーンを切り替える
         Invoke("LoadScene_Game", 0.2f);
-
-        //SoundManager.Instance.Play(enterSE, SoundManager.Sound.UI);
     }
 
     //シーンの読み込み
@@ -135,10 +111,9 @@ public class ResultManager : MonoBehaviour
     //タイトルへ戻る
     public void ReturntoTitle()
     {
+        //SoundManager.Instance.Play(enterSE, SoundManager.Sound.UI);
         //0.2秒後にシーンを切り替える
         Invoke("LoadScene_Title", 0.2f);
-
-        //SoundManager.Instance.Play(enterSE, SoundManager.Sound.UI);
     }
 
     //リザルト画面で表示する物をセット
@@ -152,8 +127,8 @@ public class ResultManager : MonoBehaviour
             killText.text = "キル数:" + killCount.ToString();
             takenDamageText.text = "受けたダメージ量:" + takenDamage.ToString();
             scrapText.text = "使ったスクラップの数:" + usedScrapCount.ToString();
-            //YouWinの時の背景を表示
-            youWin_BG.SetActive(true);
+            //YouLoseの時の背景を非表示
+            youLose_BG.SetActive(false);
             //BGMを変更
             audioSource.clip = youWin;
         }
@@ -168,8 +143,8 @@ public class ResultManager : MonoBehaviour
             float ms = clearTime * 1000;
             string timeStr = String.Format("{0:00}:{1:00}:{2:000}", (int)ms / 60000, (int)(ms / 1000) % 60, ms % 1000);
             clearTimeText.text = "クリアタイム:" + timeStr;
-            //YouWinの時の背景を表示
-            youWin_BG.SetActive(true);
+            //YouLoseの時の背景を非表示
+            youLose_BG.SetActive(false);
             //BGMを変更
             audioSource.clip = youWin;
         }
@@ -183,8 +158,8 @@ public class ResultManager : MonoBehaviour
             float ms = remainingTime * 1000;
             string timeStr = String.Format("{0:00}:{1:00}:{2:000}", (int)ms / 60000, (int)(ms / 1000) % 60, ms % 1000);
             remainingTimeText.text = "残りタイム:" + timeStr;
-            //YouLoseの時の背景を表示
-            youLose_BG.SetActive(true);
+            //YouWinの時の背景を非表示
+            youWin_BG.SetActive(false);
             //BGMを変更
             audioSource.clip = youLose;
         }
