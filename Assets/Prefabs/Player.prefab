@@ -979,7 +979,7 @@ Transform:
   - {fileID: 5711423090593061627}
   - {fileID: 6322824792793788664}
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1799385376026310230
 Animator:
@@ -1092,7 +1092,7 @@ MonoBehaviour:
   weaponLeftGrip: {fileID: 1799385375007450647}
   excludeTarget:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   rigController: {fileID: 1799385374834032719}
   isHolstered: 0
   animationEvents: {fileID: 1799385374834032718}

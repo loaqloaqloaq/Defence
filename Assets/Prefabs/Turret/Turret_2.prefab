@@ -14755,9 +14755,9 @@ MonoBehaviour:
   firePref: {fileID: 2247100141260638289, guid: a058c0f510608b641bebaeacec21d25f, type: 3}
   isInifinty: 0
   fireRate: 10
-  ammoRemain: 200
+  ammoRemain: 300
   magAmmo: 200
-  magCapacity: 1500
+  magCapacity: 200
   damage: 4
   shootingAngle: 60
   attackRoot: {fileID: 781156039725122233}
@@ -14782,6 +14782,7 @@ MonoBehaviour:
     resourcePath: 
     audioLength: 0.3
     clip: {fileID: 8300000, guid: d3125e4ccfc2b124e9202420d33b752b, type: 3}
+  abnormality: 0000000000000000
 --- !u!82 &5340239322590573016
 AudioSource:
   m_ObjectHideFlags: 0

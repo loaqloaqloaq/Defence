@@ -29277,9 +29277,9 @@ MonoBehaviour:
   state: 0
   isInifinty: 0
   fireRate: 12
-  ammoRemain: 1000
-  magAmmo: 40
-  magCapacity: 40
+  ammoRemain: 2000
+  magAmmo: 120
+  magCapacity: 120
   damage: 8
   shootingAngle: 30
   raycastOrigin: {fileID: 781156039725122233}
@@ -29309,6 +29309,7 @@ MonoBehaviour:
     resourcePath: 
     audioLength: 0.3
     clip: {fileID: 8300000, guid: 7d3d9e2371152e240870e100a6132a2f, type: 3}
+  abnormality: 0000000000000000
 --- !u!82 &5340239322590573016
 AudioSource:
   m_ObjectHideFlags: 0

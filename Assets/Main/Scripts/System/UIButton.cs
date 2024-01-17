@@ -24,7 +24,7 @@ public class UIButton : MonoBehaviour
 
             if (interactTexts.Length>0)
             foreach(var interactText in interactTexts) {
-                interactText.text = "PRESS F";
+                interactText.text = "PRESS F KEY";
             }
             if (weaponBtns.Length > 0)
             foreach (var weaponBtn in weaponBtns) {

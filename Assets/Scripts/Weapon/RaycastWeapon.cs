@@ -221,16 +221,12 @@ public class RaycastWeapon : MonoBehaviour
                 damageMessage.hitPoint = hitInfo.point;
                 damageMessage.hitNormal = hitInfo.normal;
                 damageMessage.attackType = AttackType.Common;
-
-                if (!target.ApplyDamage(damageMessage))
-                {
-                    //Wall, Floor, Box Layer Process
-                }
-                
+                target.ApplyDamage(damageMessage);
             }
             else
             {
                 //EffectManager.Instance.PlayHitEffect(hitInfo.point, hitInfo.normal, hitInfo.transform);
+                Debug.Log(hitInfo.transform.name);
                 hitEffect.transform.position = hitInfo.point;
                 hitEffect.transform.forward = hitInfo.normal;
                 hitEffect.Emit(1);

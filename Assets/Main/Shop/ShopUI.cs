@@ -213,7 +213,7 @@ public class ShopUI : MonoBehaviour
         scraps.text = String.Format("{0:000000}", GameManager.Instance.scrap);
         shopUI.SetActive(true);
         UIManager.Instance.SetMouseVisible(true);
-        playerUI?.SetActive(false);
+        if (playerUI != null) playerUI.GetComponent<Canvas>().enabled = false;
     }
     GameObject Buttons(int index) { 
         return buttons.ElementAt(index).Value.gameObject;
@@ -222,7 +222,7 @@ public class ShopUI : MonoBehaviour
     {
         UIManager.Instance.SetMouseVisible(false);
         shopUI.SetActive(false);
-        playerUI?.SetActive(true);
+        if (playerUI != null) playerUI.GetComponent<Canvas>().enabled = true;
     }
 
     //UNIY Action
@@ -300,7 +300,7 @@ public class ShopUI : MonoBehaviour
             {
                 prev += stepAmount;
                 if (prev > target) prev = target;
-                Debug.Log(prev);
+                //Debug.Log(prev);
                 scraps.text = String.Format("{0:000000}", prev);
                 yield return wait;
             }            
@@ -310,7 +310,7 @@ public class ShopUI : MonoBehaviour
             {
                 prev += stepAmount;
                 if (prev < target) prev = target;
-                Debug.Log(prev);
+                //Debug.Log(prev);
                 scraps.text = String.Format("{0:000000}", prev);
                 yield return wait;
             }            
