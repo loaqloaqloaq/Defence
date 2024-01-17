@@ -104,7 +104,7 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
         agent.enabled = true;
         target = player;
 
-        guardRange = 30f;
+        guardRange = 50f;
         TeleportRandomAroundBase();
 
         lastCheck = 0;

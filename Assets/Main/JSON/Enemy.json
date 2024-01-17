@@ -3,7 +3,7 @@
     "hp": 200,
     "moveSpeed": 8,
     "atk": 10,
-    "reward": 50,
+    "reward": 100,
     "drop": {
       "ammo": 5,
       "health": 5
@@ -47,7 +47,7 @@
     "hp": 100,
     "moveSpeed": 4,
     "atk": 10,
-    "reward": 50,
+    "reward": 100,
     "drop": {
       "ammo": 5,
       "health": 5
