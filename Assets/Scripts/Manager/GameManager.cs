@@ -9,14 +9,12 @@ using static UnityEngine.Rendering.DebugUI;
 public class GameManager : MonoBehaviour
 {
     
-    public InputDevice lastInputDevice;
-    //Singleton       
-    private static GameManager instance;
+    public InputDevice lastInputDevice;   
 
-    [SerializeField] Timer timerScript;
-    [SerializeField] ScrapUI scrapUI;
+    [SerializeField] Timer timerScript;  
     [SerializeField] float playTime;
     [SerializeField] public int scrap;
+    [SerializeField] public ScrapUI scrapUI;
     public int killCount;
     public int playerDamagedCount;
     public int usedScrap;
@@ -33,8 +31,8 @@ public class GameManager : MonoBehaviour
     public int currentStage;
 
     public int NPCCount,MaxNPCCount;
-
-
+    //Singleton       
+    private static GameManager instance;
     public static GameManager Instance
     {        
         get
@@ -146,13 +144,13 @@ public class GameManager : MonoBehaviour
     public void AddScrap(int amount) { 
         scrap+=amount;
         if (scrap >= 999999) scrap = 999999;
-        if (scrapUI) scrapUI.SetScrapText();
+        if (scrapUI && scrapUI.isActiveAndEnabled) scrapUI.SetScrapText();
     }
 
     public void DeductScrap(int amount){
         scrap -= amount;
         if (scrap <= 0) scrap = 0;
-        if (scrapUI) scrapUI.SetScrapText();
+        if (scrapUI && scrapUI.isActiveAndEnabled) scrapUI.SetScrapText();
         usedScrap += amount;
     }
     private void SkyRotation()

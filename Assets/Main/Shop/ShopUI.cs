@@ -26,6 +26,7 @@ public class ShopUI : MonoBehaviour
     private EventSystem eventSystem;
     [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject playerUI;
+    [SerializeField] private ScrapUI scrapUI;
     [SerializeField] private GameObject player;
     [SerializeField] private Button firstSelectedButton;
     [SerializeField] private TextMeshProUGUI guideText;
@@ -50,7 +51,7 @@ public class ShopUI : MonoBehaviour
 
     [SerializeField]GameObject closeBtn;
     int scrap;
-    int Scrap
+    public int Scrap
     {
         get {
             return scrap;
@@ -228,6 +229,7 @@ public class ShopUI : MonoBehaviour
         UIManager.Instance.SetMouseVisible(false);
         shopUI.SetActive(false);
         playerUI?.SetActive(true);
+        scrapUI?.SetScrapText(false);
     }
 
     //UNIY Action
