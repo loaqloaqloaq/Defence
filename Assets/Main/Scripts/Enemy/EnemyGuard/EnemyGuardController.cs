@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -324,21 +323,14 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
         return Part.BODY;
     }
 
-    public void TeleportRandomAroundBase() {        
+    public void TeleportRandomAroundBase() {
         var baseRadius = 12f;
-        var spwanRange = baseRadius + 5;
-        //check out of navmesh
-        NavMeshHit hit;
-        while(true){            
-            var randX = UnityEngine.Random.Range(baseRadius, spwanRange);
-            if (UnityEngine.Random.Range(0, 2) == 0) randX *= -1;
-            var randZ = UnityEngine.Random.Range(baseRadius, spwanRange);
-            if (UnityEngine.Random.Range(0, 2) == 0) randZ *= -1;
-            originalPos = enemyBase.position + new Vector3(randX, 0, randZ);
-            if(NavMesh.SamplePosition(originalPos, out hit, 0.2f, NavMesh.AllAreas)) break;
-        };
-        Debug.DrawRay(originalPos, Vector3.up*10, Color.red, 999);
-        Debug.Log(originalPos);
+        var spwanRange = baseRadius+5;
+        var randX = UnityEngine.Random.Range(-spwanRange, spwanRange);
+        if (randX > 0) randX += baseRadius; else randX -= baseRadius;
+        var randZ = UnityEngine.Random.Range(-spwanRange, spwanRange);
+        if (randZ > 0) randZ += baseRadius; else randZ -= baseRadius;
+        originalPos = enemyBase.position + new Vector3(randX, 0, randZ);
         agent.enabled = false;
         transform.position = originalPos;
         agent.enabled = true;

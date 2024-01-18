@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ScrapUI : MonoBehaviour
 {
-    static ScrapUI instance;    
     TextMeshProUGUI text;
     int scrap;
     int Scrap
@@ -15,7 +14,6 @@ public class ScrapUI : MonoBehaviour
         }
         set {
             UpdateScrap(value);
-            if(ShopUI.Instance.isOpened) ShopUI.Instance.Scrap = value;
             scrap = value;
         }
     }
@@ -25,8 +23,7 @@ public class ScrapUI : MonoBehaviour
         text=GetComponent<TextMeshProUGUI>();
     }
    
-    public void SetScrapText(bool animation=true) {
-        if (!animation) scrap = GameManager.Instance.scrap;
+    public void SetScrapText() {
         Scrap = GameManager.Instance.scrap;       
     }
 
@@ -72,6 +69,5 @@ public class ScrapUI : MonoBehaviour
                 yield return wait;
             }
         }
-        text.text = String.Format("{0:000000}", prev);
     }
 }

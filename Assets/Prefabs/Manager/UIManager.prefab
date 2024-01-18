@@ -14809,7 +14809,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopUI: {fileID: 486793029554619044}
   playerUI: {fileID: 8541609343156395651}
-  scrapUI: {fileID: 7799003125585043130}
   player: {fileID: 0}
   firstSelectedButton: {fileID: 0}
   guideText: {fileID: 1247779692408263491}
@@ -14851,7 +14850,6 @@ MonoBehaviour:
   - key: grenade
     value: {fileID: 5160337932670183730, guid: 4a2182311f5c4124b9c82a71b2545eb8, type: 3}
   isOpened: 0
-  closeBtn: {fileID: 6909795496680116641}
   CountFPS: 60
   Duration: 0.5
 --- !u!1 &7171431460894176633
