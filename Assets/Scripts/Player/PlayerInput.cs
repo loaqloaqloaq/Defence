@@ -41,9 +41,9 @@ public class PlayerInput : MonoBehaviour
 
             int length = 0;
 
-            foreach (string controller in controllers)@
+            foreach (string controller in controllers)
             {
-                if (controller.Length > 0)@++length;
+                if (controller.Length > 0) ++length;
             }
 
             if (!controllerConnected && length > 0)
