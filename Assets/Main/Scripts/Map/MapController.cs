@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class MapController : MonoBehaviour, IPointerClickHandler
 {
@@ -95,59 +96,86 @@ public class MapController : MonoBehaviour, IPointerClickHandler
             }
 
             //マップ移動
-            //マウス
-            if (Input.GetMouseButtonDown(0))
-            {
-                curPos = Input.mousePosition;
-                prevPos = Input.mousePosition;
-                mouseHoldTime = 0;
-            }
-            if (Input.GetMouseButton(0))
-            {
-                mouseHoldTime += Time.deltaTime;
-                curPos = Input.mousePosition;
-                if (Vector2.Distance(prevPos, curPos) != 0)
-                {
-                    Vector2 dis = curPos - prevPos;
-                    Vector3 pos = cam.transform.position;
-                    pos.x += dis.y * (cam.orthographicSize / 200);
-                    pos.z -= dis.x * (cam.orthographicSize / 200);
-                    cam.transform.position = CheckMargin(pos);
-                    prevPos = curPos;
-                }
-            }
-            //ゲームパッド
-            if (Input.GetAxis("RStick X") != 0 || Input.GetAxis("RStick Y") != 0) {
-                var rx = Input.GetAxis("RStick X");
-                var ry = Input.GetAxis("RStick Y");
-                Vector3 rinput =new Vector3(ry, 0, rx);
-                Vector3 pos = cam.transform.position;
-                pos -= (rinput*Time.deltaTime*200);
-                cam.transform.position = CheckMargin(pos);
-            }
             
-            if (GameManager.LastInputDevice == InputDevice.GAMEPAD)
+            if (GameManager.LastInputDevice == InputDevice.KEYBOARD)
             {
-                if(cursor?.gameObject.activeSelf==false) cursor.gameObject.SetActive(true);
-                if (cursor?.gameObject.activeSelf == true) {
-                    if (Input.GetAxis("LStick X") != 0 || Input.GetAxis("LStick Y") != 0)
-                    {
-                        var rx = Input.GetAxis("LStick X");
-                        var ry = Input.GetAxis("LStick Y");
-                        Vector2 rinput = new Vector2(rx, ry);
-                        Vector2 pos = cursor.anchoredPosition;
-                        pos += (rinput * Time.deltaTime * 200);
-                        cursor.anchoredPosition = CheckCursorMargin(pos);
-                    }
-                }
-                if (Input.GetButtonDown("Submit")) {
-                    var pos = GetClickedWorldPos(cursor.position, null);
-                    CastRayToWorld(pos);
-                }
+                //キーボードやマウス
+                KeyBoardControll();
             }
             else {
-                if (cursor?.gameObject.activeSelf == true) cursor.gameObject.SetActive(false);
+                //ゲームパッド56+
+                GamePadControll();
+            }            
+        }
+    }
+
+    void KeyBoardControll() {
+        if (Input.GetMouseButtonDown(0))
+        {
+            curPos = Input.mousePosition;
+            prevPos = Input.mousePosition;
+            mouseHoldTime = 0;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            mouseHoldTime += Time.deltaTime;
+            curPos = Input.mousePosition;
+            if (Vector2.Distance(prevPos, curPos) != 0)
+            {
+                Vector2 dis = curPos - prevPos;
+                Vector3 pos = cam.transform.position;
+                pos.x += dis.y * (cam.orthographicSize / 200);
+                pos.z -= dis.x * (cam.orthographicSize / 200);
+                cam.transform.position = CheckMargin(pos);
+                prevPos = curPos;
             }
+        }
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            var x = Input.GetAxis("Horizontal");
+            var y = Input.GetAxis("Vertical");
+            Vector3 input = new Vector3(y, 0, -x);
+            Vector3 pos = cam.transform.position;
+            pos -= (input * Time.deltaTime * 200);
+            cam.transform.position = CheckMargin(pos);
+        }
+        var mPos = Input.mousePosition;
+        if (cursor?.gameObject.activeSelf == true && Vector2.Distance(mPos, cursor.position) > 10)
+        {
+            Vector3 direction = mPos - cursor.position;
+            cursor.position += direction * Time.deltaTime * 20;           
+        }
+        else
+        {
+            cursor.position = mPos;
+        }
+        cursor.anchoredPosition = CheckCursorMargin(cursor.anchoredPosition);
+
+    }
+    void GamePadControll() {        
+        if (Input.GetAxis("RStick X") != 0 || Input.GetAxis("RStick Y") != 0)
+        {
+            var rx = Input.GetAxis("RStick X");
+            var ry = Input.GetAxis("RStick Y");
+            Vector3 rinput = new Vector3(ry, 0, rx);
+            Vector3 pos = cam.transform.position;
+            pos -= (rinput * Time.deltaTime * 1000);
+            cam.transform.position = CheckMargin(pos);
+        }
+        if (Input.GetAxis("LStick X") != 0 || Input.GetAxis("LStick Y") != 0)
+        {
+            var lx = Input.GetAxis("LStick X");
+            var ly = Input.GetAxis("LStick Y");
+            Vector2 linput = new Vector2(lx, ly);
+            Vector2 pos = cursor.anchoredPosition;
+            pos += (linput * Time.deltaTime * 1000);
+            cursor.anchoredPosition = CheckCursorMargin(pos);
+        }
+
+        if (Input.GetButtonDown("Submit"))
+        {
+            var pos = GetClickedWorldPos(cursor.position, null);
+            CastRayToWorld(pos);
         }
     }
     Vector2 CheckCursorMargin(Vector2 pos) {

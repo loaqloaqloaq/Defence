@@ -357,7 +357,6 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
                 break;
             }
         };        
-        if(enemyBase.name.Contains("2")) Debug.Log("tried "+ tried+": "+originalPos);
         agent.enabled = false;
         transform.localPosition = originalPos;
         agent.enabled = true;
