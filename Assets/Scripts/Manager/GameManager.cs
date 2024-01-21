@@ -53,15 +53,7 @@ public class GameManager : MonoBehaviour
         {   
             return Instance.lastInputDevice;
         }
-    }
-
-    public static bool IsNight
-    {
-        get
-        {
-            return FindObjectOfType<SunController>().isNight;
-        }
-    }
+    }  
 
     public bool isGameover { get; private set; }
 

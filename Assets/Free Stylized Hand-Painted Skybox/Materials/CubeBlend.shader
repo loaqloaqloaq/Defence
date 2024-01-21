@@ -6,7 +6,8 @@ Shader "Hidden/CubeBlend"
     {
         [NoScaleOffset] _TexA("Cubemap", Cube) = "grey" {}
         [NoScaleOffset] _TexB("Cubemap", Cube) = "grey" {}
-        _value("Value", Range(0, 1)) = 0.5
+        [NoScaleOffset] _TexC("Cubemap", Cube) = "grey" {}
+        _value("Value", Range(0, 2)) = 0.5
         _Rotation("Rotation", Range(0, 360)) = 0
     }
 
@@ -19,9 +20,11 @@ Shader "Hidden/CubeBlend"
 
         half4 _TexA_HDR;
         half4 _TexB_HDR;
+        half4 _TexC_HDR;
 
         UNITY_DECLARE_TEXCUBE(_TexA);
         UNITY_DECLARE_TEXCUBE(_TexB);
+        UNITY_DECLARE_TEXCUBE(_TexC);
 
         float _Level;
         float _value;
@@ -65,8 +68,14 @@ Shader "Hidden/CubeBlend"
         {
             half3 texA = DecodeHDR(UNITY_SAMPLE_TEXCUBE_LOD(_TexA, i.texcoord, _Level), _TexA_HDR);
             half3 texB = DecodeHDR(UNITY_SAMPLE_TEXCUBE_LOD(_TexB, i.texcoord, _Level), _TexB_HDR);
+            half3 texC = DecodeHDR(UNITY_SAMPLE_TEXCUBE_LOD(_TexC, i.texcoord, _Level), _TexC_HDR);
 
-            half3 res = lerp(texA, texB, _value);
+            half3 res;
+            if (_value<=1){
+                res = lerp(texA, texB, _value);
+            }else{
+                res = lerp(texB, texC, _value-1);
+            }
             return half4(res, 1.0);
         }
             ENDCG
