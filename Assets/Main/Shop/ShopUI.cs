@@ -143,20 +143,20 @@ public class ShopUI : MonoBehaviour
             bool success = true;
             errorMessage.text = "";
             //”ƒ‚¤
-            GameManager.Instance.DeductScrap(item.cost);  
-            if (prefabList.ContainsKey(item.name)) prefabList[item.name].GetComponent<IItem>().Use(player);
+            Scrap -= item.cost;           
+            if (prefabList.ContainsKey(item.name)) prefabList[item.name].GetComponent<IItem>().Use(player,true);
             else {
                 switch (item.name) {
                     case "allies":
                         if (!BuyAllies())
                         {
-                            GameManager.Instance.AddScrap(item.cost);
+                            Scrap += item.cost;
                             success = false;
                         }
                         break;
                     default:
-                        ShowMessage("ITEM NOT FOUND!");                        
-                        GameManager.Instance.AddScrap(item.cost);
+                        ShowMessage("ITEM NOT FOUND!");
+                        Scrap += item.cost;
                         success = false;
                         break;
                 }
@@ -164,8 +164,7 @@ public class ShopUI : MonoBehaviour
             if (success)
             {                
                 ShowMessage("SUCCESS!", Color.green);
-                UpdateButtons();
-                Scrap = GameManager.Instance.scrap;
+                UpdateButtons();                
             }
         }        
     }
@@ -224,10 +223,11 @@ public class ShopUI : MonoBehaviour
         return buttons.Values.ToList().IndexOf(btn);
     }
     private void Disable()
-    {
+    {        
         UIManager.Instance.SetMouseVisible(false);
         shopUI.SetActive(false);
         playerUI?.SetActive(true);
+        GameManager.Instance.SetScrap(Scrap);
     }
 
     //UNIY Action

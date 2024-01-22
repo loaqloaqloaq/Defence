@@ -24,7 +24,7 @@ public class ScrapUI : MonoBehaviour
     }
    
     public void SetScrapText() {
-        Scrap = GameManager.Instance.scrap;       
+        if(gameObject.activeSelf) Scrap = GameManager.Instance.scrap;       
     }
 
     private Coroutine startedCoroutine;

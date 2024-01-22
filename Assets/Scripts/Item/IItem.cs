@@ -3,5 +3,5 @@
 //アイテムインタフェース
 public interface IItem　
 {
-    void Use(GameObject target);
+    void Use(GameObject target,bool fromShop=false);
 }

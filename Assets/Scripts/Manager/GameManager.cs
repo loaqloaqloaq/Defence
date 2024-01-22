@@ -147,6 +147,14 @@ public class GameManager : MonoBehaviour
         if (scrapUI) scrapUI.SetScrapText();
         usedScrap += amount;
     }
+    public void SetScrap(int amount)
+    {
+        scrap = amount;
+        if (scrap >= 999999) scrap = 999999;
+        else if (scrap <= 0) scrap = 0;
+        if (scrapUI) scrapUI.SetScrapText();
+        usedScrap += amount;
+    }
     private void SkyRotation()
     {
         rotationRepeatValue = Mathf.Repeat(now_sky.GetFloat("_Rotation") + rotateSpeed, 360f);

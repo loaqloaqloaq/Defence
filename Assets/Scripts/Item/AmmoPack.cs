@@ -6,13 +6,13 @@ public class AmmoPack : MonoBehaviour, IItem
     [SerializeField] private int ammo = 150;
     [SerializeField] ActiveWeapon.weaponSlot targetSlot;
 
-    public void Use(GameObject target)
+    public void Use(GameObject target, bool fromShop = false)
     {
         var player = target.GetComponent<ActiveWeapon>();
         var weapon = player.GetWeaponWithSlot(targetSlot);
 
         weapon?.AddAmmo(ammo);
 
-        Destroy(gameObject);
+        if (!fromShop) Destroy(gameObject);
     }
 }
