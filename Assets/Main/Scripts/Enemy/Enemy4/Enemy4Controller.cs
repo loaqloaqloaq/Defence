@@ -141,7 +141,7 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
             destoryTimer += Time.deltaTime;
             if (destoryTimer >= destoryTime)
             {
-                Attack();
+                FallAttack();
                 transform.parent.GetComponent<EnemyController>().dead();
             }
         }
@@ -319,6 +319,43 @@ public class Enemy4Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
             attacked = true;
         }       
     }
+
+    //ì|Ç≥ÇÍÇΩÇ∆Ç´ÇÃçUåÇ
+    private void FallAttack()
+    {
+        if (explosion != null)
+        {
+            var pos = transform.position;
+            pos.y += 0.5f;
+            var exp = Instantiate(explosion, pos, transform.rotation);
+            float scale = 0.75f * expRadius;
+            exp.transform.localScale = new Vector3(scale, scale, scale);
+            transform.parent.GetComponent<EnemyController>().dead();
+
+            DamageMessage dm = new DamageMessage();
+            dm.damager = gameObject;
+
+            Collider[] hitColliders = Physics.OverlapSphere(pos, expRadius);
+            foreach (var hitCollider in hitColliders)
+            {
+                if(hitCollider.gameObject.tag == "Gate")
+                {
+                    continue;
+                }
+                var hitTarget = hitCollider.gameObject.GetComponent<IDamageable>();
+                float targetToExp = Vector3.Distance(hitCollider.transform.position, exp.transform.position);
+                dm.amount = ATK * (1 - targetToExp / expRadius);
+
+                if (hitTarget != null && dm.amount > 0)
+                {
+                    hitTarget.ApplyDamage(dm);
+                }
+            }
+
+            attacked = true;
+        }
+    }
+
 
 #if UNITY_EDITOR //çUåÇîÕàÕÉfÉoÉbÉO
     private void OnDrawGizmosSelected()

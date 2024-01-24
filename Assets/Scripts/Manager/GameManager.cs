@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] ScrapUI scrapUI;
     [SerializeField] float playTime;
     [SerializeField] public int scrap;
+    [SerializeField] TextMeshProUGUI scrapText;
     public int killCount;
     public int playerDamagedCount;
     public int usedScrap;
@@ -60,7 +62,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1.0f;
-        if (Instance != this) Destroy(gameObject); 
+        
+        if (Instance != this) Destroy(gameObject);
+        SetScrap(scrap);
         Record.Init();
     }
     private void Start()
