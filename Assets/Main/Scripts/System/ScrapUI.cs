@@ -55,7 +55,8 @@ public class ScrapUI : MonoBehaviour
             while (prev < target)
             {
                 prev += stepAmount;
-                if (prev > target) prev = target;                
+                if (prev > target) prev = target;
+                //Debug.Log(prev);
                 text.text = String.Format("{0:000000}", prev);
                 yield return wait;
             }
@@ -65,7 +66,8 @@ public class ScrapUI : MonoBehaviour
             while (prev > target)
             {
                 prev += stepAmount;
-                if (prev < target) prev = target;                
+                if (prev < target) prev = target;
+                //Debug.Log(prev);
                 text.text = String.Format("{0:000000}", prev);
                 yield return wait;
             }

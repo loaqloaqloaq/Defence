@@ -3139,6 +3139,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretSlot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2857292235093950943, guid: 6b6dbe045dd71e048be45684dc4d97df, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857292235093950943, guid: 6b6dbe045dd71e048be45684dc4d97df, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5889,10 +5897,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7792094263946613050, guid: 5fc3b8bf2fd0ee44a907369a7300297b, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 4095
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6640,6 +6644,14 @@ PrefabInstance:
     - target: {fileID: 2046220243375036046, guid: 6b6dbe045dd71e048be45684dc4d97df, type: 3}
       propertyPath: m_Name
       value: TurretSlot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857292235093950943, guid: 6b6dbe045dd71e048be45684dc4d97df, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857292235093950943, guid: 6b6dbe045dd71e048be45684dc4d97df, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

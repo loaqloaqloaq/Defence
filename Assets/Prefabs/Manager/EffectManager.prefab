@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2710722925877505229
 MonoBehaviour:
@@ -47,3 +47,4 @@ MonoBehaviour:
   commonHitEffectPrefab: {fileID: 3860864921762436669, guid: aecc1d5fc4d327540b51127efbcf8c17, type: 3}
   fleshHitEffectPrefab: {fileID: 3860864921762436669, guid: aecc1d5fc4d327540b51127efbcf8c17, type: 3}
   fireHitEffectPrefab: {fileID: 3860864921762436669, guid: aecc1d5fc4d327540b51127efbcf8c17, type: 3}
+  ExplosionEffectPrefab: {fileID: 773578894063328517, guid: 5813f43f6e4069f40813c11c11d2dda4, type: 3}

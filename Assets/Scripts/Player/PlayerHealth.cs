@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class PlayerHealth : LivingEntity
-{
+{   
     private Animator animator;
 
     [SerializeField] private AudioData hitSE;
@@ -10,7 +10,6 @@ public class PlayerHealth : LivingEntity
     private void Awake()
     {
         animator = GetComponent<Animator>();
-
         SoundManager.Instance?.AddAudioInfo(hitSE);
         SoundManager.Instance?.AddAudioInfo(deadSE);
     }
@@ -18,6 +17,7 @@ public class PlayerHealth : LivingEntity
     protected override void OnEnable()
     {
         base.OnEnable();
+        //Debug.Log(startingHealth + " " + health);
         UpdateUI(false);
     }
 

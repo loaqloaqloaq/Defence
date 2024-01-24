@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
     private float sizeLerpTime = 0.1f;
     private float aimPointStartSize;
 
-    private float previousHealth = 100.0f;
+    private float previousHealth = 800.0f;
     private float grownRate = 5.0f;
     private float currentScore;
     private float nextScore;
@@ -261,6 +261,7 @@ public class UIManager : MonoBehaviour
             }
             amount = previousHealth / maxHealth;
             HealthBar.fillAmount = amount;
+            Debug.Log(previousHealth + " "+ currentHealth + " " + amount);
             yield return new WaitForEndOfFrame();
         }
     }

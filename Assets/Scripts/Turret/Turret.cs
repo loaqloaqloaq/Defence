@@ -121,7 +121,7 @@ public class Turret : MonoBehaviour, Abnormality
 
     public virtual void Awake()
     {
-        audioSource =GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         SoundManager.Instance?.AddAudioInfo(fireSE);
 
@@ -401,8 +401,8 @@ public class Turret : MonoBehaviour, Abnormality
             particle.Emit(1);
         }
 
-        float yModifier = target.GetComponent<Collider>().bounds.size.y * 0.5f;
-        var velocity = (raycastDestination.position + new Vector3(0f, yModifier, 0f) - raycastOrigin.position).normalized * bulletSpeed;
+        //float yModifier = target.GetComponent<Collider>().bounds.size.y * 0.5f;
+        var velocity = (raycastDestination.position + new Vector3(0f, 0f, 0f) - raycastOrigin.position).normalized * bulletSpeed;
 
         foreach (var bullet in bullets)
         {

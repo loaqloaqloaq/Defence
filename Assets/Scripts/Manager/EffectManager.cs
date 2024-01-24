@@ -18,14 +18,16 @@ public class EffectManager : MonoBehaviour
     {
         Common,
         Fire,
-        Flesh
+        Flesh,
+        Explosion
     }
     
     //VFX ParticleSystem
     [SerializeField] private ParticleSystem commonHitEffectPrefab;
     [SerializeField] private ParticleSystem fleshHitEffectPrefab;
     [SerializeField] private ParticleSystem fireHitEffectPrefab;
-   
+    [SerializeField] private ParticleSystem ExplosionEffectPrefab;
+
     //´®´’´ß´Ø´»˚æﬂÅE
     public void PlayHitEffect(Vector3 pos, Vector3 normal, Transform parent = null,
         EffectType effectType = EffectType.Common)
@@ -37,6 +39,9 @@ public class EffectManager : MonoBehaviour
 
         if (effectType == EffectType.Fire)
             targetPrefab = fireHitEffectPrefab;
+
+        if (effectType == EffectType.Explosion)
+            targetPrefab = ExplosionEffectPrefab;
 
         var effect = Instantiate(targetPrefab, pos, Quaternion.LookRotation(normal));
 
