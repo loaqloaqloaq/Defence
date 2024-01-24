@@ -99,7 +99,7 @@ MonoBehaviour:
   explosionVFX: {fileID: 3563381620658167861}
   mesh: {fileID: 7634488660563635516}
   explosionRange: 8
-  damageAmount: 500
+  damageAmount: 450
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 72
