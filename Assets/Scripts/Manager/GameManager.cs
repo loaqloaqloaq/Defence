@@ -8,7 +8,11 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoBehaviour
 {
-    
+    enum GameState
+    {
+        NON, STARTED, END
+    }
+    GameState gameState;
     public InputDevice lastInputDevice;
     //Singleton       
     private static GameManager instance;
@@ -34,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     public int NPCCount,MaxNPCCount;
 
+    float endTime,endTimer;
 
     public static GameManager Instance
     {        
@@ -58,7 +63,7 @@ public class GameManager : MonoBehaviour
     public bool isGameover { get; private set; }
 
     private void Awake()
-    {
+    {        
         Time.timeScale = 1.0f;
         if (Instance != this) Destroy(gameObject); 
         Record.Init();
@@ -79,7 +84,10 @@ public class GameManager : MonoBehaviour
 
         if (now_sky) originalRotate = now_sky.GetFloat("_Rotation");
 
+        gameState = GameState.STARTED;
         currentStage = 0;
+        endTimer = 3;
+        endTime = 0;
 
     }
     private void Update()
@@ -87,11 +95,15 @@ public class GameManager : MonoBehaviour
         if (timer <= 0)
         {
             Debug.Log("勝利");
-            Record.resultID = 1;
-            ToResultScene();
+            End(1);
         }
-        else TimerUpdate();
-
+        else if (gameState == GameState.STARTED) TimerUpdate();
+        else if (gameState == GameState.END) {
+            endTime += Time.deltaTime;
+            if (endTime >= endTimer) { 
+                ToResultScene();
+            }
+        }
         SkyRotation();       
     }
     private void OnDestroy()
@@ -101,6 +113,11 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void End(int type) {
+        Record.resultID = type;
+        gameState = GameState.END;
+    }
+    
     void TimerUpdate() {
         timer -= Time.deltaTime;
         EnemyGeneratorManager.Instance?.ChangeMaxEnemy(timer / (playTime * 60));
