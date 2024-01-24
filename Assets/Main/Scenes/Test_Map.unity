@@ -1888,6 +1888,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5094589675308042506, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
+      propertyPath: m_text
+      value: 'SHIFT:'
+      objectReference: {fileID: 0}
     - target: {fileID: 5554893452609229334, guid: 34bd4129422665048b9d816ee7d56c54, type: 3}
       propertyPath: m_RootOrder
       value: 20

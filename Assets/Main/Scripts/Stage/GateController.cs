@@ -1,16 +1,10 @@
 using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
-using UnityEngine.XR;
-using UnityEngine.SceneManagement;
-using System.Xml.Linq;
 
 public class GateController : MonoBehaviour,IDamageable
 {   
-    
     [HideInInspector]
     public float HP;
     [SerializeField]
@@ -112,8 +106,7 @@ public class GateController : MonoBehaviour,IDamageable
         else if( gateNumber >= 3)
         {
             Debug.Log("•‰‚¯");
-            Record.resultID = 3;
-            GameManager.Instance?.ToResultScene();
+            GameManager.Instance.End(3);
         }
     }
 
