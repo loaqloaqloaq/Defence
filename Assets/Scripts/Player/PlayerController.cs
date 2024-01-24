@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
     private PlayerTurret playerTurret;
     private PlayerInput input;
 
-    [SerializeField] Transform respawnPosition;
+    [SerializeField] Transform[] respawnPosition;
 
     [SerializeField] private AudioData pickUpSE;
 
@@ -48,7 +48,10 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         UIManager.Instance?.UpdateLifeText(lifeRemains);
 
         //復活位置
-        if (!respawnPosition) respawnPosition = transform;
+        for (int i = 0; i < respawnPosition.Length; i++)
+        {
+            if (!respawnPosition[i]) respawnPosition[i] = transform;
+        }
     }
 
     //死ぬときの処理
@@ -84,7 +87,8 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
     {
         //プレイやースクリプトオン
         gameObject.SetActive(false);
-        transform.position = respawnPosition.position;
+        int point = GameManager.Instance.currentStage;
+        transform.position = respawnPosition[point].position;
         locomotion.enabled = true;
         aiming.enabled = true;
         activeWeapon.enabled = true;

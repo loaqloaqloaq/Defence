@@ -27,7 +27,7 @@
       "genFreq": 1
     },
     {
-      "timeLeftPresent": 0.15,
+      "timeLeftPresent": 0.1,
       "maxEnemy": 200,
       "genFreq": 0.5
     }

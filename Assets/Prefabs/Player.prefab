@@ -1205,7 +1205,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLife: 3
-  respawnPosition: {fileID: 0}
+  respawnPosition:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   pickUpSE:
     maxSENum: 2
     initVolume: 1
@@ -1225,7 +1228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07bcf948993159f4c97fd36893be88a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 800
+  startingHealth: 300
   hitSE:
     maxSENum: 4
     initVolume: 0.76
@@ -1325,7 +1328,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLight: {fileID: 0}
-  CameraLookAt: {fileID: 1550301817, guid: 5d96086e046b95644942b5d0d423d626, type: 2}
 --- !u!1 &1799385376070111846
 GameObject:
   m_ObjectHideFlags: 0
