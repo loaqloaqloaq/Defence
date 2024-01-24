@@ -17,12 +17,14 @@ public class ScrapUI : MonoBehaviour
             scrap = value;
         }
     }
-    // Start is called before the first frame update
-    void Start()
+    // Start is called before the first frame update   
+    private void Awake()
     {
-        text=GetComponent<TextMeshProUGUI>();
+        text = GetComponent<TextMeshProUGUI>();
+        scrap = GameManager.Instance.scrap;
+        text.text = String.Format("{0:000000}", scrap);
     }
-   
+
     public void SetScrapText() {
         if(gameObject.activeSelf) Scrap = GameManager.Instance.scrap;       
     }
@@ -36,8 +38,7 @@ public class ScrapUI : MonoBehaviour
         startedCoroutine = StartCoroutine(NumberAnimation(target));
     }   
     private IEnumerator NumberAnimation(int target)
-    {
-        
+    {        
         WaitForSeconds wait = new WaitForSeconds(1f / CountFPS);
         int prev = scrap;
         int stepAmount;

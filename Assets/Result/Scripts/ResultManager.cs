@@ -45,7 +45,7 @@ public class ResultManager : MonoBehaviour
     //前、選択されていたボタン
     private GameObject prevSelectButton;
 
-    void Start()
+    void Awake()
     {
         //値を取得
         killCount = PlayerPrefs.GetInt("killCount", 0);

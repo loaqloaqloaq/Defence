@@ -68,8 +68,7 @@ public class GameManager : MonoBehaviour
     {        
         Time.timeScale = 1.0f;
         
-        if (Instance != this) Destroy(gameObject);
-        SetScrap(scrap);
+        if (Instance != this) Destroy(gameObject);         
         Record.Init();
     }
     private void Start()
@@ -166,6 +165,9 @@ public class GameManager : MonoBehaviour
         scrap -= amount;
         if (scrap <= 0) scrap = 0;
         if (scrapUI) scrapUI.SetScrapText();
+        else {
+            Debug.LogWarning("cannot found scrap UI");
+        }
         usedScrap += amount;
     }
     public void SetScrap(int amount)
