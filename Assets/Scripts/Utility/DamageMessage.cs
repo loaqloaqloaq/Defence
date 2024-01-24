@@ -15,6 +15,4 @@ public struct DamageMessage
 
     public Vector3 hitPoint;
     public Vector3 hitNormal;
-
-    
 }

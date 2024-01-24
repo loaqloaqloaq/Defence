@@ -14777,7 +14777,7 @@ MonoBehaviour:
   target: {fileID: 0}
   fireSE:
     maxSENum: 7
-    initVolume: 0.8
+    initVolume: 0.629
     name: flameFire
     resourcePath: 
     audioLength: 0.3
