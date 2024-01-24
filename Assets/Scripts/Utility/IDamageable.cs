@@ -1,5 +1,9 @@
+using UnityEngine;
+
 public interface IDamageable
 {
+    Transform transform { get; }
+    GameObject gameObject { get; }
     bool ApplyDamage(DamageMessage damageMessage);
 
     //ƒ_ƒ[ƒWˆ—

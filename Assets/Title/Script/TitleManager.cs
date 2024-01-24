@@ -57,7 +57,7 @@ public class TitleManager : MonoBehaviour
     //シーンの読み込み
     private void LoadScene()
     {
-        LoadingSceneController.LoadScene("Test_Map");
+        LoadingSceneController.LoadScene("main");
     }
 
     //ゲームを開始
