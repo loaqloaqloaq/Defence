@@ -57,7 +57,7 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
 
     public float guardRange;
 
-    public Vector3 originalPos;
+    public Vector3 originalPos,originalWorldPos;
 
     private void Awake()
     {
@@ -111,8 +111,7 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
         agent.enabled = true;
         target = player;
 
-        guardRange = 50f;
-        TeleportRandomAroundBase();
+        guardRange = 50f;        
 
         lastCheck = 0;
         checkFeq = 0.5f;
@@ -122,6 +121,9 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
 
         attacking = false;
         setCollider(true);
+
+        originalPos = transform.localPosition;
+        originalWorldPos = transform.position;
 
         frameCnt = 0;
     }
@@ -337,28 +339,20 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
         return Part.BODY;
     }
 
-    public void TeleportRandomAroundBase()
+    public void TeleportWithBase()
     {
-        var baseRadius = 12f;
-        var spwanRange = baseRadius + 5;
-        //check out of navmesh
-        NavMeshHit hit;
-        int tried= 0;
-        while (tried<10)
-        {
-            tried++;
-            var randX = UnityEngine.Random.Range(-spwanRange, spwanRange);            
-            var randZ = UnityEngine.Random.Range(-spwanRange, spwanRange);
-            
-            originalPos =  new Vector3(randX, 0, randZ);
-            if (NavMesh.SamplePosition(enemyBase.position + originalPos, out hit, spwanRange, NavMesh.AllAreas))
-            {
-                originalPos=hit.position - enemyBase.position;
-                break;
-            }
-        };        
         agent.enabled = false;
         transform.localPosition = originalPos;
+        originalWorldPos = transform.position;
+        //check out of navmesh
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(originalWorldPos, out hit, 20f, NavMesh.AllAreas))
+        {
+            originalWorldPos = hit.position;
+        }
+        transform.position = originalWorldPos;
+        originalPos = transform.localPosition;       
+       
         agent.enabled = true;
     }
 }
