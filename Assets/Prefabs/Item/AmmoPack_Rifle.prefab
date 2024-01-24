@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 8028297364508348738}
   - component: {fileID: 4987219167129833117}
   - component: {fileID: 536193490856268558}
+  - component: {fileID: 6882920642474533707}
   m_Layer: 0
   m_Name: AmmoPack_Rifle
   m_TagString: Untagged
@@ -110,7 +111,7 @@ Transform:
   - {fileID: 4541135192053058975}
   - {fileID: 5835549232315904332}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8028297364508348738
 BoxCollider:
@@ -160,6 +161,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammo: 300
   targetSlot: 0
+--- !u!208 &6882920642474533707
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4549580422657515402}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.3, y: 0.3, z: 0.3}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5835549231559569789
 GameObject:
   m_ObjectHideFlags: 0

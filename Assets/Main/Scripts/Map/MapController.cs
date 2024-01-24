@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class MapController : MonoBehaviour, IPointerClickHandler
 {
@@ -17,6 +18,7 @@ public class MapController : MonoBehaviour, IPointerClickHandler
     Camera cam;
     [SerializeField] float maxZoom, minZoom;
     [SerializeField] LayerMask whatIsTarget;
+    [SerializeField] RectTransform cursor;
 
     RawImage miniMapImage;
 
@@ -28,6 +30,8 @@ public class MapController : MonoBehaviour, IPointerClickHandler
     float[] maxZ, maxX,minZ,minX; 
     float maxZdif, maxXdif, minZdif, minXdif;
     public float zoomPresent;
+
+    [SerializeField] float curMaxY, curMinY,curMaxX,curMinX;
 
     float mouseHoldTime;
 
@@ -66,49 +70,119 @@ public class MapController : MonoBehaviour, IPointerClickHandler
         if (UIManager.Instance) isPause = UIManager.Instance.isPause;
 
         //マップの表示や非表示
-        if (Input.GetKeyDown(KeyCode.M) && !isPause) {
+        if (Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown("joystick button 6") && !isPause) {
             SetVisible(!enable);
         }
         //マップのコントロール
         if (enable)
         {
             //マップスケール
+            //マウス
             if (Input.mouseScrollDelta.y != 0)
             {
-                cam.orthographicSize -= Input.mouseScrollDelta.y * 5;
+                cam.orthographicSize -= Input.mouseScrollDelta.y * 200 * Time.deltaTime;
                 if (cam.orthographicSize > maxZoom) cam.orthographicSize = maxZoom;
                 else if (cam.orthographicSize < minZoom) cam.orthographicSize = minZoom;
                 cam.transform.position = CheckMargin(cam.transform.position);
             }
+            //ゲームパッド
+            if (Input.GetKey("joystick button 4")) {               
+                cam.orthographicSize +=  200 * Time.deltaTime;
+                if (cam.orthographicSize > maxZoom) cam.orthographicSize = maxZoom;
+            }
+            if (Input.GetKey("joystick button 5")) {
+                cam.orthographicSize -=  200 * Time.deltaTime;
+                if (cam.orthographicSize < minZoom) cam.orthographicSize = minZoom;
+            }
 
             //マップ移動
-            if (Input.GetMouseButtonDown(0))
+            
+            if (GameManager.LastInputDevice == InputDevice.KEYBOARD)
             {
-                curPos = Input.mousePosition;
-                prevPos = Input.mousePosition;
-                mouseHoldTime = 0;
+                //キーボードやマウス
+                KeyBoardControll();
             }
-            if (Input.GetMouseButton(0))
-            {
-                mouseHoldTime += Time.deltaTime;
-                curPos = Input.mousePosition;
-                if (Vector2.Distance(prevPos, curPos) != 0)
-                {
-                    Vector2 dis = curPos - prevPos;
-                    Vector3 pos = cam.transform.position;
-                    pos.x += dis.y * (cam.orthographicSize / 200);
-                    pos.z -= dis.x * (cam.orthographicSize / 200);
-                    cam.transform.position = CheckMargin(pos);
-                    prevPos = curPos;
-                }
-            }
-            if (Input.GetMouseButtonUp(0)&& mouseHoldTime < 0.2f)
-            {                
-                
-            }
+            else {
+                //ゲームパッド56+
+                GamePadControll();
+            }            
         }
     }
 
+    void KeyBoardControll() {
+        if (Input.GetMouseButtonDown(0))
+        {
+            curPos = Input.mousePosition;
+            prevPos = Input.mousePosition;
+            mouseHoldTime = 0;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            mouseHoldTime += Time.deltaTime;
+            curPos = Input.mousePosition;
+            if (Vector2.Distance(prevPos, curPos) != 0)
+            {
+                Vector2 dis = curPos - prevPos;
+                Vector3 pos = cam.transform.position;
+                pos.x += dis.y * (cam.orthographicSize / 200);
+                pos.z -= dis.x * (cam.orthographicSize / 200);
+                cam.transform.position = CheckMargin(pos);
+                prevPos = curPos;
+            }
+        }
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            var x = Input.GetAxis("Horizontal");
+            var y = Input.GetAxis("Vertical");
+            Vector3 input = new Vector3(y, 0, -x);
+            Vector3 pos = cam.transform.position;
+            pos -= (input * Time.deltaTime * 200);
+            cam.transform.position = CheckMargin(pos);
+        }
+        var mPos = Input.mousePosition;
+        if (cursor?.gameObject.activeSelf == true && Vector2.Distance(mPos, cursor.position) > 10)
+        {
+            Vector3 direction = mPos - cursor.position;
+            cursor.position += direction * Time.deltaTime * 20;           
+        }
+        else
+        {
+            cursor.position = mPos;
+        }
+        cursor.anchoredPosition = CheckCursorMargin(cursor.anchoredPosition);
+
+    }
+    void GamePadControll() {        
+        if (Input.GetAxis("RStick X") != 0 || Input.GetAxis("RStick Y") != 0)
+        {
+            var rx = Input.GetAxis("RStick X");
+            var ry = Input.GetAxis("RStick Y");
+            Vector3 rinput = new Vector3(ry, 0, rx);
+            Vector3 pos = cam.transform.position;
+            pos -= (rinput * Time.deltaTime * 1000);
+            cam.transform.position = CheckMargin(pos);
+        }
+        if (Input.GetAxis("LStick X") != 0 || Input.GetAxis("LStick Y") != 0)
+        {
+            var lx = Input.GetAxis("LStick X");
+            var ly = Input.GetAxis("LStick Y");
+            Vector2 linput = new Vector2(lx, ly);
+            Vector2 pos = cursor.anchoredPosition;
+            pos += (linput * Time.deltaTime * 1000);
+            cursor.anchoredPosition = CheckCursorMargin(pos);
+        }
+
+        if (Input.GetButtonDown("Submit"))
+        {
+            var pos = GetClickedWorldPos(cursor.position, null);
+            CastRayToWorld(pos);
+        }
+    }
+    Vector2 CheckCursorMargin(Vector2 pos) {
+        pos.x = pos.x > curMaxX ? curMaxX : pos.x < curMinX ? curMinX : pos.x;
+        pos.y = pos.y > curMaxY ? curMaxY : pos.y < curMinY ? curMinY : pos.y;
+        return pos;
+    }
     Vector3 CheckMargin(Vector3 pos) {
         zoomPresent = 1-((cam.orthographicSize - minZoom) / (maxZoom - minZoom));        
         float minX = this.minX[1] + minXdif * zoomPresent;
@@ -129,12 +203,14 @@ public class MapController : MonoBehaviour, IPointerClickHandler
         if (eventData.button != PointerEventData.InputButton.Left) return;
         
         if (mouseHoldTime >= 0.2f) return;
-        Vector2 curosr = new Vector2(0, 0);
+        var pos = GetClickedWorldPos(eventData.pressPosition, eventData.pressEventCamera);
+        CastRayToWorld(pos);
+    }
 
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(miniMapImage.rectTransform,
-            eventData.pressPosition, eventData.pressEventCamera, out curosr))
+    private Vector2 GetClickedWorldPos(Vector2 clickedPos, Camera cam) {
+        Vector2 curosr = Vector2.zero;
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(miniMapImage.rectTransform, clickedPos, cam, out curosr))
         {
-
             Texture texture = miniMapImage.texture;
             Rect rect = miniMapImage.rectTransform.rect;
 
@@ -144,12 +220,9 @@ public class MapController : MonoBehaviour, IPointerClickHandler
             float calX = coordX / texture.width;
             float calY = coordY / texture.height;
 
-
-            curosr = new Vector2(calX, calY);
-           
-            CastRayToWorld(curosr);
+            curosr = new Vector2(calX, calY);            
         }
-
+        return curosr;
     }
 
     private void CastRayToWorld(Vector2 vec)
@@ -180,14 +253,20 @@ public class MapController : MonoBehaviour, IPointerClickHandler
         if (playerInput) playerInput.enabled = !enable;
         UIManager.Instance?.SetMouseVisible(enable);
         //mapCanvas.enabled = enable;
-        if (player && enable)
+        if (enable)
         {
-            cam.transform.position = new Vector3(
-                player.position.x,
-                cam.transform.position.y,
-                player.position.z
-                );
-            cam.transform.position = CheckMargin(cam.transform.position);
+            if (player)
+            {
+                cam.transform.position = new Vector3(
+                    player.position.x,
+                    cam.transform.position.y,
+                    player.position.z
+                    );
+                cam.transform.position = CheckMargin(cam.transform.position);
+            }
+            if (cursor) {
+                cursor.anchoredPosition = Vector2.zero;
+            }
         }
     }
 

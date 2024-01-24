@@ -75,7 +75,7 @@ public class EnemyGeneratorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GenerateEnemy) return;
+        if (!GenerateEnemy || generators.Count<=0) return;
         lastGen += Time.deltaTime;
         if (lastGen >= (genFreq + randomTime))
         {

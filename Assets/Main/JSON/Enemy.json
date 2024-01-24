@@ -23,7 +23,7 @@
   },
   "Enemy1": {
     "hp": 100,
-    "moveSpeed": 4,
+    "moveSpeed": 3,
     "atk": 10,
     "reward": 50,
     "drop": {
@@ -44,8 +44,8 @@
     }
   },
   "Enemy2": {
-    "hp": 100,
-    "moveSpeed": 4,
+    "hp": 200,
+    "moveSpeed": 3,
     "atk": 10,
     "reward": 100,
     "drop": {
@@ -90,7 +90,7 @@
     }
   },
   "Enemy4": {
-    "hp": 100,
+    "hp": 50,
     "moveSpeed": 5,
     "atk": 200,
     "reward": 100,
@@ -114,8 +114,8 @@
     }
   },
   "Enemy5": {
-    "hp": 100,
-    "moveSpeed": 5,
+    "hp": 50,
+    "moveSpeed": 4,
     "atk": 0,
     "reward": 100,
     "AttackRadius": 3.3,

@@ -143,20 +143,20 @@ public class ShopUI : MonoBehaviour
             bool success = true;
             errorMessage.text = "";
             //”ƒ‚¤
-            GameManager.Instance.DeductScrap(item.cost);  
-            if (prefabList.ContainsKey(item.name)) prefabList[item.name].GetComponent<IItem>().Use(player);
+            Scrap -= item.cost;           
+            if (prefabList.ContainsKey(item.name)) prefabList[item.name].GetComponent<IItem>().Use(player,true);
             else {
                 switch (item.name) {
                     case "allies":
                         if (!BuyAllies())
                         {
-                            GameManager.Instance.AddScrap(item.cost);
+                            Scrap += item.cost;
                             success = false;
                         }
                         break;
                     default:
-                        ShowMessage("ITEM NOT FOUND!");                        
-                        GameManager.Instance.AddScrap(item.cost);
+                        ShowMessage("ITEM NOT FOUND!");
+                        Scrap += item.cost;
                         success = false;
                         break;
                 }
@@ -164,8 +164,7 @@ public class ShopUI : MonoBehaviour
             if (success)
             {                
                 ShowMessage("SUCCESS!", Color.green);
-                UpdateButtons();
-                Scrap = GameManager.Instance.scrap;
+                UpdateButtons();                
             }
         }        
     }
@@ -215,7 +214,7 @@ public class ShopUI : MonoBehaviour
         scraps.text = String.Format("{0:000000}", GameManager.Instance.scrap);
         shopUI.SetActive(true);
         UIManager.Instance.SetMouseVisible(true);
-        if (playerUI != null) playerUI.GetComponent<Canvas>().enabled = false;
+        playerUI?.SetActive(false);
     }
     GameObject Buttons(int index) { 
         return buttons.ElementAt(index).Value.gameObject;
@@ -224,10 +223,11 @@ public class ShopUI : MonoBehaviour
         return buttons.Values.ToList().IndexOf(btn);
     }
     private void Disable()
-    {
+    {        
         UIManager.Instance.SetMouseVisible(false);
         shopUI.SetActive(false);
-        if (playerUI != null) playerUI.GetComponent<Canvas>().enabled = true;
+        playerUI?.SetActive(true);
+        GameManager.Instance.SetScrap(Scrap);
     }
 
     //UNIY Action
@@ -327,8 +327,7 @@ public class ShopUI : MonoBehaviour
             while (prev < target)
             {
                 prev += stepAmount;
-                if (prev > target) prev = target;
-                //Debug.Log(prev);
+                if (prev > target) prev = target;                
                 scraps.text = String.Format("{0:000000}", prev);
                 yield return wait;
             }            
@@ -337,8 +336,7 @@ public class ShopUI : MonoBehaviour
             while (prev > target)
             {
                 prev += stepAmount;
-                if (prev < target) prev = target;
-                //Debug.Log(prev);
+                if (prev < target) prev = target;              
                 scraps.text = String.Format("{0:000000}", prev);
                 yield return wait;
             }            

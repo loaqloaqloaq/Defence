@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9154532257925269124}
   - component: {fileID: 6165211551097952980}
   - component: {fileID: 7663736817504418432}
+  - component: {fileID: 5390422101556558010}
   m_Layer: 11
   m_Name: WeaponPickup_Rocket
   m_TagString: Untagged
@@ -135,6 +136,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &5390422101556558010
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8744942562257654918}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &3243193729238389000
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,7 +18,7 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
     public NavMeshAgent agent;
 
     [HideInInspector]
-    public bool attacking,attacked;
+    public bool attacking, attacked;
 
     private float destoryTimer, destoryTime;
     private bool dead;
@@ -35,8 +36,9 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
 
     float checkFeq, lastCheck;
 
-    public enum State { 
-        FOLLOWING,STOP,ATTACKING
+    public enum State
+    {
+        FOLLOWING, STOP, ATTACKING
     }
     public State state;
 
@@ -70,7 +72,7 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
     void Start()
     {
         if (!loaded)
-        {  
+        {
             animator = GetComponent<Animator>();
             agent = GetComponent<NavMeshAgent>();
 
@@ -87,7 +89,7 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
             MAXHP = EnemyJson.hp;
 
             ATK = EnemyJson.atk;
-            reward=EnemyJson.reward;
+            reward = EnemyJson.reward;
 
             drop.Add("ammo", EnemyJson.drop.ammo);
             drop.Add("health", EnemyJson.drop.health);
@@ -129,21 +131,23 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
     {
         if (HP <= 0)
         {
-            setCollider(false);            
+            setCollider(false);
             agent.enabled = false;
             destoryTimer += Time.deltaTime;
             if (destoryTimer >= destoryTime)
-            {                
-                if (explosion != null) {
+            {
+                if (explosion != null)
+                {
                     var pos = transform.position;
                     pos.y += 0.5f;
-                    var exp=Instantiate(explosion, pos, transform.rotation);
-                    exp.transform.localScale=new Vector3(0.7f, 0.7f, 0.7f);
-                }                
+                    var exp = Instantiate(explosion, pos, transform.rotation);
+                    exp.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                }
                 transform.gameObject.SetActive(false);
             }
         }
-        else {  
+        else
+        {
             lastCheck += Time.deltaTime;
             if (lastCheck >= checkFeq)
             {
@@ -235,17 +239,21 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
         takingDamage[part] = false;
         return true;
     }
-    private void Dead() {
+    private void Dead()
+    {
         Drop();
         animator.SetTrigger("die");
         GameManager.Instance.AddScrap(reward);
         //GetComponent<Rigidbody>().isKinematic = true;
     }
-    private void Drop() {
+    private void Drop()
+    {
         float dice = UnityEngine.Random.Range(0f, 100f);
         float prevPresent = 0;
-        foreach (KeyValuePair<string, float> d in drop) {            
-            if (dice > prevPresent && dice <= prevPresent+d.Value && dropPrefab[d.Key] != null) {
+        foreach (KeyValuePair<string, float> d in drop)
+        {
+            if (dice > prevPresent && dice <= prevPresent + d.Value && dropPrefab[d.Key] != null)
+            {
                 var pos = transform.position;
                 pos.x += UnityEngine.Random.Range(-0.5f, 0.5f);
                 pos.z += UnityEngine.Random.Range(-0.5f, 0.5f);
@@ -263,39 +271,43 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
             }
 
             prevPresent += d.Value;
-        }        
+        }
     }
-    private void Attack() {
+    private void Attack()
+    {
         //前にいないとダメージ受けない
         var heading = target.position - transform.position;
-        float dot = Vector3.Dot(heading, transform.forward);        
+        float dot = Vector3.Dot(heading, transform.forward);
         if (dot < 0.2f || dot > 1.7f) return;
         //攻撃したとアニメション終わるまでもう一度攻撃しない
         if (attacked) return;
         //遠い行くとダメージ受けない
-        if (Vector3.Distance(target.position,transform.position) >= 1.7f) return;
+        if (Vector3.Distance(target.position, transform.position) >= 1.7f) return;
 
-        DamageMessage dm= new DamageMessage();
+        DamageMessage dm = new DamageMessage();
         dm.damager = gameObject;
         dm.amount = ATK;
-        dm.hitNormal = transform.position - target.transform.position; 
+        dm.hitNormal = transform.position - target.transform.position;
         if ((target.GetComponent<GateController>() ?? null) != null) target.GetComponent<GateController>().ApplyDamage(dm);
-        else if ((target.GetComponent<PlayerHealth>() ?? null) != null) target.GetComponent<PlayerHealth>().ApplyDamage(dm);   
+        else if ((target.GetComponent<PlayerHealth>() ?? null) != null) target.GetComponent<PlayerHealth>().ApplyDamage(dm);
         attacked = true;
     }
 
-    private void ResetAfterAttack() { 
+    private void ResetAfterAttack()
+    {
         attacking = false;
         state = State.STOP;
         attacked = false;
         agent.isStopped = false;
     }
-       
-    private void setCollider(GameObject gb,bool enable) {
-        foreach (Transform child in transform) {
+
+    private void setCollider(GameObject gb, bool enable)
+    {
+        foreach (Transform child in transform)
+        {
             child.GetComponent<Collider>().enabled = enable;
             setCollider(child.gameObject, enable);
-        }        
+        }
     }
 
     public bool IsDead()
@@ -306,8 +318,10 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
     {
         Start();
     }
-    private void setCollider(bool en) {
-        foreach (var c in transform.GetComponentsInChildren<Collider>()) { 
+    private void setCollider(bool en)
+    {
+        foreach (var c in transform.GetComponentsInChildren<Collider>())
+        {
             c.enabled = en;
         }
         /*
@@ -323,16 +337,28 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
         return Part.BODY;
     }
 
-    public void TeleportRandomAroundBase() {
+    public void TeleportRandomAroundBase()
+    {
         var baseRadius = 12f;
-        var spwanRange = baseRadius+5;
-        var randX = UnityEngine.Random.Range(-spwanRange, spwanRange);
-        if (randX > 0) randX += baseRadius; else randX -= baseRadius;
-        var randZ = UnityEngine.Random.Range(-spwanRange, spwanRange);
-        if (randZ > 0) randZ += baseRadius; else randZ -= baseRadius;
-        originalPos = enemyBase.position + new Vector3(randX, 0, randZ);
+        var spwanRange = baseRadius + 5;
+        //check out of navmesh
+        NavMeshHit hit;
+        int tried= 0;
+        while (tried<10)
+        {
+            tried++;
+            var randX = UnityEngine.Random.Range(-spwanRange, spwanRange);            
+            var randZ = UnityEngine.Random.Range(-spwanRange, spwanRange);
+            
+            originalPos =  new Vector3(randX, 0, randZ);
+            if (NavMesh.SamplePosition(enemyBase.position + originalPos, out hit, spwanRange, NavMesh.AllAreas))
+            {
+                originalPos=hit.position - enemyBase.position;
+                break;
+            }
+        };        
         agent.enabled = false;
-        transform.position = originalPos;
+        transform.localPosition = originalPos;
         agent.enabled = true;
     }
 }

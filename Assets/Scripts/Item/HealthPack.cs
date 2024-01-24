@@ -5,7 +5,7 @@ public class HealthPack : MonoBehaviour, IItem
     [SerializeField] private float health = 50;
 
     //体力回復
-    public void Use(GameObject target)
+    public void Use(GameObject target, bool fromShop = false)
     {
         var livingEntity = target.GetComponent<LivingEntity>();
 
@@ -14,6 +14,6 @@ public class HealthPack : MonoBehaviour, IItem
             livingEntity.RestoreHealth(health);
         }
 
-        Destroy(gameObject);
+        if (!fromShop) Destroy(gameObject);
     }
 }

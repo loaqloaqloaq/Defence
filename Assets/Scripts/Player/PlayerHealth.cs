@@ -51,6 +51,8 @@ public class PlayerHealth : LivingEntity
 
         GameManager.Instance.playerDamagedCount += (int)damageMessage.amount;
 
+        DamageIndicator.Set(damageMessage.damager);
+
         UpdateUI(true);
         return true;
     }
