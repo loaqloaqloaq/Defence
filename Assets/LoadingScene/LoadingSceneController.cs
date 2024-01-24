@@ -9,7 +9,7 @@ public class LoadingSceneController : MonoBehaviour
     static string nextScene;
 
     [SerializeField] private Image progressBar;
-    [SerializeField] private TextMeshProUGUI guideText;
+    [SerializeField] private TextMeshProUGUI guideText;   
 
     private AsyncOperation op;
 
@@ -65,7 +65,7 @@ public class LoadingSceneController : MonoBehaviour
 
     private void Update()
     {
-        if (InputActivation && Input.anyKeyDown) 
+        if (InputActivation && Input.anyKeyDown && Input.GetAxis("Horizontal")==0) 
         {
             op.allowSceneActivation = true;
         }

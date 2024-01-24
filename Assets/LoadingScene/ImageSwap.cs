@@ -9,12 +9,15 @@ public class ImageSwap : MonoBehaviour
 
     private int imageIndex;
 
+    private bool pressed;
+
     private float alpha;
 
     private void Awake()
     {
          image = GetComponent<Image>();
         imageIndex = 0;
+        pressed = false;
 
         SetImage(imageIndex);
     }
@@ -39,5 +42,18 @@ public class ImageSwap : MonoBehaviour
         if (imageIndex < 0) imageIndex += sprite.Length - 1;
         SetImage(imageIndex);
     }
-
+    private void Update()
+    {
+        var inputX=Input.GetAxis("Horizontal");
+        if (inputX < 0 && !pressed) {
+            OnClickLeftButton();
+            pressed = true;
+        }
+        else if (inputX > 0 && !pressed)
+        {
+            OnClickRightButton();
+            pressed = true;
+        }
+        else if(inputX==0) pressed = false;
+    }
 }

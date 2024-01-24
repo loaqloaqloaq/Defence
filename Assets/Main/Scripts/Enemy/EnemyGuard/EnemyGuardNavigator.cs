@@ -9,6 +9,8 @@ public class EnemyGuardNavigator : MonoBehaviour
     private Animator animator;
     private EnemyGuardController ec;
     private Transform player;
+
+    [SerializeField] bool debug;
     
 
 
@@ -40,15 +42,18 @@ public class EnemyGuardNavigator : MonoBehaviour
                 case EnemyGuardController.State.FOLLOWING:
                     ec.agent.isStopped = false;
                     animator.SetBool("walking", true);
-                    var targetPos = target.position;
-                    ec.agent.destination = targetPos;
-                    if (Vector3.Distance(ec.enemyBase.transform.position, target.position) > (ec.guardRange + 10) && Vector3.Distance(transform.position, ec.enemyBase.position) > 0.2f)
+                    if (Vector3.Distance(ec.enemyBase.transform.position, target.position) > (ec.guardRange + 10))
                     {
-                        ec.agent.destination = ec.originalPos;
+                        ec.agent.destination = ec.originalWorldPos;
                     }
-                    else if (Vector3.Distance(transform.position, ec.enemyBase.position) <= 0.2f) { 
-                        ec.state= EnemyGuardController.State.STOP;
+                    else {                      
+                        ec.agent.destination = target.position;
                     }
+                    if (debug) Debug.Log(Vector3.Distance(transform.position, ec.agent.destination));
+                    if (Vector3.Distance(transform.position, ec.agent.destination) <= 0.1f)
+                    {                        
+                        ec.state = EnemyGuardController.State.STOP;
+                    }                     
                     break;
                 case EnemyGuardController.State.ATTACKING:
                     animator.SetBool("walking", false);
@@ -56,6 +61,7 @@ public class EnemyGuardNavigator : MonoBehaviour
                     break;
             }
         }
+        /*
         if (ec?.agent?.enabled == true && !ec.attacking)
         {
             target = ec.target ?? player;
@@ -77,7 +83,8 @@ public class EnemyGuardNavigator : MonoBehaviour
         }
         else {            
             animator.SetBool("walking", false);            
-        }        
+        }    
+        */
     }
 
    

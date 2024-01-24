@@ -173,7 +173,7 @@ public class EnemyBase_Manager : MonoBehaviour
     private void MoveGuard(EnemyGuardController[] guards)
     {
         foreach (var g in guards) {
-            g.TeleportRandomAroundBase();
+            g.TeleportWithBase();
         }
     }
 

@@ -39,7 +39,7 @@ public class DamageIndicator : MonoBehaviour
             if (indicator == null)
             {
                 indicator = Instantiate(indicatorPrefab);
-                indicator.transform.parent = transform;
+                indicator.transform.SetParent(transform);
             }
             indicators.Add(attacker, indicator);
         }
