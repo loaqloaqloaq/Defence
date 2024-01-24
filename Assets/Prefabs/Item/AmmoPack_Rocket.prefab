@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aeaa2068a1740e448cce86c8cb82ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammo: 6
+  ammo: 3
   targetSlot: 2
 --- !u!208 &6005757336047643193
 NavMeshObstacle:

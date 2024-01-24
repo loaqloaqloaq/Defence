@@ -37,7 +37,6 @@ public class EnemyBase_Manager : MonoBehaviour
         Player = GameObject.Find("Player");
         teleportCounter = 0;
         teleportFlg = false;
-        counterUI.SetActive(false);
         for (int i = 0; i < shopScript.Length; ++i)
         {
             shopScript[i] = GameObject.Find("Shop" + (i+1)).GetComponent<ShopController>();

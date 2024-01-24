@@ -2,11 +2,11 @@
   "EnemyGuard":{
     "hp": 200,
     "moveSpeed": 8,
-    "atk": 10,
+    "atk": 50,
     "reward": 100,
     "drop": {
-      "ammo": 5,
-      "health": 5
+      "ammo": 30,
+      "health": 30
     },
     "resist": {
       "persent":0,
@@ -46,11 +46,11 @@
   "Enemy2": {
     "hp": 200,
     "moveSpeed": 3,
-    "atk": 10,
+    "atk": 30,
     "reward": 100,
     "drop": {
-      "ammo": 5,
-      "health": 5
+      "ammo": 15,
+      "health": 15
     },
     "resist": {
       "persent": 0,
@@ -67,14 +67,14 @@
   },
   "Enemy3": {
     "hp": 100,
-    "moveSpeed": 2,
-    "atk": 10,
-    "reward": 50,
+    "moveSpeed": 3,
+    "atk": 30,
+    "reward": 100,
     "AttackDuration": 1,
     "AttackStop": 1.5,
     "drop": {
-      "ammo": 5,
-      "health": 5
+      "ammo": 15,
+      "health": 15
     },
     "resist": {
       "persent": 0,
@@ -115,7 +115,7 @@
   },
   "Enemy5": {
     "hp": 50,
-    "moveSpeed": 4,
+    "moveSpeed": 10,
     "atk": 0,
     "reward": 100,
     "AttackRadius": 3.3,
