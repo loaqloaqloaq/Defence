@@ -79,6 +79,7 @@ public class EnemyGeneratorManager : MonoBehaviour
         lastGen += Time.deltaTime;
         if (lastGen >= (genFreq + randomTime))
         {
+            if (!generators[currentGenerator].activeSelf) return;
             if (eg.enemyCnt >= maxEnemy) return;
             lastGen = 0;
             randomTime = UnityEngine.Random.Range(-randomRange, randomRange);  
