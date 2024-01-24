@@ -12,8 +12,7 @@ public class SunController : MonoBehaviour
     }
     
     [SerializeField] float rotateSpeed;
-    [SerializeField] DayTime dayTime;    
-    [SerializeField] float NightValue, DayValue;
+    [SerializeField] DayTime dayTime;     
     [SerializeField] float DayNigntChangeSpeed;
     
     Light envlight;
@@ -26,9 +25,7 @@ public class SunController : MonoBehaviour
     {
         if (rotateSpeed <= 0) rotateSpeed = 1f;
         skybox = RenderSettings.skybox;
-        dayTime = DayTime.Sun;
-        if (NightValue <= 0) NightValue = 0.1f;
-        if (DayValue <= 0) DayValue = 0.5f;
+        dayTime = DayTime.Sun;        
         if (DayNigntChangeSpeed <= 0) DayNigntChangeSpeed = 0.5f;
         envlight = GameObject.Find("Directional Light").GetComponent<Light>();
 

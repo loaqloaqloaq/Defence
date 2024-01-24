@@ -1209,7 +1209,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5aa5410e9f8e0b4d99068061319883a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resultData: {fileID: 0}
+  textBox:
+  - {fileID: 683720173}
+  - {fileID: 1812862316}
+  - {fileID: 994875406}
+  - {fileID: 1439859205}
+  - {fileID: 2067261354}
+  - {fileID: 1072500481}
 --- !u!1 &1072500480
 GameObject:
   m_ObjectHideFlags: 0

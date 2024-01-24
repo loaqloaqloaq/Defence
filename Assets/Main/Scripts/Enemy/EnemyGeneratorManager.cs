@@ -22,7 +22,7 @@ public class EnemyGeneratorManager : MonoBehaviour
 
     [SerializeField] GameObject enemy;
 
-    [SerializeField] bool GenerateEnemy;
+    [SerializeField] public bool GenerateEnemy;
 
     float lastGen;
     float genFreq;

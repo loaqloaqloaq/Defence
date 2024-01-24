@@ -93,7 +93,7 @@ public class ResultManager : MonoBehaviour
     //シーンの読み込み
     private void LoadScene_Game()
     {
-        LoadingSceneController.LoadScene("Test_Map");
+        LoadingSceneController.LoadScene("main");
     }
     //もう一度ゲームをプレイ
     public void Retry()

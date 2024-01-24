@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
 
         gameState = GameState.STARTED;
         currentStage = 0;
-        endTimer = 3;
+        endTimer = 5;
         endTime = 0;
 
     }
@@ -100,9 +100,11 @@ public class GameManager : MonoBehaviour
             Debug.Log("勝利");
             End(1);
         }
-        else if (gameState == GameState.STARTED) TimerUpdate();
-        else if (gameState == GameState.END) {
+
+        if (gameState == GameState.STARTED) TimerUpdate();
+        if (gameState == GameState.END) {
             endTime += Time.deltaTime;
+            Debug.Log(endTime);
             if (endTime >= endTimer) { 
                 ToResultScene();
             }
@@ -116,13 +118,31 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void End(int type) {
+    public void End(int type) {       
         Record.resultID = type;
         gameState = GameState.END;
+        if(type!=3)KillAllEnemy();
+        Debug.Log(gameState);
     }
-    
+
+    void KillAllEnemy() {
+        EnemyGeneratorManager.Instance.GenerateEnemy = false;
+        DamageMessage dm = new DamageMessage();
+        dm.damager = gameObject;
+        dm.amount = 9999;
+        Transform pool = GameObject.Find("Enemy Pool").transform;
+        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+        IEnemyDamageable[] allEnemey = pool.GetComponentsInChildren<IEnemyDamageable>();
+        foreach(IEnemyDamageable enemy in allEnemey) {
+            var dis = Vector3.Distance(player.position, enemy.transform.position);
+            if(dis<100) enemy.ApplyDamage(dm);
+            else enemy.gameObject.SetActive(false);
+        }
+    }
+
     void TimerUpdate() {
         timer -= Time.deltaTime;
+        if (timer < 0) timer = 0;
         EnemyGeneratorManager.Instance?.ChangeMaxEnemy(timer / (playTime * 60));
         PlayerPrefs.SetFloat("clearTime", playTime * 60 - timer);
         if (timerScript) timerScript.setTimerString(timer);

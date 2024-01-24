@@ -16,7 +16,7 @@ public class Enemy3Navigator : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         ec = GetComponent<Enemy3Controller>();
-        player = GameObject.Find("Player").transform;
+        player = GameObject.FindWithTag("Player").transform;
     }
 
     // Update is called once per frame
