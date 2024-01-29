@@ -48,8 +48,7 @@ public class EnemyGuardNavigator : MonoBehaviour
                     }
                     else {                      
                         ec.agent.destination = target.position;
-                    }
-                    if (debug) Debug.Log(Vector3.Distance(transform.position, ec.agent.destination));
+                    }                    
                     if (Vector3.Distance(transform.position, ec.agent.destination) <= 0.1f)
                     {                        
                         ec.state = EnemyGuardController.State.STOP;

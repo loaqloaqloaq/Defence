@@ -121,12 +121,11 @@ public class GameManager : MonoBehaviour
     public void End(int type) {
         //ゲーム終了処理がした場合、繰り返しての執行を防ぐ
         if (gameState == GameState.END) return;
-        //1時間切れ勝利 2敵拠点破壊勝利 3ゲート全破壊された　4プレイヤー死んだ
-        Record.resultID = type;
+        //1時間切れ勝利 2敵拠点破壊勝利 3ゲート全破壊された　4プレイヤー死んだ       
         ShowEndSubtitle(type);
         if (type == 4) type = 3;
-        gameState = GameState.END;   
         Record.resultID = type;
+        gameState = GameState.END;  
         if (type!=3) KillAllEnemy();        
         //Debug.Log(gameState);
     }
