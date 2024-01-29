@@ -76,9 +76,8 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
             grController.RefillGrenade();
         }
         else
-        {
-            Record.resultID = 3;
-            Invoke("toResult", 5); //5秒後にリザルトシーンへ移行
+        {            
+            GameManager.Instance.End(4);
         }
     }
 

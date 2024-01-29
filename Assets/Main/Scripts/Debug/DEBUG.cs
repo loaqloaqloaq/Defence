@@ -75,12 +75,14 @@ public class DEBUG : MonoBehaviour
         {
             timeScale = Time.timeScale;
             --timeScale;
+            if (timeScale < 0) timeScale = 0;
             Time.timeScale = timeScale;
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
             timeScale = Time.timeScale;
             ++timeScale;
+            if (timeScale > 5) timeScale = 5;
             Time.timeScale = timeScale;
         }
         if (Input.GetKeyDown(KeyCode.F3))

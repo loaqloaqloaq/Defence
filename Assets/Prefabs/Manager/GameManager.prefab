@@ -49,14 +49,14 @@ MonoBehaviour:
   lastInputDevice: 0
   timerScript: {fileID: 0}
   scrapUI: {fileID: 0}
-  playTime: 10
+  playTime: 0.2
   scrap: 500
   scrapText: {fileID: 0}
   killCount: 0
   playerDamagedCount: 0
   usedScrap: 0
   timer: 0
-  rotateSpeed: 0.05
+  rotateSpeed: 0.01
   now_sky: {fileID: 2100000, guid: 29eb611dc05e53e4b8e9b4c348ef7b48, type: 2}
   currentStage: 0
   NPCCount: 0

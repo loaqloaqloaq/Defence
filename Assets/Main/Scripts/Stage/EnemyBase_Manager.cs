@@ -41,6 +41,7 @@ public class EnemyBase_Manager : MonoBehaviour
         {
             shopScript[i] = GameObject.Find("Shop" + (i+1)).GetComponent<ShopController>();
         }
+        counterUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -75,10 +76,10 @@ public class EnemyBase_Manager : MonoBehaviour
             Debug.Log("ワープ開始");
             NPCMove();
             PlayerMove();
-            EnemyBaseMove();            
+            EnemyBaseMove();       
             teleportCounter = 0;
             teleportFlg = false;
-            counterUI.SetActive(false);
+            counterUI.GetComponent<TextMeshProUGUI>().text = "";
         }
     }
 
@@ -203,9 +204,8 @@ public class EnemyBase_Manager : MonoBehaviour
         }
         else
         {
-            Debug.Log("勝利");
-            Record.resultID = 2;
-            GameManager.Instance?.ToResultScene();
+            Debug.Log("勝利");            
+            GameManager.Instance?.End(2);
         }
 
     }

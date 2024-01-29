@@ -89,13 +89,13 @@ public class GameManager : MonoBehaviour
 
         gameState = GameState.STARTED;
         currentStage = 0;
-        endTimer = 5;
+        endTimer = 7f;
         endTime = 0;
 
     }
     private void Update()
     {
-        if (timer <= 0)
+        if (timer <= 0 && gameState != GameState.END )
         {
             Debug.Log("勝利");
             End(1);
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         if (gameState == GameState.STARTED) TimerUpdate();
         if (gameState == GameState.END) {
             endTime += Time.deltaTime;
-            Debug.Log(endTime);
+            //Debug.Log(endTime);
             if (endTime >= endTimer) { 
                 ToResultScene();
             }
@@ -118,11 +118,21 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void End(int type) {       
+    public void End(int type) {
+        //ゲーム終了処理がした場合、繰り返しての執行を防ぐ
+        if (gameState == GameState.END) return;
+        //1時間切れ勝利 2敵拠点破壊勝利 3ゲート全破壊された　4プレイヤー死んだ
         Record.resultID = type;
-        gameState = GameState.END;
-        if(type!=3)KillAllEnemy();
-        Debug.Log(gameState);
+        ShowEndSubtitle(type);
+        if (type == 4) type = 3;
+        gameState = GameState.END;   
+        Record.resultID = type;
+        if (type!=3) KillAllEnemy();        
+        //Debug.Log(gameState);
+    }
+
+    void ShowEndSubtitle(int type) {
+        sireiController.showText("End"+ type);
     }
 
     void KillAllEnemy() {
@@ -157,7 +167,7 @@ public class GameManager : MonoBehaviour
 
     //結果シーンに移る
     public void ToResultScene()
-    {
+    {        
         PlayerPrefs.SetInt("killCount",killCount);
         PlayerPrefs.SetInt("playerDamagedCount", playerDamagedCount);
         PlayerPrefs.SetInt("usedScrap", usedScrap);
