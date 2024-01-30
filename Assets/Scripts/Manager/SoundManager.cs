@@ -1,10 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Xml.Linq;
-using Unity.PlasticSCM.Editor.WebApi;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using static AudioClipInfo;
 
 public class SoundManager : MonoBehaviour

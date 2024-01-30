@@ -187,8 +187,7 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
         }
     }
     public bool ApplyDamage(DamageMessage damageMessage)
-    {
-        Debug.Log(damageMessage.damager);
+    {       
         return ApplyDamage(damageMessage, Part.BODY);
     }
     private KeyValuePair<Part, bool>? GetTakingDamagePart()
@@ -259,10 +258,11 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
                 var pos = transform.position;
                 pos.x += UnityEngine.Random.Range(-0.5f, 0.5f);
                 pos.z += UnityEngine.Random.Range(-0.5f, 0.5f);
-                pos.y = 200f;
+                pos.y = 30f;
                 RaycastHit hitInfo;
-                if (Physics.Raycast(pos, Vector3.down, out hitInfo))
+                if (Physics.Raycast(pos, Vector3.down, out hitInfo,LayerMask.GetMask("Floor")))
                 {
+                    Debug.Log(hitInfo.point);
                     pos = hitInfo.point;
                 }
                 else
