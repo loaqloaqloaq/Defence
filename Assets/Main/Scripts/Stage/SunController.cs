@@ -17,6 +17,7 @@ public class SunController : MonoBehaviour
     
     Light envlight;
     Color dayColor, sunsetColor;
+    float dayIns, sunsetIns;
     //6B7AA0
 
 
@@ -32,6 +33,8 @@ public class SunController : MonoBehaviour
         Tfactor = -1;
         dayColor = Colors.FromHex("94CFFF");
         sunsetColor = Colors.FromHex("FFD794");
+        dayIns = 0.3f;
+        sunsetIns = 0.6f;
 
         DayTimeUpdate();
         SkyBoxUpdate(false); 
@@ -45,8 +48,6 @@ public class SunController : MonoBehaviour
 
         DayTimeUpdate();
         SkyBoxUpdate();
-
-
     }
     void DayTimeUpdate() {        
         if      (transform.localRotation.eulerAngles.x > 335f)  dayTime = DayTime.Sunset;
@@ -68,6 +69,7 @@ public class SunController : MonoBehaviour
             }
             skybox.SetFloat("_value", Tfactor);
             envlight.color = Color.Lerp(dayColor, sunsetColor, math.abs(2 - Tfactor));
+            envlight.intensity = Mathf.Lerp(dayIns, sunsetIns, math.abs(2 - Tfactor));
         }
         else if (dayTime == DayTime.Sunset && Tfactor != 1)
         {
@@ -80,6 +82,7 @@ public class SunController : MonoBehaviour
             }
             skybox.SetFloat("_value", Tfactor);
             envlight.color = Color.Lerp(sunsetColor, dayColor, math.abs(1 - Tfactor));
+            envlight.intensity = Mathf.Lerp( sunsetIns, dayIns, math.abs(1 - Tfactor));
         }
         else if (dayTime == DayTime.Sun && Tfactor != 0)
         {
@@ -92,6 +95,7 @@ public class SunController : MonoBehaviour
             }
             skybox.SetFloat("_value", Tfactor);
             envlight.color = Color.Lerp(dayColor, sunsetColor, math.abs(0 - Tfactor));
+            envlight.intensity = Mathf.Lerp(dayIns, sunsetIns, math.abs(0 - Tfactor));
         }        
     }
 }
