@@ -26,6 +26,7 @@ public class TurretUI : MonoBehaviour
     [SerializeField] public Button firstSelectedButton;
     [SerializeField] private TextMeshProUGUI guideText;
     [SerializeField] private TextMeshProUGUI errorMessage;
+    [SerializeField] private TextMeshProUGUI t1cost, t2cost, t3cost;
 
     //Unity Action 
     public event Action openUI;
@@ -76,6 +77,7 @@ public class TurretUI : MonoBehaviour
             default:                
                 break;
         }
+        Debug.Log($"cost: {cost}\n scraps:{GameManager.Instance.scrap}");
         if (!enoughScrap) {
             errorMessage.text = "NOT ENOUGH SCRAP!";
             return;
@@ -114,6 +116,9 @@ public class TurretUI : MonoBehaviour
     {
         if (firstSelectedButton != null) { eventSystem.SetSelectedGameObject(firstSelectedButton.gameObject); }
         errorMessage.text = "";
+        t1cost.text = String.Format("{0:000000}", TurretJsonLoader.T1.cost);
+        t2cost.text = String.Format("{0:000000}", TurretJsonLoader.T2.cost);
+        t3cost.text = String.Format("{0:000000}", TurretJsonLoader.T3.cost);
         turretUIBackGround.SetActive(true);
         UIManager.Instance.SetMouseVisible(true);
         isOpened = true;
