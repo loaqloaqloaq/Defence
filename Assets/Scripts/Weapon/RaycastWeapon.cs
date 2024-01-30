@@ -3,7 +3,7 @@ using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class RaycastWeapon : MonoBehaviour
-{
+{    
     protected PlayerInput input;
 
      public class Bullet
