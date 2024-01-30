@@ -108,6 +108,7 @@ public class Turret_Missile : MonoBehaviour, Abnormality
         audioSource = GetComponent<AudioSource>();
 
         SoundManager.Instance?.AddAudioInfo(fireSE);
+        SoundManager.Instance.AddSESource(audioSource);
 
         abnormality = new int[] { 0, 0 };
     }

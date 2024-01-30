@@ -350,6 +350,7 @@ public class UIManager : MonoBehaviour
 
     public void SetEnableCanvas_Sniping(bool isEnable)
     {
+        crosshair.OnSniping(isEnable);
         canvas_Sniping.enabled = isEnable;
     }
 

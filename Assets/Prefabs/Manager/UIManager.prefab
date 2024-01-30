@@ -7312,19 +7312,7 @@ MonoBehaviour:
   m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9042679379071027765}
-        m_TargetAssemblyTypeName: SettingManager, Assembly-CSharp
-        m_MethodName: SetCameraXAxis
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &3631041224846740653
 GameObject:
   m_ObjectHideFlags: 0
@@ -11318,6 +11306,7 @@ MonoBehaviour:
   aimPointReticle: {fileID: 1960332924043655809}
   hitPointReticle: {fileID: 3683030004846278478}
   smoothTime: 0.2
+  isSniping: 0
 --- !u!1 &5832802064099539052
 GameObject:
   m_ObjectHideFlags: 0
@@ -13891,19 +13880,7 @@ MonoBehaviour:
   m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9042679379071027765}
-        m_TargetAssemblyTypeName: SettingManager, Assembly-CSharp
-        m_MethodName: SetCameraXAxis
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6600300638652535662
 GameObject:
   m_ObjectHideFlags: 0

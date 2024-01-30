@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static AudioClipInfo;
@@ -37,11 +38,20 @@ public class SoundManager : MonoBehaviour
 
     Dictionary<string, AudioClipInfo> audioClipInfo = new Dictionary<string, AudioClipInfo>();
 
+    private List<AudioSource> seList = new List<AudioSource>();
+
+    private float currentVolume;
+
     private bool IsContained(string seName)
     { 
         return audioClipInfo.ContainsKey(seName);
     }
 
+
+    private void Start()
+    {
+        seList.Add(audioSources[(int)Sound.EFFECT]);  
+    }
 
     public void Clear()
     {
@@ -232,7 +242,24 @@ public class SoundManager : MonoBehaviour
     }
     public void SetSfxVolume(float volume)
     {
-        audioSources[(int)Sound.EFFECT].volume = volume;
+        currentVolume = volume;
+        int index = 0;
+        foreach (AudioSource source in seList)
+        {
+            if (source == null)
+            {
+                //seList.RemoveAt(index);
+                continue;
+            }
+            index++;
+            source.volume = volume;
+        }
+    }
+
+    public void AddSESource(AudioSource ad)
+    {
+        seList.Add(ad);
+        ad.volume = currentVolume;
     }
 }
 

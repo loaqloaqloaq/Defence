@@ -65,6 +65,8 @@ public class RaycastWeapon : MonoBehaviour
 
     [SerializeField] protected LayerMask whatIsTarget;
 
+    private AudioSource audioSource;
+
     public bool reloadAvailable
     {
         get
@@ -76,11 +78,13 @@ public class RaycastWeapon : MonoBehaviour
     public virtual void Awake()
     {
         recoil = GetComponent<WeaponRecoil>();
+        audioSource = GetComponent<AudioSource>();
 
         //SE‚Ì’Ç‰Á
         SoundManager.Instance.AddAudioInfo(fireSE);
         SoundManager.Instance.AddAudioInfo(reloadSE);
         SoundManager.Instance.AddAudioInfo(emptySE);
+        SoundManager.Instance.AddSESource(audioSource);
     }
 
     public void OnEnable()
@@ -346,13 +350,13 @@ public class RaycastWeapon : MonoBehaviour
         switch (soundName)
         {
             case "Shot":
-                SoundManager.Instance.PlaySE(fireSE.name);
+                SoundManager.Instance.PlaySE(fireSE.name, audioSource);
                 break;
             case "Reload":
-                SoundManager.Instance.PlaySE(reloadSE.name);
+                SoundManager.Instance.PlaySE(reloadSE.name, audioSource);   
                 break;
             case "Empty":
-                SoundManager.Instance.PlaySE(emptySE.name);
+                SoundManager.Instance.PlaySE(emptySE.name, audioSource);
                 break;
             default:
                 break;

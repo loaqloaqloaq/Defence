@@ -30,10 +30,10 @@ public class Data
     }
 
     //ボリュームセッティング保存
-    public void SetVolumeSetting(float mVolue, float sVolue)
+    public void SetVolumeSetting(float mVolume, float sVolume)
     {
-        data[(int)dataType.musicVolume] = mVolue;
-        data[(int)dataType.sfxVolume] = sVolue;
+        data[(int)dataType.musicVolume] = mVolume;
+        data[(int)dataType.sfxVolume] = sVolume;
     }
 
     //初期化

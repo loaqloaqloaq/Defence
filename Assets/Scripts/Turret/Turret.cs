@@ -124,6 +124,7 @@ public class Turret : MonoBehaviour, Abnormality
         audioSource = GetComponent<AudioSource>();
 
         SoundManager.Instance?.AddAudioInfo(fireSE);
+        SoundManager.Instance.AddSESource(audioSource);
 
         abnormality = new int[] { 0, 0 };
     }
