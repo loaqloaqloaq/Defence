@@ -74,7 +74,7 @@ public class EnemyBase_Manager : MonoBehaviour
             counterUI.SetActive(true);
             teleportCounter += Time.deltaTime;
             int Counter = 30 - (int)teleportCounter;
-            counterUI.GetComponent<TextMeshProUGUI>().text = Counter + "•bŒã‚ÉŽŸ‚Ì‹’“_‚ÖˆÚ“®‚µ‚Ü‚·";
+            counterUI.GetComponent<TextMeshProUGUI>().text = "ŽŸ‚Ì‹’“_‚Ö‚Ì“P‘Þ" + Counter + "•b‘O";
         }
         else
         {
