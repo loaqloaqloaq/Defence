@@ -39,15 +39,15 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //初期値を設定
         gaugeWidth = 30.0f;
         width = gaugeWidth;
-        MaxHP = 500f;
+        MaxHP = 1750f;
         HP = MaxHP;
         reward = 1000;
-        //HP表示設定
+        //HP表示設定     
         HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
         //ダメージを受けていないを設定
         applydamage = false;
         healTime = 0.0f;
-
+        
         dead = false;
     }
     void Update()
@@ -97,6 +97,28 @@ public class EnemyBase : MonoBehaviour, IDamageable
         //ダメージ処理
         else
         {
+            if (damageMessage.damager?.name.Contains("Player") == true)
+            {
+                RaycastWeapon weapon = damageMessage.damager.GetComponent<ActiveWeapon>().GetActiveWeapon();             
+                switch (weapon.weaponType)
+                {
+                    case "rifle":
+                        damageMessage.amount *= 0.8f;
+                        break;
+                    case "rocket":
+                        damageMessage.amount *= 1.2f;
+                        break;
+                    case "sniperRifle":
+                        damageMessage.amount *= 0.7f;
+                        break;
+                    case "pistol":
+                        damageMessage.amount = 0;
+                        break;
+                    default:
+                        break;
+                }
+                Debug.Log(weapon.weaponType+": "+ damageMessage.amount);
+            }
             //ダメージを食らう
             HP -= damageMessage.amount;
             //animationを再生
@@ -106,8 +128,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
         }
         //ゲージの更新
         gaugeWidth = 30f * HP / MaxHP;
-        HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
-
+        HPText.text = HP + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";       
+       
         return false;
     }
 
@@ -141,10 +163,10 @@ public class EnemyBase : MonoBehaviour, IDamageable
         healTime += Time.deltaTime;
 
         //ダメージを受けてから10秒以上経過したら
-        if (healTime >= 10.0f)
+        if (healTime >= 5f)
         {
             //HPを100回復
-            HP += 100.0f;
+            HP += 200.0f;
             //時間をリセット
             healTime = 0.0f;
         }

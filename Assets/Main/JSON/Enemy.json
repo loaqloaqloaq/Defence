@@ -2,7 +2,7 @@
   "EnemyGuard":{
     "hp": 200,
     "moveSpeed": 8,
-    "atk": 50,
+    "atk": 75,
     "reward": 100,
     "drop": {
       "ammo": 30,
@@ -24,7 +24,7 @@
   "Enemy1": {
     "hp": 100,
     "moveSpeed": 3,
-    "atk": 10,
+    "atk": 20,
     "reward": 50,
     "drop": {
       "ammo": 5,

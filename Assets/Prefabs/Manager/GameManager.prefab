@@ -46,12 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d20de68d9725e246afba533b5706877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: 0
   lastInputDevice: 0
   timerScript: {fileID: 0}
   scrapUI: {fileID: 0}
-  playTime: 0.2
+  playTime: 10
   scrap: 500
   scrapText: {fileID: 0}
+  fadeEffect: {fileID: 0}
   killCount: 0
   playerDamagedCount: 0
   usedScrap: 0

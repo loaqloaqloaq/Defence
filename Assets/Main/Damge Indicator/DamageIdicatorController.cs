@@ -59,7 +59,7 @@ public class DamageIdicatorController : MonoBehaviour
     private void updateRotation() {
         Vector3 targetDir = targetPos - player.transform.position;
         float angle = Vector3.Angle(targetDir, player.transform.forward);
-        Debug.Log(angle);
+        //Debug.Log(angle);
         var an=rectTransform.eulerAngles;
         an.z = angle;
         rectTransform.eulerAngles=an;

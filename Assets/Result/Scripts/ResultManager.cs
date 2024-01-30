@@ -47,6 +47,8 @@ public class ResultManager : MonoBehaviour
 
     void Awake()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         //値を取得
         killCount = PlayerPrefs.GetInt("killCount", 0);
         takenDamage　= PlayerPrefs.GetInt("playerDamagedCount", 0);
@@ -57,7 +59,7 @@ public class ResultManager : MonoBehaviour
         SetResult();
         //オーディオの再生
         audioSource.Play();
-    }
+    }   
 
     void Update()
     {
