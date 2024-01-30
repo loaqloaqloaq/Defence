@@ -62,6 +62,8 @@ public class Enemy5Controller : MonoBehaviour, IDamageable, EnemyInterface
 
         SoundManager.Instance?.AddAudioInfo(hitSE);
         SoundManager.Instance?.AddAudioInfo(deadSE);
+
+        SoundManager.Instance.AddSESource(audioSource);
     }
 
     void Start()

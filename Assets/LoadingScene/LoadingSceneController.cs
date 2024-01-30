@@ -42,7 +42,7 @@ public class LoadingSceneController : MonoBehaviour
         while (!op.isDone)
         {
             yield return null;
-            if (op.progress < 0.7f)
+            if (op.progress < 0.3f)
             {
                 progressBar.fillAmount = op.progress;
             }
@@ -50,7 +50,7 @@ public class LoadingSceneController : MonoBehaviour
             {
                 timer += Time.deltaTime;
                 //Debug.Log(timer);
-                progressBar.fillAmount = Mathf.Lerp(0.7f, 1f, timer);
+                progressBar.fillAmount = Mathf.Lerp(0.3f, 1f, timer);
                 if (progressBar.fillAmount >= 1f)
                 {
                     InputActivation = true;
@@ -65,7 +65,7 @@ public class LoadingSceneController : MonoBehaviour
 
     private void Update()
     {
-        if (InputActivation && Input.anyKeyDown && Input.GetAxis("Horizontal")==0) 
+        if (InputActivation && Input.anyKeyDown) 
         {
             op.allowSceneActivation = true;
         }

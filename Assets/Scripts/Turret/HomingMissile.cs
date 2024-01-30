@@ -44,6 +44,7 @@ public class HomingMissile : MonoBehaviour
         Gizmos.DrawSphere(transform.position, attackRadius); //オブジェクトの攻撃半径を球体に描画
     }
 
+
     public Transform Target
     {
         set
@@ -68,6 +69,7 @@ public class HomingMissile : MonoBehaviour
         m_transform = transform;
         m_audioSource = GetComponent<AudioSource>();
         SoundManager.Instance?.AddAudioInfo(fireSE);
+        SoundManager.Instance.AddSESource(m_audioSource);
     }
 
 
