@@ -230,7 +230,7 @@ public class RaycastWeapon : MonoBehaviour
             else
             {
                 //EffectManager.Instance.PlayHitEffect(hitInfo.point, hitInfo.normal, hitInfo.transform);
-                Debug.Log(hitInfo.transform.name);
+                //Debug.Log(hitInfo.transform.name);
                 hitEffect.transform.position = hitInfo.point;
                 hitEffect.transform.forward = hitInfo.normal;
                 hitEffect.Emit(1);

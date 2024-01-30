@@ -1055,7 +1055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5829751208796661597, guid: b620418d4d9367e4e942562fac92d818, type: 3}
       propertyPath: GenerateEnemy
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
