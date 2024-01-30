@@ -44,7 +44,8 @@ public class ImageSwap : MonoBehaviour
     }
     private void Update()
     {
-        var inputX=Input.GetAxis("Horizontal");
+        var inputX = Input.GetAxis("Horizontal");
+
         if (inputX < 0 && !pressed) {
             OnClickLeftButton();
             pressed = true;

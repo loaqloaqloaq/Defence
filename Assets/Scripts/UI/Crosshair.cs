@@ -14,6 +14,13 @@ public class Crosshair : MonoBehaviour
     private Vector2 currentHitPointVelocity;
     private Vector2 targetPoint; //表示先
 
+    [SerializeField] private bool isSniping;
+
+    public void OnSniping(bool isActive)
+    {
+        isSniping = isActive;
+    }
+
     private void Awake()
     {
         screenCamera = Camera.main;
@@ -23,6 +30,12 @@ public class Crosshair : MonoBehaviour
     //クロスヘアの表示・非表示
     public void SetActiveCrosshair(bool active)
     {
+        if (isSniping) 
+        {
+            hitPointReticle.enabled = false;
+            aimPointReticle.enabled = false;
+            return;
+        }
         hitPointReticle.enabled = active;
         aimPointReticle.enabled = active;
     }

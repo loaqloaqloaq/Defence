@@ -140,7 +140,7 @@ public class PlayerAiming : MonoBehaviour
         {
             return;
         }
-
+        
         //uiManager.SetEnableCanvas_Player(false);
         uiManager.SetEnableCanvas_Sniping(true);
     }

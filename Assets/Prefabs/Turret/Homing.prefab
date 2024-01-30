@@ -4988,7 +4988,7 @@ MonoBehaviour:
   model: {fileID: 7437840732190204487}
   fireSE:
     maxSENum: 5
-    initVolume: 0.731
+    initVolume: 0.7
     name: missileExplosion
     resourcePath: 
     audioLength: 1.2
@@ -5014,7 +5014,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 45
+  MaxDistance: 35
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -5033,8 +5033,8 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.642694
-      value: 0.7861166
+      time: 0.5851226
+      value: 0.7369299
       inSlope: -1.0227273
       outSlope: -1.0227273
       tangentMode: 0
@@ -5042,8 +5042,8 @@ AudioSource:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.872323
-      value: 0.46673107
+      time: 0.8329248
+      value: 0.35494518
       inSlope: -2.1945047
       outSlope: -2.1945047
       tangentMode: 0

@@ -63,6 +63,8 @@ public class Enemy1Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
 
        SoundManager.Instance?.AddAudioInfo(hitSE);
        SoundManager.Instance?.AddAudioInfo(deadSE);
+
+       SoundManager.Instance.AddSESource(audioSource);
     }
 
     // Start is called before the first frame update

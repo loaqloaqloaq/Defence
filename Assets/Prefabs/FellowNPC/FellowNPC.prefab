@@ -2186,7 +2186,7 @@ Transform:
   - {fileID: 35365105081357782}
   - {fileID: 5168296253272351566}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2180171520960222192
 Animator:
@@ -2470,17 +2470,33 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6157621352187347037, guid: 0b3d9c92445d98c4c8e2a0ed9388f4ff, type: 3}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[3].value
+      value: 0.058135986
+      objectReference: {fileID: 0}
     - target: {fileID: 6360325984832206524, guid: 0b3d9c92445d98c4c8e2a0ed9388f4ff, type: 3}
       propertyPath: fireRate
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360325984832206524, guid: 0b3d9c92445d98c4c8e2a0ed9388f4ff, type: 3}
+      propertyPath: fireSE.name
+      value: FellowpistolFire
       objectReference: {fileID: 0}
     - target: {fileID: 6360325984832206524, guid: 0b3d9c92445d98c4c8e2a0ed9388f4ff, type: 3}
       propertyPath: maxLifeTime
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6360325984832206524, guid: 0b3d9c92445d98c4c8e2a0ed9388f4ff, type: 3}
+      propertyPath: fireSE.initVolume
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360325984832206524, guid: 0b3d9c92445d98c4c8e2a0ed9388f4ff, type: 3}
       propertyPath: targetLeyer.m_Bits
       value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360325984832206524, guid: 0b3d9c92445d98c4c8e2a0ed9388f4ff, type: 3}
+      propertyPath: reloadSE.initVolume
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6360325984832206524, guid: 0b3d9c92445d98c4c8e2a0ed9388f4ff, type: 3}
       propertyPath: whatIsTarget.m_Bits
