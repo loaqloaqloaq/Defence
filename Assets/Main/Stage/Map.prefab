@@ -787,7 +787,7 @@ Transform:
   - {fileID: 4854467155489716973}
   - {fileID: 6504060650692790942}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5469553819465290822
 GameObject:
@@ -8297,7 +8297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5160337932670183729, guid: 4a2182311f5c4124b9c82a71b2545eb8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.01
+      value: 15.6
       objectReference: {fileID: 0}
     - target: {fileID: 5160337932670183729, guid: 4a2182311f5c4124b9c82a71b2545eb8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20310,6 +20310,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2058016346539046542, guid: 5e939871286b608429a8234669cbf384, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058016346539046542, guid: 5e939871286b608429a8234669cbf384, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2914084737055963306, guid: 5e939871286b608429a8234669cbf384, type: 3}
       propertyPath: gateNumber
       value: 1
@@ -22391,7 +22399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5160337932670183729, guid: 4a2182311f5c4124b9c82a71b2545eb8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.01
+      value: 15.54
       objectReference: {fileID: 0}
     - target: {fileID: 5160337932670183729, guid: 4a2182311f5c4124b9c82a71b2545eb8, type: 3}
       propertyPath: m_LocalPosition.z
