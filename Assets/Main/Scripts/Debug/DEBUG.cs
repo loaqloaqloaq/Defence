@@ -42,6 +42,7 @@ public class DEBUG : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.F10)) g1.ApplyDamage(gateDestory);
         if (Input.GetKeyDown(KeyCode.F11)) g2.ApplyDamage(gateDestory);
         if (Input.GetKeyDown(KeyCode.F12)) g3.ApplyDamage(gateDestory);
