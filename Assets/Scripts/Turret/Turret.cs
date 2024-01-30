@@ -84,6 +84,7 @@ public class Turret : MonoBehaviour, Abnormality
 
         if (ITarget != null)
         {
+            Debug.Log($"{target.name}: {ITarget.IsDead()}");
             return ITarget.IsDead();
         }
 
@@ -187,6 +188,7 @@ public class Turret : MonoBehaviour, Abnormality
        
         foreach (var collider in colliders)
         {
+            
             //オブジェクトが視野範囲内にない
             if (!IsTargetOnSight(collider.transform))
                 continue;
@@ -223,7 +225,7 @@ public class Turret : MonoBehaviour, Abnormality
 
         //オブジェクトと対象の間に障害物がないのを確認
         if (Physics.Raycast(raycastOrigin.position, direction, out hit, attackRadius))
-        {
+        {            
             if (hit.transform == target)
                 return true;
         }

@@ -66,8 +66,7 @@ public class Turret_FlameThrower : MonoBehaviour, Abnormality
         var ITarget = target.GetComponent<IDamageable>();
 
         if (ITarget != null)
-        {
-            Debug.Log($"{target.name}: {ITarget.IsDead()}");
+        {           
             return ITarget.IsDead();
         }
 
