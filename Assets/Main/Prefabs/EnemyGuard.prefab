@@ -3229,7 +3229,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.71
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 0
   m_AngularSpeed: 270
@@ -3388,22 +3388,24 @@ MonoBehaviour:
   target: {fileID: 0}
   player: {fileID: 0}
   enemyBase: {fileID: 0}
+  state: 0
   hitSE:
-    maxSENum: 0
-    initVolume: 0
-    name: 
+    maxSENum: 6
+    initVolume: 0.8
+    name: enemy2Hit
     resourcePath: 
-    audioLength: 0
-    clip: {fileID: 0}
+    audioLength: 0.3
+    clip: {fileID: 8300000, guid: 7a4046571e14f5a4f929d063e1fd087f, type: 3}
   deadSE:
-    maxSENum: 0
-    initVolume: 0
-    name: 
+    maxSENum: 3
+    initVolume: 0.8
+    name: enemy2Dead
     resourcePath: 
-    audioLength: 0
-    clip: {fileID: 0}
+    audioLength: 1
+    clip: {fileID: 8300000, guid: 00d1d12e4a476104886cb7fdf3e1c0eb, type: 3}
   guardRange: 0
   originalPos: {x: 0, y: 0, z: 0}
+  originalWorldPos: {x: 0, y: 0, z: 0}
 --- !u!114 &6440585087816939868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3417,6 +3419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  debug: 0
 --- !u!1 &3554424129767012803 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100096, guid: 3a8d927a02cf68d4a9879833567d9124, type: 3}

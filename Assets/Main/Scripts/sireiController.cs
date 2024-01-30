@@ -55,7 +55,7 @@ public class sireiController : MonoBehaviour
             }
             else if (tt[0] == "msg")
             {               
-                if (key == "") continue;
+                if (key == "") continue;                
                 else if (!messages.ContainsKey(key))  messages.Add(key, new List<string>());    
                 messages[key].Add(tt[1]);               
             }
@@ -80,6 +80,10 @@ public class sireiController : MonoBehaviour
         {
             message = messages.ElementAt(3).Value;
         }
+        else if (key == "End4")
+        {
+            message = messages.ElementAt(4).Value;
+        }
         if (message.Count <= 0)
         {
             Debug.LogWarning("message not found");
@@ -99,8 +103,8 @@ public class sireiController : MonoBehaviour
             tmp.text = "";
             return;
         }    
-        time += Time.unscaledDeltaTime;
-        //Debug.Log(time);
+        time += Time.deltaTime;
+        //Debug.Log(Mathf.round(time));
         if (time > timer)
         {
             currentIndex++;

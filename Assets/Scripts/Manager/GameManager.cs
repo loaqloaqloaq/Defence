@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEngine.Rendering.DebugUI;
+using System.Collections;
+using System.Collections.Generic;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float playTime;
     [SerializeField] public int scrap;
     [SerializeField] TextMeshProUGUI scrapText;
+    [SerializeField] GameObject fadeEffect; 
     public int killCount;
     public int playerDamagedCount;
     public int usedScrap;
@@ -172,6 +172,10 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("playerDamagedCount", playerDamagedCount);
         PlayerPrefs.SetInt("usedScrap", usedScrap);
         PlayerPrefs.SetFloat("remainingTime", timer);
+        fadeEffect.SetActive(true);
+        Invoke("LoadResultScene", 2f);
+    }
+    void LoadResultScene() {
         SceneManager.LoadScene("Result");
     }
     

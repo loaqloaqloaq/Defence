@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
+using UnityEngine.UI;
 
 public class DEBUG : MonoBehaviour
 {
     private IDamageable g1, g2, g3;
     DamageMessage gateDestory;
+
+    [SerializeField] Text FPS;
 
     EnemyBase[] eb;
 
@@ -42,6 +45,7 @@ public class DEBUG : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        FPS.text = Mathf.Round(1 / Time.deltaTime).ToString();
         if (Input.GetKeyDown(KeyCode.F10)) g1.ApplyDamage(gateDestory);
         if (Input.GetKeyDown(KeyCode.F11)) g2.ApplyDamage(gateDestory);
         if (Input.GetKeyDown(KeyCode.F12)) g3.ApplyDamage(gateDestory);

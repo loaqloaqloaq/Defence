@@ -9,6 +9,7 @@ public class TextAnimation : MonoBehaviour
     int current;
     int dataCount;
     float timer;
+    float firstAnimationTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,19 +27,23 @@ public class TextAnimation : MonoBehaviour
         dataCount = textBox.Count;        
 
         current = 0;
-        timer = 0.5f;
+        timer = 0.5f;        
+        firstAnimationTimer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (current < dataCount) {
+        if(firstAnimationTimer < 1.5f) firstAnimationTimer += Time.deltaTime;
+        else if (current < dataCount)
+        {
             timer += Time.deltaTime;
-            if (timer >= 0.5f) {
+            if (timer >= 0.5f)
+            {
                 textBox[current].gameObject.SetActive(true);
-                if (textBox[current].GetComponentInChildren<TextMeshProUGUI>().text != "") timer = 0;                
+                if (textBox[current].GetComponentInChildren<TextMeshProUGUI>().text != "") timer = 0;
                 current++;
             }
-        }
+        }        
     }
 }

@@ -42,14 +42,16 @@ public class EnemyGuardNavigator : MonoBehaviour
                 case EnemyGuardController.State.FOLLOWING:
                     ec.agent.isStopped = false;
                     animator.SetBool("walking", true);
+                    var pointOffset = 0.1f;
                     if (Vector3.Distance(ec.enemyBase.transform.position, target.position) > (ec.guardRange + 10))
                     {
                         ec.agent.destination = ec.originalWorldPos;
                     }
                     else {                      
                         ec.agent.destination = target.position;
+                        pointOffset = 1.5f;
                     }                    
-                    if (Vector3.Distance(transform.position, ec.agent.destination) <= 0.1f)
+                    if (Vector3.Distance(transform.position, ec.agent.destination) <= pointOffset)
                     {                        
                         ec.state = EnemyGuardController.State.STOP;
                     }                     
