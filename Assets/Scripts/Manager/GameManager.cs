@@ -9,11 +9,11 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoBehaviour
 {
-    enum GameState
+    public enum GameState
     {
         NON, STARTED, END
     }
-    GameState gameState;
+    public GameState gameState;
     public InputDevice lastInputDevice;
     //Singleton       
     private static GameManager instance;
@@ -115,7 +115,8 @@ public class GameManager : MonoBehaviour
     {
         //スカイボックスのマテリアルを元に戻す
         now_sky.SetFloat("_Rotation", originalRotate);
-        
+        now_sky.SetFloat("_value", 2);
+
     }
 
     public void End(int type) {

@@ -66,6 +66,11 @@ public class EnemyBase_Manager : MonoBehaviour
         //30秒後にワープ
         if (teleportCounter <= 30.0f)
         {
+            if (GameManager.Instance.gameState == GameManager.GameState.END) {
+                //ゲーム終わったらカウンター停止してUI非表示する
+                counterUI.SetActive(false);
+                return;
+            }
             counterUI.SetActive(true);
             teleportCounter += Time.deltaTime;
             int Counter = 30 - (int)teleportCounter;
