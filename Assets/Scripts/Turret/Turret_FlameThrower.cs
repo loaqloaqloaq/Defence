@@ -67,6 +67,7 @@ public class Turret_FlameThrower : MonoBehaviour, Abnormality
 
         if (ITarget != null)
         {
+            Debug.Log($"{target.name}: {ITarget.IsDead()}");
             return ITarget.IsDead();
         }
 
@@ -167,7 +168,7 @@ public class Turret_FlameThrower : MonoBehaviour, Abnormality
         var colliders = Physics.OverlapSphere(attackRoot.position, attackRadius, whatIsTarget);
 
         foreach (var collider in colliders)
-        {
+        {            
             //�I�u�W�F�N�g������͈͓��ɂȂ�
             if (!IsTargetOnSight(collider.transform))
                 continue;

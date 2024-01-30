@@ -6265,6 +6265,9 @@ MonoBehaviour:
   firstSelectedButton: {fileID: 375535812952997288}
   guideText: {fileID: 7742424673256318438}
   errorMessage: {fileID: 8691081151918044320}
+  t1cost: {fileID: 4405799548464585364}
+  t2cost: {fileID: 8954244896537626132}
+  t3cost: {fileID: 991015605551007820}
 --- !u!1 &3165047547518613145
 GameObject:
   m_ObjectHideFlags: 0
@@ -6443,8 +6446,6 @@ GameObject:
   - component: {fileID: 4746443938692860996}
   - component: {fileID: 7731872460122972580}
   - component: {fileID: 4405799548464585364}
-  - component: {fileID: 3389490117357136713}
-  - component: {fileID: 4009271854314470808}
   m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
@@ -6572,32 +6573,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3389490117357136713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3198384248413917428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2322f22448201f845a2cfab883094655, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4009271854314470808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3198384248413917428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6c102b60d6e0146b12ff9482a80e9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CountFPS: 60
-  Duration: 0.5
 --- !u!1 &3293957493400062776
 GameObject:
   m_ObjectHideFlags: 0
@@ -13273,8 +13248,6 @@ GameObject:
   - component: {fileID: 931633885185170213}
   - component: {fileID: 8031201218945412350}
   - component: {fileID: 8954244896537626132}
-  - component: {fileID: 8805370667026378076}
-  - component: {fileID: 7031054567533896352}
   m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
@@ -13402,32 +13375,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8805370667026378076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6517496948987698787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2322f22448201f845a2cfab883094655, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7031054567533896352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6517496948987698787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6c102b60d6e0146b12ff9482a80e9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CountFPS: 60
-  Duration: 0.5
 --- !u!1 &6567822071472585832
 GameObject:
   m_ObjectHideFlags: 0
@@ -18078,8 +18025,6 @@ GameObject:
   - component: {fileID: 6765917187012670713}
   - component: {fileID: 9037679948210125318}
   - component: {fileID: 991015605551007820}
-  - component: {fileID: 5809590531414074321}
-  - component: {fileID: 4681600176483036213}
   m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
@@ -18207,32 +18152,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &5809590531414074321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8358893001326954500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2322f22448201f845a2cfab883094655, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4681600176483036213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8358893001326954500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6c102b60d6e0146b12ff9482a80e9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CountFPS: 60
-  Duration: 0.5
 --- !u!1 &8404823737498040901
 GameObject:
   m_ObjectHideFlags: 0
@@ -19813,7 +19732,7 @@ Transform:
   - {fileID: 1735300005795352515}
   - {fileID: 3037189217508534199}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9068163846488966494
 MonoBehaviour:

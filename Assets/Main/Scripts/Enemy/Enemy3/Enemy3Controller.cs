@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
+public class Enemy3Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
 {
     [HideInInspector]
-    public float HP, MAXHP, ATK;
+    public float HP, MAXHP, ATK;  
     int reward;
     Dictionary<string, float> drop = new Dictionary<string, float>();
     private Animator animator;
@@ -161,8 +162,7 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
 
         }
     }
-    public bool ApplyDamage(DamageMessage damageMessage)
-    {
+    public bool ApplyDamage(DamageMessage damageMessage, Part part) {
         float damageMuiltplier = 1f;
 
         switch (damageMessage.attackType)
@@ -197,6 +197,12 @@ public class Enemy3Controller : MonoBehaviour, IDamageable, EnemyInterface
             SoundManager.Instance?.PlaySE(deadSE.name, audioSource);
             Dead();
         }
+        return true;
+        
+    }    
+    public bool ApplyDamage(DamageMessage damageMessage)
+    {
+        ApplyDamage(damageMessage, Part.BODY);
         return true;
     }
     private void Dead() {

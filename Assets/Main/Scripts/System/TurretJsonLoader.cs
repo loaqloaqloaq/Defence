@@ -54,14 +54,9 @@ public class TurretJsonLoader : MonoBehaviour
     [SerializeField]
     public TextAsset TurretJsonFile;
     public TurretData turretData = null;
-
-
-    void Awake()
+    private void Awake()
     {
-        if (TurretJsonFile)
-        {
-            turretData = JsonUtility.FromJson<TurretData>(TurretJsonFile.ToString());            
-        }
+        turretData = JsonUtility.FromJson<TurretData>(TurretJsonFile.ToString());
     }
 
     private TurretData getData() { 
