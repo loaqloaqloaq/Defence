@@ -83,8 +83,7 @@ public class Turret : MonoBehaviour, Abnormality
         var ITarget = target?.GetComponent<IDamageable>()??null;
 
         if (ITarget != null)
-        {
-            Debug.Log($"{target.name}: {ITarget.IsDead()}");
+        {           
             return ITarget.IsDead();
         }
 
@@ -224,7 +223,7 @@ public class Turret : MonoBehaviour, Abnormality
         }
 
         //オブジェクトと対象の間に障害物がないのを確認
-        if (Physics.Raycast(raycastOrigin.position, direction, out hit, attackRadius))
+        if (Physics.Raycast(raycastOrigin.position, direction, out hit, attackRadius, whatIsTarget))
         {            
             if (hit.transform == target)
                 return true;

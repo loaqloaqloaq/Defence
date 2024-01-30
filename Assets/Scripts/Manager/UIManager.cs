@@ -261,7 +261,7 @@ public class UIManager : MonoBehaviour
             }
             amount = previousHealth / maxHealth;
             HealthBar.fillAmount = amount;
-            Debug.Log(previousHealth + " "+ currentHealth + " " + amount);
+            //Debug.Log(previousHealth + " "+ currentHealth + " " + amount);
             yield return new WaitForEndOfFrame();
         }
     }
