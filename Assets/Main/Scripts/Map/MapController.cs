@@ -168,6 +168,14 @@ public class MapController : MonoBehaviour, IPointerClickHandler
             Vector2 linput = new Vector2(lx, ly);
             Vector2 pos = cursor.anchoredPosition;
             pos += (linput * Time.deltaTime * 1000);
+
+            Vector3 camPos = cam.transform.position;
+            if (pos.x >= curMaxX) camPos.z += lx*Time.deltaTime * 1000;
+            else if(pos.x <= curMinX) camPos.z += lx * Time.deltaTime * 1000;
+            if (pos.y >= curMaxY) camPos.x -= ly * Time.deltaTime * 1000;
+            else if (pos.y <= curMinY) camPos.x -= ly * Time.deltaTime * 1000;
+            if(cam.transform.position!=camPos) cam.transform.position = CheckMargin(camPos);
+
             cursor.anchoredPosition = CheckCursorMargin(pos);
         }
 
