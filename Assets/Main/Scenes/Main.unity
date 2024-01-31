@@ -160,7 +160,7 @@ PlayableDirector:
   - key: {fileID: -1100091215954188821, guid: 4d36ab846268cf946b7b1529845df961, type: 2}
     value: {fileID: 388183877}
   - key: {fileID: 6703567436834612134, guid: 4d36ab846268cf946b7b1529845df961, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 2050124225}
   m_ExposedReferences:
     m_References:
     - 45bf75d8db8a4314790355b088006969: {fileID: 0}
@@ -8872,6 +8872,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
+      propertyPath: ending
+      value: 
+      objectReference: {fileID: 32065236}
     - target: {fileID: 3578588381432519277, guid: 6bb82e7d5043b584c82437ab2d57c66a, type: 3}
       propertyPath: scrapUI
       value: 

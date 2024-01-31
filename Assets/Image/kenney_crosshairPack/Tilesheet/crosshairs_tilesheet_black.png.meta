@@ -3,7 +3,7 @@ guid: 89872224181713c41908e3cc46dc1654
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,10 +64,12 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -102,6 +105,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -3444,210 +3471,209 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      crosshairs_tilesheet_black_9: 1141764134
-      crosshairs_tilesheet_black_169: 1808449799
-      crosshairs_tilesheet_black_103: 977411592
-      crosshairs_tilesheet_black_53: -250667942
-      crosshairs_tilesheet_black_189: -968810010
-      crosshairs_tilesheet_black_83: -372068815
-      crosshairs_tilesheet_black_52: 319919988
-      crosshairs_tilesheet_black_79: 1012682073
-      crosshairs_tilesheet_black_5: -396422228
-      crosshairs_tilesheet_black_160: 1889267925
-      crosshairs_tilesheet_black_70: -1722761956
-      crosshairs_tilesheet_black_196: 963349118
-      crosshairs_tilesheet_black_22: -1233457448
-      crosshairs_tilesheet_black_11: 2096973810
-      crosshairs_tilesheet_black_152: 46579963
-      crosshairs_tilesheet_black_3: -907769021
-      crosshairs_tilesheet_black_142: 657093099
-      crosshairs_tilesheet_black_174: 1586272292
-      crosshairs_tilesheet_black_75: -1913964922
-      crosshairs_tilesheet_black_127: -263914667
-      crosshairs_tilesheet_black_154: -2139305625
-      crosshairs_tilesheet_black_177: 510246
-      crosshairs_tilesheet_black_111: 252981540
-      crosshairs_tilesheet_black_59: 1391864143
-      crosshairs_tilesheet_black_144: -1662543056
-      crosshairs_tilesheet_black_78: 1923413540
-      crosshairs_tilesheet_black_172: 76965393
-      crosshairs_tilesheet_black_194: -446252964
-      crosshairs_tilesheet_black_140: -1485671629
-      crosshairs_tilesheet_black_114: 1111137023
-      crosshairs_tilesheet_black_38: 159406151
-      crosshairs_tilesheet_black_190: 157621788
-      crosshairs_tilesheet_black_123: -696621480
-      crosshairs_tilesheet_black_125: 662730045
-      crosshairs_tilesheet_black_82: -1778891949
-      crosshairs_tilesheet_black_128: 1958464665
+      Crosshair1_Aimpoint: 1661360760
+      Crosshair1_Hitpoint: 743617646
+      crosshairs_tilesheet_black_1: 217030581
+      crosshairs_tilesheet_black_10: -472628193
+      crosshairs_tilesheet_black_100: 130965558
+      crosshairs_tilesheet_black_101: 976254670
       crosshairs_tilesheet_black_102: 2143803653
-      crosshairs_tilesheet_black_99: -1893359655
-      crosshairs_tilesheet_black_137: 367033609
-      crosshairs_tilesheet_black_181: -74737228
-      crosshairs_tilesheet_black_129: -144402815
-      crosshairs_tilesheet_black_19: -1697570787
-      crosshairs_tilesheet_black_13: -376336478
-      crosshairs_tilesheet_black_84: 1445189105
-      crosshairs_tilesheet_black_143: -1357590338
-      crosshairs_tilesheet_black_171: 1256031449
-      crosshairs_tilesheet_black_158: 1948345211
-      crosshairs_tilesheet_black_46: 1571331771
-      crosshairs_tilesheet_black_97: 2081890290
-      crosshairs_tilesheet_black_57: 1397339126
-      crosshairs_tilesheet_black_15: -1931689378
-      crosshairs_tilesheet_black_45: 682192787
-      crosshairs_tilesheet_black_192: -1542453826
-      crosshairs_tilesheet_black_81: -236983355
-      crosshairs_tilesheet_black_92: -1905429175
-      crosshairs_tilesheet_black_91: 2143731926
-      crosshairs_tilesheet_black_146: -740032774
-      crosshairs_tilesheet_black_73: 2116854191
-      crosshairs_tilesheet_black_4: -2017042117
-      crosshairs_tilesheet_black_6: -1397168538
-      crosshairs_tilesheet_black_51: 1871221627
-      crosshairs_tilesheet_black_55: -1840289661
-      crosshairs_tilesheet_black_80: 1803827832
-      crosshairs_tilesheet_black_85: -121335870
-      crosshairs_tilesheet_black_161: -1383872983
-      crosshairs_tilesheet_black_119: 360252035
-      crosshairs_tilesheet_black_170: -772741262
-      crosshairs_tilesheet_black_76: 1940209005
-      crosshairs_tilesheet_black_185: 1459627779
-      crosshairs_tilesheet_black_138: -1756658506
-      crosshairs_tilesheet_black_106: 170737909
-      crosshairs_tilesheet_black_27: 348691373
-      crosshairs_tilesheet_black_182: 944465782
-      crosshairs_tilesheet_black_195: -1648186297
-      crosshairs_tilesheet_black_167: 90231645
-      crosshairs_tilesheet_black_32: -2053671560
-      crosshairs_tilesheet_black_67: 482724585
+      crosshairs_tilesheet_black_103: 977411592
+      crosshairs_tilesheet_black_104: -570805378
       crosshairs_tilesheet_black_105: 1554089763
+      crosshairs_tilesheet_black_106: 170737909
+      crosshairs_tilesheet_black_107: -986091245
+      crosshairs_tilesheet_black_108: -816788095
+      crosshairs_tilesheet_black_109: -450660639
+      crosshairs_tilesheet_black_11: 2096973810
+      crosshairs_tilesheet_black_110: -1866090371
+      crosshairs_tilesheet_black_111: 252981540
+      crosshairs_tilesheet_black_112: -8342498
+      crosshairs_tilesheet_black_113: -1645616546
+      crosshairs_tilesheet_black_114: 1111137023
+      crosshairs_tilesheet_black_115: 1802673987
+      crosshairs_tilesheet_black_116: -1596018144
       crosshairs_tilesheet_black_117: -828771617
       crosshairs_tilesheet_black_118: 1291414161
-      crosshairs_tilesheet_black_104: -570805378
-      crosshairs_tilesheet_black_168: 540432949
-      crosshairs_tilesheet_black_151: -1699631147
-      crosshairs_tilesheet_black_100: 130965558
-      crosshairs_tilesheet_black_56: -812752589
-      crosshairs_tilesheet_black_150: -1378981473
-      crosshairs_tilesheet_black_180: 2031207780
-      crosshairs_tilesheet_black_49: -1583148133
-      crosshairs_tilesheet_black_7: 1215648835
-      crosshairs_tilesheet_black_197: -321918322
-      crosshairs_tilesheet_black_98: 1573937697
-      crosshairs_tilesheet_black_112: -8342498
-      crosshairs_tilesheet_black_48: -2110193325
-      crosshairs_tilesheet_black_149: -867837541
-      crosshairs_tilesheet_black_96: 453407548
-      crosshairs_tilesheet_black_87: 1072568370
-      crosshairs_tilesheet_black_29: 1949276565
-      crosshairs_tilesheet_black_184: 541359356
-      crosshairs_tilesheet_black_94: 1643996078
-      crosshairs_tilesheet_black_63: 1328980182
-      crosshairs_tilesheet_black_35: 1359797358
-      crosshairs_tilesheet_black_187: 1164885485
-      crosshairs_tilesheet_black_69: 1196613940
-      crosshairs_tilesheet_black_153: 1584908510
-      crosshairs_tilesheet_black_44: 188158977
-      crosshairs_tilesheet_black_17: 1450864601
-      crosshairs_tilesheet_black_18: -1559798094
-      crosshairs_tilesheet_black_28: -2016053971
-      crosshairs_tilesheet_black_148: 11760208
-      crosshairs_tilesheet_black_20: 568295870
-      crosshairs_tilesheet_black_147: 1355108397
-      crosshairs_tilesheet_black_25: -196627336
-      crosshairs_tilesheet_black_101: 976254670
-      crosshairs_tilesheet_black_88: 800803006
-      crosshairs_tilesheet_black_191: 549504403
-      crosshairs_tilesheet_black_157: 907892394
-      crosshairs_tilesheet_black_116: -1596018144
-      crosshairs_tilesheet_black_31: -347169772
-      crosshairs_tilesheet_black_175: -255834448
+      crosshairs_tilesheet_black_119: 360252035
+      crosshairs_tilesheet_black_12: 1186321891
+      crosshairs_tilesheet_black_120: -132061041
+      crosshairs_tilesheet_black_121: -1080294517
+      crosshairs_tilesheet_black_122: -437035191
+      crosshairs_tilesheet_black_123: -696621480
       crosshairs_tilesheet_black_124: -954984289
-      crosshairs_tilesheet_black_10: -472628193
-      crosshairs_tilesheet_black_155: 1241768867
-      crosshairs_tilesheet_black_166: -945563580
-      crosshairs_tilesheet_black_173: 128022826
-      crosshairs_tilesheet_black_95: 368298546
-      crosshairs_tilesheet_black_37: -1385255362
+      crosshairs_tilesheet_black_125: 662730045
       crosshairs_tilesheet_black_126: 1355717528
+      crosshairs_tilesheet_black_127: -263914667
+      crosshairs_tilesheet_black_128: 1958464665
+      crosshairs_tilesheet_black_129: -144402815
+      crosshairs_tilesheet_black_13: -376336478
+      crosshairs_tilesheet_black_130: 584533985
+      crosshairs_tilesheet_black_131: 161208661
+      crosshairs_tilesheet_black_132: -1274469015
+      crosshairs_tilesheet_black_133: -1681876889
+      crosshairs_tilesheet_black_134: 1979661521
+      crosshairs_tilesheet_black_135: 1276637945
+      crosshairs_tilesheet_black_136: -1135059503
+      crosshairs_tilesheet_black_137: 367033609
+      crosshairs_tilesheet_black_138: -1756658506
+      crosshairs_tilesheet_black_139: 1157702451
+      crosshairs_tilesheet_black_14: 962841551
+      crosshairs_tilesheet_black_140: -1485671629
+      crosshairs_tilesheet_black_141: -1581234600
+      crosshairs_tilesheet_black_142: 657093099
+      crosshairs_tilesheet_black_143: -1357590338
+      crosshairs_tilesheet_black_144: -1662543056
+      crosshairs_tilesheet_black_145: -1017835005
+      crosshairs_tilesheet_black_146: -740032774
+      crosshairs_tilesheet_black_147: 1355108397
+      crosshairs_tilesheet_black_148: 11760208
+      crosshairs_tilesheet_black_149: -867837541
+      crosshairs_tilesheet_black_15: -1931689378
+      crosshairs_tilesheet_black_150: -1378981473
+      crosshairs_tilesheet_black_151: -1699631147
+      crosshairs_tilesheet_black_152: 46579963
+      crosshairs_tilesheet_black_153: 1584908510
+      crosshairs_tilesheet_black_154: -2139305625
+      crosshairs_tilesheet_black_155: 1241768867
+      crosshairs_tilesheet_black_156: -273955349
+      crosshairs_tilesheet_black_157: 907892394
+      crosshairs_tilesheet_black_158: 1948345211
+      crosshairs_tilesheet_black_159: 163452466
+      crosshairs_tilesheet_black_16: 1613365822
+      crosshairs_tilesheet_black_160: 1889267925
+      crosshairs_tilesheet_black_161: -1383872983
+      crosshairs_tilesheet_black_162: -1961855198
+      crosshairs_tilesheet_black_163: -1888802417
+      crosshairs_tilesheet_black_164: -1715425123
+      crosshairs_tilesheet_black_165: 119275888
+      crosshairs_tilesheet_black_166: -945563580
+      crosshairs_tilesheet_black_167: 90231645
+      crosshairs_tilesheet_black_168: 540432949
+      crosshairs_tilesheet_black_169: 1808449799
+      crosshairs_tilesheet_black_17: 1450864601
+      crosshairs_tilesheet_black_170: -772741262
+      crosshairs_tilesheet_black_171: 1256031449
+      crosshairs_tilesheet_black_172: 76965393
+      crosshairs_tilesheet_black_173: 128022826
+      crosshairs_tilesheet_black_174: 1586272292
+      crosshairs_tilesheet_black_175: -255834448
+      crosshairs_tilesheet_black_176: 351939547
+      crosshairs_tilesheet_black_177: 510246
+      crosshairs_tilesheet_black_178: 431261962
+      crosshairs_tilesheet_black_179: 2061911605
+      crosshairs_tilesheet_black_18: -1559798094
+      crosshairs_tilesheet_black_180: 2031207780
+      crosshairs_tilesheet_black_181: -74737228
+      crosshairs_tilesheet_black_182: 944465782
+      crosshairs_tilesheet_black_183: -262813681
+      crosshairs_tilesheet_black_184: 541359356
+      crosshairs_tilesheet_black_185: 1459627779
+      crosshairs_tilesheet_black_186: -1983497571
+      crosshairs_tilesheet_black_187: 1164885485
+      crosshairs_tilesheet_black_188: 931806487
+      crosshairs_tilesheet_black_189: -968810010
+      crosshairs_tilesheet_black_19: -1697570787
+      crosshairs_tilesheet_black_190: 157621788
+      crosshairs_tilesheet_black_191: 549504403
+      crosshairs_tilesheet_black_192: -1542453826
+      crosshairs_tilesheet_black_193: -1041432690
+      crosshairs_tilesheet_black_194: -446252964
+      crosshairs_tilesheet_black_195: -1648186297
+      crosshairs_tilesheet_black_196: 963349118
+      crosshairs_tilesheet_black_197: -321918322
+      crosshairs_tilesheet_black_198: 720380443
+      crosshairs_tilesheet_black_199: -1667196798
+      crosshairs_tilesheet_black_2: 303872716
+      crosshairs_tilesheet_black_20: 568295870
+      crosshairs_tilesheet_black_21: -1128676031
+      crosshairs_tilesheet_black_22: -1233457448
+      crosshairs_tilesheet_black_23: -1346587875
+      crosshairs_tilesheet_black_24: 930047683
+      crosshairs_tilesheet_black_25: -196627336
+      crosshairs_tilesheet_black_26: -542371888
+      crosshairs_tilesheet_black_27: 348691373
+      crosshairs_tilesheet_black_28: -2016053971
+      crosshairs_tilesheet_black_29: 1949276565
+      crosshairs_tilesheet_black_3: -907769021
+      crosshairs_tilesheet_black_30: 691701188
+      crosshairs_tilesheet_black_31: -347169772
+      crosshairs_tilesheet_black_32: -2053671560
+      crosshairs_tilesheet_black_33: 1080819954
+      crosshairs_tilesheet_black_34: 174158090
+      crosshairs_tilesheet_black_35: 1359797358
+      crosshairs_tilesheet_black_36: 1260642524
+      crosshairs_tilesheet_black_37: -1385255362
+      crosshairs_tilesheet_black_38: 159406151
+      crosshairs_tilesheet_black_39: 520175679
+      crosshairs_tilesheet_black_4: -2017042117
+      crosshairs_tilesheet_black_40: -1225344198
       crosshairs_tilesheet_black_41: 2068498613
       crosshairs_tilesheet_black_42: -1231354121
-      crosshairs_tilesheet_black_77: -1976586988
-      crosshairs_tilesheet_black_163: -1888802417
-      crosshairs_tilesheet_black_108: -816788095
-      crosshairs_tilesheet_black_14: 962841551
-      crosshairs_tilesheet_black_8: 1863122853
-      Crosshair1_Aimpoint: 1661360760
-      crosshairs_tilesheet_black_33: 1080819954
-      crosshairs_tilesheet_black_134: 1979661521
-      crosshairs_tilesheet_black_86: -1154850000
-      crosshairs_tilesheet_black_178: 431261962
-      crosshairs_tilesheet_black_109: -450660639
-      crosshairs_tilesheet_black_121: -1080294517
-      crosshairs_tilesheet_black_23: -1346587875
-      crosshairs_tilesheet_black_36: 1260642524
-      crosshairs_tilesheet_black_39: 520175679
-      crosshairs_tilesheet_black_176: 351939547
-      crosshairs_tilesheet_black_136: -1135059503
-      crosshairs_tilesheet_black_89: 219178307
-      crosshairs_tilesheet_black_47: -1256951290
-      crosshairs_tilesheet_black_186: -1983497571
-      crosshairs_tilesheet_black_66: -1320982414
-      crosshairs_tilesheet_black_26: -542371888
-      crosshairs_tilesheet_black_135: 1276637945
-      crosshairs_tilesheet_black_72: 950968831
-      crosshairs_tilesheet_black_179: 2061911605
-      crosshairs_tilesheet_black_183: -262813681
-      crosshairs_tilesheet_black_93: -687604914
-      crosshairs_tilesheet_black_34: 174158090
-      crosshairs_tilesheet_black_159: 163452466
-      crosshairs_tilesheet_black_68: -203813564
-      crosshairs_tilesheet_black_61: 1631636507
-      crosshairs_tilesheet_black_2: 303872716
-      crosshairs_tilesheet_black_188: 931806487
-      crosshairs_tilesheet_black_54: -1676808295
-      crosshairs_tilesheet_black_130: 584533985
-      crosshairs_tilesheet_black_62: 228140346
-      crosshairs_tilesheet_black_1: 217030581
-      Crosshair1_Hitpoint: 743617646
-      crosshairs_tilesheet_black_132: -1274469015
-      crosshairs_tilesheet_black_141: -1581234600
-      crosshairs_tilesheet_black_50: -1753944480
-      crosshairs_tilesheet_black_71: 1922669161
-      crosshairs_tilesheet_black_122: -437035191
-      crosshairs_tilesheet_black_58: 1723832700
-      crosshairs_tilesheet_black_113: -1645616546
-      crosshairs_tilesheet_black_21: -1128676031
-      crosshairs_tilesheet_black_30: 691701188
-      crosshairs_tilesheet_black_115: 1802673987
-      crosshairs_tilesheet_black_74: 252652386
-      crosshairs_tilesheet_black_198: 720380443
-      crosshairs_tilesheet_black_156: -273955349
-      crosshairs_tilesheet_black_24: 930047683
-      crosshairs_tilesheet_black_133: -1681876889
-      crosshairs_tilesheet_black_60: 1101167179
-      crosshairs_tilesheet_black_64: -833710722
-      crosshairs_tilesheet_black_199: -1667196798
-      crosshairs_tilesheet_black_40: -1225344198
-      crosshairs_tilesheet_black_165: 119275888
-      crosshairs_tilesheet_black_12: 1186321891
-      crosshairs_tilesheet_black_139: 1157702451
-      crosshairs_tilesheet_black_193: -1041432690
-      crosshairs_tilesheet_black_65: 1083374440
-      crosshairs_tilesheet_black_16: 1613365822
-      crosshairs_tilesheet_black_110: -1866090371
-      crosshairs_tilesheet_black_145: -1017835005
-      crosshairs_tilesheet_black_162: -1961855198
-      crosshairs_tilesheet_black_120: -132061041
-      crosshairs_tilesheet_black_90: -152154273
-      crosshairs_tilesheet_black_107: -986091245
-      crosshairs_tilesheet_black_164: -1715425123
       crosshairs_tilesheet_black_43: -509909208
-      crosshairs_tilesheet_black_131: 161208661
-  spritePackingTag: 
+      crosshairs_tilesheet_black_44: 188158977
+      crosshairs_tilesheet_black_45: 682192787
+      crosshairs_tilesheet_black_46: 1571331771
+      crosshairs_tilesheet_black_47: -1256951290
+      crosshairs_tilesheet_black_48: -2110193325
+      crosshairs_tilesheet_black_49: -1583148133
+      crosshairs_tilesheet_black_5: -396422228
+      crosshairs_tilesheet_black_50: -1753944480
+      crosshairs_tilesheet_black_51: 1871221627
+      crosshairs_tilesheet_black_52: 319919988
+      crosshairs_tilesheet_black_53: -250667942
+      crosshairs_tilesheet_black_54: -1676808295
+      crosshairs_tilesheet_black_55: -1840289661
+      crosshairs_tilesheet_black_56: -812752589
+      crosshairs_tilesheet_black_57: 1397339126
+      crosshairs_tilesheet_black_58: 1723832700
+      crosshairs_tilesheet_black_59: 1391864143
+      crosshairs_tilesheet_black_6: -1397168538
+      crosshairs_tilesheet_black_60: 1101167179
+      crosshairs_tilesheet_black_61: 1631636507
+      crosshairs_tilesheet_black_62: 228140346
+      crosshairs_tilesheet_black_63: 1328980182
+      crosshairs_tilesheet_black_64: -833710722
+      crosshairs_tilesheet_black_65: 1083374440
+      crosshairs_tilesheet_black_66: -1320982414
+      crosshairs_tilesheet_black_67: 482724585
+      crosshairs_tilesheet_black_68: -203813564
+      crosshairs_tilesheet_black_69: 1196613940
+      crosshairs_tilesheet_black_7: 1215648835
+      crosshairs_tilesheet_black_70: -1722761956
+      crosshairs_tilesheet_black_71: 1922669161
+      crosshairs_tilesheet_black_72: 950968831
+      crosshairs_tilesheet_black_73: 2116854191
+      crosshairs_tilesheet_black_74: 252652386
+      crosshairs_tilesheet_black_75: -1913964922
+      crosshairs_tilesheet_black_76: 1940209005
+      crosshairs_tilesheet_black_77: -1976586988
+      crosshairs_tilesheet_black_78: 1923413540
+      crosshairs_tilesheet_black_79: 1012682073
+      crosshairs_tilesheet_black_8: 1863122853
+      crosshairs_tilesheet_black_80: 1803827832
+      crosshairs_tilesheet_black_81: -236983355
+      crosshairs_tilesheet_black_82: -1778891949
+      crosshairs_tilesheet_black_83: -372068815
+      crosshairs_tilesheet_black_84: 1445189105
+      crosshairs_tilesheet_black_85: -121335870
+      crosshairs_tilesheet_black_86: -1154850000
+      crosshairs_tilesheet_black_87: 1072568370
+      crosshairs_tilesheet_black_88: 800803006
+      crosshairs_tilesheet_black_89: 219178307
+      crosshairs_tilesheet_black_9: 1141764134
+      crosshairs_tilesheet_black_90: -152154273
+      crosshairs_tilesheet_black_91: 2143731926
+      crosshairs_tilesheet_black_92: -1905429175
+      crosshairs_tilesheet_black_93: -687604914
+      crosshairs_tilesheet_black_94: 1643996078
+      crosshairs_tilesheet_black_95: 368298546
+      crosshairs_tilesheet_black_96: 453407548
+      crosshairs_tilesheet_black_97: 2081890290
+      crosshairs_tilesheet_black_98: 1573937697
+      crosshairs_tilesheet_black_99: -1893359655
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
