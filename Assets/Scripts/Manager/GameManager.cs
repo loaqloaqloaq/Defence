@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     float endTime,endTimer;
 
+    [SerializeField] GameObject ending;
+
     public static GameManager Instance
     {        
         get
@@ -108,6 +110,7 @@ public class GameManager : MonoBehaviour
             if (endTime >= endTimer) { 
                 ToResultScene();
             }
+            
         }
         SkyRotation();       
     }
@@ -124,6 +127,7 @@ public class GameManager : MonoBehaviour
         if (gameState == GameState.END) return;
         //1時間切れ勝利 2敵拠点破壊勝利 3ゲート全破壊された　4プレイヤー死んだ       
         ShowEndSubtitle(type);
+        if (type == 3) { ending.SetActive(true); }
         if (type == 4) type = 3;
         Record.resultID = type;
         gameState = GameState.END;  
