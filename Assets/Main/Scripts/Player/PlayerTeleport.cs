@@ -6,7 +6,8 @@ public class PlayerTeleport : MonoBehaviour
 {
     [SerializeField] GameObject teleportEffect;
     Vector3 targetPos;
-    ParticleSystem[] pss;    
+    ParticleSystem[] pss;
+    public bool teleporting;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +18,9 @@ public class PlayerTeleport : MonoBehaviour
     }
 
     public void TeleportTo(Vector3 pos) {
-        if (targetPos == Vector3.zero && pos != Vector3.zero)
+        if (targetPos == Vector3.zero && pos != Vector3.zero && !teleporting)
         {
+            teleporting = true;
             targetPos = pos;
             GetComponent<CharacterController>().enabled = false;
             GetComponent<PlayerInput>().enabled = false;
@@ -37,7 +39,8 @@ public class PlayerTeleport : MonoBehaviour
             GetComponent<PlayerInput>().enabled = true;
             GetComponent<PlayerAiming>().enabled = true;
             GetComponent<PlayerLocomotion>().enabled = true;
-            targetPos = Vector3.zero;           
+            targetPos = Vector3.zero;
+            teleporting = false;
         }
     }
 

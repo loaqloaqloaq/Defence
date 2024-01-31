@@ -223,8 +223,10 @@ public class Turret : MonoBehaviour, Abnormality
         }
 
         //オブジェクトと対象の間に障害物がないのを確認
-        if (Physics.Raycast(raycastOrigin.position, direction, out hit, attackRadius, whatIsTarget))
-        {            
+        if (Physics.Raycast(raycastOrigin.position, direction, out hit, attackRadius, ~LayerMask.GetMask("TurretSlot")))
+        {
+            Debug.DrawRay(raycastOrigin.position, direction*999, Color.red);
+            Debug.Log(target.transform.name+" / "+hit.transform.name);
             if (hit.transform == target)
                 return true;
         }

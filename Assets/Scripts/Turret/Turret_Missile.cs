@@ -211,7 +211,6 @@ public class Turret_Missile : MonoBehaviour, Abnormality
             if (hit.transform == target)
                 return true;
         }
-
         return false;
     }
 
