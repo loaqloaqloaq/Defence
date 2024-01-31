@@ -29275,9 +29275,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  isInifinty: 0
+  isInifinty: 1
   fireRate: 12
-  ammoRemain: 2000
+  ammoRemain: 20000
   magAmmo: 120
   magCapacity: 120
   damage: 8

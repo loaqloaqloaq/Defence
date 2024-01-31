@@ -1,6 +1,6 @@
 {
   "EnemyGuard":{
-    "hp": 200,
+    "hp": 400,
     "moveSpeed": 8,
     "atk": 50,
     "reward": 100,
