@@ -14753,9 +14753,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   firePref: {fileID: 2247100141260638289, guid: a058c0f510608b641bebaeacec21d25f, type: 3}
-  isInifinty: 0
+  isInifinty: 1
   fireRate: 10
-  ammoRemain: 300
+  ammoRemain: 5000
   magAmmo: 200
   magCapacity: 200
   damage: 4

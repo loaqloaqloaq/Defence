@@ -20988,7 +20988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   missilePref: {fileID: 5210415521221817854, guid: 889040607fae61d41ad24417bd73843a, type: 3}
-  isInifinty: 0
+  isInifinty: 1
   fireRate: 7
   ammoRemain: 10000
   magAmmo: 20

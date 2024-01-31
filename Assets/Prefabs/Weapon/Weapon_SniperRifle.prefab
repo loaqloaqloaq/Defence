@@ -9967,7 +9967,7 @@ MonoBehaviour:
   weaponType: sniperRifle
   isFiring: 0
   fireRate: 1
-  ammoRemain: 32
+  ammoRemain: 64
   magAmmo: 8
   magCapacity: 8
   damage: 300
