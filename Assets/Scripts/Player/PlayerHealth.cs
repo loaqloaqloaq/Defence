@@ -43,6 +43,7 @@ public class PlayerHealth : LivingEntity
 
     public override bool ApplyDamage(DamageMessage damageMessage)
     {
+        if (GetComponent<PlayerTeleport>()?.teleporting == true) return false;
         if (!base.ApplyDamage(damageMessage)) return false;
         EffectManager.Instance?.PlayHitEffect(damageMessage.hitPoint, damageMessage.hitNormal,
             transform, EffectManager.EffectType.Flesh);

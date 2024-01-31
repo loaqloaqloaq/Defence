@@ -2,9 +2,12 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class GateController : MonoBehaviour,IDamageable
-{   
+{
+    [SerializeField]
+    Image[] gateHPUI;
     [HideInInspector]
     public float HP;
     [SerializeField]
@@ -86,6 +89,7 @@ public class GateController : MonoBehaviour,IDamageable
         gaugeWidth = 30f * HP / MaxHP;        
         HPText.text =   HP.ToString() + "/" + MaxHP + "(" + Math.Round(HP / MaxHP * 100, 2) + "%)";
         transform.Find("MapIcon").GetComponent<MapIcon>().SetFill(Math.Max((HP / MaxHP),0f));
+        UpdateUIHP();
         return true;
     }
 
@@ -95,7 +99,8 @@ public class GateController : MonoBehaviour,IDamageable
         GetComponent<BoxCollider>().enabled = false;
         WarningController.ShowWarning("gateDestroyed", "GATE " + gateNumber + " HAS BEEN DESTROYED!!",5);
         ani.SetTrigger("break");
-        HPfill.GetComponent<Animator>().SetTrigger("hideHP");        
+        HPfill.GetComponent<Animator>().SetTrigger("hideHP");
+        UpdateUIHP();
         if (EnemyBase_Manager != null && gateNumber <= 2)
         {
             GameManager.Instance.currentStage = gateNumber;
@@ -108,6 +113,19 @@ public class GateController : MonoBehaviour,IDamageable
             Debug.Log("•‰‚¯");
             GameManager.Instance.End(3);
         }
+    }
+
+    void UpdateUIHP() {
+        float fill=HP / MaxHP;
+        if (gateHPUI[gateNumber - 1])
+        {
+            gateHPUI[gateNumber - 1].fillAmount = fill;
+            if (fill <= 0.3f) gateHPUI[gateNumber - 1].color = Color.red;
+            else if (fill <= 0.5f) gateHPUI[gateNumber - 1].color = Color.yellow;
+
+            if(fill <= 0) gateHPUI[gateNumber - 1].transform.GetComponentInParent<TextMeshProUGUI>().color = Color.red;
+        }
+        
     }
 
     public bool IsDead()
