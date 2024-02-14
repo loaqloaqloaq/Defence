@@ -331,4 +331,13 @@ public class Enemy2Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
     {
         return Part.BODY;
     }
+    public bool debug = false;
+    public bool isDebug()
+    {
+        return debug;
+    }
+    public void setDebug(bool debug)
+    {
+        this.debug = debug;
+    }
 }

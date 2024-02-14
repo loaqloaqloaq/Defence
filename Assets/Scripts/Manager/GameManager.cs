@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void TimerUpdate() {
+    public void TimerUpdate() {
         timer -= Time.deltaTime;
         if (timer < 0) timer = 0;
         EnemyGeneratorManager.Instance?.ChangeMaxEnemy(timer / (playTime * 60));

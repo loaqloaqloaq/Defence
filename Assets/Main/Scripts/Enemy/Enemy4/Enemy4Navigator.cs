@@ -99,6 +99,26 @@ public class Enemy4Navigator : MonoBehaviour
     void NextCheckPoint()
     {
         checkPointIndex++;
+
+        if (checkPointIndex == 0 && ec.debug)
+        {
+            //一番近いチェックポイントを探す。
+            float disToCheckpoint = 999999;
+            int index = 0;
+            int cloestIndex = 0;
+            foreach (Transform point in route)
+            {
+                float tmp = Vector3.Distance(ec.gate.position, point.position);
+                if (Vector3.Distance(ec.gate.position, point.position) < disToCheckpoint)
+                {
+                    disToCheckpoint = tmp;
+                    cloestIndex = index;
+                }
+                index++;
+            }
+            checkPointIndex = index;
+        }
+
         if (checkPointIndex >= route.childCount)
         {
             destination = ec.gate;

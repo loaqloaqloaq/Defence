@@ -355,4 +355,14 @@ public class EnemyGuardController : MonoBehaviour, IEnemyDamageable, EnemyInterf
        
         agent.enabled = true;
     }
+
+    public bool debug = false;
+    public bool isDebug()
+    {
+        return debug;
+    }
+    public void setDebug(bool debug)
+    {
+        this.debug = debug;
+    }
 }

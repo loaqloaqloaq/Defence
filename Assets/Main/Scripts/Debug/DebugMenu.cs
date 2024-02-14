@@ -7,11 +7,11 @@ using UnityEngine;
 public class DebugMenu : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI enemyGenTxt;
-    [SerializeField] GameObject enemy;
-    [SerializeField] GameObject enemyGuard;
+    [SerializeField] GameObject enemy;    
     public void timer0()
     {
         GameManager.Instance.timer = 0;
+        GameManager.Instance.TimerUpdate();
     }
     public void life0()
     {
@@ -45,7 +45,7 @@ public class DebugMenu : MonoBehaviour
         pos += player.transform.forward * 3;
         e.gameObject.SetActive(true);
         e.transform.position = pos;
-        e.GetComponent<EnemyController>().setType(type);            
+        e.GetComponent<EnemyController>().setType(type,true);      
 
     }
 }

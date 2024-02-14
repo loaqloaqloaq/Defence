@@ -10,7 +10,7 @@ public class Enemy1Navigator : MonoBehaviour
     private Transform routes,area, route;
     private Vector3 checkPoint;
     private int checkPointIndex;
-    private float offsetRange;
+    private float offsetRange;  
 
 
     // Start is called before the first frame update
@@ -66,8 +66,25 @@ public class Enemy1Navigator : MonoBehaviour
     }   
     
     void NextCheckPoint()
-    {
+    {        
         checkPointIndex++;
+
+        if (checkPointIndex == 0 && ec.debug) {
+            //一番近いチェックポイントを探す。
+            float disToCheckpoint = 999999;
+            int index = 0;
+            int cloestIndex=0;
+            foreach (Transform point in route) {
+                float tmp = Vector3.Distance(ec.gate.position, point.position);
+                if (Vector3.Distance(ec.gate.position, point.position) < disToCheckpoint) { 
+                    disToCheckpoint = tmp; 
+                    cloestIndex = index;
+                }
+                index++;
+            }
+            checkPointIndex = index;
+        }
+
         if (checkPointIndex >= route.childCount) {
             destination = ec.gate;
             checkPoint = destination.position;

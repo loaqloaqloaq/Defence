@@ -54,7 +54,7 @@ public class Enemy1Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
     private AudioSource audioSource;
 
     [SerializeField] private AudioData hitSE;
-    [SerializeField] private AudioData deadSE;
+    [SerializeField] private AudioData deadSE;    
 
 
     private void Awake()
@@ -358,5 +358,14 @@ public class Enemy1Controller : MonoBehaviour, IEnemyDamageable, EnemyInterface
     public Part GetPart()
     {
         return Part.BODY;
+    }
+
+    public bool debug = false;
+    public bool isDebug() {
+        return debug;
+    }
+    public void setDebug(bool debug)
+    {
+        this.debug = debug;
     }
 }

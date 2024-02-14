@@ -6,15 +6,15 @@ public class EnemyController : MonoBehaviour
 {
     int type;
 
-    EnemyGloable eg;    
+    EnemyGloable eg;   
    
     private void Start()
     {        
         type = 0;   
-        eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
-    }      
+        eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();      
+    }
 
-    public void setType(int type) {
+    public void setType(int type, bool debug = false) {
         int index = 0;
         type--;
         this.type = type;
@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
         {           
             
             if (index == type) {                
-                resetEnemy(child);
+                resetEnemy(child, debug);
                 if(eg == null) eg = GameObject.Find("EnemyLoader").GetComponent<EnemyGloable>();
                 eg.EnemyCreated();
             } 
@@ -31,11 +31,12 @@ public class EnemyController : MonoBehaviour
        
     }
 
-    private void resetEnemy(Transform t) {
+    private void resetEnemy(Transform t,bool debug) {
         t.gameObject.SetActive(true);
         t.position = transform.position;
         EnemyInterface controller = t.GetComponent<EnemyInterface>();       
         controller.resetEnemy();
+        controller.setDebug(debug);
     }
 
     public void dead() {
@@ -51,6 +52,8 @@ public class EnemyController : MonoBehaviour
 
 public interface EnemyInterface {
     public void resetEnemy();
+    public bool isDebug();
+    public void setDebug(bool debug);
 }
 
 
