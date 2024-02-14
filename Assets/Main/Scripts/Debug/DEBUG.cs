@@ -56,15 +56,6 @@ public class DEBUG : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F11)) g2.ApplyDamage(gateDestory);
         if (Input.GetKeyDown(KeyCode.F12)) g3.ApplyDamage(gateDestory);
 
-        if (Input.GetKey(KeyCode.Escape) && escEnabled)
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-                Application.Quit();
-#endif
-        }
-
         if (Input.GetKeyDown(KeyCode.F8)) {
             fireCannonEnabled = !fireCannonEnabled;
             foreach (EnemyBase b in eb)
