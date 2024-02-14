@@ -143,7 +143,4 @@ public class EnemyGeneratorManager : MonoBehaviour
         //Debug.Log("Called" + (i == -1 ? "add" : "remove")+" "+generators.Count);
         return index;
     }
-
-
-
 }
