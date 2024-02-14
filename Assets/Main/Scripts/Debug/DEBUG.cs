@@ -103,12 +103,13 @@ public class DEBUG : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F4)) {
             showDebugMenu = !showDebugMenu;
             debugMenu.SetActive(showDebugMenu);
-            Cursor.visible = showDebugMenu;
-            Cursor.lockState = showDebugMenu ? CursorLockMode.None:CursorLockMode.Locked;
+            UIManager.Instance.SetMouseVisible(showDebugMenu);      
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>().enabled = !showDebugMenu;
         }
         if (Input.GetKeyDown(KeyCode.Escape)) {
             showDebugMenu = false;
             debugMenu.SetActive(showDebugMenu);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>().enabled = !showDebugMenu;
         }
     }
     
