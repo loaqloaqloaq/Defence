@@ -54,6 +54,12 @@ public class PlayerController : MonoBehaviour //各機能担当するスクリ�
         }
     }
 
+    public void setLIfe(int life) {
+        lifeRemains = life;
+        UIManager.Instance?.UpdateLifeText(lifeRemains);
+
+    }
+
     //死ぬときの処理
     private void HandleDeath()
     {

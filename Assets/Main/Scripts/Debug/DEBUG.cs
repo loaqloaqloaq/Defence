@@ -10,6 +10,8 @@ public class DEBUG : MonoBehaviour
     DamageMessage gateDestory;
 
     [SerializeField] Text FPS;
+    [SerializeField] GameObject debugMenu;
+    bool showDebugMenu;
 
     EnemyBase[] eb;
 
@@ -17,6 +19,7 @@ public class DEBUG : MonoBehaviour
 
     [SerializeField] bool fireCannonEnabled;
     [SerializeField][Range(0, 10)] float timeScale;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +42,9 @@ public class DEBUG : MonoBehaviour
         }
 
         timeScale = 1;
+
+        showDebugMenu = false;
+        if (debugMenu) debugMenu.SetActive(false);
 
     }
 
@@ -94,8 +100,16 @@ public class DEBUG : MonoBehaviour
             WarningController.ShowWarning("debug", "debug tesing test warning", 2);
         }
 
-
-
-
+        if (Input.GetKeyDown(KeyCode.F4)) {
+            showDebugMenu = !showDebugMenu;
+            debugMenu.SetActive(showDebugMenu);
+            Cursor.visible = showDebugMenu;
+            Cursor.lockState = showDebugMenu ? CursorLockMode.None:CursorLockMode.Locked;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            showDebugMenu = false;
+            debugMenu.SetActive(showDebugMenu);
+        }
     }
+    
 }

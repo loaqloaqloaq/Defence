@@ -58,6 +58,11 @@ public class PlayerHealth : LivingEntity
         return true;
     }
 
+    public void maxHP() {
+        health = startingHealth;
+        UpdateUI(true);
+    }
+
     public override void Die()
     {
         base.Die();
